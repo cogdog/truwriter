@@ -4,7 +4,7 @@ by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 ## What is this?
 This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/) a means to let site users create rich published writing in Wordpress without logins or needs to learn Wordpress. See [an example created by copy/paste from a Word document](http://splot.ca/writer/2014/101)
 
-![](images/web2storylling.jpg "Sketch to Painting")
+![](images/web2storytelling.jpg "Sketch to Painting")
 
 
 ## How to Install
