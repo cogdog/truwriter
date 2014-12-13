@@ -1,0 +1,371 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Radcliffe v1.07\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-08-06 11:25:03+0000\n"
+"Last-Translator: anders <anders@andersnoren.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Swedish\n"
+"X-Poedit-Country: SWEDEN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:11
+#@ radcliffe
+msgid "Error 404"
+msgstr "Error 404"
+
+#: 404.php:19
+#@ radcliffe
+msgid "It seems like you have tried to open a page that doesn't exist. It could have been deleted, moved, or it never existed at all. You are welcome to search for what you are looking for with the form below."
+msgstr "Det vekar som att du har försökt öppna en sida som inte existerar. Den kan ha raderats, flyttats, eller har aldrig existerat överhuvudtaget. Du är välkommen att söka efter det du letar efter genom formuläret nedan."
+
+#: archive.php:12
+#, php-format
+#@ radcliffe
+msgid "Date: %s"
+msgstr "Datum: %s"
+
+#: archive.php:14
+#, php-format
+#@ radcliffe
+msgid "Month: %s"
+msgstr "Månad: %s"
+
+#: archive.php:14
+#@ radcliffe
+msgctxt "F = Month, Y = Year"
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:16
+#, php-format
+#@ radcliffe
+msgid "Year: %s"
+msgstr "År: %s"
+
+#: archive.php:16
+#@ radcliffe
+msgctxt "Y = Year"
+msgid "Y"
+msgstr "Y"
+
+#: archive.php:18
+#, php-format
+#@ radcliffe
+msgid "Category: %s"
+msgstr "Kategori: %s"
+
+#: archive.php:20
+#, php-format
+#@ radcliffe
+msgid "Tag: %s"
+msgstr "Etikett: %s"
+
+#: archive.php:23
+#, php-format
+#@ radcliffe
+msgid "Author: %s"
+msgstr "Författare: %s"
+
+#: archive.php:25
+#@ radcliffe
+msgid "Archive"
+msgstr "Arkiv"
+
+#: archive.php:33
+#: search.php:20
+#: search.php:69
+#, php-format
+#@ radcliffe
+msgid "(page %s of %s)"
+msgstr "(sida %s av %s)"
+
+#: archive.php:69
+#: index.php:41
+#: search.php:46
+#@ radcliffe
+msgid "Older posts"
+msgstr "Äldre inlägg"
+
+#: archive.php:71
+#: index.php:43
+#: search.php:48
+#@ radcliffe
+msgid "Newer posts"
+msgstr "Nyare inlägg"
+
+#: comments.php:18
+#@ radcliffe
+msgid "Comment"
+msgid_plural "Comments"
+msgstr[0] "kommentar"
+msgstr[1] "kommentarer"
+
+#: comments.php:22
+#@ radcliffe
+msgid "Add yours"
+msgstr "Lägg till"
+
+#: comments.php:43
+#@ radcliffe
+msgid "Pingback"
+msgid_plural "Pingbacks"
+msgstr[0] "Pingback"
+msgstr[1] "Pingbacks"
+
+#: comments.php:63
+#@ radcliffe
+msgid "Older Comments"
+msgstr "Äldre kommentarer"
+
+#: comments.php:69
+#@ radcliffe
+msgid "Newer Comments"
+msgstr "Nyare kommentarer"
+
+#: comments.php:87
+#@ radcliffe
+msgid "Comments are closed."
+msgstr "Kommentarsfältet är stängt."
+
+#: comments.php:100
+#@ radcliffe
+msgid "Your email address will not be published."
+msgstr "Din e-postadress kommer inte att publiceras."
+
+#: comments.php:110
+#@ radcliffe
+msgid "Name"
+msgstr "Namn"
+
+#: comments.php:115
+#@ radcliffe
+msgid "Email"
+msgstr "E-postadress"
+
+#: comments.php:120
+#@ radcliffe
+msgid "Website"
+msgstr "Webbplats"
+
+#: content.php:39
+#@ radcliffe
+msgid "Sticky"
+msgstr "Klistrat"
+
+#: footer.php:69
+#@ radcliffe
+msgid "Theme by"
+msgstr "Tema av"
+
+#: footer.php:69
+#@ radcliffe
+msgid "To the top"
+msgstr "Till toppen"
+
+#: footer.php:69
+#@ radcliffe
+msgid "Up"
+msgstr "Upp"
+
+#: functions.php:68
+#@ radcliffe
+msgid "Footer A"
+msgstr "Sidfot A"
+
+#: functions.php:70
+#@ radcliffe
+msgid "Widgets in this area will be shown in the left column in the footer."
+msgstr "Widgets i det här fältet kommer att visas i den vänstra kolumenen i sidfoten."
+
+#: functions.php:77
+#@ radcliffe
+msgid "Footer B"
+msgstr "Footer B"
+
+#: functions.php:79
+#@ radcliffe
+msgid "Widgets in this area will be shown in the middle column in the footer."
+msgstr "Widgets i det här fältet kommer att visas i mittenkolumnen i sidfoten."
+
+#: functions.php:86
+#@ radcliffe
+msgid "Footer C"
+msgstr "Footer C"
+
+#: functions.php:88
+#@ radcliffe
+msgid "Widgets in this area will be shown in the right column in the footer."
+msgstr "Widgets i det här fältet kommer att visas i den högra kolumenen i sidfoten."
+
+#: functions.php:118
+#, php-format
+#@ radcliffe
+msgid "Page %s"
+msgstr "Sida %s"
+
+#: functions.php:141
+#@ radcliffe
+msgid "Continue reading"
+msgstr "Fortsätt läsa"
+
+#: functions.php:218
+#@ radcliffe
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: functions.php:218
+#@ radcliffe
+msgid "(Edit)"
+msgstr "(Redigera)"
+
+#: functions.php:237
+#@ radcliffe
+msgid "Comment by post author"
+msgstr "Kommentar av inläggsförfattaren"
+
+#: functions.php:237
+#@ radcliffe
+msgid "(Post author)"
+msgstr "(Inläggsförfattare)"
+
+#: functions.php:253
+#@ radcliffe
+msgid "Your comment is awaiting moderation."
+msgstr "Din kommentar inväntar moderering"
+
+#: functions.php:263
+#@ radcliffe
+msgid "Edit"
+msgstr "Redigera"
+
+#: functions.php:265
+#@ radcliffe
+msgid "Reply"
+msgstr "Svara"
+
+#: functions.php:296
+#: functions.php:326
+#@ radcliffe
+msgid "Logo"
+msgstr "Logotyp"
+
+#: functions.php:318
+#@ radcliffe
+msgid "Accent Color"
+msgstr "Accentfärg"
+
+#: header.php:26
+#@ radcliffe
+msgid "Type and press enter"
+msgstr "Skriv och tryck enter"
+
+#: header.php:53
+#@ radcliffe
+msgid "Menu"
+msgstr "Meny"
+
+#: header.php:88
+#@ radcliffe
+msgid "Show the search field"
+msgstr "Visa sökfältet"
+
+#: header.php:124
+#: searchform.php:2
+#@ radcliffe
+msgid "Search form"
+msgstr "Sökformulär"
+
+#: header.php:125
+#: searchform.php:3
+#@ radcliffe
+msgid "Search"
+msgstr "Sök"
+
+#: image.php:47
+#: page.php:58
+#: single.php:165
+#: template-archive.php:55
+#@ radcliffe
+msgid "We couldn't find any posts that matched your query. Please try again."
+msgstr "Vi kunde inte hitta några inlägg som matchar din sökning. Vänligen försök igen."
+
+#: index.php:19
+#, php-format
+#@ radcliffe
+msgid "Page %s of %s"
+msgstr "Sida %s av %s"
+
+#: search.php:13
+#: search.php:62
+#@ radcliffe
+msgid "Search results:"
+msgstr "Sökresultat:"
+
+#: search.php:81
+#@ radcliffe
+msgid "No results. Try again, would you kindly?"
+msgstr "Inga resultat. Försök gärna igen."
+
+#: single.php:67
+#@ radcliffe
+msgid "About the author"
+msgstr "Om författaren"
+
+#: single.php:81
+#@ radcliffe
+msgid "Author archive"
+msgstr "Författararkiv"
+
+#: single.php:89
+#@ radcliffe
+msgid "Author website"
+msgstr "Författarens webbplats"
+
+#: single.php:105
+#@ radcliffe
+msgid "About the post"
+msgstr "Om inlägget"
+
+#: single.php:131
+#@ radcliffe
+msgid "Next post:"
+msgstr "Nästa inlägg:"
+
+#: single.php:143
+#@ radcliffe
+msgid "Previous post:"
+msgstr "Föregående inlägg:"
+
+#: functions.php:288
+#@ radcliffe
+msgid "Radcliffe Options"
+msgstr "Radcliffe-alternativ"
+
+#: functions.php:291
+#@ radcliffe
+msgid "Allows you to customize theme settings for Radcliffe."
+msgstr "Låter dig ändra temainställningarna för Radcliffe."
+
+#: page.php:48
+#: single.php:59
+#@ radcliffe
+msgid "Pages:"
+msgstr "Sidor:"
+
+#: functions.php:298
+#@ radcliffe
+msgid "Upload a logo to replace the default site name and description in the header"
+msgstr "Ladda upp en logotyp för att ersätta sidtiteln och -beskrivningen i sidhuvudet"
+

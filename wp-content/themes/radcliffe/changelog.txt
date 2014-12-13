@@ -1,0 +1,65 @@
+*** Radcliffe changelog ***
+
+
+Version 1.09 (2014-10-01)
+------------------------- 
+- Fixed an error with center aligned images in the post content
+
+
+Version 1.08 (2014-09-25)
+------------------------- 
+- Fixed faulty styling of the search form button on some pages
+
+
+Version 1.07 (2014-08-06)
+------------------------- 
+- Added a missing namespace, updated the Swedish translation
+- Updated style.css for brevity and browser compatibility
+- Updated the editor style to be better structured and include post forms/inputs
+- Updated screenshot.png
+- Updated readme.txt with licensing information for screenshot.png
+
+
+Version 1.06 (2014-08-03)
+------------------------- 
+- Fixed a bug which prevented featured images from being set
+
+
+Version 1.05 (2014-08-02)
+------------------------- 
+- Fixed an issue with the HTML declaration in header.php
+- Removed a non-printable character from footer.php
+
+
+Version 1.04 (2014-08-02)
+------------------------- 
+- Fixed some missing tags in header.php
+- Syntax improvements to functions.php
+- Removed the email and Twitter icons in the post meta due to request from theme reviewer
+- Added a missing string in the Swedish translation
+
+
+Version 1.03 (2014-08-01)
+------------------------- 
+- Improved the styling of the header
+- Added styling for forms in the post content CSS
+- Various other styling improvements/adjustments
+– Updated the custom color element classes in functions.php
+
+
+Version 1.02 (2014-06-30)
+------------------------- 
+- Added closing tag for HTML element in header.php
+– Removed superfluous fourth argument for comments_number() in content.php
+– Removed unused support for custom image header in functions.php (and related theme tags in style.css)
+– Added missing prefixes to functions.php
+
+
+Version 1.01 (2014-06-12)
+------------------------- 
+- Added wp_link_pages(); and page-links styling
+- Added styling for .sticky and .bypostauthor
+
+
+Version 1.00 (2014-06-12)
+------------------------- 

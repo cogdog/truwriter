@@ -1,0 +1,270 @@
+/*---------------------------------------------------------------------------------
+
+	Editor styles for Radcliffe
+
+---------------------------------------------------------------------------------*/
+
+body#tinymce.wp-editor { 
+	font-family: 'Crimson Text', 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: #222;
+    -webkit-font-smoothing: antialiased;
+}
+
+body#tinymce.wp-editor p { line-height: 150%; }
+
+body#tinymce.wp-editor a { color: #ca2017; }
+body#tinymce.wp-editor a:hover { color: #ca2017; text-decoration: underline; }
+
+
+/* Headlines --------------------------------------- */
+
+
+body#tinymce.wp-editor h1, 
+body#tinymce.wp-editor h2, 
+body#tinymce.wp-editor h3, 
+body#tinymce.wp-editor h4, 
+body#tinymce.wp-editor h5, 
+body#tinymce.wp-editor h6 {
+	margin: 40px 0 20px;
+	font-family: 'Open Sans', sans-serif;
+	line-height: 120%;
+}
+
+body#tinymce.wp-editor h1 { 
+	font-size: 1.6em; 
+	font-weight: 700;
+}
+
+body#tinymce.wp-editor h2 { 
+	font-size: 1.4em; 
+	font-weight: 700;
+}
+
+body#tinymce.wp-editor h3 { font-size: 1.25em; font-weight: 400; }
+body#tinymce.wp-editor h4 { font-size: 1.1em; font-weight: 400; }
+body#tinymce.wp-editor h5 { font-size: 1em; font-weight: 400; }
+
+body#tinymce.wp-editor h6 {
+	font-size: 16px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
+}
+
+
+/* Blockquote --------------------------------------- */
+
+
+body#tinymce.wp-editor blockquote {
+	line-height: 150%;
+	color: #666;
+}
+
+body#tinymce.wp-editor blockquote:before,
+body#tinymce.wp-editor blockquote:after {
+	content: "";
+	display: block;
+	width: 100px;
+	height: 2px;
+	background: #ddd;
+	margin: 40px auto;
+}
+
+body#tinymce.wp-editor blockquote p { 
+	font-size: 1.2em;
+	line-height: 160%;
+	text-align: center;
+	font-style: italic;
+}
+
+body#tinymce.wp-editor blockquote p:first-child { margin-top: 0; }
+body#tinymce.wp-editor blockquote p:last-child { margin-bottom: 0; }
+
+body#tinymce.wp-editor cite {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9rem;
+	font-weight: 800;
+	text-transform: uppercase;
+	line-height: 140%;
+	text-align: center;
+	display: block;
+	margin-top: 1.1em;
+	font-style: normal;
+}
+
+body#tinymce.wp-editor cite:before { content: "— " }
+
+body#tinymce.wp-editor blockquote cite em { font-style: italic; font-weight: bold; }
+
+
+/* Media --------------------------------------- */
+
+
+body#tinymce.wp-editor .alignright { margin-left: 20px; }
+
+body#tinymce.wp-editor .alignleft { margin-right: 20px; }
+
+body#tinymce.wp-editor .wp-caption {
+	padding: 0;
+	border: none;
+	background: none;
+}
+
+body#tinymce.wp-editor .wp-caption-dd {
+	font-size: 0.85em;
+	padding-top: 0.5em;
+	color: #888;
+	text-align: center;
+	padding: 10px 0;
+}
+
+
+/* Tables --------------------------------------- */
+
+
+body#tinymce.wp-editor table {
+	border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    font-size: 0.9em;
+    width: 100%;
+    margin-bottom: 1.1em;
+    border: none;
+}
+
+body#tinymce.wp-editor th,
+body#tinymce.wp-editor td {
+	padding: 2%;
+	margin: 0;
+	overflow: visible;
+	line-height: 120%;
+	border: none;
+	border-bottom: 1px solid #DDD;
+	font-size: 1em;
+}
+
+body#tinymce.wp-editor caption {
+	color: #444;
+	text-align: center;
+	padding: 2%;
+}
+
+body#tinymce.wp-editor thead {
+	vertical-align: bottom;
+	white-space: nowrap;
+}
+
+body#tinymce.wp-editor th {
+	font-weight: bold;
+	color: #444;
+}
+
+body#tinymce.wp-editor table tbody > tr:nth-child(odd) > td { background: #f9f9f9; }
+
+
+/* Forms --------------------------------------- */
+
+
+.post-content fieldset {
+	padding: 25px;
+	border: 2px solid #eee;
+	margin-bottom: 1em;
+}
+
+.post-content fieldset legend {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.9rem;
+	line-height: 1;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 10px 12px;
+	background: #ca2017;
+	color: #fff;
+}
+
+.post-content label {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.75em;
+	font-weight: 700;
+}
+
+.post-content input,
+.post-content textarea { 
+	font-family: 'Open Sans', sans-serif; 
+	-webkit-font-smoothing: antialiased;
+}
+
+.post-content input[type="text"],
+.post-content input[type="tel"],
+.post-content input[type="url"],
+.post-content input[type="password"],
+.post-content textarea {
+	width: 100%;
+	padding: 14px 16px;
+	font-size: 1rem;
+	border: none;
+	color: #333;
+	background: #eee;
+	border-radius: 3px;
+	-webkit-transition: background 0.2s ease-in-out;
+	-moz-transition: background 0.2s ease-in-out;
+	-ms-transition: background 0.2s ease-in-out;
+	-o-transition: background 0.2s ease-in-out;
+	transition: background 0.2s ease-in-out;
+	-webkit-appearance: none;
+}
+
+.post-content textarea { 
+	height: 180px; 
+	line-height: 140%;
+}
+
+.post-content input[type="text"]:focus,
+.post-content input[type="tel"]:focus,
+.post-content input[type="url"]:focus,
+.post-content input[type="password"]:focus,
+.post-content textarea:focus {
+	background: #222;
+	color: #fff;
+	outline: none;
+}
+
+.post-content input[type="submit"],
+.post-content input[type="reset"],
+.post-content input[type="button"] {
+	padding: 12px 16px;
+	margin: 0;
+	border: none;
+	background: #222;
+	color: #fff;
+	font-size: 0.9rem;
+	line-height: 1;
+	-webkit-appearance: none;
+	border-radius: 3px;
+}
+
+.post-content input[type="submit"] + input[type="reset"],
+.post-content input[type="submit"] + input[type="reset"],
+.post-content input[type="reset"] + input[type="submit"],
+.post-content input[type="reset"] + input[type="button"],
+.post-content input[type="button"] + input[type="button"],
+.post-content input[type="button"] + input[type="reset"],
+.post-content input[type="button"] + input[type="submit"] {
+	margin-left: 8px;
+}
+
+.post-content input[type="submit"]:hover,
+.post-content input[type="reset"]:hover,
+.post-content input[type="button"]:hover {
+	cursor: pointer;
+	background: #ca2017;
+	color: #fff;
+}
+
+.post-content input[type="submit"]:focus,
+.post-content input[type="submit"]:active {
+	outline: none;
+}
