@@ -40,7 +40,7 @@
 		
 				<div class="post-header-inner section-inner medium">
 													
-					<p class="post-meta-top"><a href="<?php the_permalink(); ?>" title="<?php the_time('h:i'); ?>"><?php the_time(get_option('date_format')); ?></a> <?php echo '<span class="sep">/</span> Reading Time: ~'; $readtime = do_shortcode( '[est_time]' ); echo $readtime; ?> </p>
+					<p class="post-meta-top"><a href="<?php the_permalink(); ?>" title="<?php the_time('h:i'); ?>"><?php the_time(get_option('date_format')); ?></a> <?php if ( comments_open() and truwriter_option('allow_comments') ) { echo '<span class="sep">|</span> '; comments_popup_link( '0 comments', '1 comment', '% comments', 'post-comments' ); } ?> <?php echo '<span class="sep">|</span> Reading Time: ~'; $readtime = do_shortcode( '[est_time]' ); echo $readtime; ?> </p>
 														
 					<h2 class="post-title"><?php the_title(); ?></h2>
 					
@@ -81,6 +81,10 @@
 							<p class="author-description"><strong>Published:</strong> <?php the_time(get_option('date_format')); ?></p>
 							<p class="author-description"><strong>Word Count:</strong> <?php  echo str_word_count( get_the_content());?> </p>
 							<p class="author-description"><strong>Reading time:</strong> ~<?php echo $readtime?></p>
+							
+							<p class="author-description"><strong>Share: </strong> <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="splot" 
+<a href="https://twitter.com/share" class="twitter-share-button" data-text="Published at TRU Writer: <?php echo addslashes(get_the_title())?> by <?php echo $wAuthor?>" data-hashtags="splot" data-dnt="true">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
 							
 							
 							<div class="author-links">
@@ -152,6 +156,9 @@
 			</div> <!-- /post-meta -->
 													                                    	        	        
 		</div> <!-- /post -->
+				
+				<?php if ( truwriter_option('allow_comments') ) comments_template( '', true ); ?>
+				
 									                        
    	<?php endwhile; else: ?>
 

@@ -24,7 +24,19 @@
 	
 	<div class="post-meta-top">
 	
-		<?php the_time(get_option('date_format')); ?>
+		<?php the_time(get_option('date_format')); 
+		
+		
+		if ( truwriter_option('allow_comments') and comments_open() ) {
+			echo '<span class="sep">|</span> '; 
+			if ( is_single() )
+				comments_popup_link( '0 comments', '1 comment', '% comments', 'post-comments' ); 
+			else
+				comments_number( '0 comments', '1 comment', '% comments' ); 
+		}
+		?> 
+
+
 		<span class="sep">|</span> Reading Time: ~
 		<?php $readtime = do_shortcode( '[est_time]' ); echo $readtime; ?>		
 		<?php if ( is_sticky() ) { echo '<span class="sep">/</span> '; _e('Sticky','radcliffe'); } ?>

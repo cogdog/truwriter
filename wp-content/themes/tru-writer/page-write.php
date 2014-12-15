@@ -6,11 +6,29 @@ Generates the form for doing all the writing and previewing
 */
 
 
-// already not logged in? go to desk.
+
 if ( !is_user_logged_in() ) {
-  wp_redirect ( site_url() . '/desk' );
-  exit;
+	// already not logged in? go to desk.
+  	wp_redirect ( site_url() . '/desk' );
+  	exit;
+  	
+} elseif ( !current_user_can( 'edit_others_posts' ) ) {
+	// okay user, who are you? we know you are not an admin or editor
+	
+	$user = get_user_by( 'login', 'writer');
+	
+	// if the writer user not found, we send you to the desk
+	if ( !$user ) {
+		// log out, you!
+		wp_logout();
+		
+		// now go to the desk and check in properly
+	  	wp_redirect ( site_url() . '/desk' );
+  		exit;
+  	}
 }
+
+		
 
 // ------------------------ defaults ------------------------
 
@@ -137,7 +155,24 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been submitted for editorial review. When published, you will be able to view it at <strong>'. get_permalink( $post_id )  . '</strong>. You may want to copy and save this link now';
 					
 					// add here a function to notify via email??
-										
+					
+					// who gets mail? They do.
+					$to_recipients = explode( "," ,  truwriter_option( 'notify' ) );
+					
+					$subject = 'Review newly submitted writing at ' . get_bloginfo();
+					
+					$message = 'A writing <strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish it, simply <a href="' . admin_url( 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'Published' ) ) . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
+					
+					if ( $wNotes ) $message .= '<br /><br />There are some extra notes from the author:<blockquote>' . $wNotes . '</blockquote>';
+					
+					// turn on HTML mail
+					add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+					
+					// mail it!
+					wp_mail( $to_recipients, $subject, $message);
+					
+					// Reset content-type to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
+					remove_filter( 'wp_mail_content_type', 'set_html_content_type' );				
 					
 				} else {
 					// not published, attach the default category ID

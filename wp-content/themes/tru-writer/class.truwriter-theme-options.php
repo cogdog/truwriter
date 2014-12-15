@@ -191,6 +191,15 @@ class truwriter_Theme_Options {
 			'section' => 'general'
 		);
 		
+		$this->settings['allow_comments'] = array(
+			'section' => 'general',
+			'title'   => __( 'Allow Comments?' ),
+			'desc'    => __( 'Enable comments on published writings.' ),
+			'type'    => 'checkbox',
+			'std'     => 0 // Set to 1 to be checked by default, 0 to be unchecked by default.
+		);
+
+		
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
 			'desc'    => __( 'Used on articles as a default. Be sure to enter a default caption in the upload.' ),
@@ -215,6 +224,13 @@ class truwriter_Theme_Options {
 		'type'    => 'heading'
 		);		
 
+		$this->settings['authorcheck'] = array(
+		'section' => 'general',
+		'title' 	=> '' ,// Not used for headings.
+		'desc'   => 'Author Account Setup', 
+		'std'    =>  truwriter_author_user_check(),
+		'type'    => 'heading'
+		);		
 
 		$this->settings['captcha_heading'] = array(
 		'section' => 'general',
@@ -499,11 +515,17 @@ class truwriter_Theme_Options {
 		
 		if ( ! isset( $input['reset_theme'] ) ) {
 			$options = get_option( 'truwriter_options' );
+			
+			if ( $input['notify'] != $options['notify'] ) {
+				$input['notify'] = str_replace(' ', '', $input['notify']);
+			}
+
 					
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[$id] ) && ! isset( $input[$id] ) )
 					unset( $options[$id] );
 			}
+			
 			
 			return $input;
 		}

@@ -7,9 +7,30 @@ Gateway to the Writing tool
 
 // already logged in? go directly to the tool
 if ( is_user_logged_in() ) {
-  wp_redirect ( site_url() . '/write' );
-  exit;
+	
+	if ( current_user_can( 'edit_others_posts' ) ) {
+
+		// If user has edit/admin role, send them to the tool
+		wp_redirect ( site_url() . '/write' );
+  		exit;
+
+	} else {
+	
+		// okay user, who are you? we know you are not an admin or editor
+		$user = get_user_by( 'login', 'writer');
+		
+		// if the writer user  found, go directly to the tool
+		if (  $user ) {			
+	  		wp_redirect ( site_url() . '/write' );
+  			exit;
+  		} else {
+  		
+			// they are logged in to splot from somewhere else, zap them out
+			wp_logout();
+  		}
+  	}
 }
+
 
 // ------------------------ defaults ------------------------
 
@@ -27,7 +48,7 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		&& wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
  
 	// grab the variables from the form
-	$wAccess = 	$_POST['wAccess'];
+	$wAccess = 	stripslashes( $_POST['wAccess'] );
 	
 	// let's do some validation, store an error message for each problem found
 	$errors = array();

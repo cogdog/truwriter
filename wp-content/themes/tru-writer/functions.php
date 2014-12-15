@@ -139,6 +139,17 @@ function truwriter_cookie_expiration( $expiration, $user_id, $remember ) {
 
 add_filter( 'auth_cookie_expiration', 'truwriter_cookie_expiration', 99, 3 );
 
+
+add_filter('comment_form_defaults', 'truwriter_comment_mod');
+
+function truwriter_comment_mod( $defaults ) {
+	$defaults['title_reply'] = 'Provide Feedback';
+	$defaults['logged_in_as'] = '';
+	$defaults['title_reply_to'] = 'Provide Feedback for %s';
+	return $defaults;
+}
+
+
 # -----------------------------------------------------------------
 # Options Panel for Admin
 # -----------------------------------------------------------------
@@ -222,7 +233,7 @@ function truwriter_autologin() {
 		// ACCOUNT USERNAME TO LOGIN TO
 		$creds['user_login'] = 'writer';
 		
-		// ACCOUNT PASSWORD TO USE
+		// ACCOUNT PASSWORD TO USE- lame hard coded....
 		$creds['user_password'] = 'Ry2fraD5wY7';
 		
 		$creds['remember'] = true;
@@ -239,7 +250,7 @@ function truwriter_autologin() {
 add_action('after_setup_theme', 'remove_admin_bar');
 
 function remove_admin_bar() {
-	if (!current_user_can('administrator') && !is_admin()) {
+	if ( !current_user_can('edit_others_posts')  ) {
 	  show_admin_bar(false);
 	}
 
@@ -292,13 +303,35 @@ function get_attachment_caption_by_id( $post_id ) {
 }
 
 function reading_time_check() {
-// returns indicatior of the Reading Time plugin is installed
+// checks for installation of Estimated Reading Time plugin
+
 	if ( shortcode_exists( 'est_time' ) ) {
+		// yep, golden
 		return ('The Estimated Post Reading Time plugin is installed. No further action necessary.');
 	} else {
+		// nope, send them off to set it up
 		return ('The <a href="http://wordpress.org/extend/plugins/estimated-post-reading-time/" target="_blank">Estimated Post Reading Time plugin</a> is NOT installed.  <a href="' . admin_url( 'plugins.php') . '">Do it now!</a>');
 	}
 }
 
+function truwriter_author_user_check() {
+// checks for an authoring account set up
+
+	$auser = get_user_by( 'login', 'writer' );
+	
+	if ( !$auser) {
+		return ('Authoring account not set up. You need to <a href="' . admin_url( 'user-new.php') . '">create a user account</a> with login name <strong>writer</strong> with a role of <strong>Author</strong>. Make a killer strong password; no one uses it.');
+	} elseif ( $auser->roles[0] != 'author') {
+		return ('The user account <strong>writer</strong> is set up but needs to have it\'s role set to <strong>Author</strong>. You can <a href="' . admin_url( 'user-edit.php?user_id=' . $auser->ID ) . '">edit it now</a>'); 
+	} else {
+		return ('The authoring account <strong>writer</strong> is correctly set up.');
+	}
+}
+
+
+function set_html_content_type() {
+	// from http://codex.wordpress.org/Function_Reference/wp_mail
+	return 'text/html';
+}
 
 ?>
