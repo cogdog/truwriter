@@ -166,5 +166,21 @@ fieldset p {
 	background: #eee;
 }
 
+/*
+#writerform textarea {
+	height: 320px;
+	line-height: 100%;
+}
+*/
 
+
+#writerform p {
+	line-height: 120%;
+}
+
+#writerform .uploader {
+	float:left;
+	margin: 0 1.3em 1.3em 0;
+
+}
 

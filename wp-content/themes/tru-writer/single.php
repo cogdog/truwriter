@@ -54,6 +54,10 @@
 		    <div class="post-content section-inner thin">
 		    
 		    	<?php the_content(); ?>
+		    	
+		    	<hr />
+		    	<?php $wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); if ($wFooter) echo '<p><em>' . $wFooter . '</em></p>';?>
+		    	
 
 		    	<div class="clear"></div>
 		    	

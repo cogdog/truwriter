@@ -1,10 +1,8 @@
 <?php
 /*
-Random  Post Picker
-Use on page to send viewer to random post optionally
-
+Random Post Picker
+Use on page to send viewer to random post optionally mod query
 */
-
 
 // set arguments for WP_Query on published posts to get 1 at random
 $args = array(
@@ -14,7 +12,7 @@ $args = array(
     'orderby' => 'rand'
 );
 
-// It's time! Go get a random post from the database
+// It's time! Go someplace random
 $my_random_post = new WP_Query ( $args );
 
 while ( $my_random_post->have_posts () ) {

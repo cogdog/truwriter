@@ -121,9 +121,9 @@ function truwriter_change_post_object() {
  
 
 function truwriter_drafts_menu() {
-	add_submenu_page('edit.php', 'Writings in Draft', 'Writings in Draft', 'manage_options', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
+	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'manage_options', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
 	
-	add_submenu_page('edit.php', 'Writings Submitted', 'Writings Submitted', 'manage_options', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'Published' ) ); 
+	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'manage_options', 'edit.php?post_status=pending&post_type=post' ); 
 }
 
 function truwriter_cookie_expiration( $expiration, $user_id, $remember ) {
@@ -149,6 +149,31 @@ function truwriter_comment_mod( $defaults ) {
 	return $defaults;
 }
 
+
+
+function truwriter_tinymce_buttons($buttons)
+ {
+	//Remove the more button
+	$remove = 'wp_more';
+
+	//Find the array key and then unset
+	if ( ( $key = array_search($remove,$buttons) ) !== false )
+		unset($buttons[$key]);
+
+	return $buttons;
+ }
+add_filter('mce_buttons','truwriter_tinymce_buttons');
+
+
+
+function truwriter_tinymce_2_buttons($buttons)
+ {
+	//Remove the keybord shortcut and paste text buttons
+	$remove = array('wp_help','pastetext');
+
+	return array_diff($buttons,$remove);
+ }
+add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
 
 # -----------------------------------------------------------------
 # Options Panel for Admin
@@ -332,6 +357,12 @@ function truwriter_author_user_check() {
 function set_html_content_type() {
 	// from http://codex.wordpress.org/Function_Reference/wp_mail
 	return 'text/html';
+}
+
+function br2nl ( $string )
+// from http://php.net/manual/en/function.nl2br.php#115182
+{
+    return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);
 }
 
 ?>

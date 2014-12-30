@@ -33,10 +33,11 @@ if ( !is_user_logged_in() ) {
 // ------------------------ defaults ------------------------
 
 // default welcome message
-$feedback_msg = 'Enter the content for your article below. You must save first and preview once before it goes into the system.';
+$feedback_msg = 'Enter the content for your article below. You must save first and preview once before it goes into the system. After that make all changes, save, and preview. Once you submit it as final, you cannot change anything again.';
 
 $wTitle = "My Article Title";
 $wAuthor = "Anonymous";
+$wText = "This is the place where you compose your content. So start by deleting this... do not be content with plain  content, eh?";
 $wCats = array();
 
 $wHeaderImage_id = truwriter_option('defheaderimg');
@@ -63,6 +64,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$wTags = 					sanitize_text_field( $_POST['wTags'] );	
  		$wText = 					$_POST['wText'];
  		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
+ 		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
  		$wHeaderImage_id = 			$_POST['wHeaderImage'];
  		$post_id = 					$_POST['post_id'];
  		$wCats = 					( isset ($_POST['wCats'] ) ) ? $_POST['wCats'] : array();
@@ -134,6 +136,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				
 				// store notes for editor
 				if ( $wNotes ) add_post_meta($post_id, 'wEditorNotes', $wNotes);
+
+				// store notes for editor
+				if ( $wFooter ) add_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
 				
 				$feedback_msg = 'Ok, we have saved this first version of your article. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
 					
@@ -152,16 +157,20 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					// set the published category
 					$copy_cats[] = $published_cat_id;
 					
+					// revise status to pending
+					$w_information['post_status'] = 'pending';
+				
 					$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been submitted for editorial review. When published, you will be able to view it at <strong>'. get_permalink( $post_id )  . '</strong>. You may want to copy and save this link now';
 					
-					// add here a function to notify via email??
+					
+					// Let's do some EMAIL!
 					
 					// who gets mail? They do.
 					$to_recipients = explode( "," ,  truwriter_option( 'notify' ) );
 					
 					$subject = 'Review newly submitted writing at ' . get_bloginfo();
 					
-					$message = 'A writing <strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish it, simply <a href="' . admin_url( 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'Published' ) ) . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
+					$message = 'A writing <strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish it, simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
 					
 					if ( $wNotes ) $message .= '<br /><br />There are some extra notes from the author:<blockquote>' . $wNotes . '</blockquote>';
 					
@@ -175,6 +184,8 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					remove_filter( 'wp_mail_content_type', 'set_html_content_type' );				
 					
 				} else {
+				
+					
 					// not published, attach the default category ID
 					$copy_cats[] = $def_category_id ;
 					
@@ -214,6 +225,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				
 				// store notes for editor
 				if ( $wNotes ) update_post_meta($post_id, 'wEditorNotes', $wNotes);
+
+				// store any end notes
+				if ( $wFooter ) update_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
 
 				// log them out if they are not end editor or better
 				if ( $is_published and !current_user_can( 'edit_pages' )  ) wp_logout();
@@ -314,25 +328,67 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			
 	<?php if ( is_user_logged_in() and !$is_published ) : // show form in logged in and it has not been published ?>
 			
-		<form  id="comparatorform" class="comparatorform" method="post" action="" enctype="multipart/form-data">
+		<form  id="writerform" class="writerform" method="post" action="" enctype="multipart/form-data">
 		
 		<input name="is_previewed" type="hidden" value="<?php echo $is_previewed?>" />
 		<input name="post_id" type="hidden" value="<?php echo $post_id?>" />		
 			
 				<fieldset>
-					<label for="wTitle"><?php _e('Article Title', 'wpbootstrap' ) ?></label><br />
-					<p>An interesting title goes a long way!</p>
+					<label for="wTitle"><?php _e('The Title', 'wpbootstrap' ) ?></label><br />
+					<p>An interesting title goes a long way; it's the headline.</p>
 					<input type="text" name="wTitle" id="wTitle" class="required" value="<?php echo $wTitle; ?>" tabindex="1" />
 				</fieldset>	
 			
 
 				<fieldset>
 					<label for="wAuthor"><?php _e('How to List Author', 'wpbootstrap' ) ?></label><br />
-					<p>Publish under your name, or your secret agent name, or leave as "Anonymous"</p>
+					<p>Publish under your name, twitter handle, secret agent name, or remain "Anonymous". If you include a twitter handle such as @billyshakespeare, when someone tweets your work, you shall receive a lovely notification.</p>
 					<input type="text" name="wAuthor" id="wAuthor" class="required" value="<?php echo $wAuthor; ?>" tabindex="2" />
 				</fieldset>	
+				
+				<fieldset>
+						<label for="wText"><?php _e('Article text', 'wpbootstrap') ?></label>
+						<p>Use the editing area below the tool bar to write using any of the editor tools to format (the cursor may not light up until you click there). You can also paste formatted content here (e.g. from MS Word). The TRU Writer will do it's best to preserve standard formatting- headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images. You can embed audio and video  from many social sites simply by putting it's URL on  separate line. Click and drag the icon in the lower right to resize the editing space, or click the <strong>Full Screen</strong> button (second from right) to expand the editor to the size of this window.</p>
+						
+						<p> See more details in the  
+<a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
+						<?php
+						// set up for inserting the WP post editor
+						$settings = array( 'textarea_name' => 'wText',  'tabindex'  => "3");
 
+						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
+						?>
+				</fieldset>
 
+				<fieldset>
+						<label for="wFooter"><?php _e('End Notes, Credits, etc.', 'wpbootstrap') ?></label>						
+						<p>Add any text you wish to append to the end, such as a citation to where it was previously published or any other meta information </p>
+						<textarea name="wFooter" id="wFooter" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
+				</fieldset>
+
+				
+				<fieldset>
+					<label for="headerImage"><?php _e('Header Image', 'wpbootstrap') ?></label>
+					
+						
+					<div class="uploader">
+						<input id="wHeaderImage" name="wHeaderImage" type="hidden" value="<?php echo $wHeaderImage_id?>" />
+
+						<?php $defthumb = wp_get_attachment_image_src( $wHeaderImage_id, 'thumbnail' );?>
+					
+						<img src="<?php echo $defthumb[0]?>" alt="article banner image" id="headerthumb" /><br />
+					
+						<input type="button" id="wHeaderImage_button"  class="btn btn-success btn-medium  upload_image_button" name="_wImage_button"  data-uploader_title="Set Header Image" data-uploader_button_text="Select Image" value="Set Header Image" tabindex="5" />
+						
+						</div>
+						
+						<p>You can upload any JPG or PNG image to be used in the header or choose from any that have already been added to the site. Ideally, it should be 800px in width or wider. It will automatically be cropped along the middle of the image to fit as the one is you see on this page.</p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution in the caption field below.<br clear="left"></p>
+						
+						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'wpbootstrap') ?></label>
+						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo $wHeaderImageCaption; ?>" tabindex="6" />
+					
+				</fieldset>						
+				
 				<fieldset>
 					<label for="wCats"><?php _e( 'Kind of Writing', 'wpbootstrap' ) ?></label>
 					<p>Check as many that apply.</p>
@@ -350,58 +406,25 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					
 						$checked = ( in_array( $acat->term_id, $wCats) ) ? ' checked="checked"' : '';
 						
-						echo '<br /><input type="checkbox" name="wCats[]" tabindex="3" value="' . $acat->term_id . '"' . $checked . '> ' . $acat->name;
+						echo '<br /><input type="checkbox" name="wCats[]" tabindex="7" value="' . $acat->term_id . '"' . $checked . '> ' . $acat->name;
 					}
 					
 					?>
 					
 				</fieldset>
 
-			
 				<fieldset>
-					<label for="wTags"><?php _e( 'Tags (optional)', 'wpbootstrap' ) ?></label>
+					<label for="wTags"><?php _e( 'Tags', 'wpbootstrap' ) ?></label>
 					<p>Descriptive tags, separate multiple ones with commas</p>
 					
-					<input type="text" name="wTags" id="wTags" value="<?php echo $wTags; ?>"  />
+					<input type="text" name="wTags" id="wTags" value="<?php echo $wTags; ?>" tabindex="8"  />
 				</fieldset>
 
-				<fieldset>
-					<label for="headerImage"><?php _e('Upload or Select Header Image', 'wpbootstrap') ?></label>
-						
-					<div class="uploader">
-						<input id="wHeaderImage" name="wHeaderImage" type="hidden" value="<?php echo $wHeaderImage_id?>" />
-					
-					
-						<?php $defthumb = wp_get_attachment_image_src( $wHeaderImage_id, 'thumbnail' );?>
-					
-						<img src="<?php echo $defthumb[0]?>" alt="article banner image" id="headerthumb" /><br />
-					
-						<input type="button" id="wHeaderImage_button" tabindex="4" class="btn btn-success btn-medium  upload_image_button" name="_wImage_button"  data-uploader_title="Set Article Header Image" data-uploader_button_text="Select Image" value="Set Image" tabindex="1" />
-						<br /><br />
-						
-						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'wpbootstrap') ?></label>
-						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo $wHeaderImageCaption; ?>" tabindex="5" />
-					</div>
-				</fieldset>			
-
-				<fieldset>
-						<label for="wText"><?php _e('Article text', 'wpbootstrap') ?></label>
-						<p>You can copy/paste formatted content here; The TRU Writer will preserve standard headings, bold, italic, lists, footnotes, and hypertext links. See more 
-<a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
-						<?php
-						// set up for inserting the WP post editor
-						$settings = array( 'textarea_name' => 'wText', 'textarea_rows' => 40 );
-
-						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
-
-						?>
-
-				</fieldset>
 
 				<fieldset>
 						<label for="wNotes"><?php _e('Notes to the Editor', 'wpbootstrap') ?></label>						
-						<p>Add any notes or messages to the editor, will not be part of published article. If you want to be contacted, you will have to leave some form of contact.</p>
-						<textarea name="wNotes" id="wNotes" rows="15"  tabindex="10"><?php echo stripslashes( $wNotes );?></textarea>
+						<p>Add any notes or messages to the editor; this will not be part of published article. If you want to be contacted, you will have to leave some means of contact.</p>
+						<textarea name="wNotes" id="wNotes" rows="15"  tabindex="9"><?php echo stripslashes( $wNotes );?></textarea>
 				</fieldset>
 
 			
@@ -417,12 +440,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					
 					<?php echo $box_style . $feedback_msg . '</div>';?>
 					
-					<input type="submit" class="pretty-button pretty-button-green" value="Revise Draft" id="wSubDraft" name="wSubDraft" tabindex="15"> Save changes, preview again.<br /><br />
-					<input type="submit" class="pretty-button pretty-button-blue" value="Publish Final" id="wPublish" name="wPublish" tabindex="16"> All changes completed. You cannot edit once this is done.
+					<input type="submit" class="pretty-button pretty-button-green" value="Revise Draft" id="wSubDraft" name="wSubDraft" tabindex="10"> Save changes, preview again.<br /><br />
+					<input type="submit" class="pretty-button pretty-button-blue" value="Publish Final" id="wPublish" name="wPublish" tabindex="11"> All changes completed. You cannot edit once this is done.
 					
 					<?php else:?>
 					
-					<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="makeit" name="makeit" tabindex="15"> Save your first draft, then preview.
+					<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="makeit" name="makeit" tabindex="12"> Save your first draft, then preview.
 					
 					
 					<?php endif?>

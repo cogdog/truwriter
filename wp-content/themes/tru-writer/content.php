@@ -44,5 +44,6 @@
 	</div>
 	
     <h2 class="post-title"><?php the_title(); ?></h2>
+    <p class="theauthor">written by <?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
     	    
 </a> <!-- /post-header -->
