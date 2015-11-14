@@ -56,7 +56,7 @@
 		    	<?php the_content(); ?>
 		    	
 		    	<hr />
-		    	<?php $wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); if ($wFooter) echo '<p><em>' . $wFooter . '</em></p>';?>
+		    	<?php $wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); if ($wFooter) echo '<p><em>' . make_clickable( $wFooter ) . '</em></p>';?>
 		    	
 
 		    	<div class="clear"></div>
@@ -69,7 +69,7 @@
 			
 				<div class="meta-block post-author">
 				
-					<h3 class="meta-title"><?php _e('Comparte Report','radcliffe'); ?></h3>
+					<h3 class="meta-title"><?php _e('SPLOT WRITTEN','radcliffe'); ?></h3>
 					
 					<div class="post-author-container">
 				
@@ -124,7 +124,7 @@
 				
 					<h3 class="meta-title"><?php _e('ABOUT','radcliffe'); ?></h3>
 				
-					<p><strong>Project Type:</strong> 
+					<p class="post-categories">
 												
 						<?php the_category(', '); ?>
 					
@@ -132,31 +132,14 @@
 					
 					<?php if ( has_tag() ) : ?>
 						
-						<p><strong>Subject Areas :</strong> 
+						<p class="post-tags">
 																			
 							<?php the_tags('', ', '); ?>
+						
 						</p>
-					<?php endif; ?>
 					
-					<?php 
-						// now lets get the tech terms for this item
-						$terms = get_the_terms( $post->ID, 'techtags' );
-						
-						// got some?
-						if ( $terms && ! is_wp_error( $terms ) ) { 
-							$techtags  = array();
-
-							foreach ( $terms as $term ) {
-								$techtags[] = '<a href="'
-       								 .    get_term_link( $term->slug, 'techtags' ) .'">'
-       								 .    $term->name
-        							 . "</a>";
-							}
-						
-							echo '<p><strong>Technologies: </strong>' . implode( ", " , $techtags ) . '</p>';
-						}
-					?>
-
+					<?php endif; ?>
+				
 					<div class="post-nav">
 		
 						<?php
