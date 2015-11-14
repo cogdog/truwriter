@@ -32,7 +32,7 @@ This theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/ex
 
 The theme will hide the Wordpress admin bar, but just in case of savvy users who can can guess the URL for the dashboard (although they cannot do much logged in as an Author), install the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) which can be set to deny access to anyone who is not an Editor or Administrator.
 
-If you want to customize/re-arrange the buttons and controls on the rich text editor that writers on your site will use, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme[(wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt) with a recommended set of options for this plug you can copy and paste into the import field (its a blob of json).
+If you want to customize/re-arrange the buttons and controls on the rich text editor that writers on your site will use, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt) with a recommended set of options for this plug you can copy and paste into the import field (its a blob of json).
 
 ## Theme Options and Settings
 Upon activation the theme will create a few Pages it needs, some categories, and will set up a **TRU Writer Options** link it will add to your Dashboard and to the top admin bar. Click that to make all settings outlined below. For extra fun "writer" here in lower case refers to the person using your site.
