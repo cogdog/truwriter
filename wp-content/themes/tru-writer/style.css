@@ -14,10 +14,26 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html http://www.apache.org/lice
 
 @import url(../radcliffe/style.css);
 
+
+.featured-media > img, .backstretch { max-height: 360px;}
+
 .post-header .theauthor { font-size: 1.2em; margin-top: 1em; font-style:italic; text-align:center; }
 
-.featured-media > img, .backstretch { max-height: 400px; }
+a.post-header {height: 100%;}
 
+.title-wrap {
+	top:50%;
+	transform:translateY(-100%);
+}
+
+
+.featured-media {
+    max-height: 400px;
+}
+
+.posts .post.has-featured-image {
+    max-height: 500px;
+}
 
 fieldset p {
 	font-size: 0.85em;
@@ -46,30 +62,31 @@ fieldset p {
         -moz-transition-duration: 0.3s;
         -o-transition-duration: 0.3s;
         transition-duration: 0.3s;
-        color: #ffffff;
+        color: #fff;
         text-shadow: none;
         border: none;
-        height: 32px;
-        line-height: 32px;
-        padding: 0px 25.6px;
-        font-weight: 300;
-        font-size: 14px;
+        height: 2em;
+        line-height: 2em;
+        padding: 0px 0.7em;
+        font-weight: 900;
+        font-size: 1em;
+        
         font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         margin: 0;
         text-decoration: none;
         text-align: center;
-        display: inline-block      
+        display: inline-block;   
     }
     
     /* user actions on the buttons. */
     .pretty-button:hover, .post-content input.pretty-button:hover {
         text-decoration: none;
-        color: #ffffff
+        color: #fff;
     }
     .pretty-button:active, .post-content input.pretty-button:active {
         -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
         -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
-        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03)
+        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
     }
         
     /* The next blocks of code are specific to the color. Copy the color you want. */
@@ -166,13 +183,36 @@ fieldset p {
 	background: #eee;
 }
 
-/*
-#writerform textarea {
-	height: 320px;
-	line-height: 100%;
+form#writerform {
+	padding: 30px 20px;
 }
-*/
 
+.writenew {
+		background-color: #8ed9f6;
+}
+
+.writedraft {
+		background-color: #D1FAB6;
+}
+
+.writeoops {
+		background-color: #fad9d7;
+}
+
+.writestatus {
+	text-align: right;
+	left: 80%;
+	padding: 4px;
+	margin-bottom: 10px;
+	font-family: monospace;
+	font-weight: 900;
+	font-size: 90%;
+}
+
+.writestatus .statnow {
+	color: #333;
+	font-size: 80%;
+}
 
 #writerform p {
 	line-height: 120%;
@@ -181,6 +221,40 @@ fieldset p {
 #writerform .uploader {
 	float:left;
 	margin: 0 1.3em 1.3em 0;
+}
 
+#writerform fieldset {
+	border: 2px solid #ddd;
+	background-color: #eee;
+}
+
+
+/* -------------------- style the autocomplete stuff ----------------------------------*/
+/* h/t http://sudarmuthu.com/blog/using-wordpress-built-in-tag-auto-complete-script-in-your-plugins/#comment-644312 */
+
+.ac_results {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	position: absolute;
+	z-index: 10000;
+	display: none;
+	border-width: 1px;
+	border-style: solid;
+	background-color: white;
+}
+
+.ac_results li {
+	padding: 4px 6px;
+	white-space: nowrap;
+	text-align: left;
+}
+
+.ac_over {
+	cursor: pointer;
+}
+
+.ac_match {
+	text-decoration: underline;
 }
 

@@ -178,7 +178,7 @@ class truwriter_Theme_Options {
 		$this->settings['accesscode'] = array(
 			'title'   => __( 'Access Code' ),
 			'desc'    => __( 'Set necessary code to access the writing tool; leave blank to make wide open' ),
-			'std'     => 'tru writer',
+			'std'     => '',
 			'type'    => 'text',
 			'section' => 'general'
 		);
@@ -190,6 +190,27 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
+
+
+		$this->settings['pub_status'] = array(
+			'section' => 'general',
+			'title'   => __( 'Status For New Writings' ),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'pending',
+			'choices' => array(
+				'pending' => 'Moderated: new submissions will not appear until an admin edits status in Wordpress',
+				'publish' => 'Published immediately to site',
+			)
+		);		
+
+		$this->settings['def_text'] = array(
+			'title'   => __( 'Default Writing Prompt' ),
+			'desc'    => __( 'Contents that will appear in a new blank writing spot; it can include HTML (sorry not rich text editor here yet)' ),
+			'std'     => '<h2>Introduction</h2><p>This is what I have to say, which of course is something important. As you can see we can use headings and other <strong>formatting</strong> in our work.</p>',
+			'type'    => 'textarea',
+			'section' => 'general'
+		);
 		
 		$this->settings['allow_comments'] = array(
 			'section' => 'general',
@@ -198,7 +219,27 @@ class truwriter_Theme_Options {
 			'type'    => 'checkbox',
 			'std'     => 0 // Set to 1 to be checked by default, 0 to be unchecked by default.
 		);
-
+		
+		$this->settings['require_extra_info'] = array(
+			'section' => 'general',
+			'title'   => __( 'Require Extra Information Field Filled In?'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '0',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes',
+					)
+		);
+		
+		$this->settings['extra_info_prompt'] = array(
+			'title'   => __( 'Extra Information Field Prompt' ),
+			'desc'    => __( 'Specific instructions to appear on the form' ),
+			'std'     => 'Please add any specific notes or instructions about this submission. If you want a response, you will have to leave some means of contact such as an email address or telephone number. ',
+			'type'    => 'text',
+			'section' => 'general'
+		);
+		
 		
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
@@ -207,6 +248,23 @@ class truwriter_Theme_Options {
 			'type'    => 'medialoader',
 			'section' => 'general'
 		);
+		
+  		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
+	  	$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
+	  	
+	  	// Walk those cats, store as array index=ID 
+		foreach ( $all_cats as $item ) {
+  			$cat_options[$item->term_id] =  $item->name;
+  		}
+ 
+		$this->settings['def_cat'] = array(
+			'section' => 'general',
+			'title'   => __( 'Default Category for New Writing'),
+			'desc'    => '',
+			'type'    => 'select',
+			'std'     => get_option('default_category'),
+			'choices' => $cat_options
+		);	
 			
 		$this->settings['notify'] = array(
 			'title'   => __( 'Notification Emails' ),
@@ -228,10 +286,59 @@ class truwriter_Theme_Options {
 		'section' => 'general',
 		'title' 	=> '' ,// Not used for headings.
 		'desc'   => 'Author Account Setup', 
-		'std'    =>  truwriter_author_user_check(),
+		'std'    =>  truwriter_author_user_check( 'writer' ),
 		'type'    => 'heading'
 		);		
 
+		$this->settings['pkey'] = array(
+			'title'   => __( 'Author Account Password' ),
+			'desc'    => __( 'The password for the writer user account' ),
+			'std'     => 'When you create the account, we suggest using the generated strong password, make sure you copy it so you can add it here.',
+			'type'    => 'password',
+			'section' => 'general'
+		);
+		
+		
+		// ------- creative commons options		
+		$this->settings['cc_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Creative Commons',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+		
+		$this->settings['use_cc'] = array(
+			'section' => 'general',
+			'title'   => __( 'Usage Mode' ),
+			'desc'    => __( 'How licenses are applied' ),
+			'type'    => 'radio',
+			'std'     => 'none',
+			'choices' => array(
+				'none' => 'No Creative Commons',
+				'site' => 'Apply the same license to all writings',
+				'user' => 'Enable authors to choose a license'
+			)
+		);
+		
+		$this->settings['cc_site'] = array(
+			'section' => 'general',
+			'title'   => __( 'License for All Writings'),
+			'desc'    => __( 'Choose a license that will appear sitewide or used as default if user selects.' ),
+			'type'    => 'select',
+			'std'     => 'by',
+			'choices' => array(
+				'0' =>'CC0 Public Domain',
+				'by' => 'CC BY Attribution',
+				'by-sa' => 'CC Attribution-ShareAlike',
+				'by-nd' => 'CC BY-ND Attribution-NoDerivs',
+				'by-nc' => 'CC BY-NC Attribution-NonCommercial',
+				'by-nc-sa' => 'CC BY-NC-SA	Attribution-NonCommercial-ShareAlike',
+				'by-nc-nd' => 'CC BY-NC-ND Attribution-NonCommercial-NoDerivs',
+			)
+		);
+
+/*
 		$this->settings['captcha_heading'] = array(
 		'section' => 'general',
 		'title' 	=> '' ,// Not used for headings.
@@ -239,7 +346,6 @@ class truwriter_Theme_Options {
 		'std'    => 'Not current used, but may set up in future.',
 		'type'    => 'heading'
 		);		
-
 				
 		$this->settings['use_captcha'] = array(
 			'section' => 'general',
@@ -281,7 +387,7 @@ class truwriter_Theme_Options {
 			'section' => 'general'
 		);
 
-
+*/
 
 				
 
@@ -365,7 +471,7 @@ class truwriter_Theme_Options {
 				break;
 
 			case 'textarea':
-				echo '<textarea class="' . $field_class . '" id="' . $id . '" name="truwriter_options[' . $id . ']" placeholder="' . $std . '" rows="5" cols="30">' . wp_htmledit_pre( $options[$id] ) . '</textarea>';
+				echo '<textarea class="' . $field_class . '" id="' . $id . '" name="truwriter_options[' . $id . ']" placeholder="' . $std . '" rows="10" cols="80">' . format_for_editor( $options[$id] ) . '</textarea>';
 
 				if ( $desc != '' )
 					echo '<br /><span class="description">' . $desc . '</span>';

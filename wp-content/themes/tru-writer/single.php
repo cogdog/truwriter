@@ -44,7 +44,7 @@
 														
 					<h2 class="post-title"><?php the_title(); ?></h2>
 					
-					<p class="theauthor">written by <?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
+					<p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
 					
 				
 				</div> <!-- /post-header-inner section-inner -->
@@ -69,12 +69,11 @@
 			
 				<div class="meta-block post-author">
 				
-					<h3 class="meta-title"><?php _e('SPLOT WRITTEN','radcliffe'); ?></h3>
+					<h3 class="meta-title"><?php _e('Comparte Report','radcliffe'); ?></h3>
 					
 					<div class="post-author-container">
 				
-						<?php echo get_avatar( 2, '160', 'http://splot.ca/writer/files/2014/12/splot.png' ); ?>
-						
+						<img src="<?php echo get_stylesheet_directory_uri();?>/images/writer.png"  class="avatar avatar-160 photo" height="160" width="160" alt="" />
 						
 						<div class="post-author-inner">
 						 
@@ -86,14 +85,32 @@
 							<p class="author-description"><strong>Word Count:</strong> <?php  echo str_word_count( get_the_content());?> </p>
 							<p class="author-description"><strong>Reading time:</strong> ~<?php echo $readtime?></p>
 							
+							<?php
+							
+							if ( get_post_meta( $post->ID, 'wEmail', 1 ) ) {
+								echo '<p class="author-description"><strong>Edit Link:</strong> <em>(emailed to author)</em><br /> <a href="#" id="getEditLink" class="pretty-button pretty-button-blue" data-widurl="' . get_bloginfo('url') . '/get-edit-link/?wid=' .   $post->ID . '">Request Now</a> <span id="getEditLinkResponse" class="writenew"></span></p>';
+							}
+							?>
+							
+							<?php if ( truwriter_option( 'use_cc' ) != 'none' ):?>					
+								<!-- creative commons -->
+								<p class="author-description"><strong>License: </strong><br />
+								<?php 
+									// get the license code, either define for site or post meta for user assigned						
+									$cc_code = ( truwriter_option( 'use_cc' ) == 'site') ? truwriter_option( 'cc_site' ) : get_post_meta($post->ID, 'wLicense', true);
+									echo cc_license_html( $cc_code, $wAuthor, get_the_time( "Y", $post->ID ) );
+
+								?>		
+							
+								</p> <!-- /creative commons -->
+							<?php endif?>
+
+							
 							<p class="author-description"><strong>Share: </strong> <a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="splot" 
 <a href="https://twitter.com/share" class="twitter-share-button" data-text="Published at TRU Writer: <?php echo addslashes(get_the_title())?> by <?php echo $wAuthor?>" data-hashtags="splot" data-dnt="true">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
 							
 							
-							<div class="author-links">
-								
-							</div> <!-- /author-links -->
 						
 						</div>
 						
@@ -107,7 +124,7 @@
 				
 					<h3 class="meta-title"><?php _e('ABOUT','radcliffe'); ?></h3>
 				
-					<p class="post-categories">
+					<p><strong>Project Type:</strong> 
 												
 						<?php the_category(', '); ?>
 					
@@ -115,14 +132,31 @@
 					
 					<?php if ( has_tag() ) : ?>
 						
-						<p class="post-tags">
+						<p><strong>Subject Areas :</strong> 
 																			
 							<?php the_tags('', ', '); ?>
-						
 						</p>
-					
 					<?php endif; ?>
-				
+					
+					<?php 
+						// now lets get the tech terms for this item
+						$terms = get_the_terms( $post->ID, 'techtags' );
+						
+						// got some?
+						if ( $terms && ! is_wp_error( $terms ) ) { 
+							$techtags  = array();
+
+							foreach ( $terms as $term ) {
+								$techtags[] = '<a href="'
+       								 .    get_term_link( $term->slug, 'techtags' ) .'">'
+       								 .    $term->name
+        							 . "</a>";
+							}
+						
+							echo '<p><strong>Technologies: </strong>' . implode( ", " , $techtags ) . '</p>';
+						}
+					?>
+
 					<div class="post-nav">
 		
 						<?php

@@ -43,7 +43,8 @@ function radcliffe_load_style() {
 
 	if ( !is_admin() ) {
 	    wp_enqueue_style( 'radcliffe_googlefonts', '//fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700,700italic,800|Crimson+Text:400,400italic,700,700italic|Abril+Fatface:400' );
-	    wp_enqueue_style( 'radcliffe_style', get_stylesheet_uri() );
+	   //  wp_enqueue_style( 'radcliffe_style', get_stylesheet_uri() );
+	    wp_enqueue_style( 'radcliffe_style', get_stylesheet_directory_uri() . '/style.css' . '?' . filemtime( get_stylesheet_directory() . '/style.css' ) );
 	}
 	
 }

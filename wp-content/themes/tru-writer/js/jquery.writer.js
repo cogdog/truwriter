@@ -7,12 +7,16 @@
 */
 
 
-function getAbsolutePath() {
-    var loc = window.location;
-    var pathName = loc.pathname.substring(0, loc.pathname.lastIndexOf('/') + 1);
-    return loc.href.substring(0, loc.href.length - ((loc.pathname + loc.search + loc.hash).length - pathName.length));
+function getWPURL( page_slug ) {
+/* return the base wordpress URL based on a page name passed as parameter
+    which should be something like "/slug"                              */
+
+    var loc = window.location.href;
+    return loc.substring(0,loc.lastIndexOf(page_slug));
 }
 
+jQuery('#wTags').suggest( getWPURL('/write') + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
+	
 jQuery(document).ready(function() { 
 	// called for via click of upload button in theme options
 
@@ -55,8 +59,4 @@ jQuery(document).ready(function() {
 		file_frame.open();
 	
 	});
-		
-	jQuery('#wTags').suggest( getAbsolutePath() + "wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
-	
-
 });

@@ -1,9 +1,14 @@
 <?php
-/*
-Template Name: Entrance To Writer
 
-Gateway to the Writing tool
-*/
+// ------------------------ defaults ------------------------
+
+// default welcome message
+$feedback_msg = '';
+
+// the passcode to enter
+$wAccessCode = truwriter_option('accesscode');
+
+// ------------------------ door check -----------------------
 
 // already logged in? go directly to the tool
 if ( is_user_logged_in() ) {
@@ -16,29 +21,26 @@ if ( is_user_logged_in() ) {
 
 	} else {
 	
-		// okay user, who are you? we know you are not an admin or editor
-		$user = get_user_by( 'login', 'writer');
-		
-		// if the writer user  found, go directly to the tool
-		if (  $user ) {			
+		// if the correct user found, go directly to the tool
+		if ( truwriter_check_user() ) {			
 	  		wp_redirect ( site_url() . '/write' );
   			exit;
+  			
   		} else {
-  		
-			// they are logged in to splot from somewhere else, zap them out
-			wp_logout();
+			// we need to force a click through a logout
+			$log_out_warning = true;
+			$feedback_msg = 'First, please <a href="' . wp_logout_url( site_url() . '/write' ) . '" class="pretty-button pretty-button-green">activate lasers</a>';
   		}
-  	}
+  	}	
+	
+  	  	
+} elseif ( $wAccessCode == '')  {
+	
+	// no code required, log 'em in
+	wp_redirect ( site_url() . '/wp-login.php?autologin=writer' );
+	exit;
+
 }
-
-
-// ------------------------ defaults ------------------------
-
-// default welcome message
-$feedback_msg = '';
-
-// the passcode to enter
-$wAccessCode = truwriter_option('accesscode');
 
 // ------------------------ presets ------------------------
 
@@ -124,44 +126,53 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		    <div class="post-content section-inner thin">
 		    
 		    	<?php the_content(); ?>
+
+	
+				<?php if ($log_out_warning):?>
+					<div class="notify notify-green"><span class="symbol icon-tick"></span>
+					<?php echo $feedback_msg?>
+					</div>
+
+				<?php else:?>
 		    	
 			    	
 		    	
-		    	<?php  
-		    	// set up box code colors CSS
+						<?php  
+						// set up box code colors CSS
 
-		    	if ( count( $errors ) ) {
-		    		$box_style = '<div class="notify notify-red"><span class="symbol icon-error"></span> ';
-		    		echo $box_style . $feedback_msg . '</div>';
-		    	}
-		    			    	
-		    	
-		    	?>   
-		    	
-				<div class="clear"></div>
-		    
-					
-		<?php endwhile; else: ?>
-	
-			<p><?php _e("We couldn't find any posts that matched your query. Please try again.", "radcliffe"); ?></p>
-
-		<?php endif; ?>
-						
-		<form  id="comparatorform" class="comparatorform" method="post" action="">
-					
-				<fieldset>
-					<label for="wAccess"><?php _e('Access Code', 'radcliffe' ) ?></label><br />
-					<p>Enter a proper code</p>
-					<input type="text" name="wAccess" id="wAccess" class="required" value="<?php echo $wAccess; ?>" tabindex="1" />
-				</fieldset>	
-			
-				<fieldset>
-					<?php wp_nonce_field( 'truwriter_form_access', 'truwriter_form_access_submitted' ); ?>
-					<input type="submit" class="pretty-button pretty-button-blue" value="Check Code" id="checkit" name="checkit" tabindex="15">
-				</fieldset>
+						if ( count( $errors ) ) {
+							$box_style = '<div class="notify notify-red"><span class="symbol icon-error"></span> ';
+							echo $box_style . $feedback_msg . '</div>';
+						}
+								
 				
-		</form>
+						?>   
+				
+						<div class="clear"></div>
+									
+				<form  id="comparatorform" class="comparatorform" method="post" action="">
+					
+						<fieldset>
+							<label for="wAccess"><?php _e('Access Code', 'radcliffe' ) ?></label><br />
+							<p>Enter a proper code</p>
+							<input type="text" name="wAccess" id="wAccess" class="required" value="<?php echo $wAccess; ?>" tabindex="1" />
+						</fieldset>	
+			
+						<fieldset>
+							<?php wp_nonce_field( 'truwriter_form_access', 'truwriter_form_access_submitted' ); ?>
+							<input type="submit" class="pretty-button pretty-button-blue" value="Check Code" id="checkit" name="checkit" tabindex="15">
+						</fieldset>
+				
+				</form>
+		<?php endif?>
+		
+				<?php endwhile; else: ?>
+	
+					<p><?php _e("We couldn't find any posts that matched your query. Please try again.", "radcliffe"); ?></p>
 
+				<?php endif; ?>
+		
+		
 			
 	</div> <!-- /post -->
 	

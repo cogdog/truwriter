@@ -19,7 +19,8 @@
 	</a> <!-- /featured-media -->
 		
 <?php endif; ?>
-	
+
+<div class="title-wrap">
 <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="post-header section medium-padding">
 	
 	<div class="post-meta-top">
@@ -44,6 +45,7 @@
 	</div>
 	
     <h2 class="post-title"><?php the_title(); ?></h2>
-    <p class="theauthor">written by <?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
+    <p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
     	    
 </a> <!-- /post-header -->
+</div>
