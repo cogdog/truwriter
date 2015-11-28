@@ -6,14 +6,14 @@ This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/) a site for ric
 
 To provide access to advanced editing tools, the site will invisibly log your visitors in to a special account; they will never even know it! They will never know; they will never see the Wordpress interface (we love Wordpress, but hey, not everyone needs to see that dashboard, right?)
 
-![](images/web2storytelling.jpg "Web 2.0 Storytelling Article")
+[![Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
 
 You can see other versions of this in action:
 
 * [TRU Write demo site](http://splot.ca/writer/)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/) 
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/)
-* [ENGL 1110 Writer, TRY](http://engl1110writer.trubox.ca/)
+* [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
