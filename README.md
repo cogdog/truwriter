@@ -23,13 +23,13 @@ You can see other versions of this in action:
 
 ## Relatively New Features
 
-** Provide an Email, Edit your Work Later ** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (and it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
+**Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (and it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
 
 When published, any writing with an email is published with a `Get Edit Link` button at the bottom which will resend the link to the email associated with the item.
 
 ![](images/email-request.jpg "Email Request Link")
 
-** Admins Can Get Edit Link for Anybody ** Even if the author does not provide an email address, in the Wordpress Dashboard interface, editors and admins can click and copy an edit like they can provide directly to a writer (this is added as a side metabox).
+**Admins Can Get Edit Link for Anybody** Even if the author does not provide an email address, in the Wordpress Dashboard interface, editors and admins can click and copy an edit like they can provide directly to a writer (this is added as a side metabox).
 
 ![](images/re-edit-link.jpg "Admin Re-edit Link")
 
