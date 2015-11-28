@@ -367,8 +367,53 @@ function oembed_filter( $str ) {
 
 
 # -----------------------------------------------------------------
-# Email Eriting Edit Link
+# User Edit Link
 # -----------------------------------------------------------------
+
+// add meta box to show edit link on posts
+function truwriter_editlink_meta_box() {
+
+	add_meta_box(
+		're_editlink',
+		'Author Re-Edit Link',
+		'truwriter_editlink_meta_box_callback',
+		'post',
+		'side'
+	);
+}
+add_action( 'add_meta_boxes', 'truwriter_editlink_meta_box' );
+
+// content for edit link meta box
+function truwriter_editlink_meta_box_callback( $post ) {
+
+	// Add a nonce field so we can check for it later.
+	wp_nonce_field( 'truwriter_editlink_meta_box_data', 'truwriter_editlink_meta_box_nonce' );
+
+
+	// get edit key
+	$ekey = get_post_meta( $post->ID, 'wEditKey', 1 );
+	
+	// make an edit link if it does not exist
+	if ( !$ekey ) {
+		truwriter_make_edit_link( $post->ID );
+		$ekey = get_post_meta( $post->ID, 'wEditKey', 1 );
+	}
+
+	echo '<label for="writing_edit_link">';
+	_e( 'Click to highlight, then copy', 'radcliffe' );
+	echo '</label> ';
+	echo '<input style="width:100%; type="text" id="writing_edit_link" name="writing_edit_link" value="' . get_bloginfo('url') . '/write/?wid=' . $post->ID . '&tk=' . $ekey  . '"  onclick="this.select();" />';
+	
+	}
+
+
+function truwriter_make_edit_link( $post_id, $post_title='') {
+	// add a token for editing
+	// ----h/t via http://www.sitepoint.com/generating-one-time-use-urls/
+	
+	if ( $post_title == '')   $post_title = get_the_title($post_id );
+	update_post_meta( $post_id, 'wEditKey',sha1( uniqid( $post_title, true ) ) );
+}
 
 function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 

@@ -93,6 +93,8 @@
 							}
 							?>
 							
+							
+							
 							<?php if ( truwriter_option( 'use_cc' ) != 'none' ):?>					
 								<!-- creative commons -->
 								<p class="author-description"><strong>License: </strong><br />

@@ -27,7 +27,7 @@ if ( ! ($wid and $tk) ) {
 // ------------------------ defaults ------------------------
 
 // default welcome message
-$feedback_msg = 'Enter the content for your article below. You must save first and preview once before it goes into the system. After that you can continue to edit and preview, but make sure you submit it when it is done.';
+$feedback_msg = 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  <strong>Publish Final</strong> when you are done. If you include your email address, we can send you a link that will allow you to make changes later.';
 
 $wTitle = '';
 $wAuthor = "Anonymous";
@@ -224,8 +224,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				if ( $my_cc_mode != 'none' ) add_post_meta( $post_id,  'wLicense', $wLicense);
 				
 				// add a token for editing
-				// ----h/t via http://www.sitepoint.com/generating-one-time-use-urls/
-				add_post_meta( $post_id, 'wEditKey',sha1( uniqid( $wTitle, true ) ) );
+				truwriter_make_edit_link( $post_id,  $wTitle );
 				
 				$feedback_msg = 'Ok, we have saved this first version of your article. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
 					

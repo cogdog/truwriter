@@ -269,7 +269,7 @@ class truwriter_Theme_Options {
 		$this->settings['notify'] = array(
 			'title'   => __( 'Notification Emails' ),
 			'desc'    => __( 'Send notifications to these addresses (separate multiple wth commas). They must have an Editor Role on this site to be able to moderate' ),
-			'std'     => get_option( 'admin_email' ),
+			'std'     => '',
 			'type'    => 'text',
 			'section' => 'general'
 		);
@@ -293,7 +293,7 @@ class truwriter_Theme_Options {
 		$this->settings['pkey'] = array(
 			'title'   => __( 'Author Account Password' ),
 			'desc'    => __( 'The password for the writer user account' ),
-			'std'     => 'When you create the account, we suggest using the generated strong password, make sure you copy it so you can add it here.',
+			'std'     => 'When you create the account, we suggest using the generated strong password, make sure you save it so you can add it here.',
 			'type'    => 'password',
 			'section' => 'general'
 		);
