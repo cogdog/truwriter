@@ -10,7 +10,7 @@ To provide access to advanced editing tools, the site will invisibly log your vi
 
 You can see other versions of this in action:
 
-* [TRU Write demo site](http://splot.ca/writer/)
+* [TRU Writer SPLOT demo site](http://splot.ca/writer/) occasional breakage if testing new features
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/) 
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/)
