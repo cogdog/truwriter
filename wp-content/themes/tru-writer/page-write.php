@@ -471,7 +471,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				
 				<fieldset>
 						<label for="wText"><?php _e('Article text', 'wpbootstrap') ?></label>
-						<p>Use the editing area below the tool bar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Dics). The editing tool will do it's best to preserve standard formatting- headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images to include in your writing. You can also embed audio and video from many social sites simply by putting it's URL on  separate line (you will see a place holder in the editor, but the media will show in preview and when published).  Click and drag the icon in the lower right to resize the editing space.</p>
+						<p>Use the editing area below the tool bar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images to include in your writing or choose from the media already in the media library (click on the tab labelled "media library"). You can also embed audio and video from many social sites simply by putting the URL of the media on a separate line (you will see a place holder in the editor, but the media will only show in preview and when published).  Click and drag the icon in the lower right to resize the editing space.</p>
 						
 						<p> See more details in the  
 <a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
