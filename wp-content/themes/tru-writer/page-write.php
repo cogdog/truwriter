@@ -547,7 +547,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				<fieldset>
 					<label for="wEmail"><?php _e('Your Email Address', 'wpbootstrap' ) ?> (optional)</label><br />
 					<p>If you provide an email address, once your writing is published, you can request a special link that will allow you to edit it again in the future.</p>
-					<input type="text" name="wEmail" id="wTitle"  value="<?php echo $wEmail; ?>" tabindex="9" />
+					<input type="text" name="wEmail" id="wTitle"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
 				</fieldset>	
 				
 

@@ -292,8 +292,8 @@ class truwriter_Theme_Options {
 
 		$this->settings['pkey'] = array(
 			'title'   => __( 'Author Account Password' ),
-			'desc'    => __( 'The password for the writer user account' ),
-			'std'     => 'When you create the account, we suggest using the generated strong password, make sure you save it so you can add it here.',
+			'desc'    => __( 'When you create the account, we suggest using the generated strong password, make sure you save it so you can add it here.' ),
+			'std'     => '',
 			'type'    => 'password',
 			'section' => 'general'
 		);
