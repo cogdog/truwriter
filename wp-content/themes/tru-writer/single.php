@@ -44,7 +44,7 @@
 														
 					<h2 class="post-title"><?php the_title(); ?></h2>
 					
-					<p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo $wAuthor;?></p>
+					<p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo twitternameify( $wAuthor );?></p>
 					
 				
 				</div> <!-- /post-header-inner section-inner -->

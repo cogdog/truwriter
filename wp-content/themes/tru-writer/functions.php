@@ -598,6 +598,15 @@ function truwriter_check_user( $allowed='writer' ) {
 	return ( $current_user->user_login == $allowed );
 }
 
+
+function twitternameify( $str ) {
+	// convert any "@" in astring to a linked twitter name
+	// ----- h/t http://snipe.net/2009/09/php-twitter-clickable-links/
+	$str = preg_replace( "/@(\w+)/", "<a href=\"https://www.twitter.com/\\1\" target=\"_blank\">@\\1</a>", $str );
+
+	return $str;
+}
+
 function splot_the_author() {
 	// utility to put in template to show status of special logins
 	// nothing is printed if there is not current user, 
