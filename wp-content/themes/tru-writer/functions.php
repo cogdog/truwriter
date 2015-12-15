@@ -365,6 +365,14 @@ function oembed_filter( $str ) {
 	return $str;
 }
 
+// set the default upload image size to "large' cause medium is puny
+// ----- h/t http://stackoverflow.com/a/20019915/2418186
+
+function my_default_image_size () {
+    return 'large'; 
+}
+
+add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 
 # -----------------------------------------------------------------
 # User Edit Link
