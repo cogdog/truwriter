@@ -475,17 +475,12 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 	}
 }
 
-
-
-function truwriter_publish_pending ( $post ) {
+function truwriter_publish ( $post ) {
 	 truwriter_mail_edit_link ( $post->ID, 'published' );
-    // Send edit link when status changed from pending to publish
-    
+    // Send edit link when published  
 }
 
-add_action(  'pending_to_publish',  'truwriter_publish_pending', 10, 1 );
-
-
+add_action(  'publish_post',  'truwriter_publish', 10, 2 );
 
 # -----------------------------------------------------------------
 # Creative Commons Licensing
