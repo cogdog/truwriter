@@ -10,7 +10,7 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 
 Here's some examples, and place where you can see other versions of the TRU Writer Theme in action:
 
-* [![Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
+* [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/) 
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/)
@@ -35,10 +35,6 @@ When published, any writing with an email is published with a `Get Edit Link` bu
 ![](images/re-edit-link.jpg "Admin Re-edit Link")
 
 
-
-
-
-
 ## How to Install
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)--Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
 
@@ -48,9 +44,18 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 ## Recommended Plugins
 
-While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time (blame [Medium.com](http://www.medium.com] if you hate knowing how long a post might take to read. And, if you hate estimates, then don't install the plugin. But, the theme uses them, if you activate it. The theme's options panel will nudge you to install it. You can choose to comply, or not.
+While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. And, if you hate estimates, then don't install the plugin. But, the theme uses them, if you activate it. The theme's options panel will nudge you to install it. You can choose to comply, or not.
 
-At the same time, and you already know this because you know Wordpress, but activate the Akismet--it comes pre-installed--anti-spam plugin and get that rolling so things don't get nuts in the comment box. Your admin password is solid, right? Really? You updated Wordpress to the latest version, right? And you do regular backups of Wordpress's .xml export file (at the very least), right... maybe you have a set schedule for backing up the site content? You wouldn't want to lose people's stuff. No, no you would not. 
+
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) - this keeps anyone logged in as the sedret user from even seeing the wordpress dashboard.  In its settings, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
+
+![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
+
+At the same time, and you already know this because you know Wordpress, but activate the [Akismet plugin](https://wordpress.org/plugins/akismet/). Get that rolling so things don't get nuts in the comment box. 
+
+Your admin password is solid, right? Really? You updated Wordpress to the latest version, right? And you do regular backups of Wordpress right? ... maybe you have a set schedule for backing up the site content? You wouldn't want to lose people's stuff. No, no you would not. 
+
+
 
 Now that you've installed TRU Writer and can see the barebones theme staring back at you:
 
