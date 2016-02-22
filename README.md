@@ -10,6 +10,8 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 
 Here's some examples, and place where you can see other versions of the TRU Writer Theme in action:
 
+* [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
+>>>>>>> origin/master
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphaxia)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
@@ -21,9 +23,6 @@ Here's some examples, and place where you can see other versions of the TRU Writ
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
-
-
-----
 
 ## Relatively New Features
 
