@@ -14,36 +14,12 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html http://www.apache.org/lice
 
 @import url(../radcliffe/style.css);
 
-
-.featured-media > img, .backstretch { max-height: 360px;}
-
+/* author formatting */
 .post-header .theauthor { font-size: 1.2em; margin-top: 1em; font-style:italic; text-align:center; }
 
-a.post-header {height: 100%;}
 
-.title-wrap {
-	top:50%;
-	transform:translateY(-100%);
-}
-
-
-.featured-media {
-    max-height: 400px;
-}
-
-.posts .post.has-featured-image {
-    max-height: 500px;
-}
-
-fieldset p {
-	font-size: 0.85em;
-	line-height: 60%;
-	font-style: italic;
-	font-weight: 400;
-}
-
-/* some pretty buttons all done in CSS
-   h/t http://www.graemeboy.com/modern-css-buttons */
+/* --------------------  pretty buttons all done in CSS ---------------------------------
+   h/t http://www.graemeboy.com/modern-css-buttons                                     */
    
     .pretty-button, .post-content input.pretty-button {
         -webkit-border-radius: 3px;
@@ -117,8 +93,8 @@ fieldset p {
     }
     
 
-/* alert/message boxes 100% CSS
-   h/t http://aviaryan.github.io/blog/css-notification-bubble-box.html */
+/* --------------------  alert/message boxes 100% CSS ------------------------------------
+  h/t http://aviaryan.github.io/blog/css-notification-bubble-box.html                   */
 
 .symbol {
     font-size: 0.9em;
@@ -158,7 +134,15 @@ fieldset p {
 .notify-green { background: #e9ffd9; border-color: #D1FAB6; }
 
 
-/* -------------------- invert the form field colors ----------------------------------*/
+/* --------------------           form stuff         ----------------------------------*/
+
+fieldset p {
+	font-size: 0.85em;
+	line-height: 60%;
+	font-style: italic;
+	font-weight: 400;
+}
+
 .post-content input[type="text"],
 .post-content input[type="tel"],
 .post-content input[type="url"],
