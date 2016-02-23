@@ -13,7 +13,6 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 Here's some examples, and place where you can see other versions of the TRU Writer Theme in action:
 
 * [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
->>>>>>> origin/master
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphaxia)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
@@ -64,19 +63,15 @@ Now that you've installed TRU Writer and can see the barebones theme staring bac
 ## Page Setup
 This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Previously, I tried to get fancy and create these pages on theme activation, but in  a few cases somethiing went wrong and they kept producing future publish date pages. Oh well.
 
-Create these Wordpress *Pages*:
+Create these Wordpress **Pages**:
 
-* *Write* -- The page that provides the writing form see [http://splot.ca/writer/write](http://splot.ca/writer/write). You can title it whatever you like, but the slug (url name) must be `write`  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/write`
+* **Write** -- The page that provides the writing form see [http://splot.ca/writer/write](http://splot.ca/writer/write). You can title it whatever you like, but the slug (url name) must be `write`  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/write`
 
-* *Desk* -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk). You can title it whatever you like, but the slug (url name) must be `desk` Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/desk`
+* **Desk** -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk). You can title it whatever you like, but the slug (url name) must be `desk` Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/desk`
 
-* *Random* -- No one ever sees this page, and it is not strictly required, but it is fun;  see [http://splot.ca/writer/random](http://splot.ca/writer/random)  It is used to send a visitor to a randomly published item. The slug (url name) must be `random` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/random`
+* **Random** -- No one ever sees this page, and it is not strictly required, but it is fun;  see [http://splot.ca/writer/random](http://splot.ca/writer/random)  It is used to send a visitor to a randomly published item. The slug (url name) must be `random` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/random`
 
-* *Get Edit Link* -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
-
-
-
-
+* **Get Edit Link** -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
 
 ## Theme Options and Settings
@@ -84,7 +79,7 @@ Upon activation the theme will set up a **TRU Writer Options** link that appears
 
 Click this link to see or change the settings outlined below. 
     
-**(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)**
+ *(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)*
 
 ![](wp-content/themes/tru-writer/images/writings-menu.jpg)
 
@@ -184,9 +179,9 @@ Or you can the Creative Commons options to **Enable users to choose license** wh
 
 ## The Complexish Stuff for Nerds, Who Are Awesome
 
-Before you ask, when a user encounters the tru-writer editor interface--where they are invisibly logged in as a "author," the theme will hide the Wordpress admin bar at the top and side. But, if you are afraid some savvy user might guess the URL for the dashboard (although they cannot do much logged in as an Author), go ahead and install the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). You can use that and set your site to deny access to the dashboard for anyone who is not an Editor or Administrator.
+If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
 
-If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt) (wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt) with a recommended set of options for this plugin. You can copy and paste from that .txt file into the import field (its a blob of json).
+You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (its a small chunk of json).
 
 
 
