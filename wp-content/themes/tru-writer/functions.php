@@ -13,75 +13,7 @@ function truwriter_setup () {
   wp_insert_term( 'In Progress', 'category' );
   wp_insert_term( 'Published', 'category' );
 
-  // create pages if they do not exist
-  
-  if (! get_page_by_path( 'write' ) ) {
-  
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Write',
-  		'post_content'	=> 'Use the tools below to compose, preview, and publish your writing.',
-  		'post_name'		=> 'write',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-write.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  
-  }
-
-  if (! get_page_by_path( 'desk' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Welcome Desk',
-  		'post_content'	=> 'Welcome to the place to add your writing to this collection.',
-  		'post_name'		=> 'desk',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-desk.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  
-  }
-
-  if (! get_page_by_path( 'random' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Random',
-  		'post_content'	=> '(Place holder for random page)',
-  		'post_name'		=> 'random',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-random.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  } 
 }
-
-  if (! get_page_by_path( 'get-edit-link' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Get Edit Link',
-  		'post_content'	=> '(Place holder for link fetcher)',
-  		'post_name'		=> 'get-edit-link',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-get-edit-link.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  } 
-
 
 
 # -----------------------------------------------------------------
