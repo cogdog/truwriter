@@ -76,7 +76,7 @@ Create these Wordpress **Pages**:
 ## Customize Your Menus
 The default menus are not what you want! Wordpress will generate one based on all Pages set up.
 
-![](wp-content/themes/tru-writer/images/default-menus.jpg)
+![](images/default-menus.jpg)
 
 In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link, and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/Writer
 
