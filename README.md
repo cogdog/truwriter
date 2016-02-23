@@ -57,15 +57,32 @@ At the same time, and you already know this because you know Wordpress, but acti
 
 Your admin password is solid, right? Really? You updated Wordpress to the latest version, right? And you do regular backups of Wordpress right? ... maybe you have a set schedule for backing up the site content? You wouldn't want to lose people's stuff. No, no you would not. 
 
+Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
+
+## Page Setup
+This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Previously, I tried to get fancy and create these pages on theme activation, but in  a few cases somethiing went wrong and they kept producing future publish date pages. Oh well.
+
+Create these Wordpress *Pages*:
+
+* *Write* -- The page that provides the writing form see [http://splot.ca/writer/write](http://splot.ca/writer/write). You can title it whatever you like, but the slug (url name) must be `write`  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/write`
+
+* *Desk* -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk). You can title it whatever you like, but the slug (url name) must be `desk` Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/desk`
+
+* *Random* -- No one ever sees this page, and it is not strictly required, but it is fun;  see [http://splot.ca/writer/random](http://splot.ca/writer/random)  It is used to send a visitor to a randomly published item. The slug (url name) must be `random` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/random`
+
+* *Get Edit Link* -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
 
-Now that you've installed TRU Writer and can see the barebones theme staring back at you:
+
+
+
 
 ## Theme Options and Settings
-Upon activation the theme will create a few Wordpress "Pages" that it needs ("write"; "random"; "welcome desk"; "get edit link"), some categories ("published"' "in-progress"), and will set up a **TRU Writer Options** link that will appear in your admin bar at the top of your Wordpress Dashboard interface, and in the "appearance" tab on your Wordpress Dashboard. 
+Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
 
-Click that to make all settings outlined below.     
-(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome TRU Write site.)
+Click this link to see or change the settings outlined below. 
+    
+**(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)**
 
 ![](wp-content/themes/tru-writer/images/writings-menu.jpg)
 
