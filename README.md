@@ -73,15 +73,23 @@ Create these Wordpress **Pages**:
 
 * **Get Edit Link** -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
+## Customize Your Menus
+The default menus are not what you want! Wordpress will generate one based on all Pages set up.
+
+![](wp-content/themes/tru-writer/images/default-menus.jpg)
+
+In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link, and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/Writer
+
+![](images/writer-menus.jpg)
+
+You can of course, create any menu structure that works for your site- but don't use the default!
 
 ## Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
 
-Click this link to see or change the settings outlined below. 
+Click **TRU Writer Options** to see or change the settings outlined below. 
     
  *(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)*
-
-![](wp-content/themes/tru-writer/images/writings-menu.jpg)
 
 In the TRU Writer Theme, traditional "posts" in Wordpress are renamed "writings," but they still have all the attributes of garden variety Wordpress blog posts. Yum.
 
@@ -134,7 +142,7 @@ Once selected you will see a preview of your default image. Isn't Cadu a nice lo
 ![](wp-content/themes/tru-writer/images/options-4.jpg)
 
 ## Default Category for New Writing
-If you have not set up any categories, this menu will not do much. You might want to save your options and go edit your *Writing Categories*. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.
+If you have not set up any categories, this menu will not do much. You might want to save your options and go edit your **Writing Categories**. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.
 
 ![](wp-content/themes/tru-writer/images/categories.jpg)
 
