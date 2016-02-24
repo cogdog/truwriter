@@ -13,75 +13,7 @@ function truwriter_setup () {
   wp_insert_term( 'In Progress', 'category' );
   wp_insert_term( 'Published', 'category' );
 
-  // create pages if they do not exist
-  
-  if (! get_page_by_path( 'write' ) ) {
-  
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Write',
-  		'post_content'	=> 'Use the tools below to compose, preview, and publish your writing.',
-  		'post_name'		=> 'write',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-write.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  
-  }
-
-  if (! get_page_by_path( 'desk' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Welcome Desk',
-  		'post_content'	=> 'Welcome to the place to add your writing to this collection.',
-  		'post_name'		=> 'desk',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-desk.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  
-  }
-
-  if (! get_page_by_path( 'random' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Random',
-  		'post_content'	=> '(Place holder for random page)',
-  		'post_name'		=> 'random',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-random.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  } 
 }
-
-  if (! get_page_by_path( 'get-edit-link' ) ) {
-
-  	// create the Write page if it does not exist
-  	$page_data = array(
-  		'post_title' 	=> 'Get Edit Link',
-  		'post_content'	=> '(Place holder for link fetcher)',
-  		'post_name'		=> 'get-edit-link',
-  		'post_status'	=> 'publish',
-  		'post_type'		=> 'page',
-  		'post_author' 	=> 1,
-  		'page_template'	=> 'page-get-edit-link.php',
-  	);
-  	
-  	wp_insert_post( $page_data );
-  } 
-
 
 
 # -----------------------------------------------------------------
@@ -365,6 +297,14 @@ function oembed_filter( $str ) {
 	return $str;
 }
 
+// set the default upload image size to "large' cause medium is puny
+// ----- h/t http://stackoverflow.com/a/20019915/2418186
+
+function my_default_image_size () {
+    return 'large'; 
+}
+
+add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 
 # -----------------------------------------------------------------
 # User Edit Link
@@ -467,17 +407,12 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 	}
 }
 
-
-
-function truwriter_publish_pending ( $post ) {
+function truwriter_publish ( $post ) {
 	 truwriter_mail_edit_link ( $post->ID, 'published' );
-    // Send edit link when status changed from pending to publish
-    
+    // Send edit link when published  
 }
 
-add_action(  'pending_to_publish',  'truwriter_publish_pending', 10, 1 );
-
-
+add_action(  'publish_post',  'truwriter_publish', 10, 2 );
 
 # -----------------------------------------------------------------
 # Creative Commons Licensing
@@ -596,6 +531,15 @@ function truwriter_check_user( $allowed='writer' ) {
 	
 	// return check of match
 	return ( $current_user->user_login == $allowed );
+}
+
+
+function twitternameify( $str ) {
+	// convert any "@" in astring to a linked twitter name
+	// ----- h/t http://snipe.net/2009/09/php-twitter-clickable-links/
+	$str = preg_replace( "/@(\w+)/", "<a href=\"https://www.twitter.com/\\1\" target=\"_blank\">@\\1</a>", $str );
+
+	return $str;
 }
 
 function splot_the_author() {

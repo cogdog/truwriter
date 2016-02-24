@@ -14,163 +14,167 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html http://www.apache.org/lice
 
 @import url(../radcliffe/style.css);
 
-
-.featured-media > img, .backstretch { max-height: 360px;}
-
-.post-header .theauthor { font-size: 1.2em; margin-top: 1em; font-style:italic; text-align:center; }
-
-a.post-header {height: 100%;}
-
-.title-wrap {
-	top:50%;
-	transform:translateY(-100%);
+/* author formatting */
+.post-header .theauthor
+{
+	font-size: 1.2em;
+	margin-top: 1em;
+	font-style: italic;
+	text-align: center;
 }
 
+/* --------------------  pretty buttons all done in CSS ---------------------------------
+   h/t http://www.graemeboy.com/modern-css-buttons                                     */
 
-.featured-media {
-    max-height: 400px;
+.pretty-button, .post-content input.pretty-button
+{
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	-ms-border-radius: 3px;
+	-o-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	-webkit-transition-property: background;
+	-moz-transition-property: background;
+	-o-transition-property: background;
+	transition-property: background;
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+	color: #fff;
+	text-shadow: none;
+	border: 1px #666 solid;
+	height: 2em;
+	line-height: 2em;
+	padding: 0px 0.7em;
+	font-weight: 900;
+	font-size: 1em;
+	font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	margin: 0;
+	text-decoration: none;
+	text-align: center;
+	display: inline-block;
 }
 
-.posts .post.has-featured-image {
-    max-height: 500px;
+/* user actions on the buttons. */
+.pretty-button:hover, .post-content input.pretty-button:hover
+{
+	text-decoration: none;
+	color: #ededed;
+	border: 1px #666 solid;
 }
 
-fieldset p {
+.pretty-button:active, .post-content input.pretty-button:active
+{
+	-webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
+	-moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
+	box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
+}
+
+/* The next blocks of code are specific to the color. Copy the color you want. */
+.pretty-button-red { background: #e54028; }
+.pretty-button-red:hover { background: #FF530D; }
+.pretty-button-blue, .post-content input.pretty-button-blue { background: #0971B2; }
+.pretty-button-blue:hover, .post-content input.pretty-button-blue:hover { background: #0B88D6; }
+.pretty-button-green, .post-content input.pretty-button-green { background: #00B233; }
+.pretty-button-green:hover, .post-content input.pretty-button-green:hover { background: #00BD36; }
+.pretty-button-dark-green { background: #007F25; }
+.pretty-button-dark-green:hover { background: #008F29; }
+
+/* --------------------  alert/message boxes 100% CSS ------------------------------------
+  h/t http://aviaryan.github.io/blog/css-notification-bubble-box.html                   */
+
+.symbol
+{
+	font-size: 0.9em;
+	font-family: Times New Roman;
+	border-radius: 1em;
+	padding: .1em .6em .1em .6em;
+	font-weight: bolder;
+	color: white;
+	background-color: #3229CF;
+}
+
+.icon-info { background-color: #3229CF; }
+
+.icon-error
+{
+	background: #e64943;
+	font-family: Consolas;
+}
+
+.icon-tick { background: #13c823; }
+
+.icon-excl
+{
+	background: #ffd54b;
+	color: black;
+}
+
+.icon-info:before { content: 'i'; }
+.icon-error:before { content: 'x'; }
+.icon-tick:before { content: '\002713'; }
+.icon-excl:before { content: '!'; }
+
+.notify
+{
+	background-color: #e3f7fc;
+	color: #555;
+	border: .1em solid;
+	border-color: #8ed9f6;
+	border-radius: 10px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 0.75em;
+	font-weight: 700;
+	padding: 10px 10px 10px 10px;
+	margin: 10px;
+	cursor: default;
+}
+
+.notify-yellow
+{
+	background: #fff8c4;
+	border-color: #f7deae;
+}
+
+.notify-red
+{
+	background: #ffecec;
+	border-color: #fad9d7;
+}
+
+.notify-green
+{
+	background: #e9ffd9;
+	border-color: #D1FAB6;
+}
+
+/* --------------------           form stuff         ----------------------------------*/
+fieldset p
+{
 	font-size: 0.85em;
 	line-height: 60%;
 	font-style: italic;
 	font-weight: 400;
 }
 
-/* some pretty buttons all done in CSS
-   h/t http://www.graemeboy.com/modern-css-buttons */
-   
-    .pretty-button, .post-content input.pretty-button {
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        -ms-border-radius: 3px;
-        -o-border-radius: 3px;
-        border-radius: 3px;   
-        -webkit-box-shadow: none;
-        -moz-box-shadow: none;
-        box-shadow: none;
-        -webkit-transition-property: background;
-        -moz-transition-property: background;
-        -o-transition-property: background;
-        transition-property: background;
-        -webkit-transition-duration: 0.3s;
-        -moz-transition-duration: 0.3s;
-        -o-transition-duration: 0.3s;
-        transition-duration: 0.3s;
-        color: #fff;
-        text-shadow: none;
-        border: 1px #666 solid;
-        height: 2em;
-        line-height: 2em;
-        padding: 0px 0.7em;
-        font-weight: 900;
-        font-size: 1em;
-        
-        font-family: "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-        margin: 0;
-        text-decoration: none;
-        text-align: center;
-        display: inline-block;   
-    }
-    
-    /* user actions on the buttons. */
-    .pretty-button:hover, .post-content input.pretty-button:hover {
-        text-decoration: none;
-        color: #ededed;
-        border: 1px #666 solid;
-    }
-    .pretty-button:active, .post-content input.pretty-button:active {
-        -webkit-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
-        -moz-box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
-        box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.03), inset 0px -1px 1px rgba(255, 255, 255, 0.05), 0px 1px 0px #777777, 0px 3px 3px rgba(0, 0, 0, 0.03);
-    }
-        
-    /* The next blocks of code are specific to the color. Copy the color you want. */
-    .pretty-button-red {
-        background: #e54028;
-    }
-    .pretty-button-red:hover {
-        background: #FF530D;
-    }
-    .pretty-button-blue, .post-content input.pretty-button-blue  {
-        background: #0971B2;
-    }
-    .pretty-button-blue:hover, .post-content input.pretty-button-blue:hover {
-        background: #0B88D6;
-    }
-    .pretty-button-green, .post-content input.pretty-button-green {
-        background: #00B233;
-    }
-    .pretty-button-green:hover, .post-content input.pretty-button-green:hover {
-        background: #00BD36;
-    }
-    .pretty-button-dark-green {
-        background: #007F25;
-    }
-    .pretty-button-dark-green:hover {
-        background: #008F29;
-    }
-    
-
-/* alert/message boxes 100% CSS
-   h/t http://aviaryan.github.io/blog/css-notification-bubble-box.html */
-
-.symbol {
-    font-size: 0.9em;
-    font-family: Times New Roman;
-    border-radius: 1em;
-    padding: .1em .6em .1em .6em;
-    font-weight: bolder;
-    color: white;
-    background-color: #3229CF;
-}
-
-.icon-info { background-color: #3229CF; }
-.icon-error { background: #e64943; font-family: Consolas; }
-.icon-tick { background: #13c823; }
-.icon-excl { background: #ffd54b; color: black; }
-.icon-info:before { content: 'i'; }
-.icon-error:before { content: 'x'; }
-.icon-tick:before { content: '\002713'; }
-.icon-excl:before { content: '!'; }
-
-.notify {
-    background-color:#e3f7fc; 
-    color:#555; 
-    border:.1em solid;
-    border-color: #8ed9f6;
-    border-radius:10px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 0.75em;
-	font-weight: 700;
-    padding:10px 10px 10px 10px;
-    margin:10px;
-    cursor: default;
-}
-
-.notify-yellow { background: #fff8c4; border-color: #f7deae; }
-.notify-red { background: #ffecec; border-color: #fad9d7; }
-.notify-green { background: #e9ffd9; border-color: #D1FAB6; }
-
-
-/* -------------------- invert the form field colors ----------------------------------*/
 .post-content input[type="text"],
 .post-content input[type="tel"],
 .post-content input[type="url"],
 .post-content input[type="password"],
-.post-content textarea {
+.post-content textarea
+{
 	background: #222;
 	color: #fff;
 }
 
 .post-content input[type="submit"]:hover,
 .post-content input[type="reset"]:hover,
-.post-content input[type="button"]:hover {
+.post-content input[type="button"]:hover
+{
 	color: #333;
 	background: #eee;
 }
@@ -179,28 +183,19 @@ fieldset p {
 .post-content input[type="tel"]:focus,
 .post-content input[type="url"]:focus,
 .post-content input[type="password"]:focus,
-.post-content textarea:focus {
+.post-content textarea:focus
+{
 	color: #333;
 	background: #eee;
 }
 
-form#writerform {
-	padding: 30px 20px;
-}
+form#writerform { padding: 30px 20px; }
+.writenew { background-color: #8ed9f6; }
+.writedraft { background-color: #D1FAB6; }
+.writeoops { background-color: #fad9d7; }
 
-.writenew {
-		background-color: #8ed9f6;
-}
-
-.writedraft {
-		background-color: #D1FAB6;
-}
-
-.writeoops {
-		background-color: #fad9d7;
-}
-
-.writestatus {
+.writestatus
+{
 	text-align: right;
 	left: 80%;
 	padding: 4px;
@@ -210,30 +205,30 @@ form#writerform {
 	font-size: 90%;
 }
 
-.writestatus .statnow {
+.writestatus .statnow
+{
 	color: #333;
 	font-size: 80%;
 }
 
-#writerform p {
-	line-height: 120%;
-}
+#writerform p { line-height: 120%; }
 
-#writerform .uploader {
-	float:left;
+#writerform .uploader
+{
+	float: left;
 	margin: 0 1.3em 1.3em 0;
 }
 
-#writerform fieldset {
+#writerform fieldset
+{
 	border: 2px solid #ddd;
 	background-color: #eee;
 }
 
-
 /* -------------------- style the autocomplete stuff ----------------------------------*/
 /* h/t http://sudarmuthu.com/blog/using-wordpress-built-in-tag-auto-complete-script-in-your-plugins/#comment-644312 */
-
-.ac_results {
+.ac_results
+{
 	padding: 0;
 	margin: 0;
 	list-style: none;
@@ -245,17 +240,12 @@ form#writerform {
 	background-color: white;
 }
 
-.ac_results li {
+.ac_results li
+{
 	padding: 4px 6px;
 	white-space: nowrap;
 	text-align: left;
 }
 
-.ac_over {
-	cursor: pointer;
-}
-
-.ac_match {
-	text-decoration: underline;
-}
-
+.ac_over { cursor: pointer; }
+.ac_match { text-decoration: underline; }
