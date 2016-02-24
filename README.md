@@ -14,7 +14,7 @@ Here's some examples, and place where you can see other versions of the TRU Writ
 
 * [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
-* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphaxia)
+* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
@@ -49,8 +49,9 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. And, if you hate estimates, then don't install the plugin. But, the theme uses them, if you activate it. The theme's options panel will nudge you to install it. You can choose to comply, or not.
 
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
 
-Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) - this keeps anyone logged in as the sedret user from even seeing the wordpress dashboard.  In its settings, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
+In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
 
@@ -114,6 +115,8 @@ Enter this field to pre-populate the field that visitors write use to compose th
 
 ## Allow Comments
 Check this box to add a standard blog comment field at the bottom of all published pieces. Writers like comments. Don't you?
+
+If you allow comments--and you should--be sure to install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) (instructions above), or else there could be trouble. 
 
 ## Extra Information Field
 On the editor where people will be composing their madness, this represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
