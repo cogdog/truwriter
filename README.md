@@ -14,7 +14,7 @@ Here's some examples, and place where you can see other versions of the TRU Writ
 
 * [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
-* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphaxia)
+* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
@@ -57,7 +57,9 @@ While your doing all that uploading, you should know that this theme uses the [E
 
 
 
-Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) - this keeps anyone logged in as the sedret user from even seeing the wordpress dashboard.  In its settings, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
+
+In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
 
