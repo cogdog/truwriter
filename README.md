@@ -55,6 +55,8 @@ While your doing all that uploading, you should know that this theme uses the [E
 * **Show in archives:** Yes
 * **All letters lowercase:** No 
 
+
+
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) - this keeps anyone logged in as the sedret user from even seeing the wordpress dashboard.  In its settings, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
