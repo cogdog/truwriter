@@ -69,9 +69,9 @@ function truwriter_change_post_object() {
  
 
 function truwriter_drafts_menu() {
-	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'manage_options', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
+	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
 	
-	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'manage_options', 'edit.php?post_status=pending&post_type=post' ); 
+	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
 }
 
 function truwriter_cookie_expiration( $expiration, $user_id, $remember ) {
@@ -556,6 +556,17 @@ function splot_the_author() {
 		echo '<a href="' . wp_logout_url( site_url() ). '">(' . $user_code  .')</a>';
 	}
 }
+
+function truwriter_publink ( $redirect ) {
+	// for feedback after publishing, for guest users we want to return
+	// a logout link, if we are an editor or admin, we just want the regular link
+	if ( is_user_logged_in() and !current_user_can( 'edit_others_posts' ) )  {
+		return ( wp_logout_url( $redirect ) );
+	} else {
+		return ( $redirect  );
+	}
+}
+
 
 function set_html_content_type() {
 	// from http://codex.wordpress.org/Function_Reference/wp_mail

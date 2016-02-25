@@ -21,5 +21,6 @@
         openEffect      : 'none',
         closeEffect     : 'none'
     });
+       
  
 })(jQuery);

@@ -1,4 +1,4 @@
-/* Comparator: Writer Page Scripts
+/* TRU Writer Page Scripts
    code by Alan Levine @cogdog http://cogdog.info
    
    media uploader scripts somewhat lifted from
@@ -16,6 +16,7 @@ function getWPURL( page_slug ) {
 }
 
 jQuery('#wTags').suggest( getWPURL('/write') + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
+
 	
 jQuery(document).ready(function() { 
 	// called for via click of upload button in theme options
@@ -59,4 +60,5 @@ jQuery(document).ready(function() {
 		file_frame.open();
 	
 	});
+	
 });
