@@ -83,7 +83,7 @@ In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and chec
 
 ![](images/writer-menus.jpg)
 
-You can of course, create any menu structure that works for your site- but don't use the default!
+You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  
 
 ## Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
