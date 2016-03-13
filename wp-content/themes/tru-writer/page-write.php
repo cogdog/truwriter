@@ -251,34 +251,36 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					 	// revise status to pending (new ones) 
 					 	
 						$w_information['post_status'] = 'publish';
-						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been updated. You can view it now at  <a href="'. get_permalink( $post_id )  . '">' .  get_permalink( $post_id ) . '</a>. Enjoy!';
+						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been updated. You can at  <a href="'. truwriter_publink( get_permalink( $post_id ) )  . '" >view the updated version now</a> or <a href="' . truwriter_publink( site_url() ) . '">return to ' . get_bloginfo() . '</a>.';
 					 
 					} else {
 						// revise status to pending (new ones) 
 						$w_information['post_status'] = truwriter_option('pub_status');
 						
 						if ( truwriter_option('pub_status') == 'pending' ) {
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been submitted for editorial review. When it is approved you will be able to view it at <strong>'. get_permalink( $post_id )  . '</strong>. ';
+							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. When published you will be able to view it at <strong>'. get_permalink( $post_id )  . '</strong>. ';
 
 							if ( $wEmail == '' ) {
 								$feedback_msg .= 'HINT- you may want to copy this link now. Got it?';
 							} else {
-								$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published to this site.';
+								$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
 							}
+							
+							$feedback_msg .= ' Now please <a href="' . truwriter_publink( site_url() ) . '">deactivate the lasers and return to ' . get_bloginfo() . '</a>.';
 							
 							// set up admin email
 							$subject = 'Review newly submitted writing at ' . get_bloginfo();
 					
-							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish it, simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
+							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
 							
 						} else {
 						
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to the site. you can view it now at  <a href="'. get_permalink( $post_id )  . '">' .  get_permalink( $post_id ) . '</a>. Enjoy!';
+							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can  <a href="'. truwriter_publink( get_permalink( $post_id ) )  . '" >view it now</a> or <a href="' . truwriter_publink( site_url() ) . '">return to ' . get_bloginfo() . '</a>.';
 							
 							// set up admin email
 							$subject = 'Recently published writing at ' . get_bloginfo();
 					
-							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a> and review / edit if needed, or just enjoy the feeling of free publishing.';
+							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a> and review / edit if needed, or just enjoy the feeling of being published.';
 						
 						}
 
@@ -349,9 +351,6 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 				// store any end notes
 				if ( $wFooter ) update_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
-
-				// log them out if they are not end editor or better
-				if ( $is_published and !current_user_can( 'edit_pages' )  ) wp_logout();
 				
 			}
 			 	
@@ -505,7 +504,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						
 						</div>
 						
-						<p>You can upload any image file to be used in the header of what you write or choose from ones that have already been added to the site. Ideally it should be 800px in width or bigger. It will automatically be cropped along the middle of the image to like the one is you see on this page.</p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution in the caption field below.<br clear="left"></p>
+						<p>You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be 800px in width or bigger. </p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.<br clear="left"></p>
 						
 						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'wpbootstrap') ?></label>
 						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo $wHeaderImageCaption; ?>" tabindex="6" />

@@ -47,10 +47,23 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 ## Recommended Plugins
 
-While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. And, if you hate estimates, then don't install the plugin. But, the theme uses them, if you activate it. The theme's options panel will nudge you to install it. You can choose to comply, or not.
+While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
+
+<<<<<<< HEAD
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
+
+=======
+* **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
+* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad of you try "Yes"
+* **Show in homepage:** Yes
+* **Show in archives:** Yes
+* **All letters lowercase:** No 
+
+
 
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
 
+>>>>>>> cogdog/master
 In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
