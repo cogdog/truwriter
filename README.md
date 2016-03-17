@@ -49,16 +49,33 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
+
+=======
 * **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
 * **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad of you try "Yes"
 * **Show in homepage:** Yes
 * **Show in archives:** Yes
 * **All letters lowercase:** No 
 
+=======
+* **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
+* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad of you try "Yes"
+* **Show in homepage:** Yes
+* **Show in archives:** Yes
+* **All letters lowercase:** No 
+
+>>>>>>> cogdog/master
 
 
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
 
+<<<<<<< HEAD
+>>>>>>> cogdog/master
+=======
+>>>>>>> cogdog/master
 In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
@@ -91,7 +108,7 @@ In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and chec
 
 ![](images/writer-menus.jpg)
 
-You can of course, create any menu structure that works for your site- but don't use the default!
+You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  
 
 ## Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
@@ -123,6 +140,8 @@ Enter this field to pre-populate the field that visitors write use to compose th
 
 ## Allow Comments
 Check this box to add a standard blog comment field at the bottom of all published pieces. Writers like comments. Don't you?
+
+If you allow comments--and you should--be sure to install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) (instructions above), or else there could be trouble. 
 
 ## Extra Information Field
 On the editor where people will be composing their madness, this represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
