@@ -49,33 +49,14 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
-
-=======
 * **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
-* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad of you try "Yes"
+* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad if you try "Yes")
 * **Show in homepage:** Yes
 * **Show in archives:** Yes
 * **All letters lowercase:** No 
 
-=======
-* **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
-* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad of you try "Yes"
-* **Show in homepage:** Yes
-* **Show in archives:** Yes
-* **All letters lowercase:** No 
-
->>>>>>> cogdog/master
-
-
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
 
-<<<<<<< HEAD
->>>>>>> cogdog/master
-=======
->>>>>>> cogdog/master
 In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
@@ -108,7 +89,7 @@ In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and chec
 
 ![](images/writer-menus.jpg)
 
-You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  
+You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  It will list as menu items a bunch of pages that users never should see (e.g. Welcome Desk, Get Edit Link).
 
 ## Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
@@ -149,9 +130,6 @@ On the editor where people will be composing their madness, this represents a pl
 These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
 
 ![](wp-content/themes/tru-writer/images/options-3.jpg)
-
-
-*** MORE EDITS TO COME>>>
 
 ## Default Header Image
 Click **Set/Change Image** to open the Wordpress media editor. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
