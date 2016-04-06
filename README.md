@@ -24,6 +24,8 @@ Here's some examples, and place where you can see other versions of the TRU Writ
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [BIOL 420 Writer, UNBC] (http://unbc.biol420.ca) University of Northern British Columbia Course
+* [BIOL 312 Writer, UNBC] (http://unbc.biol312.ca) University of Northern British Columbia Course
 
 ## Relatively New Features
 
