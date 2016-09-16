@@ -618,6 +618,14 @@ function reading_time_check() {
 	}
 }
 
+function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
+	// return the estimated reading time only if the short code (aka plugin) exists. start with the string and add an approximation symbol.
+	
+	if ( shortcode_exists( 'est_time' ) ) return ( $prefix_string . ' ~' . do_shortcode( '[est_time]' ) . $suffix_string );
+}
+
+
+
 function truwriter_author_user_check( $expected_user = 'writer' ) {
 // checks for the proper authoring account set up
 

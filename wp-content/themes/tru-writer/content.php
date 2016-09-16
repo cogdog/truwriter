@@ -35,11 +35,10 @@
 			else
 				comments_number( '0 comments', '1 comment', '% comments' ); 
 		}
+		
+		echo truwriter_get_reading_time('<span class="sep">|</span> Reading Time:', '');
 		?> 
 
-
-		<span class="sep">|</span> Reading Time: ~
-		<?php $readtime = do_shortcode( '[est_time]' ); echo $readtime; ?>		
 		<?php if ( is_sticky() ) { echo '<span class="sep">/</span> '; _e('Sticky','radcliffe'); } ?>
 		
 	</div>
