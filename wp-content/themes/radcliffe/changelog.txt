@@ -1,6 +1,53 @@
 *** Radcliffe changelog ***
 
 
+Version 1.17 (2016-06-18)
+-------------------------
+- Added the new theme directory tags
+
+
+Version 1.16 (2016-04-02)
+-------------------------
+- Fixed margins on respond inputs
+
+
+Version 1.15 (2016-03-12)
+-------------------------
+- Removed wp_title() function from header.php
+
+
+Version 1.14 (2015-08-25)
+-------------------------
+- Fixed an issue with overflowing images
+- Added the .screen-reader-text class
+
+
+Version 1.13 (2015-08-11)
+------------------------- 
+- Replaced the title function with support for title-tag
+- Queued comment-reply
+- Added UTF-8 as charset in style.css
+- Changed titles on singular to h1 for SEO reasons
+
+
+Version 1.12 (2015-01-27)
+------------------------- 
+- Added another missing sanitize callback (for radcliffe_logo)
+
+
+Version 1.11 (2015-01-27)
+------------------------- 
+- Added a sanitize callback for the custom accent color setting
+- Removed the shortcode adjusting the display of captions
+- Adjusted the display of image alignments
+- Adjusted the styling of blockquotes for readability
+
+
+Version 1.10 (2015-01-27)
+------------------------- 
+- Fixed an error with center aligned images in the post content (again)
+
+
 Version 1.09 (2014-10-01)
 ------------------------- 
 - Fixed an error with center aligned images in the post content

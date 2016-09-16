@@ -15,6 +15,9 @@ function radcliffe_setup() {
 	// Add nav menu
 	register_nav_menu( 'primary', 'Primary Menu' );
 	
+	// Add title tag support
+	add_theme_support('title-tag');
+	
 	// Make the theme translation ready
 	load_theme_textdomain('radcliffe', get_template_directory() . '/languages');
 	
@@ -31,6 +34,7 @@ function radcliffe_load_javascript_files() {
 	if ( !is_admin() ) {
 		wp_enqueue_script( 'radcliffe_backstretch', get_template_directory_uri() . '/js/jquery.backstretch.js', array('jquery'), '', true );
 		wp_enqueue_script( 'radcliffe_global', get_template_directory_uri() . '/js/global.js', array('jquery'), '', true );
+		if ( is_singular() ) wp_enqueue_script( "comment-reply" );
 	}
 	
 }
@@ -43,8 +47,7 @@ function radcliffe_load_style() {
 
 	if ( !is_admin() ) {
 	    wp_enqueue_style( 'radcliffe_googlefonts', '//fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,600,700,700italic,800|Crimson+Text:400,400italic,700,700italic|Abril+Fatface:400' );
-	   //  wp_enqueue_style( 'radcliffe_style', get_stylesheet_uri() );
-	    wp_enqueue_style( 'radcliffe_style', get_stylesheet_directory_uri() . '/style.css' . '?' . filemtime( get_stylesheet_directory() . '/style.css' ) );
+	    wp_enqueue_style( 'radcliffe_style', get_stylesheet_uri() );
 	}
 	
 }
@@ -99,30 +102,6 @@ function radcliffe_widget_areas_reg() {
 if ( ! isset( $content_width ) ) $content_width = 740;
 
 
-// Custom title function
-function radcliffe_wp_title( $title, $sep ) {
-	global $paged, $page;
-
-	if ( is_feed() )
-		return $title;
-
-	// Add the site name.
-	$title .= get_bloginfo( 'name' );
-
-	// Add the site description for the home/front page.
-	$site_description = get_bloginfo( 'description', 'display' );
-	if ( $site_description && ( is_home() || is_front_page() ) )
-		$title = "$title $sep $site_description";
-
-	// Add a page number if necessary.
-	if ( $paged >= 2 || $page >= 2 )
-		$title = "$title $sep " . sprintf( __( 'Page %s', 'radcliffe' ), max( $paged, $page ) );
-
-	return $title;
-}
-add_filter( 'wp_title', 'radcliffe_wp_title', 10, 2 );
-
-
 // Add classes to next_posts_link and previous_posts_link
 add_filter('next_posts_link_attributes', 'radcliffe_posts_link_attributes_1');
 add_filter('previous_posts_link_attributes', 'radcliffe_posts_link_attributes_2');
@@ -156,36 +135,6 @@ function radcliffe_if_featured_image_class($classes) {
 	}
 	// return the $classes array
 	return $classes;
-}
-
-
-// Remove inline styling of attachment
-add_shortcode('wp_caption', 'radcliffe_fixed_img_caption_shortcode');
-add_shortcode('caption', 'radcliffe_fixed_img_caption_shortcode');
-
-function radcliffe_fixed_img_caption_shortcode($attr, $content = null) {
-	if ( ! isset( $attr['caption'] ) ) {
-		if ( preg_match( '#((?:<a [^>]+>\s*)?<img [^>]+>(?:\s*</a>)?)(.*)#is', $content, $matches ) ) {
-			$content = $matches[1];
-			$attr['caption'] = trim( $matches[2] );
-		}
-	}
-	
-	$output = apply_filters('img_caption_shortcode', '', $attr, $content);
-	
-	if ( $output != '' ) return $output;
-	extract(shortcode_atts(array(
-		'id' => '',
-		'align' => 'alignnone',
-		'width' => '',
-		'caption' => ''
-	), $attr));
-	
-	if ( 1 > (int) $width || empty($caption) )
-	return $content;
-	if ( $id ) $id = 'id="' . esc_attr($id) . '" ';
-	return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" >' 
-	. do_shortcode( $content ) . '<p class="wp-caption-text">' . $caption . '</p></div>';
 }
 
 
@@ -306,10 +255,15 @@ class Radcliffe_Customize {
             'type' => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
             'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
             'transport' => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+            'sanitize_callback' => 'sanitize_hex_color'
          ) 
       );
       
-      $wp_customize->add_setting( 'radcliffe_logo' );
+      $wp_customize->add_setting( 'radcliffe_logo', 
+      	array( 
+      		'sanitize_callback' => 'esc_url_raw'
+      	) 
+      );
                   
       //3. Finally, we define the control itself (which links a setting to a section and renders the HTML controls)...
       $wp_customize->add_control( new WP_Customize_Color_Control( //Instantiate the color control class

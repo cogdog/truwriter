@@ -44,7 +44,7 @@
 													
 					<p class="post-meta-top"><a href="<?php the_permalink(); ?>" title="<?php the_time('h:i'); ?>"><?php the_time(get_option('date_format')); ?></a> <?php if ( comments_open() ) { echo '<span class="sep">/</span> '; comments_popup_link( '0 comments', '1 comment', '% comments', 'post-comments' ); } ?> <?php edit_post_link( 'Edit', '<span class="sep">/</span> ' ); ?></p>
 											
-					<h2 class="post-title"><?php the_title(); ?></h2>
+					<h1 class="post-title"><?php the_title(); ?></h1>
 				
 				</div> <!-- /post-header-inner section-inner -->
 														

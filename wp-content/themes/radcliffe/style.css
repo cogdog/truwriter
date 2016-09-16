@@ -1,9 +1,12 @@
+@charset "UTF-8";
+
 /*---------------------------------------------------------------------------------
 
 	Theme Name: Radcliffe
-	Version: 1.09
+    Text Domain: radcliffe
+	Version: 1.17
 	Description: A theme for bloggers who want their content to take center stage. Radcliffe features responsive design, retina-ready assets, full width header images, beautiful design and typography, support for custom logo, support for custom accent color, three widget areas, editor style and translation-ready code. Included translations: Swedish/svenska.
-	Tags: gray, white, one-column, fluid-layout, responsive-layout, custom-menu, featured-images, sticky-post, threaded-comments, translation-ready, editor-style
+	Tags: blog, one-column, custom-colors, custom-menu, editor-style, featured-images, footer-widgets, post-formats, sticky-post, theme-options, threaded-comments, translation-ready, photography
 	Author: Anders Norén
 	Author URI: http://www.andersnoren.se
 	Theme URI: http://www.andersnoren.se/teman/radcliffe-wordpress-theme/
@@ -180,6 +183,38 @@ body a,
 	-ms-transition: all 0.3s ease-in-out;
 	-o-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+}
+
+
+/* Screen Reader Text --------------------------------------- */
+
+
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
 }
 
 
@@ -817,7 +852,6 @@ p.post-nav-next { background-image: url(images/icons/1x/next-g.png); }
 .post-content blockquote p { 
 	font-size: 1.1em;
 	text-align: center; 
-	color: #666;
 	font-style: italic;
 }
 
@@ -836,7 +870,6 @@ p.post-nav-next { background-image: url(images/icons/1x/next-g.png); }
 	font-size: 0.65em;
 	line-height: 140%;
 	font-weight: 800;
-	color: #666;
 	text-transform: uppercase;
 	letter-spacing: 1px;
 }
@@ -947,11 +980,18 @@ abbr, acronym { cursor: help; }
 /* Post media --------------------------------------- */
 
 
+.wp-caption,
+.post-content img {
+	max-width: 100%;
+}
+
 .post-content .alignleft,
 .post-content .alignright {
 	margin-bottom: 1.2em;
 	max-width: 400px;
 }
+
+.post-content .wp-caption { max-width: 100%; }
 
 .post-content .wp-caption img { display: block; }
 
@@ -972,7 +1012,10 @@ abbr, acronym { cursor: help; }
 	margin-left: 1.5em;
 }
 
-.post-content .aligncenter { margin: 0 auto; }
+.post-content .aligncenter { 
+	margin-left: auto; 
+	margin-right: auto;
+}
 
 .post-content .alignnone {
 	max-width: 940px;
@@ -982,7 +1025,7 @@ abbr, acronym { cursor: help; }
 .post-content a.alignnone { width: 940px; }
 
 .post-content .aligncenter img,
-.post-content .alignnone img {
+.post-content img.aligncenter {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -992,7 +1035,7 @@ abbr, acronym { cursor: help; }
 .post-content .gallery-caption {
 	padding-top: 15px;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 0.7em;
+	font-size: 14px;
 	font-weight: 600;
 	color: #888;
 	text-align: center;
@@ -1416,6 +1459,8 @@ li.comment {
 }
 
 .logged-in-as a:hover { text-decoration: underline; }
+
+.comment-form-comment + .thirds { margin-top: 28px; }
 
 .comment-respond .thirds { margin-bottom: 28px; }
 
@@ -2247,6 +2292,7 @@ li.comment {
 	
 	.post-content .alignleft,
 	.post-content .alignright {
+		display: block;
 		max-width: none;
 		float: none;
 		margin-right: auto;
@@ -2323,6 +2369,8 @@ li.comment {
 	}
 	
 	.comment-respond .thirds { margin: 0; }
+    
+    .comment-form-comment + .thirds { margin-top: 12px; }
 	
 	.comment-respond textarea { height: 200px; }
 	

@@ -1,25 +1,119 @@
 <?php
+/*  tru-writer theme functions
+	
+	Lives and forks at http://github.com/cogdog/truwriter
+	
+	Much of the magic happens here. Edit your own discretion, peril, unless you
+	find a coding error, and by all means please fork this to the github repo 
+	thus you are deemed an honor SPLOT knight
+	
+*/
 
 # -----------------------------------------------------------------
-# Theme activation
+# Theme activation: Wonder Theme ACTIVATE
 # -----------------------------------------------------------------
 
 // run when this theme is activated
 add_action('after_switch_theme', 'truwriter_setup');
 
 function truwriter_setup () { 
-  // make sure our categories are present
+	// Let's get this show on the road! 
+
+
+    // make sure our categories are present, accounted for, named
+	wp_insert_term( 'In Progress', 'category' );
+	wp_insert_term( 'Published', 'category' );
+
+
+
+	// Look for existence of pages with the appropriate template, if not found
+	// make 'em cause it's good to make the pages
+	
+	if (! page_with_template_exists( 'page-write.php' ) ) {
   
-  wp_insert_term( 'In Progress', 'category' );
-  wp_insert_term( 'Published', 'category' );
+		// create the writing form page if it does not exist
+		// backdate creation date 2 days just to make sure they do not end up future dated
+		// which causes all kinds of disturbances in the force
+		
+		$page_data = array(
+			'post_title' 	=> 'Write? Write. Right.',
+			'post_content'	=> 'Here is the place to compose, preview, and hone your fine words. If you are building this site, maybe edit this page to customize this wee bit of text.',
+			'post_name'		=> 'write',
+			'post_status'	=> 'publish',
+			'post_type'		=> 'page',
+			'post_author' 	=> 1,
+			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
+			'page_template'	=> 'page-write.php',
+		);
+	
+		wp_insert_post( $page_data );
+	}
+
+	if (! page_with_template_exists( 'page-desk.php' ) ) {
+  
+		// create the welcome entrance to the tool if it does not exist
+		// backdate creation date 2 days just to make sure they do not end up future dated
+		
+		$page_data = array(
+			'post_title' 	=> 'Welcome Desk',
+			'post_content'	=> 'You are but one special key word away from being able to write. Hopefully the kind owner of this site has provided you the key phrase. Spelling and capitalization do count. If you are said owner, editing this page will let you personalize this bit. ',
+			'post_name'		=> 'desk',
+			'post_status'	=> 'publish',
+			'post_type'		=> 'page',
+			'post_author' 	=> 1,
+			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
+			'page_template'	=> 'page-desk.php',
+		);
+	
+		wp_insert_post( $page_data );
+	}
+
+	
+	if (! page_with_template_exists( 'page-random.php' ) ) {
+  
+		// create the writing form page if it does not exist
+		// backdate creation date 2 days just to make sure they do not end up future dated
+		
+		$page_data = array(
+			'post_title' 	=> 'Random',
+			'post_content'	=> 'You should never see this page, it is for random redirects. What are you doing looking at this page? Get back to writing, willya?',
+			'post_name'		=> 'random',
+			'post_status'	=> 'publish',
+			'post_type'		=> 'page',
+			'post_author' 	=> 1,
+			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
+			'page_template'	=> 'page-random.php',
+		);
+	
+		wp_insert_post( $page_data );
+	}
+
+	if (! page_with_template_exists( 'page-get-edit-link.php' ) ) {
+  
+		// create the writing form page if it does not exist
+		// backdate creation date 2 days just to make sure they do not end up future dated
+		
+		$page_data = array(
+			'post_title' 	=> 'Get Edit Link',
+			'post_content'	=> 'You should never see this page, it is for doing a few chores. What did your mom tell you about peeking?',
+			'post_name'		=> 'get-edit-link',
+			'post_status'	=> 'publish',
+			'post_type'		=> 'page',
+			'post_author' 	=> 1,
+			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
+			'page_template'	=> 'page-get-edit-link.php',
+		);
+	
+		wp_insert_post( $page_data );
+	}
+	
 
 }
 
 
 # -----------------------------------------------------------------
-# Set up the table and put the napkins out
+# Set up the table and put the napkins out, stuff we do every visit
 # -----------------------------------------------------------------
-
 
 // we need to load the options this before the auto login so we can use the pass
 add_action( 'after_setup_theme', 'truwriter_load_theme_options', 9 );
@@ -29,9 +123,6 @@ add_action( 'after_setup_theme', 'truwriter_load_theme_options', 9 );
 // and of course the Codex http://codex.wordpress.org/Function_Reference/add_submenu_page
 
 add_action( 'admin_menu', 'truwriter_change_post_label' );
-add_action( 'init', 'truwriter_change_post_object' );
-add_action('admin_menu', 'truwriter_drafts_menu');
-
 
 function truwriter_change_post_label() {
     global $menu;
@@ -46,8 +137,11 @@ function truwriter_change_post_label() {
     $submenu['edit.php'][16][0] = $thing_name .' Tags';
     echo '';
 }
-function truwriter_change_post_object() {
 
+// Here we further move the Wordpress interface from it's Post centric personality, to rename the labels for posts
+add_action( 'init', 'truwriter_change_post_object' );
+
+function truwriter_change_post_object() {
     $thing_name = 'Writing';
 
     global $wp_post_types;
@@ -66,7 +160,11 @@ function truwriter_change_post_object() {
     $labels->menu_name =  $thing_name;
     $labels->name_admin_bar =  $thing_name;
 }
- 
+
+
+// Add some menu items to the admin menu to porvide easy access to the In Progress category items
+// and the pending status ones
+add_action('admin_menu', 'truwriter_drafts_menu');
 
 function truwriter_drafts_menu() {
 	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
@@ -74,10 +172,15 @@ function truwriter_drafts_menu() {
 	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
 }
 
+
+// Some vain attempts to manage the twitter auto logout time, make them much longer for admins
+// and much shorther for authors (this does not seem to work, sigh. Help me Obi Wordpress Kenobi)
+
+add_filter( 'auth_cookie_expiration', 'truwriter_cookie_expiration', 99, 3 );
 function truwriter_cookie_expiration( $expiration, $user_id, $remember ) {
 
 	if ( current_user_can( 'edit_pages' )  ) {
-		// default 14 day logout function 
+		// bump up default 14 day logout function 
     	return $remember ? $expiration : 1209600; 
     } else {
     	// shorter auto logout for guests (2 hours)
@@ -85,9 +188,7 @@ function truwriter_cookie_expiration( $expiration, $user_id, $remember ) {
     }
 }
 
-add_filter( 'auth_cookie_expiration', 'truwriter_cookie_expiration', 99, 3 );
-
-
+// Customize the headings for the comment form
 add_filter('comment_form_defaults', 'truwriter_comment_mod');
 
 function truwriter_comment_mod( $defaults ) {
@@ -98,6 +199,8 @@ function truwriter_comment_mod( $defaults ) {
 }
 
 
+// remove  buttons from the visual editor
+add_filter('mce_buttons','truwriter_tinymce_buttons');
 
 function truwriter_tinymce_buttons($buttons)
  {
@@ -110,9 +213,10 @@ function truwriter_tinymce_buttons($buttons)
 
 	return $buttons;
  }
-add_filter('mce_buttons','truwriter_tinymce_buttons');
 
+// remove  more buttons from the visual editor
 
+add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
 
 function truwriter_tinymce_2_buttons($buttons)
  {
@@ -121,10 +225,10 @@ function truwriter_tinymce_2_buttons($buttons)
 
 	return array_diff($buttons,$remove);
  }
-add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
 
 
-// -----  add allowable url parameter
+
+// -----  add allowable url parameters so we can do reall cool stuff, wally
 add_filter('query_vars', 'truwriter_tqueryvars' );
 
 function truwriter_tqueryvars( $qvars ) {
@@ -135,7 +239,6 @@ function truwriter_tqueryvars( $qvars ) {
 }   
 
 
-
 # -----------------------------------------------------------------
 # Options Panel for Admin
 # -----------------------------------------------------------------
@@ -143,6 +246,7 @@ function truwriter_tqueryvars( $qvars ) {
 // -----  Add admin menu link for Theme Options
 add_action( 'wp_before_admin_bar_render', 'truwriter_options_to_admin' );
 
+// put the options on the menu and top stage
 function truwriter_options_to_admin() {
     global $wp_admin_bar;
     
@@ -155,10 +259,9 @@ function truwriter_options_to_admin() {
     ) );
 }
 
-
+// Set up javascript for the theme options interface
 function truwriter_enqueue_options_scripts() {
-	// Set up javascript for the theme options interface
-	
+
 	// media scripts needed for wordpress media uploaders
 	wp_enqueue_media();
 	
@@ -167,9 +270,8 @@ function truwriter_enqueue_options_scripts() {
 	wp_enqueue_script( 'truwriter_options_js' );
 }
 
+// load theme options Settings
 function truwriter_load_theme_options() {
-	// load theme options Settings
-
 	if ( file_exists( get_stylesheet_directory()  . '/class.truwriter-theme-options.php' ) ) {
 		include_once( get_stylesheet_directory()  . '/class.truwriter-theme-options.php' );
 	}
@@ -182,6 +284,8 @@ function truwriter_load_theme_options() {
 
 // Add custom logo to entry screen... because we can
 // While we are at it, use CSS to hide the back to blog and retried password links
+
+// You know like my logo? Whatsamatta you? Then chenage the image in the theme folder images/site-login-logo.png
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 function my_login_logo() { ?>
@@ -206,7 +310,7 @@ function login_link( $url ) {
 }
  
  
-// Auto Login
+// Auto Login for the Author account
 // create a link that can automatically log in as a specific user, bypass login screen
 // -- h/t  http://www.wpexplorer.com/automatic-wordpress-login-php/
 
@@ -300,17 +404,18 @@ function oembed_filter( $str ) {
 // set the default upload image size to "large' cause medium is puny
 // ----- h/t http://stackoverflow.com/a/20019915/2418186
 
+add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
+
 function my_default_image_size () {
     return 'large'; 
 }
 
-add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 
 # -----------------------------------------------------------------
-# User Edit Link
+# Author Edit Link - cause we want people to come back and get to their stuff
 # -----------------------------------------------------------------
 
-// add meta box to show edit link on posts
+// add meta box to show edit link on posts in dashboard
 function truwriter_editlink_meta_box() {
 
 	add_meta_box(
@@ -329,11 +434,10 @@ function truwriter_editlink_meta_box_callback( $post ) {
 	// Add a nonce field so we can check for it later.
 	wp_nonce_field( 'truwriter_editlink_meta_box_data', 'truwriter_editlink_meta_box_nonce' );
 
-
-	// get edit key
+	// get edit key, it's in the meta, baby!
 	$ekey = get_post_meta( $post->ID, 'wEditKey', 1 );
 	
-	// make an edit link if it does not exist
+	// Create an edit link if it does not exist
 	if ( !$ekey ) {
 		truwriter_make_edit_link( $post->ID );
 		$ekey = get_post_meta( $post->ID, 'wEditKey', 1 );
@@ -348,17 +452,17 @@ function truwriter_editlink_meta_box_callback( $post ) {
 
 
 function truwriter_make_edit_link( $post_id, $post_title='') {
-	// add a token for editing
+	// add a token for editing by using the post title as a trugger
 	// ----h/t via http://www.sitepoint.com/generating-one-time-use-urls/
 	
 	if ( $post_title == '')   $post_title = get_the_title($post_id );
-	update_post_meta( $post_id, 'wEditKey',sha1( uniqid( $post_title, true ) ) );
+	update_post_meta( $post_id, 'wEditKey', sha1( uniqid( $post_title, true ) ) );
 }
 
 function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 
 	// for post id = $wid
-	// requested means by click of button vs  one sent when published.
+	// requested means by click of button vs one sent when published.
 	
 	// look up the stored edit key 
 	$wEditKey = get_post_meta( $wid, 'wEditKey', 1 );
@@ -477,6 +581,23 @@ function cc_license_select_options ($curr) {
 # Useful spanners and wrenches
 # -----------------------------------------------------------------
 
+function page_with_template_exists ( $template ) {
+	// returns true if at least one Page exists that uses given template
+
+	// look for pages that use the given template
+	$seekpages = get_posts (array (
+				'post_type' => 'page',
+				'meta_key' => '_wp_page_template',
+				'meta_value' => $template
+			));
+	 
+	// did we find any?
+	$pages_found = ( count ($seekpages) ) ? true : false ;
+	
+	// report to base
+	return ($pages_found);
+}
+
 
 // function to get the caption for an attachment (stored as post_excerpt)
 // -- h/t http://wordpress.stackexchange.com/a/73894/14945
@@ -493,7 +614,7 @@ function reading_time_check() {
 		return ('The Estimated Post Reading Time plugin is installed. No further action necessary.');
 	} else {
 		// nope, send them off to set it up
-		return ('The <a href="http://wordpress.org/extend/plugins/estimated-post-reading-time/" target="_blank">Estimated Post Reading Time plugin</a> is NOT installed.  <a href="' . admin_url( 'plugins.php') . '">Do it now!</a>');
+		return ('The <a href="http://wordpress.org/extend/plugins/estimated-post-reading-time/" target="_blank">The Estimated Post Reading Time plugin</a> is NOT installed. You might want it-- it\'s not needed, but it\'s nifty.  <a href="' . admin_url( 'plugins.php') . '">Do it now!</a>');
 	}
 }
 
@@ -502,14 +623,13 @@ function truwriter_author_user_check( $expected_user = 'writer' ) {
 
 	$auser = get_user_by( 'login', $expected_user );
 		
-	
 	if ( !$auser) {
-		return ('Authoring account not set up. You need to <a href="' . admin_url( 'user-new.php') . '">create a user account</a> with login name <strong>' . $expected_user . '</strong> with a role of <strong>Author</strong>. Make a killer strong password; no one uses it.');
+		return ('The Authoring account not set up. You need to <a href="' . admin_url( 'user-new.php') . '">create a user account</a> with login name <strong>' . $expected_user . '</strong> with a role of <strong>Author</strong>. Make a killer strong password; no one uses it. Not even you.');
 	} elseif ( $auser->roles[0] != 'author') {
 	
-		// for multisite lets check if user is not member of blog
+		// for multisite let's check if user is not member of blog
 		if ( is_multisite() AND !is_user_member_of_blog( $auser->ID, get_current_blog_id() ) )  {
-			return ('The user account <strong>' . $expected_user . '</strong> is set up but has not been added as a user to this site (and needs to have a role of <strong>Author</strong>). You can <a href="' . admin_url( 'user-edit.php?user_id=' . $auser->ID ) . '">edit it now</a>'); 
+			return ('The user account <strong>' . $expected_user . '</strong> is set up but it has not been added as a user to this site (and needs to have a role of <strong>Author</strong>). You can <a href="' . admin_url( 'user-edit.php?user_id=' . $auser->ID ) . '">edit the account now</a>'); 
 			
 		} else {
 		
@@ -519,7 +639,7 @@ function truwriter_author_user_check( $expected_user = 'writer' ) {
 		
 		
 	} else {
-		return ('The authoring account <strong>' . $expected_user . '</strong> is correctly set up.');
+		return ('The authoring account <strong>' . $expected_user . '</strong> is correctly set up. You are ready to Write and Roll. Or your site users are.');
 	}
 }
 
@@ -545,8 +665,8 @@ function twitternameify( $str ) {
 function splot_the_author() {
 	// utility to put in template to show status of special logins
 	// nothing is printed if there is not current user, 
-	//   echos (1) if logged in user is the special account
-	//   echos (0) if logged in user is the another account
+	//   echoes (1) if logged in user is the special account
+	//   echoes (0) if logged in user is the another account
 	//   in both cases the code is linked to a logout script
 
 	
@@ -574,6 +694,7 @@ function set_html_content_type() {
 }
 
 function br2nl ( $string )
+// convert HTML <br> tags to new lines
 // from http://php.net/manual/en/function.nl2br.php#115182
 {
     return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);

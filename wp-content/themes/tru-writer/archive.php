@@ -15,20 +15,12 @@
 					<?php elseif ( is_year() ) : ?>
 						<?php printf( __( 'Year: %s', 'radcliffe' ), '' . get_the_date( _x( 'Y', 'Y = Year', 'radcliffe' ) ) ); ?>
 					<?php elseif ( is_category() ) : ?>
-						<?php printf( __( 'Reorts of Project Type: %s', 'radcliffe' ), '' . single_cat_title( '', false ) . '' ); ?>
+						<?php printf( __( 'Category: %s', 'radcliffe' ), '' . single_cat_title( '', false ) . '' ); ?>
 					<?php elseif ( is_tag() ) : ?>
-						<?php printf( __( 'Reports in Subject Area: %s', 'radcliffe' ), '' . single_tag_title( '', false ) . '' ); ?>
-					<?php elseif ( is_tax('techtags') ) : ?>
-						
-						<?php 					
-						$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); 
-						printf( __( 'Reports Using Technology: %s', 'radcliffe' ), '' . $term->name . '' ); 
-						
-						?>
-						
+						<?php printf( __( 'Tagged: %s', 'radcliffe' ), '' . single_tag_title( '', false ) . '' ); ?>
 					<?php elseif ( is_author() ) : ?>
 						<?php $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author)); ?>
-						<?php printf( __( 'Author: %s', 'radcliffe' ), $curauth->display_name ); ?>
+						<?php printf( __( 'By Author: %s', 'radcliffe' ), $curauth->display_name ); ?>
 					<?php else : ?>
 						<?php _e( 'Archive', 'radcliffe' ); ?>
 					<?php endif; ?>

@@ -32,7 +32,7 @@
 		
 				<div class="post-header-inner section-inner">
 																									
-					<h2 class="post-title"><?php the_title(); ?></h2>
+					<h1 class="post-title"><?php the_title(); ?></h1>
 				
 				</div> <!-- /post-header-inner section-inner -->
 														

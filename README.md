@@ -2,18 +2,19 @@
 by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 
 ## What is this?
-This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including media content, without needing to login or understand the backend of the Wordpress Content Management System (CMS). 
+This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including media content, without needing to login or understand the backend of  Wordpress. 
 
-Once installed, the TRU Writer theme allows individuals to generate content online using an editor interface inside their browser or, to add content by cutting and then pasting into the editor from word-processing software such as MS Word, carrying forward most formatting (here's an example of a  post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. 
+Once installed the TRU Writer theme allows individuals to generate content online using an editor interface inside their browser. Writers can also add content by cutting and then pasting into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a  post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
 
-Basically, the site invisibly logs in visitors to a special account and reveals advanced publication and editing tools, but those individuals will not need to navigate the Wordpress dashboard or login structure (we love Wordpress, but hey, not everyone needs to see that dashboard, right?). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. Point is, only the website administrator needs to do anything to generate the posts--and even they can automate that process! No one else needs to see anything under the hood.  
+Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!)
+
+The site invisibly logs in visitors to a special account to make available advanced publication and editing tools, but those individuals will not need to navigate the Wordpress dashboard or login structure (we love Wordpress, but hey, not everyone needs to see that dashboard, right?). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
 
 The TRU Writer Theme was developed along with the [TRU Collector](http://splot.ca/splots/the-comparator/), the [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
-Here's some examples, and place where you can see other versions of the TRU Writer Theme in action:
+Here's some places you can see others putting the TRU Writer Theme in action:
 
-* [Web 2.0 Storytelling Article](images/web2storytelling.jpg)](http://splot.ca/writer/2014/101)
-* [TRU Writer SPLOT demo site](http://splot.ca/writer/) (there might be occasional breakage if testing new features)
+* [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
@@ -25,11 +26,15 @@ Here's some examples, and place where you can see other versions of the TRU Writ
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
 
+And if you make a TRU Writer site, please pleas pretty please fork this repo to edit this Readme with a link to your new site.
+
+If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
+
 ## Relatively New Features
 
-**Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (and it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
+**Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
 
-When published, any writing with an email is published with a `Get Edit Link` button at the bottom which will resend the link to the email associated with the item.
+When published, any writing with an email is published with a `Get Edit Link` button at the bottom which will resend the link to the email associated with it.
 
 ![](images/email-request.jpg "Email Request Link")
 
@@ -38,14 +43,19 @@ When published, any writing with an email is published with a `Get Edit Link` bu
 ![](images/re-edit-link.jpg "Admin Re-edit Link")
 
 
-## How to Install
-Using this theme requires a self-hosted--or institutionally hosted (lucky you)--Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
+## How to Install TRU Writer
+Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
 
-You will need to be able to install themes and plugins. The TRU Writer is  based on [the free Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe), which is also included in this repo (but you should update it once you install the theme). If you have found your way to GitHub, you'll probably know that you cannot install the downloaded .zip file from here into your themes folder in Wordpress. Instead, download the repository as a .zip file and then unpack the .zip file "truwriter-master" on your computer (you can find it in the folder where all your downloads go). Once you have done that, open the folder named "truwriter-master" and look for the folder "wp-content" --> "themes." Inside the "themes" folder you will find two ore folders: "radcliffe" and "tru-writer." Now, remembering where those folders are, go and upload them to the "wp-content" --> "themes" folder on your self-hosted server (wherever you installed Wordpress). Or, if you are so inclined, you can make the "tru-writer" folder into a .zip file and upload it in the Wordpress dashboard under "add themes" (and add "radcliffe" while you're at it; let's play nice). 
+You will need to be able to install themes and plugins. The TRU Writer is  based on [the free Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe), which is also included in this repo. 
+
+
+Upload the **tru-writer** and the **radcliffee** directories (from wp-content/ in this distro) to your site's wp-content/themes directory. 
+
+Or if you wish to install from within the Wordpress Dashboard, from **Appearance** select **Themes** and click the **Upload** links.  A zip of both themes is included with this repo, or you can download directly [installable-ds106banker.zip](https://github.com/cogdog/truwriter/blob/master/installable-tru-writer.zip) and  [installable-wp-bootstrap.zip](https://github.com/cogdog/truwriter/blob/master/radcliffee.zip) 
 
 To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in your Wordpress dashboard under "appearance" --> "themes." It should appear there as soon as you upload it or add it via .zip file. You don't need to activate "radcliffe," but it's nice to have if you ever want to use that theme for something else later on. Once you activate the theme in the "appearance" menu, you are pretty much ready to go. But you'll still need to get things in order by entering some info.      
 
-## Recommended Plugins
+## Recommended Plugins for TRU Writer
 
 While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
 
@@ -55,9 +65,7 @@ While your doing all that uploading, you should know that this theme uses the [E
 * **Show in archives:** Yes
 * **All letters lowercase:** No 
 
-
-
-Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. 
+Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. This plugin is not critical for the Writer to work, it just closes the back door a bit tighter.
 
 In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
@@ -70,9 +78,9 @@ Your admin password is solid, right? Really? You updated Wordpress to the latest
 Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
 
 ## Page Setup
-This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Previously, I tried to get fancy and create these pages on theme activation, but in  a few cases somethiing went wrong and they kept producing future publish date pages. Oh well.
+This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. The theme should create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
 
-Create these Wordpress **Pages**:
+If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions, but do not change the slug or short name.
 
 * **Write** -- The page that provides the writing form see [http://splot.ca/writer/write](http://splot.ca/writer/write). You can title it whatever you like, but the slug (url name) must be `write`  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/write`
 
@@ -83,7 +91,7 @@ Create these Wordpress **Pages**:
 * **Get Edit Link** -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
 ## Customize Your Menus
-The default menus are not what you want! Wordpress will generate one based on all Pages set up.
+The default menus are not what you want (it will add menu items for some pages that users should not see! Wordpress will generate one based on all Pages set up.
 
 ![](images/default-menus.jpg)
 
@@ -130,9 +138,6 @@ On the editor where people will be composing their madness, this represents a pl
 These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
 
 ![](wp-content/themes/tru-writer/images/options-3.jpg)
-
-
-*** MORE EDITS TO COME>>>
 
 ## Default Header Image
 Click **Set/Change Image** to open the Wordpress media editor. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
@@ -198,7 +203,7 @@ Or you can the Creative Commons options to **Enable users to choose license** wh
 
 If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
 
-You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (its a small chunk of json).
+You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 
 
