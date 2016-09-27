@@ -14,23 +14,27 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 
 Here's some places you can see others putting the TRU Writer Theme in action:
 
-* [TRU Writer SPLOT demo site](http://splot.ca/writer/)
-* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
-* [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
-* [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
-* [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
-* [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
-* [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
-* [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
-* [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
-* [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
+
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
+* [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
+* [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
+* [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course University of Northern British Columbia
+* [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
+* [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
+* [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
+* [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
+* [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
+* [TRU Writer SPLOT demo site](http://splot.ca/writer/)
+* [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
 
 And if you make a TRU Writer site, please pleas pretty please fork this repo to edit this Readme with a link to your new site.
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
-## Relatively New Features
+## Relatively Cool New Features
+
+**Options Refreshed, Auto Page Creation, Better Reading Time Display** Recoded the theme options so documentation in its own tab. When he theme is activated now, the necessary pages will be created automagically. And if the Estimated reading time plugin is not activated, nothing will be displayed where it normally displays.
 
 **Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
 
