@@ -16,10 +16,13 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 
 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [BIOL 312 @ UNBC](http://unbc.biol312.ca/) Molecular Biology (University of Northern British Columbia)
+* [BIOL 420 @ UNBC](http://unbc.biol420.ca/) Animal Behaviour (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
-* [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course University of Northern British Columbia
+* [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course (University of Northern British Columbia)
+* [Lexical Confessions](http://lexicalconfessions.com/blog/)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
