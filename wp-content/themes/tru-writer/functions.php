@@ -332,6 +332,8 @@ function truwriter_autologin() {
 		
 		if ( !is_wp_error($autologin_user) ) {
 				wp_redirect ( site_url() . '/write' );
+		} else {
+				echo 'Bad news! login error: ' . $autologin_user->get_error_message();
 		}
 	}
 }
