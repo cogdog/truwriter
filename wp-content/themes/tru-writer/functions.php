@@ -333,11 +333,8 @@ function truwriter_autologin() {
 		if ( is_ssl() ) {
 			// extra cookie stuff 
 			
-			// get our user
-			$writer_user =  get_user_by('login', 'writer');
-			
 			// give out a secure cookie
-			wp_set_auth_cookie( $writer_user->ID, false, true );
+			truwriter_secure_cookie_set();
 			
 			// do it
 			$use_secure_cookie = true;
@@ -351,6 +348,18 @@ function truwriter_autologin() {
 		} else {
 				die ('Bad news! login error: ' . $autologin_user->get_error_message() );
 		}
+	}
+}
+
+function truwriter_secure_cookie_set() {
+	if ( is_ssl() ) {
+		// extra cookie stuff 
+		
+		// get our user
+		$writer_user =  get_user_by('login', 'writer');
+		
+		// give out a secure cookie
+		wp_set_auth_cookie( $writer_user->ID, false, true );
 	}
 }
 
