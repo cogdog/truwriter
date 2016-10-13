@@ -327,13 +327,29 @@ function truwriter_autologin() {
 		$creds['user_password'] = truwriter_option('pkey');
 
 		$creds['remember'] = true;
-		$autologin_user = wp_signon( $creds, false );
+		
+		$use_secure_cookie = false;
+		
+		if ( is_ssl() ) {
+			// extra cookie stuff 
+			
+			// get our user
+			$writer_user =  get_user_by('login', 'writer');
+			
+			// give out a secure cookie
+			wp_set_auth_cookie( $writer_user->ID, false, true );
+			
+			// do it
+			$use_secure_cookie = true;
+		
+		} 
+		$autologin_user = wp_signon( $creds, $use_secure_cookie );
 		
 		
 		if ( !is_wp_error($autologin_user) ) {
 				wp_redirect ( site_url() . '/write' );
 		} else {
-				echo 'Bad news! login error: ' . $autologin_user->get_error_message();
+				die ('Bad news! login error: ' . $autologin_user->get_error_message() );
 		}
 	}
 }
