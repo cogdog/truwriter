@@ -115,6 +115,10 @@ function truwriter_setup () {
 # Set up the table and put the napkins out, stuff we do every visit
 # -----------------------------------------------------------------
 
+// set a secure cookie early in the game
+add_action( 'after_setup_theme', 'truwriter_secure_cookie_set', 8 );
+
+
 // we need to load the options this before the auto login so we can use the pass
 add_action( 'after_setup_theme', 'truwriter_load_theme_options', 9 );
 
@@ -328,18 +332,9 @@ function truwriter_autologin() {
 
 		$creds['remember'] = true;
 		
-		$use_secure_cookie = false;
-		
-		if ( is_ssl() ) {
-			// extra cookie stuff 
-			
-			// give out a secure cookie
-			truwriter_secure_cookie_set();
-			
-			// do it
-			$use_secure_cookie = true;
-		
-		} 
+		// set flag for using secure cookie		
+		$use_secure_cookie = is_ssl();
+
 		$autologin_user = wp_signon( $creds, $use_secure_cookie );
 		
 		
@@ -352,8 +347,8 @@ function truwriter_autologin() {
 }
 
 function truwriter_secure_cookie_set() {
-	if ( is_ssl() ) {
-		// extra cookie stuff 
+// extra cookie stuff for sites with SSL turned on
+	if ( is_ssl()  ) {
 		
 		// get our user
 		$writer_user =  get_user_by('login', 'writer');

@@ -35,9 +35,6 @@ if ( is_user_logged_in() ) {
 	
   	  	
 } elseif ( $wAccessCode == '')  {
-
-	// see if they need a secure cookie
-	truwriter_secure_cookie_set();
 	
 	// no code required, log 'em in
 	wp_redirect ( site_url() . '/wp-login.php?autologin=writer' );
@@ -72,10 +69,6 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		$feedback_msg .= '</p>';
 		
 	} else {
-
-
-		// see if they need a secure cookie
-		truwriter_secure_cookie_set();
 
 		wp_redirect ( site_url() . '/wp-login.php?autologin=writer' );
 		exit;
