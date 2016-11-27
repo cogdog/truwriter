@@ -50,7 +50,7 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		&& wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
  
 	// grab the variables from the form
-	$wAccess = 	stripslashes( $_POST['wAccess'] );
+	$wAccess = 	stripslashes( trim( $_POST['wAccess'] ) );
 	
 	// let's do some validation, store an error message for each problem found
 	$errors = array();

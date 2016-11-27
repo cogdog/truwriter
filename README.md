@@ -22,6 +22,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course (University of Northern British Columbia)
+* [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Lexical Confessions](http://lexicalconfessions.com/blog/)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
