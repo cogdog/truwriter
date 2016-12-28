@@ -63,8 +63,9 @@ class truwriter_Theme_Options {
 
 		do_settings_sections( $_GET['page'] );
 		
-			echo '<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>
+		echo '<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>
 
+		</form>
 		</div>
 		
 		<script type="text/javascript">
@@ -395,7 +396,7 @@ class truwriter_Theme_Options {
 				break;
 
 			case 'password':
-				echo '<input class="regular-text' . $field_class . '" type="password" id="' . $id . '" name="truwriter_options[' . $id . ']" value="' . esc_attr( $options[$id] ) . '" />';
+				echo '<input class="regular-text' . $field_class . '" type="text" id="' . $id . '" name="truwriter_options[' . $id . ']" value="' . esc_attr( $options[$id] ) . '" /> <input type="button" id="showHide" value="Show" /> ';
 
 				if ( $desc != '' )
 					echo '<br /><span class="description">' . $desc . '</span>';

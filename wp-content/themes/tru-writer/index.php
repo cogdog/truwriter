@@ -38,9 +38,10 @@
 			
 				<div class="archive-nav">
 				
-					<?php echo get_next_posts_link( '&laquo; ' . __('Older Writings', 'radcliffe')); ?>
+				<?php echo get_next_posts_link( '&laquo; ' . __('Older Writings', 'radcliffe')); ?>
 						
-					<?php echo get_previous_posts_link( __('Newer Writings', 'radcliffe') . ' &raquo;'); ?>
+				<?php echo get_previous_posts_link( __('Newer Writings', 'radcliffe') . ' &raquo;'); ?>
+				
 					
 					<div class="clear"></div>
 					

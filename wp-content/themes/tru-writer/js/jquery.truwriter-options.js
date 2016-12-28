@@ -7,9 +7,24 @@
 */
 
 jQuery(document).ready(function() { 
-	// called for via click of upload button in theme options
+
+	//hide the password field
+	jQuery("#pkey").hide();
+
+	//toggle password field to show/hide contents
+	 jQuery("#showHide").click(function() {
+		if (jQuery("#showHide").val() == "Show") {
+		  jQuery("#pkey").show();
+		  jQuery("#showHide").attr('value', 'Hide');
+
+		} else {
+		  jQuery("#pkey").hide();
+		  jQuery("#showHide").attr('value', 'Show');
+		}
+	  });
 
 
+	// called for via click of upload button in theme options	
 	jQuery(document).on('click', '.upload_image_button', function(e){
 
 		// disable defauklt behavior
