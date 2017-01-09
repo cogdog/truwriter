@@ -16,6 +16,8 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 
 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [ENGL205 @ UNBC] (http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
+* [ENGL485 @ UNBC] (http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
 * [BIOL 312 @ UNBC](http://unbc.biol312.ca/) Molecular Biology (University of Northern British Columbia)
 * [BIOL 420 @ UNBC](http://unbc.biol420.ca/) Animal Behaviour (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
