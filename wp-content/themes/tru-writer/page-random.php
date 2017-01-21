@@ -1,6 +1,7 @@
 <?php
 /*
-Random Post Picker
+Template Name: Random Post Picker
+
 Use on page to send viewer to random post optionally mod query
 */
 

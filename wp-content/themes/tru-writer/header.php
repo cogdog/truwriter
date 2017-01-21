@@ -19,9 +19,26 @@
     	add_action( 'wp_head', 'theme_slug_render_title' );
 		endif;
 		?>
-
-				
-		<?php if ( is_singular() ) wp_enqueue_script( "comment-reply" ); ?>
+	
+		<?php if ( is_singular() ) :?>
+			 
+			 <?php 
+			 global $post;
+			 
+			$author_twitter = splot_get_twitter_name( get_post_meta( $post->ID, 'wAuthor', 1 ) );
+			?> 
+			 
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@cogdog">
+		<?php if ($author_twitter) echo '<meta name="twitter:creator" content="' . $author_twitter . '">';?>
+		<meta name="twitter:title" content="<?php bloginfo( 'name' ); ?>">
+		<meta name="twitter:description" content="<?php echo wp_trim_words( strip_tags( $post->post_content ), 30, '...' );?>">
+		<meta name="twitter:image" content="<?php echo get_the_post_thumbnail_url( $post->ID, 'medium');?>">
+  
+		<?php wp_enqueue_script( "comment-reply" );?>	 
+		<?php endif?>
+		
+		 
 		 
 		<?php wp_head(); ?>
 	
@@ -56,6 +73,8 @@
 					<h1 class="blog-title">
 						<a href="<?php echo esc_url( home_url() ); ?>" title="<?php echo esc_attr( get_bloginfo( 'title' ) ); ?> &mdash; <?php echo esc_attr( get_bloginfo( 'description' ) ); ?>" rel="home"><?php echo esc_attr( get_bloginfo( 'title' ) ); ?></a>
 					</h1>
+					
+					
 					
 				<?php endif; ?>
 				
@@ -137,3 +156,6 @@
 				</form>
 			 
 		</div> <!-- /mobile-menu-container -->
+		
+		
+		

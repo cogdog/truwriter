@@ -16,8 +16,8 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 
 
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
-* [ENGL205 @ UNBC] (http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
-* [ENGL485 @ UNBC] (http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
+* [ENGL205 @ UNBC](http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
+* [ENGL485 @ UNBC](http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
 * [BIOL 312 @ UNBC](http://unbc.biol312.ca/) Molecular Biology (University of Northern British Columbia)
 * [BIOL 420 @ UNBC](http://unbc.biol420.ca/) Animal Behaviour (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
@@ -39,6 +39,8 @@ And if you make a TRU Writer site, please pleas pretty please fork this repo to 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
 ## Relatively Cool New Features
+
+**Tweet This Button** There is a new option so you can have your own hashtags added when someone tweets a published item. Also, twitter card meta data has been added so these tweets have the extended card display that shows the featured image, the site's title, and an excerpt from the item-- example https://twitter.com/cogdog/status/822656183769198593
 
 **Options Refreshed, Auto Page Creation, Better Reading Time Display** Recoded the theme options so documentation in its own tab. When he theme is activated now, the necessary pages will be created automagically. And if the Estimated reading time plugin is not activated, nothing will be displayed where it normally displays.
 
@@ -181,8 +183,12 @@ So we suggest making a few pre-set categories for a new site. As an Administrato
 ## Notification Emails
 Enter any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
 
-
 ![](wp-content/themes/tru-writer/images/est-reading-time.jpg)
+
+## Tweeted hashtags
+Enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
+
+![](wp-content/themes/tru-writer/images/twitter-button-hashtags.jpg)
 
 ## Estimated Reading Time Plugin
 This plugin is optional, if installed and activated, it will add to all published works an estimate of the reading time based on a crude formula. If it is not installed, you will see the notes shown above. This plugin is available in the Wordpress repository, so it is an easy install.
@@ -204,9 +210,14 @@ You can follow the link to create an account; for an email you can use a fictiti
 
 If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the write account, already exists, so you need to add it to the site via the Author tools. However, you still have to enter the password, so make sure you know the password that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.
 
-![](wp-content/themes/tru-writer/images/creative-commons.jpg)
+![](wp-content/themes/tru-writer/images/show-password.gif)
+You can now see the password expected for the secret account.
 
 ## Creative Commons Settings
+
+![](wp-content/themes/tru-writer/images/creative-commons.jpg)
+
+
 Creative commons licenses can be attached to all works published on your site. Choose **Apply one license to all challenges** to place the same license on all works (a notice will be displayed on the writing form).
 
 Or you can the Creative Commons options to **Enable users to choose license** which will put the menu on the submission form so users can choose a license (or set to All Rights Reserved). At this time, the only way to edit the licenses displayed (e.g. if you do not want certain ones) is to edit `functions.php` in the template directory. Look for the function `function cc_license_select_options` and comment out the lines containing license options to hide.

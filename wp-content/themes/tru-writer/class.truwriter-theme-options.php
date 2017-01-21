@@ -221,7 +221,15 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
-
+		
+		$this->settings['hashtags'] = array(
+			'title'   => __( 'Twitter Button Hashtag(s)' ),
+			'desc'    => __( 'When a writing is tweeted add these hashtags. Do not include # and separate multiple hashtags with commas.' ),
+			'std'     => 'splotwriter',
+			'type'    => 'text',
+			'section' => 'general'
+		);
+		
 		$this->settings['readingtimecheck'] = array(
 		'section' => 'general',
 		'title' 	=> '' ,// Not used for headings.

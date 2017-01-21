@@ -327,11 +327,29 @@ function truwriter_autologin() {
 		$creds['user_password'] = truwriter_option('pkey');
 
 		$creds['remember'] = true;
-		$autologin_user = wp_signon( $creds, false );
+		
+		$use_secure_cookie = false;
+		
+		if ( is_ssl() ) {
+			// extra cookie stuff 
+			
+			// get our user
+			$writer_user =  get_user_by('login', 'writer');
+			
+			// give out a secure cookie
+			wp_set_auth_cookie( $writer_user->ID, false, true );
+			
+			// do it
+			$use_secure_cookie = true;
+		
+		} 
+		$autologin_user = wp_signon( $creds, $use_secure_cookie );
 		
 		
 		if ( !is_wp_error($autologin_user) ) {
 				wp_redirect ( site_url() . '/write' );
+		} else {
+				die ('Bad news! login error: ' . $autologin_user->get_error_message() );
 		}
 	}
 }
@@ -624,7 +642,40 @@ function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
 	if ( shortcode_exists( 'est_time' ) ) return ( $prefix_string . ' ~' . do_shortcode( '[est_time]' ) . $suffix_string );
 }
 
+function splot_get_excerpt( $post_id,  $charlength ) {
+	// gets a post excerpt of specified length
+	// modded from https://codex.wordpress.org/Function_Reference/get_the_excerpt
+	$excerpt = get_the_excerpt( $post_id );
+	$charlength++;
+	
+	if ( mb_strlen( $excerpt ) > $charlength ) {
+		$subex = mb_substr( $excerpt, 0, $charlength - 5 );
+		$exwords = explode( ' ', $subex );
+		$excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
+		if ( $excut < 0 ) {
+			$newex = mb_substr( $subex, 0, $excut );
+		} else {
+			$newex =  $subex;
+		}
+		$newex .= '...';
+	} else {
+		$newex = $excerpt;
+	}
+	
+	return ($newex);
+}
 
+function splot_get_twitter_name( $str ) {
+	// takes an author string and extracts a twitter handle if there is one 
+	
+	$found = preg_match('/@(\\w+)\\b/i', '$str', $matches);
+	
+	if ($found) {
+		return $matches[0];
+	} else {
+		return false;
+	}
+}
 
 function truwriter_author_user_check( $expected_user = 'writer' ) {
 // checks for the proper authoring account set up

@@ -1,4 +1,7 @@
 <?php
+/*
+Template Name: Writing Pad
+*/
 
 // check for query vars that indicate this is a edit request
 $wid = get_query_var( 'wid' , 0 );   // id of post

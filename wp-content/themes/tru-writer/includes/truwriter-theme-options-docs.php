@@ -64,6 +64,13 @@
 <p>Enter any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma.</p>
 
 
+<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/twitter-button-hashtags.jpg" alt="" style="border:3px solid #000; margin-top:4em;" />
+
+<h2>Tweeted hashtags</h2>
+Enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
+
+
+
 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/est-reading-time.jpg" alt="" style="border:3px solid #000; margin-top:4em;" />
 
 <h2>Estimated Reading Time Plugin</h2>
@@ -89,9 +96,18 @@
 <p>If this site is on a mulitsite Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools. However, you still have to enter the password, so make sure you know the passord that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.</p>
 
 
+<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/show-password.gif" alt="" style="border:3px solid #000; margin-top:4em;" />
+
+<p>You can now see the password expected for the secret account.</p>
+
+
+
+
 <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/creative-commons.jpg" alt="" style="border:3px solid #000; margin-top:4em;" />
 
 <h2>Creative Commons Settings</h2>
+
+
 <p>Creative commons licenses can be attached to all works published on your site. Choose <strong>Apply one license to all challenges</strong> to place the same license on all works (a notice will be displayed on the writing form).</p>
 
 <p>Or you can the Creative Commons options to <strong>Enable users to choose license</strong> which will put the menu on the submission form so users can choose a license (or set to All Rights Reserved). At this time, the only way to edit the licenses displayed (e.g. if you do not want certain ones) is to edit <code>functions.php</code> in the template directory. Look for the function <code>function cc_license_select_options</code> and comment out the lines containing license options to hide.</p>
