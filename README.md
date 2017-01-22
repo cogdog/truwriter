@@ -32,7 +32,8 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
-* [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields)
+* [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
+* [When I Needed Help](http://whenineededhelp.com/)
 
 And if you make a TRU Writer site, please pleas pretty please fork this repo to edit this Readme with a link to your new site.
 
