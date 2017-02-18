@@ -507,7 +507,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						
 						</div>
 						
-						<p>You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be at least 1440px wide for photos. </p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.<br clear="left"><?php var_dump($wHeaderImageCaption)?></p>
+						<p>You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be at least 1440px wide for photos. </p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.<br clear="left"></p>
 						
 						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'wpbootstrap') ?></label>
 						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" tabindex="6" />
