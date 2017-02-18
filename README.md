@@ -14,7 +14,7 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 
 Here's some places you can see others putting the TRU Writer Theme in action:
 
-
+* [30,000,000 ACA Stories](http://30millionlike.me)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
 * [ENGL205 @ UNBC](http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
 * [ENGL485 @ UNBC](http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
@@ -35,11 +35,13 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
 * [When I Needed Help](http://whenineededhelp.com/)
 
-And if you make a TRU Writer site, please pleas pretty please fork this repo to edit this Readme with a link to your new site.
+And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site.
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
 ## Relatively Cool New Features
+
+**Separate CSS / Functions for Custom Installs** Created a new PHP file in `includes` for any custom site code and a style sheet in `styles/custom/css` for styles added for a specific site. This way, if you keep copies of these in a safe place, you can more safely update the theme. Also fixed quote bug for captions, and changed writing form so it only displays featured image and intro text for first view of the form (so you can add really long instructions).
 
 **Tweet This Button** There is a new option so you can have your own hashtags added when someone tweets a published item. Also, twitter card meta data has been added so these tweets have the extended card display that shows the featured image, the site's title, and an excerpt from the item-- example https://twitter.com/cogdog/status/822656183769198593
 

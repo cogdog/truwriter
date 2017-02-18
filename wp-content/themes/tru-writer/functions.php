@@ -5,7 +5,9 @@
 	
 	Much of the magic happens here. Edit your own discretion, peril, unless you
 	find a coding error, and by all means please fork this to the github repo 
-	thus you are deemed an honor SPLOT knight
+	thus you are deemed an honorary SPLOT knight. 
+	
+	We suggest putting your own extra groovy code in incldes/custom-functions.php 
 	
 */
 
@@ -237,6 +239,14 @@ function truwriter_tqueryvars( $qvars ) {
 	
 	return $qvars;
 }   
+
+
+// enqueue custom style sheet
+function  truwriter_enqueue_style() {
+    wp_enqueue_style( 'truwriter-custom', get_stylesheet_directory_uri() . '/style/custom.css', array('radcliffe_style') ); 
+}
+
+add_action( 'wp_enqueue_scripts', 'truwriter_enqueue_style' );
 
 
 # -----------------------------------------------------------------
@@ -642,29 +652,6 @@ function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
 	if ( shortcode_exists( 'est_time' ) ) return ( $prefix_string . ' ~' . do_shortcode( '[est_time]' ) . $suffix_string );
 }
 
-function splot_get_excerpt( $post_id,  $charlength ) {
-	// gets a post excerpt of specified length
-	// modded from https://codex.wordpress.org/Function_Reference/get_the_excerpt
-	$excerpt = get_the_excerpt( $post_id );
-	$charlength++;
-	
-	if ( mb_strlen( $excerpt ) > $charlength ) {
-		$subex = mb_substr( $excerpt, 0, $charlength - 5 );
-		$exwords = explode( ' ', $subex );
-		$excut = - ( mb_strlen( $exwords[ count( $exwords ) - 1 ] ) );
-		if ( $excut < 0 ) {
-			$newex = mb_substr( $subex, 0, $excut );
-		} else {
-			$newex =  $subex;
-		}
-		$newex .= '...';
-	} else {
-		$newex = $excerpt;
-	}
-	
-	return ($newex);
-}
-
 function splot_get_twitter_name( $str ) {
 	// takes an author string and extracts a twitter handle if there is one 
 	
@@ -758,5 +745,11 @@ function br2nl ( $string )
 {
     return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);
 }
+
+# -----------------------------------------------------------------
+# Get any custom stuff because custom stuff should be custom
+# -----------------------------------------------------------------
+
+include( 'includes/custom-functions.php' );
 
 ?>
