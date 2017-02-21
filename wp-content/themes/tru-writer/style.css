@@ -23,6 +23,14 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html http://www.apache.org/lice
 	text-align: center;
 }
 
+/* center up embedded tweets */
+
+.twitter-tweet-rendered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
 /* --------------------  pretty buttons all done in CSS ---------------------------------
    h/t http://www.graemeboy.com/modern-css-buttons                                     */
 
