@@ -208,13 +208,21 @@ To provide access to the media uploader, this site uses a Wordpress Authoring Ro
 
 ![](wp-content/themes/tru-writer/images/add-author.jpg)
 
-You can follow the link to create an account; for an email you can use a fictitious one on your domain. We suggest using the strong password that Wordpress suggests. Copy that password, and perhaps save it in a safe place. On a stand alone site, you can just paste it into the password field.
+You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. Copy that password, and perhaps save it in a safe place. 
+
+On a stand-alone Wordpress site, you can just paste it into the password field of the TRU Writer options (see below).
+
+
+If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools. 
 
 ![](wp-content/themes/tru-writer/images/add-to-site.jpg)
 
-If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the write account, already exists, so you need to add it to the site via the Author tools. However, you still have to enter the password, so make sure you know the password that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.
+However, you still have to enter the password, so make sure you know the password that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.
+
+This is how it is entered on the TRU Writer option screen (you need to click the "show" button to display the field)
 
 ![](wp-content/themes/tru-writer/images/show-password.gif)
+
 You can now see the password expected for the secret account.
 
 ## Creative Commons Settings
