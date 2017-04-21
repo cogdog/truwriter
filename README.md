@@ -23,6 +23,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
+* [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
 * [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course (University of Northern British Columbia)
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Lexical Confessions](http://lexicalconfessions.com/blog/)
