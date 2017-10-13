@@ -59,19 +59,41 @@ When published, any writing with an email is published with a `Get Edit Link` bu
 ![](images/re-edit-link.jpg "Admin Re-edit Link")
 
 
-## How to Install TRU Writer
+## Install TRU Writer
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
 
-You will need to be able to install themes and plugins. The TRU Writer is  based on [the free Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe), which is also included in this repo. 
+The TRU Collector is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
+
+### Installing TRU Writer from Scratch
+
+Download the TRU Writer theme (use the green **Clone or Download** button above) as a ZIP file.
+
+The zip can be uploaded directly to your site via **Add Themes** in the Wordpress dashboard. Of you run into size upload limits or just prefer going old school like me, unzip the package and ftp the entire folder into your `wp-content/themes` directory.
+
+To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in your Wordpress dashboard under **Appearance** --> **Themes**. 
+
+### Installing TRU Writer from The Instant Mix
+
+As a new approach for using my themes, I have set up this one as a prebuilt package that includes the theme, initial settings, plugins, and demo content. All you need to be able to do is to install a fresh Wordpress site into the location/domain you want your site.
+
+First [download the Instant Site package file](https://github.com/cogdog/instant-splot/raw/master/noodles/tru-writer-wpress.zip) and expand the file to reveal the single `*.wpress` file.
+
+Then follow the [Instant SPLOT directions for Using a Packaged Kit](https://github.com/cogdog/instant-splot#got-hosting-use-a-packaged-kit) to import into your new site.
+
+Reference the directions below for set up and customizing (but you have all the plugins it needs already installed). 
+
+### Updating the TRU Writer Theme
+
+If you have ftp/sftp access to your site (or this can be done in a cpanel file manager), simply upload the new theme files to the `wp-content/themes` directory that includes the older version theme. 
+
+For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
 
 
-Upload the **tru-writer** and the **radcliffee** directories (from wp-content/ in this distro) to your site's wp-content/themes directory. 
+## Setting Up TRU Writer
 
-Or if you wish to install from within the Wordpress Dashboard, from **Appearance** select **Themes** and click the **Upload** links.  A zip of both themes is included with this repo, or you can download directly [installable-ds106banker.zip](https://github.com/cogdog/truwriter/blob/master/installable-tru-writer.zip) and  [installable-wp-bootstrap.zip](https://github.com/cogdog/truwriter/blob/master/radcliffee.zip) 
+Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
 
-To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in your Wordpress dashboard under "appearance" --> "themes." It should appear there as soon as you upload it or add it via .zip file. You don't need to activate "radcliffe," but it's nice to have if you ever want to use that theme for something else later on. Once you activate the theme in the "appearance" menu, you are pretty much ready to go. But you'll still need to get things in order by entering some info.      
-
-## Recommended Plugins for TRU Writer
+### Recommended Plugins for TRU Writer
 
 While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
 
@@ -91,9 +113,8 @@ At the same time, and you already know this because you know Wordpress, but acti
 
 Your admin password is solid, right? Really? You updated Wordpress to the latest version, right? And you do regular backups of Wordpress right? ... maybe you have a set schedule for backing up the site content? You wouldn't want to lose people's stuff. No, no you would not. 
 
-Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
 
-## Page Setup
+### Page Setup
 This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. The theme should create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
 
 If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions, but do not change the slug or short name.
@@ -106,7 +127,7 @@ If the theme does not do so automatically (and it should) create these Wordpress
 
 * **Get Edit Link** -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
-## Customize Your Menus
+### Customize Your Menus
 The default menus are not what you want (it will add menu items for some pages that users should not see! Wordpress will generate one based on all Pages set up.
 
 ![](images/default-menus.jpg)
@@ -117,7 +138,7 @@ In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and chec
 
 You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  It will list as menu items a bunch of pages that users never should see (e.g. Welcome Desk, Get Edit Link).
 
-## Theme Options and Settings
+### Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
 
 Click **TRU Writer Options** to see or change the settings outlined below. 
@@ -126,87 +147,87 @@ Click **TRU Writer Options** to see or change the settings outlined below.
 
 In the TRU Writer Theme, traditional "posts" in Wordpress are renamed "writings," but they still have all the attributes of garden variety Wordpress blog posts. Yum.
 
-![](wp-content/themes/tru-writer/images/options-1.jpg)
+![](images/options-1.jpg)
 
-## Access Code and Hint
+#### Access Code and Hint
 Leave this field blank if you want any visitor to be able to access the writing form on your TRU Writer site. If that's too open for you, add a code and give it a hint. If you want a quick workaround here, make the site less accessible by not having any links in the homepage menu bar that go to the editor page--no link to the "writer" page, the harder it is to find the editor and post something.  
 
 If you want to require users to enter an access code (a very weak password), just enter it in the space provided. Any requests to access the editor and write a post will be sent to a front-page where a writer must enter the passcode. As an example, we have "Lassie" and an equally difficult hint. If you enter in "Lassie," you can see the editor and begin the process of writing a post--but don't actually do that; we haven't set everything up yet! This is a hypothetical situation. For now, decide if you want a passcode. If you do, put it in, with a hint. If you don't, moving on!
 
-## Status for New Writings
+#### Status for New Writings
 The TRU Writer is a moderated publishing theme. And "moderated" means that when a writer submits something, it is not  immediately visible to the world. Instead, unless you set it otherwise (more on that below), when a writer submits a post (or "writing" as above) they are automatically set as drafts with a  *Pending Approval* status. You'll get notifications that a submissions has been made to the Email address you enter in the "Notifications Email" option. 
 
 In order to make a post (or "writing" as above) visible, a user with the permission status of "Editor" or "Administrator" needs to change the status of the "pending approval" writing to "published (or ignore an "Editor" or "Administrator" could just ignore it forever, such power is theirs).
 
 You can also choose the "status for new writings" as "publish immediately" and there are no checks and balances--the writing goes right up and is publicly visible immediately. Immediate gratification goes a long way. Note though, that because of the hollow tunnel this might create, this option works best with an access code as described above in place--right Lassie!?
 
-## Default Writing Prompt
+#### Default Writing Prompt
 Enter this field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. HTML is acceptable, but for now, there is no rich text editor here. *Learn some web code!* It will set you free.
 
-![](wp-content/themes/tru-writer/images/options-2.jpg)
+![](images/options-2.jpg)
 
-## Allow Comments
+#### Allow Comments
 Check this box to add a standard blog comment field at the bottom of all published pieces. Writers like comments. Don't you?
 
 If you allow comments--and you should--be sure to install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) (instructions above), or else there could be trouble. 
 
-## Extra Information Field
+#### Extra Information Field
 On the editor where people will be composing their madness, this represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
 
 These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
 
-![](wp-content/themes/tru-writer/images/options-3.jpg)
+![](images/options-3.jpg)
 
-## Default Header Image
+#### Default Header Image
 Click **Set/Change Image** to open the Wordpress media editor. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
 
-![](wp-content/themes/tru-writer/images/header-image-caption.jpg)
+![](images/header-image-caption.jpg)
 
 Before choosing the image, be sure to add a caption (we suggest a creative commons license!) as this is what is used to display atop the image when published. Attribute and model attribution! FTW!
 
 Without proper attribute, the post / writing will not move forward. Attribution must be in there. 
 
-![](wp-content/themes/tru-writer/images/header-image-selected.jpg)
+![](images/header-image-selected.jpg)
 
 Once selected you will see a preview of your default image. Isn't Cadu a nice looking dog?
 
 
-![](wp-content/themes/tru-writer/images/options-4.jpg)
+![](images/options-4.jpg)
 
-## Default Category for New Writing
+#### Default Category for New Writing
 If you have not set up any categories, this menu will not do much. You might want to save your options and go edit your **Writing Categories**. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.
 
-![](wp-content/themes/tru-writer/images/categories.jpg)
+![](images/categories.jpg)
 
 The `In Progress` category is where all submitted writings go if they need approval. Final Published items have their own ... `Published` category (big surprise there, eh?). If you want to give your writers a choice of categories to place their work, make sure any categories you create have `Published` as a parent.
 
-![](wp-content/themes/tru-writer/images/categories-published.jpg)
+![](images/categories-published.jpg)
 
 So we suggest making a few pre-set categories for a new site. As an Administrator you can always add new ones at any time. Any text you add as a description will be included on the writing form.
 
-## Notification Emails
+#### Notification Emails
 Enter any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
 
-![](wp-content/themes/tru-writer/images/est-reading-time.jpg)
+![](images/est-reading-time.jpg)
 
-## Tweeted hashtags
+#### Tweeted hashtags
 Enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
 
-![](wp-content/themes/tru-writer/images/twitter-button-hashtags.jpg)
+![](images/twitter-button-hashtags.jpg)
 
-## Estimated Reading Time Plugin
+#### Estimated Reading Time Plugin
 This plugin is optional, if installed and activated, it will add to all published works an estimate of the reading time based on a crude formula. If it is not installed, you will see the notes shown above. This plugin is available in the Wordpress repository, so it is an easy install.
 
-![](wp-content/themes/tru-writer/images/reading-times-settings.jpg)
+![](images/reading-times-settings.jpg)
 
 If installed, you should check the settings under **Settings** -- **Post Reading Time**. Set `Show in Home Page` and `Show in Archives` to display in listings of published works.
 
-![](wp-content/themes/tru-writer/images/author-account-none.jpg)
+![](images/author-account-none.jpg)
 
-## Author Account Setup
+#### Author Account Setup
 To provide access to the media uploader, this site uses a Wordpress Authoring Role account that is logged into invisibly to your site visitors (for anyone logged in with an Editor or Administrator account, like you this account is not used.). So your site needs an active user with a name of **writer** and a role of **Author**.
 
-![](wp-content/themes/tru-writer/images/add-author.jpg)
+![](images/add-author.jpg)
 
 You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. Copy that password, and perhaps save it in a safe place. 
 
@@ -215,28 +236,28 @@ On a stand-alone Wordpress site, you can just paste it into the password field o
 
 If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools. 
 
-![](wp-content/themes/tru-writer/images/add-to-site.jpg)
+![](images/add-to-site.jpg)
 
 However, you still have to enter the password, so make sure you know the password that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.
 
 This is how it is entered on the TRU Writer option screen (you need to click the "show" button to display the field)
 
-![](wp-content/themes/tru-writer/images/show-password.gif)
+![](images/show-password.gif)
 
 You can now see the password expected for the secret account.
 
-## Creative Commons Settings
+#### Creative Commons Settings
 
-![](wp-content/themes/tru-writer/images/creative-commons.jpg)
+![](images/creative-commons.jpg)
 
 
 Creative commons licenses can be attached to all works published on your site. Choose **Apply one license to all challenges** to place the same license on all works (a notice will be displayed on the writing form).
 
 Or you can the Creative Commons options to **Enable users to choose license** which will put the menu on the submission form so users can choose a license (or set to All Rights Reserved). At this time, the only way to edit the licenses displayed (e.g. if you do not want certain ones) is to edit `functions.php` in the template directory. Look for the function `function cc_license_select_options` and comment out the lines containing license options to hide.
 
-## The Complexish Stuff for Nerds, Who Are Awesome
+## Some Complexish Stuff for Nerds, Who Are Awesome
 
-If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](wp-content/themes/tru-writer/includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
+If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
 
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
