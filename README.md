@@ -95,7 +95,11 @@ Now that you've installed TRU Writer and can see the barebones theme staring bac
 
 ### Recommended Plugins for TRU Writer
 
-While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](http://wordpress.org/extend/plugins/estimated-post-reading-time/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. These are the setting you should use for this plugin:
+While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](https://github.com/cogdog/instant-splot/blob/master/plugins/estimated-post-reading-time.zip) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. **This plugin vanished from Wordpress but I have stashed it [here](https://github.com/cogdog/instant-splot/blob/master/plugins/estimated-post-reading-time.zip))**
+
+
+
+These are the setting you should use for this plugin:
 
 * **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
 * **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad if you try "Yes")
