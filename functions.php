@@ -243,7 +243,18 @@ function truwriter_tqueryvars( $qvars ) {
 
 // enqueue custom style sheet
 function  truwriter_enqueue_style() {
-    wp_enqueue_style( 'truwriter-custom', get_stylesheet_directory_uri() . '/style/custom.css', array('radcliffe_style') ); 
+
+
+    $parent_style = 'radcliffe-style'; 
+    
+    wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+    
+    wp_enqueue_style( 'child-style',
+        get_stylesheet_directory_uri() . '/style.css',
+        array( $parent_style ),
+        wp_get_theme()->get('Version')
+    );
+	    
 }
 
 add_action( 'wp_enqueue_scripts', 'truwriter_enqueue_style' );
@@ -337,10 +348,25 @@ function truwriter_autologin() {
 		$creds['user_password'] = truwriter_option('pkey');
 
 		$creds['remember'] = true;
-
-		// login user, send secure cookie if this is on https
-		$autologin_user = wp_signon( $creds, is_ssl() );
-		 
+		
+		$use_secure_cookie = false;
+		
+		if ( is_ssl() ) {
+			// extra cookie stuff 
+			
+			// get our user
+			$writer_user =  get_user_by('login', 'writer');
+			
+			// give out a secure cookie
+			wp_set_auth_cookie( $writer_user->ID, false, true );
+			
+			// do it
+			$use_secure_cookie = true;
+		
+		} 
+		$autologin_user = wp_signon( $creds, $use_secure_cookie );
+		
+		
 		if ( !is_wp_error($autologin_user) ) {
 				wp_redirect ( site_url() . '/write' );
 		} else {
