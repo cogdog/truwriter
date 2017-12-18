@@ -123,6 +123,16 @@ class truwriter_Theme_Options {
 		===========================================*/
 
 
+		$this->settings['access_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Access to Writing Tool',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+
+
+
 		$this->settings['accesscode'] = array(
 			'title'   => __( 'Access Code' ),
 			'desc'    => __( 'Set necessary code to access the writing tool; leave blank to make wide open' ),
@@ -137,6 +147,15 @@ class truwriter_Theme_Options {
 			'std'     => 'Name of this site (lower the case, Ace!)',
 			'type'    => 'text',
 			'section' => 'general'
+		);
+
+
+		$this->settings['publish_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Publish Settings',
+			'std'    => '',
+			'type'    => 'heading'
 		);
 
 

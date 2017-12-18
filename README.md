@@ -40,7 +40,9 @@ And if you make a TRU Writer site, please please pretty please fork this repo to
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
-## Relatively Cool New Features
+## Relatively Cool New Features & Updates
+
+**Reading Time Plugin** The [Estimated Reading Time Plugin](https://wordpress.org/plugins/estimated-post-reading-time/) is no longer available, so the theme now uses [Reading Time WP](https://wordpress.org/plugins/reading-time-wp/).
 
 **Separate CSS / Functions for Custom Installs** Created a new PHP file in `includes` for any custom site code and a style sheet in `styles/custom/css` for styles added for a specific site. This way, if you keep copies of these in a safe place, you can more safely update the theme. Also fixed quote bug for captions, and changed writing form so it only displays featured image and intro text for first view of the form (so you can add really long instructions).
 
@@ -95,17 +97,13 @@ Now that you've installed TRU Writer and can see the barebones theme staring bac
 
 ### Recommended Plugins for TRU Writer
 
-While your doing all that uploading, you should know that this theme uses the [Estimated Post Reading Time plugin](https://github.com/cogdog/instant-splot/blob/master/plugins/estimated-post-reading-time.zip) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read. **This plugin vanished from Wordpress but I have stashed it [here](https://github.com/cogdog/instant-splot/blob/master/plugins/estimated-post-reading-time.zip))**
+While your doing all that uploading, you should know that this theme uses the [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read.
 
+**Note that previous versions of this theme used the [Estimated Post Reading Time plugin](https://wordpress.org/plugins/estimated-post-reading-time/) which is no longer available. Delete this plugin, and replace with [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/).**
 
+You can use all the default settings for **Reading Time WP** but be sure to deselect the bottom two checkboxes `Insert Reading Time before content:` and  `Insert Reading Time before excerpt:` (look under **Settings** -> **Reading Time WP**)
 
-These are the setting you should use for this plugin:
-
-* **Words Per Minute** We use the default of 250, but you can pick any number that feels appropriate
-* **Add automatically to all posts and pages:** NO (the theme takes care of this, and it will look bad if you try "Yes")
-* **Show in homepage:** Yes
-* **Show in archives:** Yes
-* **All letters lowercase:** No 
+![Reading Time WP settings](images/reading-time-wp-settings.jpg "Reading Time WP settings")
 
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. This plugin is not critical for the Writer to work, it just closes the back door a bit tighter.
 
