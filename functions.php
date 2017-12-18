@@ -661,16 +661,8 @@ function reading_time_check() {
 function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
 	// return the estimated reading time only if the short code (aka plugin) exists. start with the string and add an approximation symbol.
 	
-	if ( shortcode_exists( 'rt_reading_time' ) ) {
-		
-		// get the estimated reading time
-		$rt_time = do_shortcode( '[rt_reading_time]' );
-		
-		// check for values of 1, results are wrapped in newlines and spans
-		$rt_label = ( trim($rt_time) == "<span class='span-reading-time'> 1 </span>" ) ?  ' minute ' : ' minutes ';
-		
-		return ( $prefix_string . ' ~' . $rt_time .  $rt_label . $suffix_string );
-		
+	if ( shortcode_exists( 'rt_reading_time' ) ) {		
+		return ( $prefix_string . ' ~' . do_shortcode( '[rt_reading_time postfix="minutes" postfix_singular="minute"]' ) . $suffix_string );
 	}
 }
 
