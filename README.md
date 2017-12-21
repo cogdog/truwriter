@@ -28,6 +28,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Lexical Confessions](http://lexicalconfessions.com/blog/)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
+* [OER On Other Languages](https://oloer.opened.ca/) Tannis Morgan
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
