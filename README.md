@@ -16,6 +16,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 
 * [30,000,000 ACA Stories](http://30millionlike.me)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [Arganee Journal](http://journal.arganee.world/) open online journal for Networked Narratives and ResNetSem courses
 * [ENGL205 @ UNBC](http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
 * [ENGL485 @ UNBC](http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
 * [BIOL 312 @ UNBC](http://unbc.biol312.ca/) Molecular Biology (University of Northern British Columbia)
