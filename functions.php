@@ -241,24 +241,6 @@ function truwriter_tqueryvars( $qvars ) {
 }   
 
 
-// enqueue custom style sheet
-function  truwriter_enqueue_style() {
-
-
-    $parent_style = 'radcliffe-style'; 
-    
-    wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
-    
-    wp_enqueue_style( 'child-style',
-        get_stylesheet_directory_uri() . '/style.css',
-        array( $parent_style ),
-        wp_get_theme()->get('Version')
-    );
-	    
-}
-
-add_action( 'wp_enqueue_scripts', 'truwriter_enqueue_style' );
-
 
 # -----------------------------------------------------------------
 # Options Panel for Admin
@@ -405,8 +387,20 @@ function remove_admin_bar() {
 
 add_action('wp_enqueue_scripts', 'add_truwriter_scripts');
 
-function add_truwriter_scripts() {	 
- 
+function add_truwriter_scripts() {	
+
+	// set up main styles
+	$parent_style = 'radcliffe_style'; 
+
+	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
+
+	wp_enqueue_style( 'child-style',
+		get_stylesheet_directory_uri() . '/style.css',
+		array( $parent_style ),
+		wp_get_theme()->get('Version')
+	);
+	
+
  	if ( is_page('write') ) { // use on just our form page
     
 		 // add media scripts if we are on our maker page and not an admin

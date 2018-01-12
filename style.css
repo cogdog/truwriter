@@ -2,14 +2,12 @@
 Theme Name: 	TRU Writer
 Theme URI: 		http://splot.ca
 Description: 	TRU Writer (Child of Radcliffe) the famous SPLOT for rich media writing, on the web
-Version: 		0.22
+Version: 		0.23
 Template:       radcliffe
 Author: 		CogDog
-Author URI: 	http://cogdogblog.com/
-Tags: one-column, two-columns, flexible-width, custom-background, custom-colors, custom-menu, full-width-template, theme-options
-License: GNU General Public License v2.0 & Apache License 2.0
-License URI: http://www.gnu.org/licenses/gpl-2.0.html http://www.apache.org/licenses/LICENSE-2.0
-
+Author URI: 	https://cog.dog
+License: 		GNU General Public License v2.0 & Apache License 2.0
+License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 */
 
 /* author formatting */
@@ -188,16 +186,17 @@ fieldset p
 .post-content input[type="password"],
 .post-content textarea
 {
-	background: #222;
-	color: #fff;
+	background-color: #ccc;
+	color: #333;
 }
 
 .post-content input[type="submit"]:hover,
 .post-content input[type="reset"]:hover,
 .post-content input[type="button"]:hover
 {
-	color: #333;
-	background: #eee;
+	background-color: #333;
+	color: #fff;
+
 }
 
 .post-content input[type="text"]:focus,
@@ -206,8 +205,9 @@ fieldset p
 .post-content input[type="password"]:focus,
 .post-content textarea:focus
 {
-	color: #333;
-	background: #eee;
+
+	background-color: #333;
+	color: #fff;
 }
 
 form#writerform { padding: 30px 20px; }
