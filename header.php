@@ -107,7 +107,7 @@
 														
 						) ); } else {
 					
-						truwriter_default_menu();
+						echo splot_default_menu();
 						
 					} ?>
 					
