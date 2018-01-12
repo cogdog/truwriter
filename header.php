@@ -22,9 +22,10 @@
 	
 		<?php if ( is_singular() ) :?>
 			 
-			 <?php 
-			 global $post;
-			 
+			<?php 
+			global $post;
+			
+			// extract a twitter name from the wAuthor meta data
 			$author_twitter = splot_get_twitter_name( get_post_meta( $post->ID, 'wAuthor', 1 ) );
 			?> 
 			 
@@ -106,12 +107,7 @@
 														
 						) ); } else {
 					
-						wp_list_pages( array(
-						
-							'container' => '',
-							'title_li' => ''
-						
-						));
+						truwriter_default_menu();
 						
 					} ?>
 					

@@ -15,24 +15,25 @@ $wAccessCode = truwriter_option('accesscode');
 
 // already logged in? go directly to the tool
 if ( is_user_logged_in() ) {
+
 	
 	if ( current_user_can( 'edit_others_posts' ) ) {
 
 		// If user has edit/admin role, send them to the tool
-		wp_redirect ( site_url() . '/write' );
+		wp_redirect ( home_url('/') . 'write' );
   		exit;
 
 	} else {
 	
 		// if the correct user found, go directly to the tool
 		if ( truwriter_check_user() ) {			
-	  		wp_redirect ( site_url() . '/write' );
+	  		wp_redirect ( home_url('/') . 'write' );
   			exit;
   			
   		} else {
 			// we need to force a click through a logout
 			$log_out_warning = true;
-			$feedback_msg = 'First, please <a href="' . wp_logout_url( site_url() . '/write' ) . '" class="pretty-button pretty-button-green">activate lasers</a>';
+			$feedback_msg = 'First, please <a href="' . wp_logout_url( home_url('/') . 'write' ) . '" class="pretty-button pretty-button-green">activate lasers</a>';
   		}
   	}	
 	
@@ -40,7 +41,7 @@ if ( is_user_logged_in() ) {
 } elseif ( $wAccessCode == '')  {
 	
 	// no code required, log 'em in
-	wp_redirect ( site_url() . '/wp-login.php?autologin=writer' );
+	wp_redirect ( home_url() . '/wp-login.php?autologin=writer' );
 	exit;
 
 }

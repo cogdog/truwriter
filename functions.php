@@ -293,10 +293,21 @@ function truwriter_enqueue_options_scripts() {
 
 // load theme options Settings
 function truwriter_load_theme_options() {
+	
 	if ( file_exists( get_stylesheet_directory()  . '/class.truwriter-theme-options.php' ) ) {
 		include_once( get_stylesheet_directory()  . '/class.truwriter-theme-options.php' );
 	}
 }
+
+// create a basic menu if one has not been define for primary
+function truwriter_default_menu() {
+
+  $writer_home = home_url('/?p=');
+  ?>
+  <li><a href="<?php echo home_url() ?>">Home</a></li><li><a href="<?php echo $writer_home . get_page_id_by_slug( 'write' ) ?>">Write</a></li><li><a href="<?php echo $writer_home . get_page_id_by_slug( 'random' ) ?>">Random</a></li>
+  <?php
+}
+
 
 
 # -----------------------------------------------------------------
@@ -659,8 +670,9 @@ function reading_time_check() {
 
 
 function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
-	// return the estimated reading time only if the short code (aka plugin) exists. start with the string and add an approximation symbol.
-	
+	// return the estimated reading time only if the short code (aka plugin) exists. 
+	// Start with the prefix string add an approximation symbol and append suffix
+
 	if ( shortcode_exists( 'rt_reading_time' ) ) {		
 		return ( $prefix_string . ' ~' . do_shortcode( '[rt_reading_time postfix="minutes" postfix_singular="minute"]' ) . $suffix_string );
 	}
@@ -706,8 +718,7 @@ function truwriter_author_user_check( $expected_user = 'writer' ) {
 
 function truwriter_check_user( $allowed='writer' ) {
 	// checks if the current logged in user is who we expect
-	global $current_user;
-    get_currentuserinfo();
+   $current_user = wp_get_current_user();
 	
 	// return check of match
 	return ( $current_user->user_login == $allowed );
@@ -746,6 +757,21 @@ function truwriter_publink ( $redirect ) {
 		return ( $redirect  );
 	}
 }
+
+function get_page_id_by_slug( $page_slug ) {
+	// pass the slug and get it's id, so we can use most basic permalink structure
+	// ----- h/t https://gist.github.com/davidpaulsson/9224518
+	
+	// get page as object
+	$page = get_page_by_path( $page_slug );
+	
+	if ( $page ) {
+		return $page->ID;
+	} else {
+		return null;
+	}
+}
+
 
 
 function set_html_content_type() {

@@ -20,7 +20,6 @@ class truwriter_Theme_Options {
 		$this->get_settings();
 		
 		$this->sections['general'] = __( 'General Settings' );
-		$this->sections['reset']   = __( 'Reset to Defaults' );
 
 		// create a colllection of callbacks for each section heading
 		foreach ( $this->sections as $slug => $title ) {
@@ -316,13 +315,22 @@ class truwriter_Theme_Options {
 		/* Reset
 		===========================================*/
 		
+		$this->settings['reset_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'With Great Power Comes...',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+		
+		
 		$this->settings['reset_theme'] = array(
-			'section' => 'reset',
-			'title'   => __( 'Reset Options' ),
+			'section' => 'general',
+			'title'   => __( 'Reset All Options' ),
 			'type'    => 'checkbox',
 			'std'     => 0,
 			'class'   => 'warning', // Custom class for CSS
-			'desc'    => __( 'Check this box and click "Save Changes" below to reset bank options to their defaults.' )
+			'desc'    => __( 'Check this box and click "Save Changes" below to reset theme options to their defaults.' )
 		);
 
 		
@@ -410,7 +418,7 @@ class truwriter_Theme_Options {
 					$front_img = wp_get_attachment_image_src( $options[$id], 'radcliffe' );
 					echo '<img id="previewimage_' . $id . '" src="' . $front_img[0] . '" width="640" height="300" alt="default thumbnail" />';
 				} else {
-					echo '<img id="previewimage_' . $id . '" src="http://placehold.it/640x300" alt="default header image" />';
+					echo '<img id="previewimage_' . $id . '" src="https://placehold.it/640x300" alt="default header image" />';
 				}
 
 				echo '<input type="hidden" name="truwriter_options[' . $id . ']" id="' . $id . '" value="' . $options[$id]  . '" />
