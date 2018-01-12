@@ -302,9 +302,10 @@ function truwriter_load_theme_options() {
 // create a basic menu if one has not been define for primary
 function truwriter_default_menu() {
 
-  $writer_home = home_url('/?p=');
+  $writer_home = home_url('/');
+  
   ?>
-  <li><a href="<?php echo home_url() ?>">Home</a></li><li><a href="<?php echo $writer_home . get_page_id_by_slug( 'write' ) ?>">Write</a></li><li><a href="<?php echo $writer_home . get_page_id_by_slug( 'random' ) ?>">Random</a></li>
+  <li><a href="<?php echo $writer_home ?>">Home</a></li><li><a href="<?php echo $writer_home . 'write' ?>">Write</a></li><li><a href="<?php echo $writer_home . 'random'  ?>">Random</a></li>
   <?php
 }
 
