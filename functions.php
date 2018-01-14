@@ -281,6 +281,22 @@ function truwriter_load_theme_options() {
 	}
 }
 
+# -----------------------------------------------------------------
+# Menu Setup
+# -----------------------------------------------------------------
+
+// checks to see if a menu location is used.
+function splot_is_menu_location_used( $location = 'primary' ) {	
+
+	// get locations of all menus
+	$menulocations = get_nav_menu_locations();
+	
+	// if either is empty we have no menus to use
+	if ( empty( $menulocations ) OR empty( wp_get_nav_menus() ) ) return false;
+	
+	// othewise look for the menu location in the list
+	return in_array( $location , $menulocations);
+}
 
 // create a basic menu if one has not been define for primary
 function splot_default_menu() {
@@ -289,9 +305,7 @@ function splot_default_menu() {
 	$splot_home = home_url('/');
   
  	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . 'write' . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
-  
 }
-
 
 # -----------------------------------------------------------------
 # login stuff

@@ -105,11 +105,23 @@
 							'items_wrap' => '%3$s',
 							'theme_location' => 'primary'
 														
-						) ); } else {
+						) ); 
 					
+					// test uf primary menu location is not set	
+					} elseif ( !splot_is_menu_location_used() ) {
 						echo splot_default_menu();
-						
-					} ?>
+					
+					// normal make menus from pages	
+					} else {
+					
+						$list_pages_args = array(
+							'container' => '',
+							'title_li' 	=> ''
+						);
+					
+						wp_list_pages( $list_pages_args );
+					
+					}?>
 					
 					<li class="search-toggle-menu-item"><a href="#" class="search-toggle" title="<?php _e('Show the search field','radcliffe') ?>"></a></li>
 						
