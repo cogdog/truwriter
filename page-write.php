@@ -130,7 +130,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$wAuthor = 					( isset ($_POST['wAuthor'] ) ) ? sanitize_text_field( stripslashes($_POST['wAuthor']) ) : 'Anonymous';
  		$wEmail = 					sanitize_text_field( $_POST['wEmail'] );			
  		$wTags = 					sanitize_text_field( $_POST['wTags'] );	
- 		$wText = 					$_POST['wText'];
+ 		$wText = 					wp_kses_post( $_POST['wText'] );
  		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
  		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
  		$wHeaderImage_id = 			$_POST['wHeaderImage'];
@@ -462,20 +462,20 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			
 			
 				<fieldset>
-					<label for="wTitle"><?php _e('The Title', 'wpbootstrap' ) ?></label><br />
+					<label for="wTitle"><?php _e('The Title', 'radcliffe' ) ?></label><br />
 					<p>A good title is important! Create an eye catching title for your story, one that would make a person who sees it want to stop whatever they are doing and read it. </p>
 					<input type="text" name="wTitle" id="wTitle" class="required" value="<?php echo $wTitle; ?>" tabindex="1" />
 				</fieldset>	
 			
 
 				<fieldset>
-					<label for="wAuthor"><?php _e('How to List Author', 'wpbootstrap' ) ?></label><br />
+					<label for="wAuthor"><?php _e('How to List Author', 'radcliffe' ) ?></label><br />
 					<p>Publish under your name, twitter handle, secret agent name, or remain "Anonymous". If you include a twitter handle such as @billyshakespeare, when someone tweets your work you will get a lovely notification.</p>
 					<input type="text" name="wAuthor" id="wAuthor" class="required" value="<?php echo $wAuthor; ?>" tabindex="2" />
 				</fieldset>	
 				
 				<fieldset>
-						<label for="wText"><?php _e('Article text', 'wpbootstrap') ?></label>
+						<label for="wText"><?php _e('Article text', 'radcliffe') ?></label>
 						<p>Okay, here is where your story goes! Use the editing area below the tool bar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images to include in your writing or choose from the media already in the media library (click on the tab labelled "media library"). You can also embed audio and video from many social sites simply by putting the URL of the media on a separate line (you will see a place holder in the editor, but the media will only show in preview and when published).  Click and drag the icon in the lower right to resize the editing space.</p>
 						
 						<p> See more info in the  
@@ -489,14 +489,14 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				</fieldset>
 
 				<fieldset>
-						<label for="wFooter"><?php _e('Additional Information', 'wpbootstrap') ?></label>						
+						<label for="wFooter"><?php _e('Additional Information', 'radcliffe') ?></label>						
 						<p>Add any endnote like text you wish to append to the end, such as a citation to where it was previously published or any other meta information. URLs will be hyperlinked when published. </p>
 						<textarea name="wFooter" id="wFooter" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
 				</fieldset>
 
 				
 				<fieldset>
-					<label for="headerImage"><?php _e('Header Image', 'wpbootstrap') ?></label>
+					<label for="headerImage"><?php _e('Header Image', 'radcliffe') ?></label>
 					
 						
 					<div class="uploader">
@@ -512,13 +512,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						
 						<p>You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be at least 1440px wide for photos. </p><p> Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.<br clear="left"></p>
 						
-						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'wpbootstrap') ?></label>
+						<label for="wHeaderImageCaption"><?php _e('Caption/credits for header image', 'radcliffe') ?></label>
 						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" tabindex="6" />
 				
 				</fieldset>						
 				
 				<fieldset>
-					<label for="wCats"><?php _e( 'Kind of Writing', 'wpbootstrap' ) ?></label>
+					<label for="wCats"><?php _e( 'Kind of Writing', 'radcliffe' ) ?></label>
 					<p>Check as many that apply.</p>
 					<?php 
 					
@@ -542,7 +542,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				</fieldset>
 
 				<fieldset>
-					<label for="wTags"><?php _e( 'Tags', 'wpbootstrap' ) ?></label>
+					<label for="wTags"><?php _e( 'Tags', 'radcliffe' ) ?></label>
 					<p>Descriptive tags, separate multiple ones with commas</p>
 					
 					<input type="text" name="wTags" id="wTags" value="<?php echo $wTags; ?>" tabindex="8"  />
@@ -550,7 +550,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 
 				<fieldset>
-					<label for="wEmail"><?php _e('Your Email Address', 'wpbootstrap' ) ?> (optional)</label><br />
+					<label for="wEmail"><?php _e('Your Email Address', 'radcliffe' ) ?> (optional)</label><br />
 					<p>If you provide an email address when your writing is published, you can request a special link that will allow you to edit it again in the future.</p>
 					<input type="text" name="wEmail" id="wTitle"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
 				</fieldset>	
@@ -558,7 +558,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 				<fieldset>
 						<?php $req_state = ( $wNotes_required == 1 ) ? 'Required' : 'Optional';?>
-						<label for="wNotes"><?php _e('Extra Information for Editors (' . $req_state . ')' , 'wpbootstrap') ?></label>						
+						<label for="wNotes"><?php _e('Extra Information for Editors (' . $req_state . ')' , 'radcliffe') ?></label>						
 						<p><?php echo truwriter_option('extra_info_prompt')?> This information will <strong>not</strong> be published with your work, it is informational for the editor's use only. </p>
 						<textarea name="wNotes" id="wNotes" rows="15"  tabindex="12"><?php echo stripslashes( $wNotes );?></textarea>
 				</fieldset>
@@ -573,14 +573,14 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					
 							<?php if ( $my_cc_mode == 'site' ) :?>
 					
-							<label for="wLicense"><?php _e( 'Creative Commons License Applied', 'wpbootstrap' )?></label>
+							<label for="wLicense"><?php _e( 'Creative Commons License Applied', 'radcliffe' )?></label>
 								<p>All writing added to this site will be licensed:</p>
 								<p class="form-control"><?php echo cc_license_html( truwriter_option( 'cc_site' ), $wAuthor );?></p>
 								<input type="hidden" name="wLicense" id="wLicense" value="<?php echo truwriter_option( 'cc_site' )?>">
 								
 				
 							<?php elseif  ( $my_cc_mode == 'user' ) :?>
-								<label for="wLicense"><?php _e( 'Creative Commons License',  'wpbootstrap' )?></label>
+								<label for="wLicense"><?php _e( 'Creative Commons License',  'radcliffe' )?></label>
 								<p>Choose your preferred license:</p>
 								<select name="wLicense" id="wLicense" class="form-control">
 								<option value="--">Select...</option>
