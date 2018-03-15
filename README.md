@@ -20,6 +20,9 @@ The site invisibly logs in visitors to a special account to make available advan
 
 The TRU Writer Theme was developed along with the [TRU Collector](http://splot.ca/splots/the-comparator/), the [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
+
+## Examples in Action 
+
 Here's some places you can see others putting the TRU Writer Theme in action:
 
 * [30,000,000 ACA Stories](http://bones.cogdogblog.com/30million/) (archived)
