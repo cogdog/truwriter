@@ -22,7 +22,7 @@ The TRU Writer Theme was developed along with the [TRU Collector](http://splot.c
 
 Here's some places you can see others putting the TRU Writer Theme in action:
 
-* [30,000,000 ACA Stories](http://30millionlike.me)
+* [30,000,000 ACA Stories](http://bones.cogdogblog.com/30million/) (archived)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
 * [Arganee Journal](http://journal.arganee.world/) open online journal for Networked Narratives and ResNetSem courses
 * [ENGL205 @ UNBC](http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
@@ -35,16 +35,15 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
 * [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course (University of Northern British Columbia)
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
-* [Lexical Confessions](http://lexicalconfessions.com/blog/)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
-* [OER On Other Languages](https://oloer.opened.ca/) Tannis Morgan
+* [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
-* [When I Needed Help](http://whenineededhelp.com/)
+* [When I Needed Help](http://web.archive.org/web/20170925000738/http://whenineededhelp.com/) (WayBack Machine archive)
 
 And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site.
 
