@@ -10,9 +10,10 @@ by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 
 
 ## What is this?
-This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including media content, without needing to login or understand the backend of  Wordpress. 
 
-Once installed the TRU Writer theme allows individuals to generate content online using an editor interface inside their browser. Writers can also add content by cutting and then pasting into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a  post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
+This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including rich media content, without needing to login or understand the backend of Wordpress. 
+
+Once installed the TRU Writer theme allows individuals to generate content online using an rich text editor interface. Writers can also add content by cutting and then pasting into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
 
 Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!)
 
@@ -40,6 +41,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
 * [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
+* [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
@@ -54,6 +56,7 @@ If you have problems, feature suggestions, small bags of gold coin for me, pleas
 
 
 ## Install TRU Writer
+
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
 
 The TRU Collector is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
@@ -74,7 +77,7 @@ First [download the Instant Site package file](https://github.com/cogdog/instant
 
 Then follow the [Instant SPLOT directions for Using a Packaged Kit](https://github.com/cogdog/instant-splot#got-hosting-use-a-packaged-kit) to import into your new site.
 
-Reference the directions below for set up and customizing (but you have all the plugins it needs already installed). 
+Reference the directions below for set up and customizing (with the instant mix you have all the plugins it needs already installed). 
 
 ### Updating the TRU Writer Theme
 
@@ -249,6 +252,24 @@ Creative commons licenses can be attached to all works published on your site. C
 
 Or you can the Creative Commons options to **Enable users to choose license** which will put the menu on the submission form so users can choose a license (or set to All Rights Reserved). At this time, the only way to edit the licenses displayed (e.g. if you do not want certain ones) is to edit `functions.php` in the template directory. Look for the function `function cc_license_select_options` and comment out the lines containing license options to hide.
 
+## Customize the Write form
+
+You can now customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and  activate the Wordpress Customizer from the admin bar. 
+
+There is a special section at the bottom to open:
+
+![](images/customizer-writer-tab.jpg)
+
+Then from this pane, open "Write Form" tab (eventually the theme options will live here too)
+
+![](images/customizer-writer-form-tab.jpg)
+
+And then you will see a series of fields to edit for all form field elements. 
+
+For each, you can edit the title/label of the field and the prompt that appears below. As you type in the customizer fields on the left, you will see a live preview on the right.
+
+![](images/customizer-form-edit.jpg)
+
 ## Some Complexish Stuff for Nerds, Who Are Awesome
 
 If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
@@ -256,6 +277,9 @@ If you want to customize/re-arrange the buttons and controls on the rich text ed
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 ## Relatively Cool New Features & Updates
+
+
+**Customize the Writing Form Instructions**  You can now modify all form field labels and descriptions / prompts for the entry fields.
 
 **Default Menu** On new installs where no menus are defined, the theme generates a simple menu rather than listing all pages 
 
