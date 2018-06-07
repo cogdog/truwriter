@@ -69,21 +69,25 @@ The zip can be uploaded directly to your site via **Add Themes** in the Wordpres
 
 To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in your Wordpress dashboard under **Appearance** --> **Themes**. 
 
-### Installing TRU Writer from The Instant Mix
-
-As a new approach for using my themes, I have set up this one as a prebuilt package that includes the theme, initial settings, plugins, and demo content. All you need to be able to do is to install a fresh Wordpress site into the location/domain you want your site.
-
-First [download the Instant Site package file](https://github.com/cogdog/instant-splot/raw/master/noodles/tru-writer-wpress.zip) and expand the file to reveal the single `*.wpress` file.
-
-Then follow the [Instant SPLOT directions for Using a Packaged Kit](https://github.com/cogdog/instant-splot#got-hosting-use-a-packaged-kit) to import into your new site.
-
-Reference the directions below for set up and customizing (with the instant mix you have all the plugins it needs already installed). 
-
-### Updating the TRU Writer Theme
+### Updating the TRU Writer Theme (manually)
 
 If you have ftp/sftp access to your site (or this can be done in a cpanel file manager), simply upload the new theme files to the `wp-content/themes` directory that includes the older version theme. 
 
 For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
+
+### Installing TRU Writer with WP Pusher (and automatically updates!)
+
+If all this downloading and uploading is making you dizzy, we are recommending the [WP Pusher plugin](https://wppusher.com/) which makes it easier to install themes and plugins that are published in GitHub. 
+
+You will need to have or create an account on [GitHub](https://github.com) (free).
+
+Next [download WP Pusher plugin](https://wppusher.com/download) as a ZIP file. From the plugins area of your Wordpress dashboard, click the **Upload Plugin** button, select that zip file to upload, and activate the plugin.
+
+Then click the **WP Pusher** option in your Wordpress Dashboard, and then click the **GitHub** tab. Next click the **Obtain a GitHub Token** button to get an authentication token. Copy the one that is generated, paste into the field for it, and finally, click **Save GitHub Token**.
+
+Now you are ready to install TRU Writer! Look under **WP Pusher** for **Install Theme**. In the form that appears, for Theme Repository, enter `cogdog/truwriter`. Also check  the option for **Push-to-Deploy** (this will automatically update your site when the theme is updated) finally, click **Install Theme**.
+
+Not only does this install the theme without any messy download/uploads, each time I update the theme, your site will be automatically updated to.
 
 
 ## Setting Up TRU Writer
