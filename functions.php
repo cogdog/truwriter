@@ -353,6 +353,8 @@ add_action( 'after_setup_theme', 'truwriter_autologin' );
 
 function truwriter_autologin() {
 	
+	if (! isset ( $_GET['autologin'] ) ) return;
+	
 	if ($_GET['autologin'] == 'writer') {
 		
 		// ACCOUNT USERNAME TO LOGIN TO
@@ -361,24 +363,11 @@ function truwriter_autologin() {
 		// ACCOUNT PASSWORD TO USE- stored as option
 		$creds['user_password'] = truwriter_option('pkey');
 
-		$creds['remember'] = true;
+		// we don't need long cookie times
+		$creds['remember'] = false;
 		
-		$use_secure_cookie = false;
-		
-		if ( is_ssl() ) {
-			// extra cookie stuff 
-			
-			// get our user
-			$writer_user =  get_user_by('login', 'writer');
-			
-			// give out a secure cookie
-			wp_set_auth_cookie( $writer_user->ID, false, true );
-			
-			// do it
-			$use_secure_cookie = true;
-		
-		} 
-		$autologin_user = wp_signon( $creds, $use_secure_cookie );
+		$autologin_user = wp_signon( $creds, is_ssl() );
+
 		
 		
 		if ( !is_wp_error($autologin_user) ) {
@@ -1564,11 +1553,5 @@ function br2nl ( $string )
 {
     return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);
 }
-
-# -----------------------------------------------------------------
-# Get any custom stuff because custom stuff should be custom
-# -----------------------------------------------------------------
-
-include( 'includes/custom-functions.php' );
 
 ?>
