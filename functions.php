@@ -366,7 +366,7 @@ function truwriter_autologin() {
 		// we don't need long cookie times
 		$creds['remember'] = false;
 		
-		$autologin_user = wp_signon( $creds, is_ssl() );
+		$autologin_user = wp_signon( $creds );
 
 		
 		
