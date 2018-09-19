@@ -5,8 +5,10 @@ Template Name: Welcome Desk
 
 // ------------------------ defaults ------------------------
 
-// default welcome message
-$feedback_msg = '';
+// defaultz
+$feedback_msg = $log_out_warning = $wAccess = '';
+
+$errors = array();
 
 // the passcode to enter
 $wAccessCode = truwriter_option('accesscode');
@@ -39,7 +41,8 @@ if ( is_user_logged_in() ) {
 	
   	  	
 } elseif ( $wAccessCode == '')  {
-
+	// go write something, willya?
+	
 	splot_user_login();
 	exit;
 
@@ -56,7 +59,7 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 	$wAccess = 	stripslashes( $_POST['wAccess'] );
 	
 	// let's do some validation, store an error message for each problem found
-	$errors = array();
+
 	
 	if ( $wAccess != $wAccessCode ) $errors[] = '<p><strong>Incorrect Access Code</strong> - try again? Hint: ' . truwriter_option('accesshint'); 	
 	
@@ -72,8 +75,8 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		$feedback_msg .= '</p>';
 		
 	} else {
-
-		wp_redirect( splot_redirect_url() );
+		// send 'em on their way
+		splot_user_login();
 		exit;
 	}
 
