@@ -348,7 +348,7 @@ function login_link( $url ) {
 // Auto Login for the Author account
 // create a link that can automatically log in as a specific user, bypass login screen
 // -- h/t  http://www.wpexplorer.com/automatic-wordpress-login-php/
-
+/*
 add_action( 'after_setup_theme', 'truwriter_autologin' );
 
 function truwriter_autologin() {
@@ -362,20 +362,63 @@ function truwriter_autologin() {
 		
 		// ACCOUNT PASSWORD TO USE- stored as option
 		$creds['user_password'] = truwriter_option('pkey');
-
-		// we don't need long cookie times
-		$creds['remember'] = false;
-		
-		$autologin_user = wp_signon( $creds );
-
 		
 		
-		if ( !is_wp_error($autologin_user) ) {
-				wp_redirect ( site_url() . '/write' );
+		
+		// login by setting user
+		$autologin_user = get_user_by( 'login', $creds['user_login'] ); 
+		
+		if ( $autologin_user ) {
+			wp_set_current_user( $autologin_user->id, $autologin_user->user_login );
+			wp_set_auth_cookie( $autologin_user->id);
+			do_action( 'wp_login', $autologin_user->user_login );
+			wp_redirect ( site_url() . '/write' );
 		} else {
-				die ('Bad news! login error: ' . $autologin_user->get_error_message() );
+			die ('Bad news! Missing user for "' . $creds['user_login'] . '".');
+		
 		}
+		
 	}
+}
+*/
+
+function splot_redirect_url() {
+	// where to send them after login ok
+	return ( home_url('/') . 'write' );
+}
+
+function splot_user_login( $user_login = 'writer' ) {
+	// login the special user account to allow authoring
+	
+	// check for the correct user
+	$autologin_user = get_user_by( 'login', $user_login ); 
+	
+	if ( $autologin_user ) {
+	
+		// just in case we have old cookies
+		wp_clear_auth_cookie(); 
+		
+		// set the user directly
+		wp_set_current_user( $autologin_user->id, $autologin_user->user_login );
+		
+		// new cookie
+		wp_set_auth_cookie( $autologin_user->id);
+		
+		// do the login
+		do_action( 'wp_login', $autologin_user->user_login );
+		
+		// send 'em on their way
+		wp_redirect( splot_redirect_url() );
+		
+		
+	} else {
+		// uh on, problem
+		die ('Bad news. Looks like there is a missing account for "' . $user_login . '".');
+	
+	}
+	
+
+
 }
 
 // remove admin tool bar for non-admins, remove access to dashboard
@@ -1365,7 +1408,7 @@ function cc_license_html ($license, $author='', $yr='') {
 	// do we have an author?
 	$credit = ($author == '') ? '' : ' by ' . $author;
 	
-	return '<a rel="license" href="http://creativecommons.org/licenses/' . $license . '/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/' . $license . '/4.0/88x31.png" /></a><br />This work' . $credit . ' is licensed under a <a rel="license" href="http://creativecommons.org/licenses/' . $license . '/4.0/">Creative Commons ' . $commons[$license] . ' 4.0 International License</a>.';            
+	return '<a rel="license" href="http://creativecommons.org/licenses/' . $license . '/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/' . $license . '/4.0/88x31.png" /></a><br />This work' . $credit . ' is licensed under a <a rel="license" href="http://creativecommons.org/licenses/' . $license . '/4.0/">Creative Commons ' . $commons[$license] . ' 4.0 International License</a>.';            
 }
 
 

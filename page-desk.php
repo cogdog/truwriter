@@ -18,16 +18,16 @@ if ( is_user_logged_in() ) {
 
 	
 	if ( current_user_can( 'edit_others_posts' ) ) {
-
 		// If user has edit/admin role, send them to the tool
-		wp_redirect ( home_url('/') . 'write' );
+		
+		wp_redirect( splot_redirect_url() );
   		exit;
 
 	} else {
 	
-		// if the correct user found, go directly to the tool
+		// if the correct user already logged in, go directly to the tool
 		if ( truwriter_check_user() ) {			
-	  		wp_redirect ( home_url('/') . 'write' );
+	  		wp_redirect( splot_redirect_url() );
   			exit;
   			
   		} else {
@@ -39,9 +39,8 @@ if ( is_user_logged_in() ) {
 	
   	  	
 } elseif ( $wAccessCode == '')  {
-	
-	// no code required, log 'em in
-	wp_redirect ( home_url() . '/wp-login.php?autologin=writer' );
+
+	splot_user_login();
 	exit;
 
 }
@@ -74,7 +73,7 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 		
 	} else {
 
-		wp_redirect ( site_url() . '/wp-login.php?autologin=writer' );
+		wp_redirect( splot_redirect_url() );
 		exit;
 	}
 

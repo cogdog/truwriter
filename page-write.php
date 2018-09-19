@@ -35,9 +35,8 @@ if ( ! ($wid and $tk) ) {
 // default welcome message
 $feedback_msg = truwriter_form_default_prompt();
 
-$wTitle = '';
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = '';
 $wAuthor = "Anonymous";
-$wEmail = '';
 $wText =  truwriter_option('def_text'); // pre-fill the writing area
 $wCats = array( truwriter_option('def_cat')); // preload default category
 
@@ -66,6 +65,8 @@ $wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
 
 // Parent category for published topics
 $published_cat_id = get_cat_ID( 'Published' );
+
+$errors = array();
 
 // no special query params, let's see if we got the right codes to do an edit.
 if ( $wid and $tk ) {
@@ -141,7 +142,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$revcount =					$_POST['revcount'] + 1;		
  		
  		// let's do some validation, store an error message for each problem found
- 		$errors = array();
+
  		
  		if ( $wTitle == '' ) $errors[] = '<strong>Title Missing</strong> - please enter an interesting title.'; 	
  		
@@ -264,7 +265,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						$w_information['post_status'] = truwriter_option('pub_status');
 						
 						if ( truwriter_option('pub_status') == 'pending' ) {
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. When published you will be able to view it at <strong>'. get_permalink( $post_id )  . '</strong>. ';
+							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. ';
 
 							if ( $wEmail == '' ) {
 								$feedback_msg .= 'HINT- you may want to copy this link now. Got it?';
