@@ -35,7 +35,7 @@ if ( ! ($wid and $tk) ) {
 // default welcome message
 $feedback_msg = truwriter_form_default_prompt();
 
-$wTitle = $wEmail = $wFooter = $wTags = $wNotes = '';
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $firstview = '';
 $wAuthor = "Anonymous";
 $wText =  truwriter_option('def_text'); // pre-fill the writing area
 $wCats = array( truwriter_option('def_cat')); // preload default category
@@ -137,7 +137,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$wHeaderImage_id = 			$_POST['wHeaderImage'];
  		$post_id = 					$_POST['post_id'];
  		$wCats = 					( isset ($_POST['wCats'] ) ) ? $_POST['wCats'] : array();
- 		$wLicense = 				$_POST['wLicense'];
+ 		$wLicense = 				( isset ($_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
  		$wHeaderImageCaption = 		sanitize_text_field(  $_POST['wHeaderImageCaption']  );
  		$revcount =					$_POST['revcount'] + 1;		
  		
@@ -164,7 +164,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  			$feedback_msg .= '</ul>';
  			
  			// updates for display
- 			$revcount =	$_POST['revount'];		
+ 			$revcount =	$_POST['revcount'];		
  			$wStatus = 'Form input error';
  
  			$formclass = 'writeoops';
@@ -255,12 +255,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 									
 					 if ( $is_re_edit ) {
 					 
-					 	// revise status to pending (new ones) 
+					 	// set it as published
 					 	
 						$w_information['post_status'] = 'publish';
-						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been updated. You can at  <a href="'. truwriter_publink( get_permalink( $post_id ) )  . '" >view the updated version now</a> or <a href="' . truwriter_publink( site_url() ) . '">return to ' . get_bloginfo() . '</a>.';
+						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been updated. You can at  <a href="'.  get_permalink( $post_id )   . '" >view the updated version now</a> or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 					 
 					} else {
+					
 						// revise status to pending (new ones) 
 						$w_information['post_status'] = truwriter_option('pub_status');
 						
@@ -273,7 +274,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 								$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
 							}
 							
-							$feedback_msg .= ' Now please <a href="' . truwriter_publink( site_url() ) . '">deactivate the lasers and return to ' . get_bloginfo() . '</a>.';
+							$feedback_msg .= ' Now please <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 							
 							// set up admin email
 							$subject = 'Review newly submitted writing at ' . get_bloginfo();
@@ -282,7 +283,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 							
 						} else {
 						
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can  <a href="'. truwriter_publink( get_permalink( $post_id ) )  . '" >view it now</a> or <a href="' . truwriter_publink( site_url() ) . '">return to ' . get_bloginfo() . '</a>.';
+							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can  <a href="'.  get_permalink( $post_id )   . '" >view it now</a> or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 							
 							// set up admin email
 							$subject = 'Recently published writing at ' . get_bloginfo();
@@ -290,6 +291,10 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a> and review / edit if needed, or just enjoy the feeling of being published.';
 						
 						}
+						
+						// logout the special user
+						
+						if ( truwriter_check_user()=== true ) wp_logout();
 
 						// Let's do some EMAIL! 
 					
@@ -417,10 +422,6 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 		    
 		    	<?php if ( $firstview ) the_content(); ?>
 		    		
-		    	<?php 
-					if ( !is_user_logged_in() ) :?>
-						<a href="<?php echo get_bloginfo('url')?>/wp-login.php?autologin=writer">activate lasers</a>
-				<?php endif?>
 			    		
 		    	<?php  
 		    	// set up box code colors CSS

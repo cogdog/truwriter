@@ -1559,16 +1559,6 @@ function splot_the_author() {
 	}
 }
 
-function truwriter_publink ( $redirect ) {
-	// for feedback after publishing, for guest users we want to return
-	// a logout link, if we are an editor or admin, we just want the regular link
-	if ( is_user_logged_in() and !current_user_can( 'edit_others_posts' ) )  {
-		return ( wp_logout_url( $redirect ) );
-	} else {
-		return ( $redirect  );
-	}
-}
-
 function get_page_id_by_slug( $page_slug ) {
 	// pass the slug and get it's id, so we can use most basic permalink structure
 	// ----- h/t https://gist.github.com/davidpaulsson/9224518
