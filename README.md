@@ -17,7 +17,7 @@ Once installed the TRU Writer theme allows individuals to generate content onlin
 
 Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!)
 
-The site invisibly logs in visitors to a special account to make available advanced publication and editing tools, but those individuals will not need to navigate the Wordpress dashboard or login structure (we love Wordpress, but hey, not everyone needs to see that dashboard, right?). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
+The site invisibly logs in visitors to a special account to make available advanced publication and editing tools, but those individuals will not need to navigate the Wordpress dashboard or login structure (we love dashboards, but hey, not everyone needs to see that mess, right?). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
 
 The TRU Writer Theme was developed along with the [TRU Collector](http://splot.ca/splots/the-comparator/), the [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
@@ -230,22 +230,10 @@ To provide access to the media uploader, this site uses a Wordpress Authoring Ro
 
 ![](images/add-author.jpg)
 
-You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. Copy that password, and perhaps save it in a safe place. 
-
-On a stand-alone Wordpress site, you can just paste it into the password field of the TRU Writer options (see below).
+You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools.  
 
 
-If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools. 
-
-![](images/add-to-site.jpg)
-
-However, you still have to enter the password, so make sure you know the password that was used on another site. If you do not have access to it, you will have to reset the password at the Network Admin level, and then update the password on the options of all sites using the TRU Writer.
-
-This is how it is entered on the TRU Writer option screen (you need to click the "show" button to display the field)
-
-![](images/show-password.gif)
-
-You can now see the password expected for the secret account.
+** Note: As of version 0.3 of this theme, the password no longer needs to be copied and entered into the options screen.** If you are using a version of the theme that has a password field in the options, maybe it's a good time to update? Otherwise, [see an older version of this ReadMe](https://github.com/cogdog/truwriter/blob/50d86fdfe039aec4575a2eaa29c16ad3374d3596/README.md#author-account-setup) for instructions.
 
 #### Creative Commons Settings
 

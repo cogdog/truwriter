@@ -1522,7 +1522,7 @@ function truwriter_author_user_check( $expected_user = 'writer' ) {
 		
 		
 	} else {
-		return ('The authoring account <strong>' . $expected_user . '</strong> is correctly set up. You are ready to Write and Roll. Or your site users are.');
+		return ('The authoring account <strong>' . $expected_user . '</strong> is correctly set up.');
 	}
 }
 
@@ -1586,5 +1586,8 @@ function br2nl ( $string )
 {
     return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);
 }
+
+// Load plugin requirements file to display admin notices.
+require get_stylesheet_directory() . '/inc/splot-plugins.php';
 
 ?>

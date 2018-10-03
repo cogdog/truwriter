@@ -218,6 +218,9 @@ class truwriter_Theme_Options {
   		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
 	  	$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
 	  	
+	  	
+	  	$cat_options = array();
+	  	
 	  	// Walk those cats, store as array index=ID 
 		foreach ( $all_cats as $item ) {
   			$cat_options[$item->term_id] =  $item->name;
@@ -263,15 +266,6 @@ class truwriter_Theme_Options {
 		'std'    =>  truwriter_author_user_check( 'writer' ),
 		'type'    => 'heading'
 		);		
-
-		$this->settings['pkey'] = array(
-			'title'   => __( 'Author Account Password' ),
-			'desc'    => __( 'When you create the account, we suggest using the generated strong password, make sure you save it so you can add it here.' ),
-			'std'     => '',
-			'type'    => 'password',
-			'section' => 'general'
-		);
-		
 		
 		// ------- creative commons options		
 		$this->settings['cc_heading'] = array(
