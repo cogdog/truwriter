@@ -40,6 +40,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [IASK106 Writer](http://unbc.iask107.ca/) Big Questions course (University of Northern British Columbia)
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
+* [Learning on/with the Open Web](http://conf.owlteh.org/contributions/) uses TRU Writer for collecting conference event session submissions
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
 * [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
