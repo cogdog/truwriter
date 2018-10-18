@@ -65,7 +65,12 @@
 		    	<?php the_content(); ?>
 		    	
 		    	<hr />
-		    	<?php $wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); if ($wFooter) echo '<p><em>' . make_clickable( $wFooter ) . '</em></p>';?>
+		    	<?php 
+		    		 if (truwriter_option('show_footer') ) {
+		    			$wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); 
+		    			if ($wFooter) echo '<p><em>' . make_clickable( $wFooter ) . '</em></p>';
+		    		 }
+		    	?>
 		    	
 
 		    	<div class="clear"></div>
@@ -137,21 +142,31 @@
 				
 					<h3 class="meta-title"><?php _e(' ','radcliffe'); ?></h3>
 				
+				
+					<?php if (truwriter_option('show_cats') ):?>
+					
 					<p class="post-categories">
 												
 						<?php the_category(', '); ?>
 					
 					</p>
 					
-					<?php if ( has_tag() ) : ?>
-						
-						<p class="post-tags">
-																			
-							<?php the_tags('', ', '); ?>
-						
-						</p>
+					<?php endif?>
 					
-					<?php endif; ?>
+					
+					<?php if (truwriter_option('show_tags') ):?>
+					
+						<?php if ( has_tag() ) : ?>
+						
+							<p class="post-tags">
+																			
+								<?php the_tags('', ', '); ?>
+						
+							</p>
+					
+						<?php endif; ?>
+					<?php endif?>
+					
 				
 					<div class="post-nav">
 		

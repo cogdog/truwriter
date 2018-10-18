@@ -269,7 +269,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. ';
 
 							if ( $wEmail == '' ) {
-								$feedback_msg .= 'HINT- you may want to copy this link now. Got it?';
+								$feedback_msg .= '';
 							} else {
 								$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
 							}
@@ -463,20 +463,20 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 		
 			
 			
-				<fieldset>
+				<fieldset id="theTitle">
 					<label for="wTitle"><?php truwriter_form_item_title() ?></label><br />
 					<p><?php truwriter_form_item_title_prompt()?></p>
 					<input type="text" name="wTitle" id="wTitle" class="required" value="<?php echo $wTitle; ?>" tabindex="1" />
 				</fieldset>	
 			
 
-				<fieldset>
+				<fieldset id="theAuthor">
 					<label for="wAuthor"><?php truwriter_form_item_byline() ?></label><br />
 					<p><?php truwriter_form_item_byline_prompt() ?></p>
 					<input type="text" name="wAuthor" id="wAuthor" class="required" value="<?php echo $wAuthor; ?>" tabindex="2" />
 				</fieldset>	
 				
-				<fieldset>
+				<fieldset id="theText">
 						<label for="wText"><?php truwriter_form_item_writing_area() ?></label>
 						<p><?php truwriter_form_item_writing_area_prompt() ?></p>
 						
@@ -490,14 +490,16 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						?>
 				</fieldset>
 
-				<fieldset>
+
+				<?php if (truwriter_option('show_footer') ):?>
+				<fieldset id="theFooter">
 						<label for="wFooter"><?php truwriter_form_item_footer() ?></label>						
 						<p><?php truwriter_form_item_footer_prompt() ?></p>
 						<textarea name="wFooter" id="wFooter" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
 				</fieldset>
-
+				<?php endif?>
 				
-				<fieldset>
+				<fieldset id="theHeaderImage">
 					<label for="headerImage"><?php truwriter_form_item_header_image() ?></label>
 					
 						
@@ -520,7 +522,10 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				
 				</fieldset>						
 				
-				<fieldset>
+				
+				<?php if (truwriter_option('show_cats') ):?>
+				
+				<fieldset  id="theCats">
 					<label for="wCats"><?php truwriter_form_item_categories() ?></label>
 					<p><?php truwriter_form_item_categories_prompt() ?></p>
 					<?php 
@@ -544,34 +549,41 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					
 				</fieldset>
 
-				<fieldset>
+				<?php endif?>
+				
+				<?php if (truwriter_option('show_tags') ):?>
+				
+				<fieldset id="theTags">
 					<label for="wTags"><?php truwriter_form_item_tags() ?></label>
 					<p><?php truwriter_form_item_tags_prompt() ?></p>
 					
 					<input type="text" name="wTags" id="wTags" value="<?php echo $wTags; ?>" tabindex="8"  />
 				</fieldset>
 
+				<?php endif?>
 
-				<fieldset>
+				<fieldset id="theEmail">
 					<label for="wEmail"><?php truwriter_form_item_email() ?> (optional)</label><br />
 					<p><?php truwriter_form_item_email_prompt() ?> </p>
 					<input type="text" name="wEmail" id="wTitle"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
 				</fieldset>	
 				
 
-				<fieldset>
+				<?php if ( $wNotes_required != -1 ):?>
+				
+				<fieldset id="theNotes">
 						<?php $req_state = ( $wNotes_required == 1 ) ? 'Required' : 'Optional';?>
 						<label for="wNotes"><?php truwriter_form_item_editor_notes(); _e(' (' . $req_state . ')' , 'radcliffe') ?></label>						
 						<p><?php truwriter_form_item_editor_notes_prompt()?></p>
 						<textarea name="wNotes" id="wNotes" rows="15"  tabindex="12"><?php echo stripslashes( $wNotes );?></textarea>
 				</fieldset>
-
+				<?php endif?>
 
 
 
 					<?php if ( $my_cc_mode != 'none' ):?>
 						<!-- creative commons options -->
-						<fieldset>
+						<fieldset  id="theLicense">
 				
 							<label for="wLicense"><?php truwriter_form_item_license()?></label>
 							<?php if ( $my_cc_mode == 'site' ) :?>

@@ -195,18 +195,10 @@ class truwriter_Theme_Options {
 			'choices' => array (
 							'0' => 'No',
 							'1' => 'Yes',
+							'-1' => 'Hide this field',
 					)
 		);
-		
-		$this->settings['extra_info_prompt'] = array(
-			'title'   => __( 'Extra Information Field Prompt' ),
-			'desc'    => __( 'Specific instructions to appear on the form' ),
-			'std'     => 'Please add any specific notes or instructions about this submission. If you want a response, you will have to leave some means of contact such as an email address or telephone number. ',
-			'type'    => 'text',
-			'section' => 'general'
-		);
-		
-		
+			
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
 			'desc'    => __( 'Used on articles as a default. Be sure to enter a default caption in the upload.' ),
@@ -214,6 +206,20 @@ class truwriter_Theme_Options {
 			'type'    => 'medialoader',
 			'section' => 'general'
 		);
+		
+		
+		$this->settings['show_cats'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show the categories menu on writing form and display'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
+		);
+		
 		
   		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
 	  	$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
@@ -233,7 +239,33 @@ class truwriter_Theme_Options {
 			'type'    => 'select',
 			'std'     => get_option('default_category'),
 			'choices' => $cat_options
-		);	
+		);
+		
+		
+		$this->settings['show_tags'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show the tags entry on writing form and single items displays?'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
+		);
+			
+		$this->settings['show_footer'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show the footer entry field on the writing form?'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
+		);
+
 			
 		$this->settings['notify'] = array(
 			'title'   => __( 'Notification Emails' ),
