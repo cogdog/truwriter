@@ -46,6 +46,7 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
+* [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
