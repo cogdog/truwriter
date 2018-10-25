@@ -29,10 +29,10 @@ Here's some places you can see others putting the TRU Writer Theme in action:
 * [30,000,000 ACA Stories](http://bones.cogdogblog.com/30million/) (archived)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
 * [Arganee Journal](http://journal.arganee.world/) open online journal for Networked Narratives and ResNetSem courses
-* [ENGL205 @ UNBC](http://unbc.engl205.ca/) Fiction (University of Northern British Columbia)
-* [ENGL485 @ UNBC](http://unbc.engl485.ca/) Special Topics in Modern and Contemporary Literature in the US (University of Northern British Columbia)
-* [BIOL 312 @ UNBC](http://unbc.biol312.ca/) Molecular Biology (University of Northern British Columbia)
-* [BIOL 420 @ UNBC](http://unbc.biol420.ca/) Animal Behaviour (University of Northern British Columbia)
+* [BIOL 312 @ UNBC] (https://biol312.opened.ca/) Molecular Cell Physiology (University of Northern British Columbia)
+* [BIOL 420 @ UNBC](https://biol420.opened.ca/) Animal Behaviour (University of Northern British Columbia)
+* [NRES 701 @ UNBC](https://nres701.opened.ca/) Natural Resources and Evironmental Studies Graduate Colloquia (University of Northern British Columbia)
+* [BIOL 421 @ UNBC] (https://biol421.opened.ca/)Insects, Fungi and Society (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
