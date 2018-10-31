@@ -182,9 +182,9 @@
 	<wp:term>
 		<wp:term_id><![CDATA[19]]></wp:term_id>
 		<wp:term_taxonomy><![CDATA[nav_menu]]></wp:term_taxonomy>
-		<wp:term_slug><![CDATA[mein]]></wp:term_slug>
+		<wp:term_slug><![CDATA[main]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[mein]]></wp:term_name>
+		<wp:term_name><![CDATA[main]]></wp:term_name>
 	</wp:term>
 	<wp:term>
 		<wp:term_id><![CDATA[15]]></wp:term_id>
@@ -263,7 +263,7 @@
 		<wp:term_parent><![CDATA[published]]></wp:term_parent>
 		<wp:term_name><![CDATA[Big Giant Thoughts]]></wp:term_name>
 	</wp:term>
-	<wp:term><wp:term_id>19</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[mein]]></wp:term_slug><wp:term_name><![CDATA[mein]]></wp:term_name>
+	<wp:term><wp:term_id>19</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[main]]></wp:term_slug><wp:term_name><![CDATA[main]]></wp:term_name>
 </wp:term>
 
 	<generator>https://wordpress.org/?v=4.9.8</generator>
@@ -372,7 +372,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -427,7 +427,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -482,7 +482,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -537,7 +537,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -592,7 +592,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -647,7 +647,7 @@
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[taxonomy]]></wp:meta_value>
@@ -942,7 +942,7 @@ Got ideas? <a href="https://github.com/cogdog/truwriter/issues">Submit as an iss
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -997,7 +997,7 @@ Got ideas? <a href="https://github.com/cogdog/truwriter/issues">Submit as an iss
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
@@ -1052,7 +1052,7 @@ Got ideas? <a href="https://github.com/cogdog/truwriter/issues">Submit as an iss
 		<wp:post_type><![CDATA[nav_menu_item]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-		<category domain="nav_menu" nicename="mein"><![CDATA[mein]]></category>
+		<category domain="nav_menu" nicename="main"><![CDATA[main]]></category>
 		<wp:postmeta>
 			<wp:meta_key><![CDATA[_menu_item_type]]></wp:meta_key>
 			<wp:meta_value><![CDATA[post_type]]></wp:meta_value>
