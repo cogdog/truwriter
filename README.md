@@ -270,6 +270,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
+**Theme Option to Remove Tweet This Button** to enable better GDPR compliance.
 
 **Customize the Writing Form Instructions**  You can now modify all form field labels and descriptions / prompts for the entry fields.
 
@@ -277,7 +278,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 **Reading Time Plugin** The [Estimated Reading Time Plugin](https://wordpress.org/plugins/estimated-post-reading-time/) is no longer available, so the theme now uses [Reading Time WP](https://wordpress.org/plugins/reading-time-wp/).
 
-**Separate CSS / Functions for Custom Installs** Created a new PHP file in `includes` for any custom site code and a style sheet in `styles/custom/css` for styles added for a specific site. This way, if you keep copies of these in a safe place, you can more safely update the theme. Also fixed quote bug for captions, and changed writing form so it only displays featured image and intro text for first view of the form (so you can add really long instructions).
+**Separate CSS / Functions for Custom Installs** Fixed quote bug for captions, and changed writing form so it only displays featured image and intro text for first view of the form (so you can add really long instructions).
 
 **Tweet This Button** There is a new option so you can have your own hashtags added when someone tweets a published item. Also, twitter card meta data has been added so these tweets have the extended card display that shows the featured image, the site's title, and an excerpt from the item-- example https://twitter.com/cogdog/status/822656183769198593
 

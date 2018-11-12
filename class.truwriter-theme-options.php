@@ -274,7 +274,27 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
-		
+
+		$this->settings['twitter_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Twitter Settings',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+
+		$this->settings['show_tweet_button'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show a Tweet This button on published items?'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
+		);
+
 		$this->settings['hashtags'] = array(
 			'title'   => __( 'Twitter Button Hashtag(s)' ),
 			'desc'    => __( 'When a writing is tweeted add these hashtags. Do not include # and separate multiple hashtags with commas.' ),
