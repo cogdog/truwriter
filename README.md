@@ -211,8 +211,9 @@ Enter any email addresses who should be notified if new submissions; you have mu
 
 ![](images/est-reading-time.jpg)
 
-#### Tweeted hashtags
-Enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
+#### Twitter Settings
+
+You can now choose to disable the Tweet This button on published items via a new setting as of theme version 1.1. In enabled, you can enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
 
 ![](images/twitter-button-hashtags.jpg)
 
