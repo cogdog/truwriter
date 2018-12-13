@@ -802,7 +802,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	
 	// setting for header image caption label
 	$wp_customize->add_setting( 'item_header_caption', array(
-		 'default'           => __( 'Caption/credits for header image', 'radcliffe'),
+		 'default'           => __( 'Caption/Credits for Header Image', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
@@ -1103,7 +1103,7 @@ function truwriter_form_item_title_prompt() {
 	 if ( get_theme_mod( 'item_title_prompt') != "" ) {
 	 	echo get_theme_mod( 'item_title_prompt');
 	 }	else {
-	 	echo 'A good title is important! Create an eye-catching title for your story, one that would make a person who sees it want to stop whatever they are doing and read it..';
+	 	echo 'A good title is important! Create an eye-catching title for your story, one that would make a person who sees it want to stop whatever they are doing and read it.';
 	 }
 }
 
@@ -1143,7 +1143,7 @@ function truwriter_form_item_header_caption() {
 	 if ( get_theme_mod( 'item_header_caption') != "" ) {
 	 	echo get_theme_mod( 'item_header_caption');
 	 }	else {
-	 	echo 'Caption/credits for header image';
+	 	echo 'Caption/Credits for Header Image';
 	 }
 }
 
@@ -1265,7 +1265,7 @@ function truwriter_form_item_editor_notes_prompt() {
 	 if ( get_theme_mod( 'item_editor_notes_prompt') != "" ) {
 	 	echo get_theme_mod( 'item_editor_notes_prompt');
 	 }	else {
-	 	echo 'This information will *not* be published with your work, it is informational for the editor use only.';
+	 	echo 'This information will *not* be published with your work, it is only to sent to the editor of ' . get_bloginfo('name') . '.';
 	 }
 }
 

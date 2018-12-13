@@ -88,48 +88,48 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 			
 <div class="content">		
 
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>				
+	<?php if ( have_posts() ) : 
+		
+		while ( have_posts() ) : the_post(); ?>
 	
-		<div <?php post_class('post single'); ?>>
-		
-			<?php if ( has_post_thumbnail() ) : ?>
-			
-				<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail_size' ); $thumb_url = $thumb['0']; ?>
-		
-				<div class="featured-media">
-				
-					<script type="text/javascript">
-	
-						jQuery(document).ready(function($) {
-				
-							$(".featured-media").backstretch("<?php echo $thumb_url; ?>");
-							
-						});
-						
-					</script>
-		
-					<?php the_post_thumbnail('post-image'); ?>
+			<div <?php post_class( 'post single' ); ?>>
 
-					<div class="media-caption-container">
-						
-							<p class="media-caption"><?php echo get_post(get_post_thumbnail_id())->post_excerpt; ?></p>
-							
-					</div>					
-				</div> <!-- /featured-media -->
+		
+				<?php if ( has_post_thumbnail() ) : ?>
 					
-			<?php endif; ?>
+					<div class="featured-media" style="background-image: url( <?php the_post_thumbnail_url( $post->ID, 'post-image' ); ?> );">
+			
+						<?php 
+						
+						the_post_thumbnail( 'post-image' );
+						
+						$image_caption = get_post( get_post_thumbnail_id() )->post_excerpt;
+						
+						if ( $image_caption ) : 
+							?>
+												
+							<div class="media-caption-container">
+								<p class="media-caption"><?php echo $image_caption; ?></p>
+							</div>
+							
+						<?php endif; ?>
+						
+					</div><!-- .featured-media -->
+						
+				<?php endif; ?>
+
 											
 			<div class="post-header section">
 		
 				<div class="post-header-inner section-inner">
 																									
-					<h2 class="post-title"><?php the_title(); ?></h2>
+					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
 				
-				</div> <!-- /post-header-inner section-inner -->
+				</div><!-- .post-header-inner section-inner -->
 														
-			</div> <!-- /post-header section -->
+			</div><!-- .post-header section -->
 			    
-		    <div class="post-content section-inner thin">
+		   <div class="post-content section-inner thin">
 		    
 		    	<?php the_content(); ?>
 
@@ -154,9 +154,9 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 				
 						?>   
 				
-						<div class="clear"></div>
+
 									
-				<form  id="comparatorform" class="comparatorform" method="post" action="">
+				<form  id="writerform" class="writenew" method="post" action="">
 					
 						<fieldset>
 							<label for="wAccess"><?php _e('Access Code', 'radcliffe' ) ?></label><br />
@@ -170,17 +170,24 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 						</fieldset>
 				
 				</form>
-		<?php endif?>
+				<?php endif?>
 		
-				<?php endwhile; else: ?>
+				<div class="clear"></div>
 	
-					<p><?php _e("We couldn't find any posts that matched your query. Please try again.", "radcliffe"); ?></p>
+			</div>
 
-				<?php endif; ?>
+		</div><!-- .post -->
+			
+				
+			<?php
+		
+		endwhile; 
+	
+	endif; ?>
 		
 		
 			
-	</div> <!-- /post -->
+	<div class="clear"></div>
 	
 </div> <!-- /content -->
 								

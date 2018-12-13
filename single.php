@@ -2,63 +2,65 @@
 
 <div class="content">
 											        
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+	<?php if ( have_posts() ) : 
 		
-		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		while ( have_posts() ) : the_post(); ?>
+		
+			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-			<?php if ( has_post_thumbnail() ) : ?>
+
+				<?php if ( has_post_thumbnail() ) : ?>
 			
-				<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'post-image' ); $url = $thumb['0']; ?>
-		
-				<div class="featured-media">
-				
-					<script type="text/javascript">
-	
-						jQuery(document).ready(function($) {
-				
-							$(".featured-media").backstretch("<?php echo $url; ?>");
+					<div class="featured-media" style="background-image: url( <?php the_post_thumbnail_url( $post->ID, 'post-image' ); ?> );">
+			
+						<?php 
+						
+						the_post_thumbnail( 'post-image' );
+						
+						$image_caption = get_post( get_post_thumbnail_id() )->post_excerpt;
+						
+						if ( $image_caption ) : 
+							?>
+												
+							<div class="media-caption-container">
+								<p class="media-caption"><?php echo $image_caption; ?></p>
+							</div>
 							
-						});
+						<?php endif; ?>
 						
-					</script>
-		
-					<?php the_post_thumbnail('post-image'); ?>
-										
-						<div class="media-caption-container">
+					</div><!-- .featured-media -->
 						
-							<p class="media-caption"><?php echo get_post_meta( $post->ID, 'wHeaderCaption', 1 );  ?></p>
-							
-						</div>
-						
+				<?php endif; ?>
 
-					
-				</div> <!-- /featured-media -->
-					
-			<?php endif; ?>
 				
 			<div class="post-header section">
 		
 				<div class="post-header-inner section-inner medium">
-													
-					<p class="post-meta-top"><a href="<?php the_permalink(); ?>" title="<?php the_time('h:i'); ?>"><?php the_time(get_option('date_format')); ?></a> 
 					
-					<?php 
 					
-						if ( comments_open() and truwriter_option('allow_comments') ) { echo '<span class="sep">|</span> '; comments_popup_link( '0 comments', '1 comment', '% comments', 'post-comments' ); } 
+					<p class="post-meta-top">
 					
-						echo truwriter_get_reading_time('<span class="sep">|</span> Reading Time:', '');
-					?>
+									
+						<a href="<?php the_permalink(); ?>" title="<?php the_time( get_option( 'time_format' ) ); ?>"><?php the_time( get_option( 'date_format' ) ); ?></a>
 					
-					 </p>
-														
-					<h2 class="post-title"><?php the_title(); ?></h2>
 					
+					<?php if ( comments_open() and truwriter_option('allow_comments') ) : ?>
+								<span class="sep">/</span>
+								<?php comments_popup_link( __( '0 comments', 'radcliffe' ), __( '1 comment', 'radcliffe' ), __( '% comments', 'radcliffe' ), 'post-comments' ); ?>
+								
+								<?php echo truwriter_get_reading_time('<span class="sep">|</span> Reading Time:', '');?>
+							<?php endif; ?>
+							
+					</p>
+												
+					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
+			
 					<p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo twitternameify( $wAuthor );?></p>
-					
-				
-				</div> <!-- /post-header-inner section-inner -->
-														
-			</div> <!-- /post-header section -->
+			
+						
+					</div><!-- .post-header-inner section-inner -->
+															
+				</div><!-- .post-header section -->		
 			    
 		    <div class="post-content section-inner thin">
 		    
@@ -179,7 +181,7 @@
 						
 							<p class="post-nav-next">
 													
-								<a title="<?php _e('Next Writing:', 'radcliffe'); echo ' ' . get_the_title($next_post); ?>" href="<?php echo get_permalink( $next_post->ID ); ?>"><?php echo get_the_title($next_post); ?></a>
+								<a title="<?php _e('Next Writing:', 'radcliffe'); echo ' ' . get_the_title($next_post->ID); ?>" href="<?php echo get_permalink( $next_post->ID ); ?>"><?php echo get_the_title($next_post->ID); ?></a>
 							
 							</p>
 					
@@ -191,7 +193,7 @@
 						
 							<p class="post-nav-prev">
 					
-							<a title="<?php _e('Previous Writing:', 'radcliffe'); echo ' ' . get_the_title($prev_post); ?>" href="<?php echo get_permalink( $prev_post->ID ); ?>"><?php echo get_the_title($prev_post); ?></a>
+							<a title="<?php _e('Previous Writing:', 'radcliffe'); echo ' ' . get_the_title($prev_post->ID); ?>" href="<?php echo get_permalink( $prev_post->ID ); ?>"><?php echo get_the_title($prev_post->ID); ?></a>
 							
 							</p>
 					
@@ -209,14 +211,15 @@
 													                                    	        	        
 		</div> <!-- /post -->
 				
-				<?php if ( truwriter_option('allow_comments') ) comments_template( '', true ); ?>
+				<?php 
+				
+				if ( truwriter_option('allow_comments') ) comments_template( '', true ); 
 				
 									                        
-   	<?php endwhile; else: ?>
+   			endwhile; 
 
-		<p><?php _e("We couldn't find any writings that matched your query. Please try again.", "radcliffe"); ?></p>
-	
-	<?php endif; ?>    
+		endif; ?>
+  
 
 	</div> <!-- /post -->
 

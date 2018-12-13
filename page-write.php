@@ -378,47 +378,47 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			
 <div class="content">		
 
-	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>				
-	
-		<div <?php post_class('post single'); ?>>
+	<?php if ( have_posts() ) : 
 		
-			<?php if ( has_post_thumbnail() AND  $firstview  ) : ?>
-			
-				<?php $thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'thumbnail_size' ); $thumb_url = $thumb['0']; ?>
+		while ( have_posts() ) : the_post(); ?>
+	
+			<div <?php post_class( 'post single' ); ?>>
 		
-				<div class="featured-media">
-				
-					<script type="text/javascript">
-	
-						jQuery(document).ready(function($) {
-				
-							$(".featured-media").backstretch("<?php echo $thumb_url; ?>");
-							
-						});
-						
-					</script>
-		
-					<?php the_post_thumbnail('post-image'); ?>
-	
-	
-						<div class="media-caption-container">
-							<p class="media-caption"><?php echo get_post(get_post_thumbnail_id())->post_excerpt; ?></p>
-						</div>				
-				</div> <!-- /featured-media -->
+				<?php if ( has_post_thumbnail()  AND  $firstview  ) : ?>
 					
-			<?php endif; ?>
+					<div class="featured-media" style="background-image: url( <?php the_post_thumbnail_url( $post->ID, 'post-image' ); ?> );">
+			
+						<?php 
+						
+						the_post_thumbnail( 'post-image' );
+						
+						$image_caption = get_post( get_post_thumbnail_id() )->post_excerpt;
+						
+						if ( $image_caption ) : 
+							?>
+												
+							<div class="media-caption-container">
+								<p class="media-caption"><?php echo $image_caption; ?></p>
+							</div>
+							
+						<?php endif; ?>
+						
+					</div><!-- .featured-media -->
+						
+				<?php endif; ?>
+
 											
 			<div class="post-header section">
 		
 				<div class="post-header-inner section-inner">
 																									
-					<h2 class="post-title"><?php the_title(); ?></h2>
+					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
 				
-				</div> <!-- /post-header-inner section-inner -->
+				</div><!-- .post-header-inner section-inner -->
 														
-			</div> <!-- /post-header section -->
+			</div><!-- .post-header section -->
 			    
-		    <div class="post-content section-inner">
+		    <div class="post-content section-inner thin">
 		    
 		    	<?php if ( $firstview ) the_content(); ?>
 		    		
@@ -466,14 +466,14 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				<fieldset id="theTitle">
 					<label for="wTitle"><?php truwriter_form_item_title() ?></label><br />
 					<p><?php truwriter_form_item_title_prompt()?></p>
-					<input type="text" name="wTitle" id="wTitle" class="required" value="<?php echo $wTitle; ?>" tabindex="1" />
+					<input type="text" name="wTitle" id="wTitle" class="required writerfield" value="<?php echo $wTitle; ?>" tabindex="1" />
 				</fieldset>	
 			
 
 				<fieldset id="theAuthor">
 					<label for="wAuthor"><?php truwriter_form_item_byline() ?></label><br />
 					<p><?php truwriter_form_item_byline_prompt() ?></p>
-					<input type="text" name="wAuthor" id="wAuthor" class="required" value="<?php echo $wAuthor; ?>" tabindex="2" />
+					<input type="text" name="wAuthor" id="wAuthor" class="required writerfield" value="<?php echo $wAuthor; ?>" tabindex="2" />
 				</fieldset>	
 				
 				<fieldset id="theText">
@@ -495,7 +495,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				<fieldset id="theFooter">
 						<label for="wFooter"><?php truwriter_form_item_footer() ?></label>						
 						<p><?php truwriter_form_item_footer_prompt() ?></p>
-						<textarea name="wFooter" id="wFooter" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
+						<textarea name="wFooter" id="wFooter" class="writerfield" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
 				</fieldset>
 				<?php endif?>
 				
@@ -518,7 +518,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						
 						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?></label>
 						<p><?php truwriter_form_item_header_caption_prompt() ?></p>
-						<input type="text" name="wHeaderImageCaption" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" tabindex="6" />
+						<input type="text" name="wHeaderImageCaption" class="writerfield" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" tabindex="6" />
 				
 				</fieldset>						
 				
@@ -557,7 +557,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					<label for="wTags"><?php truwriter_form_item_tags() ?></label>
 					<p><?php truwriter_form_item_tags_prompt() ?></p>
 					
-					<input type="text" name="wTags" id="wTags" value="<?php echo $wTags; ?>" tabindex="8"  />
+					<input type="text" name="wTags" id="wTags" class="writerfield" value="<?php echo $wTags; ?>" tabindex="8"  />
 				</fieldset>
 
 				<?php endif?>
@@ -565,17 +565,17 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				<fieldset id="theEmail">
 					<label for="wEmail"><?php truwriter_form_item_email() ?> (optional)</label><br />
 					<p><?php truwriter_form_item_email_prompt() ?> </p>
-					<input type="text" name="wEmail" id="wTitle"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
+					<input type="text" name="wEmail" id="wTitle" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
 				</fieldset>	
 				
 
 				<?php if ( $wNotes_required != -1 ):?>
 				
 				<fieldset id="theNotes">
-						<?php $req_state = ( $wNotes_required == 1 ) ? 'Required' : 'Optional';?>
+						<?php $req_state = ( $wNotes_required == 1 ) ? 'required' : 'optional';?>
 						<label for="wNotes"><?php truwriter_form_item_editor_notes(); _e(' (' . $req_state . ')' , 'radcliffe') ?></label>						
 						<p><?php truwriter_form_item_editor_notes_prompt()?></p>
-						<textarea name="wNotes" id="wNotes" rows="15"  tabindex="12"><?php echo stripslashes( $wNotes );?></textarea>
+						<textarea name="wNotes" class="writerfield" id="wNotes" rows="15"  tabindex="12"><?php echo stripslashes( $wNotes );?></textarea>
 				</fieldset>
 				<?php endif?>
 
@@ -649,10 +649,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 		
 		</form>
 	<?php endif?>
+	
+	<div class="clear"></div>
 			
 	</div> <!-- /post -->
 		
-	
+
+<div class="clear"></div>	
 </div> <!-- /content -->
 								
 <?php get_footer(); ?>

@@ -75,6 +75,8 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 ### Updating the TRU Writer Theme (manually)
 
+*Note (Dec 11, 2018) If your site's featured images are blank, it's likely because of a change to the parent Radcliffe theme that was automatically updated on your site. An update to TRU Writer version 1.2 or later will fix this issue.*
+
 If you have ftp/sftp access to your site (or this can be done in a cpanel file manager), simply upload the new theme files to the `wp-content/themes` directory that includes the older version theme. 
 
 For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
