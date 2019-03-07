@@ -95,6 +95,7 @@ class truwriter_Theme_Options {
 				else
 					$(this).parent().css("background", "none").css("color", "inherit").css("fontWeight", "normal");
 			});
+			
 		});
 		</script>';	
 	}
@@ -221,17 +222,17 @@ class truwriter_Theme_Options {
 		);
 		
 		
-  		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
-	  	$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
-	  	
-	  	
-	  	$cat_options = array();
-	  	
-	  	// Walk those cats, store as array index=ID 
+		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
+		$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
+	
+	
+		$cat_options = array();
+	
+		// Walk those cats, store as array index=ID 
 		foreach ( $all_cats as $item ) {
-  			$cat_options[$item->term_id] =  $item->name;
-  		}
- 
+			$cat_options[$item->term_id] =  $item->name;
+		}
+
 		$this->settings['def_cat'] = array(
 			'section' => 'general',
 			'title'   => __( 'Default Category for New Writing'),
@@ -240,7 +241,7 @@ class truwriter_Theme_Options {
 			'std'     => get_option('default_category'),
 			'choices' => $cat_options
 		);
-		
+
 		
 		$this->settings['show_tags'] = array(
 			'section' => 'general',
@@ -295,6 +296,7 @@ class truwriter_Theme_Options {
 					)
 		);
 
+
 		$this->settings['hashtags'] = array(
 			'title'   => __( 'Twitter Button Hashtag(s)' ),
 			'desc'    => __( 'When a writing is tweeted add these hashtags. Do not include # and separate multiple hashtags with commas.' ),
@@ -302,6 +304,8 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
+
+		
 		
 		$this->settings['readingtimecheck'] = array(
 		'section' => 'general',

@@ -22,12 +22,6 @@ jQuery(document).ready(function() {
 		  jQuery("#showHide").attr('value', 'Show');
 		}
 	  });
-	  
-	jQuery(".fileuploader").change(function() {
-		alert('uploader: ' + jQuery( this.prop('files') );
-	
-	 });
-
 
 	// called for via click of upload button in theme options	
 	jQuery(document).on('click', '.upload_image_button', function(e){
