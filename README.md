@@ -69,26 +69,12 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 *Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
 
 
-In your cpanel, under **Applications** go to **All Applications**. This theme is available listed under Fratured Applications; just install from there.
 
-
-![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
-
-Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information. 
-
-When it's done, log into your new site and start making it your own. 
-
-
-
-## Install TRU Writer
+### Installing TRU Writer from Scratch
 
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
 
 The TRU Collector is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
-
-If you are wise enough to use [Reclaim Hosting](http://reclaimhosting.com/) you will find (soon) a one click cpanel installer for a fully built out site like the demo one.
-
-### Installing TRU Writer from Scratch
 
 Download the TRU Writer theme (use the green **Clone or Download** button above) as a ZIP file.
 
