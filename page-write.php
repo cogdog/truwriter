@@ -484,7 +484,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 <a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
 						<?php
 						// set up for inserting the WP post editor
-						$settings = array( 'textarea_name' => 'wText', 'editor_height' => '400',  'tabindex'  => "3");
+						$settings = array( 'textarea_name' => 'wText', 'editor_height' => '400',  'tabindex'  => "3", 'drag_drop_upload' => true);
 
 						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
 						?>
@@ -506,7 +506,17 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					<div class="uploader">
 						<input id="wHeaderImage" name="wHeaderImage" type="hidden" value="<?php echo $wHeaderImage_id?>" />
 
-						<?php $defthumb = wp_get_attachment_image_src( $wHeaderImage_id, 'thumbnail' );?>
+						<?php 
+						
+						if ($wHeaderImage_id) {
+							$defthumb = wp_get_attachment_image_src( $wHeaderImage_id, 'thumbnail' );
+						} else {
+							$defthumb = [];
+							$defthumb[] = get_stylesheet_directory_uri() . '/images/default-header-thumb.jpg';
+							$wHeaderImageCaption = 'flickr photo by Lívia Cristina https://flickr.com/photos/liviacristinalc/3402221680 shared under a Creative Commons (BY-NC-ND) license';
+						}
+						
+						?>
 					
 						<img src="<?php echo $defthumb[0]?>" alt="article banner image" id="headerthumb" /><br />
 					
@@ -588,9 +598,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 							<label for="wLicense"><?php truwriter_form_item_license()?></label>
 							<?php if ( $my_cc_mode == 'site' ) :?>
 					
-								<p>All writing added to this site will be licensed:</p>
+								<p>All writing added to this site will be published under a rights statement like:</p>
 								
-								<p class="form-control"><?php echo cc_license_html( truwriter_option( 'cc_site' ), $wAuthor );?></p>
+								<p class="form-control"><?php echo truwriter_license_html( truwriter_option( 'cc_site' ), $wAuthor );?></p>
 								<input type="hidden" name="wLicense" id="wLicense" value="<?php echo truwriter_option( 'cc_site' )?>">
 								
 				

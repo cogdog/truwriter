@@ -47,10 +47,10 @@
 					<?php if ( comments_open() and truwriter_option('allow_comments') ) : ?>
 								<span class="sep">/</span>
 								<?php comments_popup_link( __( '0 comments', 'radcliffe' ), __( '1 comment', 'radcliffe' ), __( '% comments', 'radcliffe' ), 'post-comments' ); ?>
-								
-								<?php echo truwriter_get_reading_time('<span class="sep">|</span> Reading Time:', '');?>
-							<?php endif; ?>
-							
+												
+					<?php endif; ?>
+					
+					<?php echo truwriter_get_reading_time('<span class="sep">/</span> Reading Time:', '');?>		
 					</p>
 												
 					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
@@ -101,7 +101,7 @@
 							<p class="author-description"><strong>Word Count:</strong> <?php  echo str_word_count( get_the_content());?> </p>
 							<?php 
 							
-							// output estimate reading time
+							// output estimated reading time if we are using plugin
 							echo truwriter_get_reading_time('<p class="author-description"><strong>Reading time:</strong>', '</p>');
 							
 							// show the request edit link button if they have provided an email and post is published
@@ -114,11 +114,11 @@
 							
 							<?php if ( truwriter_option( 'use_cc' ) != 'none' ):?>					
 								<!-- creative commons -->
-								<p class="author-description"><strong>License: </strong><br />
+								<p class="author-description"><strong>Rights: </strong><br />
 								<?php 
 									// get the license code, either define for site or post meta for user assigned						
 									$cc_code = ( truwriter_option( 'use_cc' ) == 'site') ? truwriter_option( 'cc_site' ) : get_post_meta($post->ID, 'wLicense', true);
-									echo cc_license_html( $cc_code, $wAuthor, get_the_time( "Y", $post->ID ) );
+									echo truwriter_license_html( $cc_code, $wAuthor, get_the_time( "Y", $post->ID ) );
 
 								?>		
 							
@@ -145,7 +145,7 @@
 				
 				<div class="meta-block post-cat-tags">
 				
-					<h3 class="meta-title"><?php _e(' ','radcliffe'); ?></h3>
+					<h3 class="meta-title"><?php _e('ORAGANIZED BY','radcliffe'); ?></h3>
 				
 				
 					<?php if (truwriter_option('show_cats') ):?>
@@ -172,9 +172,9 @@
 						<?php endif; ?>
 					<?php endif?>
 					
-				
+					
 					<div class="post-nav">
-		
+					<h3 class="meta-title"><?php _e('MORE TO READ','radcliffe'); ?></h3>
 						<?php
 						$next_post = get_next_post();
 						if (!empty( $next_post )): ?>

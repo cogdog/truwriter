@@ -65,9 +65,6 @@ class Splot_Theme_Plugin_Enhancements {
 					esc_html__( 'The %1$s is recommended to hide the dashboard from the special writer user account used to guest author on this site.', 'truwriter' ),
 					'<strong>' . esc_html__( 'Remove Dashboard Access plugin', 'truwriter' ) . '</strong>' ),
 			),
-			
-			
-			
 		);
 		
 		

@@ -173,9 +173,13 @@ class truwriter_Theme_Options {
 
 		$this->settings['def_text'] = array(
 			'title'   => __( 'Default Writing Prompt' ),
-			'desc'    => __( 'Contents that will appear in a new blank writing spot; it can include HTML (sorry not rich text editor here yet)' ),
-			'std'     => '<h2>Introduction</h2><p>This is what I have to say, which of course is something important. As you can see we can use headings and other <strong>formatting</strong> in our work.</p>',
-			'type'    => 'textarea',
+			'desc'    => __( 'The default content that will appear in a new blank editor.' ),
+			'std'     => 'Introduction
+
+This is what I have to say, which of course is something important. 
+
+Edit this to be more appropriate for your TRU Writer SPLOT.',
+			'type'    => 'richtextarea',
 			'section' => 'general'
 		);
 		
@@ -327,7 +331,7 @@ class truwriter_Theme_Options {
 		$this->settings['cc_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
-			'desc'	 => 'Creative Commons',
+			'desc'	 => 'Creative Commons / Rights',
 			'std'    => '',
 			'type'    => 'heading'
 		);
@@ -347,19 +351,11 @@ class truwriter_Theme_Options {
 		
 		$this->settings['cc_site'] = array(
 			'section' => 'general',
-			'title'   => __( 'License for All Writings'),
-			'desc'    => __( 'Choose a license that will appear sitewide or used as default if user selects.' ),
+			'title'   => __( 'Rights for All Writings'),
+			'desc'    => __( 'Choose an option that will appear sitewide or used as default if user selects.' ),
 			'type'    => 'select',
 			'std'     => 'by',
-			'choices' => array(
-				'0' =>'CC0 Public Domain',
-				'by' => 'CC BY Attribution',
-				'by-sa' => 'CC Attribution-ShareAlike',
-				'by-nd' => 'CC BY-ND Attribution-NoDerivs',
-				'by-nc' => 'CC BY-NC Attribution-NonCommercial',
-				'by-nc-sa' => 'CC BY-NC-SA	Attribution-NonCommercial-ShareAlike',
-				'by-nc-nd' => 'CC BY-NC-ND Attribution-NonCommercial-NoDerivs',
-			)
+			'choices' => truwriter_get_licences()
 		);
 
 		/* Reset
@@ -460,6 +456,21 @@ class truwriter_Theme_Options {
 					echo '<br /><span class="description">' . $desc . '</span>';
 
 				break;
+
+			case 'richtextarea':
+			
+			
+				// set up for inserting the WP post editor
+				$rich_settings = array( 'textarea_name' => 'truwriter_options[' . $id . ']' , 'editor_height' => '200',  'tabindex'  => "3", 'editor_class' => $field_class );
+				
+				$textdefault = (isset( $options[$id] ) ) ? $options[$id] : $std;
+
+				wp_editor(   $textdefault , $id , $rich_settings );
+
+				if ( $desc != '' )
+					echo '<br /><span class="description">' . $desc . '</span>';
+
+				break;
 				
 			case 'medialoader':
 				echo '<div id="uploader_' . $id . '">';
@@ -468,7 +479,7 @@ class truwriter_Theme_Options {
 					$front_img = wp_get_attachment_image_src( $options[$id], 'radcliffe' );
 					echo '<img id="previewimage_' . $id . '" src="' . $front_img[0] . '" width="640" height="300" alt="default thumbnail" />';
 				} else {
-					echo '<img id="previewimage_' . $id . '" src="https://placehold.it/640x300" alt="default header image" />';
+					echo '<img id="previewimage_' . $id . '" src="' . get_stylesheet_directory_uri() . '/images/default-header-640.jpg" alt="default header image" />';
 				}
 
 				echo '<input type="hidden" name="truwriter_options[' . $id . ']" id="' . $id . '" value="' . $options[$id]  . '" />

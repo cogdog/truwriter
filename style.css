@@ -1,8 +1,8 @@
 /*
 Theme Name: 	TRU Writer
 Theme URI: 		http://splot.ca
-Description: 	TRU Writer (Child of Radcliffe) the famous SPLOT for rich media writing, on the web
-Version: 		1.3
+Description: 	TRU Writer (Child of Radcliffe) is a SPLOT for rich media writing on the web, suitable for essays, magazines, and more.
+Version: 		1.4
 Template:       radcliffe
 Author: 		CogDog
 Author URI: 	https://cog.dog
@@ -26,8 +26,8 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
     margin-right: auto;
 }
 
-
-.single .rt-reading-time {
+/* hide reading time if using plugin defaults for hooking into content */
+.single .post-content .rt-reading-time {
     display: none!important;
 }
 

@@ -29,10 +29,10 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [30,000,000 ACA Stories](http://bones.cogdogblog.com/30million/) (archived)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
 * [Arganee Journal](http://journal.arganee.world/) open online journal for Networked Narratives and ResNetSem courses
-* [BIOL 312 @ UNBC] (https://biol312.opened.ca/) Molecular Cell Physiology (University of Northern British Columbia)
-* [BIOL 420 @ UNBC] (https://biol420.opened.ca/) Animal Behaviour (University of Northern British Columbia)
-* [NRES 701 @ UNBC] (https://nres701.opened.ca/) Natural Resources and Evironmental Studies Graduate Colloquia (University of Northern British Columbia)
-* [BIOL 421 @ UNBC] (https://biol421.opened.ca/) Insects, Fungi and Society (University of Northern British Columbia)
+* [BIOL 312 @ UNBC](https://biol312.opened.ca/) Molecular Cell Physiology (University of Northern British Columbia)
+* [BIOL 420 @ UNBC](https://biol420.opened.ca/) Animal Behaviour (University of Northern British Columbia)
+* [NRES 701 @ UNBC](https://nres701.opened.ca/) Natural Resources and Evironmental Studies Graduate Colloquia (University of Northern British Columbia)
+* [BIOL 421 @ UNBC](https://biol421.opened.ca/) Insects, Fungi and Society (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
@@ -58,6 +58,27 @@ And if you make a TRU Writer site, please please pretty please fork this repo to
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
+## Installing From Reclaim Hosting
+
+If you are wise enough to host your web sites at [Reclaim Hosting](http://reclaimhosting.com/) you have the option of installing a fully functioning site with this theme ([a copy of the demo site](http://lab.cogdogblog.com/writer/)) including recommended plugins, configured settings and sample content, all done  in one click. *But wait there is more!* With this method of installing your site, future updates to the theme are automatically added to your site.
+
+In your cpanel, under **Applications** go to **All Applications**. This theme is available listed under Fratured Applications; just install from there.
+
+![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
+
+*Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
+
+
+In your cpanel, under **Applications** go to **All Applications**. This theme is available listed under Fratured Applications; just install from there.
+
+
+![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
+
+Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information. 
+
+When it's done, log into your new site and start making it your own. 
+
+
 
 ## Install TRU Writer
 
@@ -65,7 +86,7 @@ Using this theme requires a self-hosted--or institutionally hosted (lucky you)--
 
 The TRU Collector is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
 
-If you are wise enough to use [Reclaim Hosting](http://reclaimhosting.com/) you will find (soon) a one click cpanel installer for a fully built out site.
+If you are wise enough to use [Reclaim Hosting](http://reclaimhosting.com/) you will find (soon) a one click cpanel installer for a fully built out site like the demo one.
 
 ### Installing TRU Writer from Scratch
 
@@ -273,6 +294,8 @@ If you want to customize/re-arrange the buttons and controls on the rich text ed
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 ## Relatively Cool New Features & Updates
+
+**Under the Hood** Fixed bug where choosing no comments hid the Reading Time display, changed options editor for default content to be rich text editor, enabled drag and drop media uploading for front page writing form.
 
 **Theme Option to Remove Tweet This Button** to enable better GDPR compliance.
 
