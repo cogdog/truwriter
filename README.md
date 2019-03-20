@@ -234,14 +234,11 @@ This plugin is optional, if installed and activated, it will add to all publishe
 
 #### Author Account Setup
 
-![](images/author-account-none.jpg)
-
 To provide access to the media uploader, this site uses a Wordpress Authoring Role account that is logged into invisibly to your site visitors (for anyone logged in with an Editor or Administrator account, like you this account is not used.). So your site needs an active user with a name of **writer** and a role of **Author**.
 
 ![](images/add-author.jpg)
 
 You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools.  
-
 
 ** Note: As of version 0.3 of this theme, the password no longer needs to be copied and entered into the options screen.** If you are using a version of the theme that has a password field in the options, maybe it's a good time to update? Otherwise, [see an older version of this ReadMe](https://github.com/cogdog/truwriter/blob/50d86fdfe039aec4575a2eaa29c16ad3374d3596/README.md#author-account-setup) for instructions.
 
