@@ -154,59 +154,57 @@ Upon activation the theme will set up a **TRU Writer Options** link that appears
 
 Click **TRU Writer Options** to see or change the settings outlined below. 
     
- *(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)*
+*(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)*
 
 In the TRU Writer Theme, traditional "posts" in Wordpress are renamed "writings," but they still have all the attributes of garden variety Wordpress blog posts. Yum.
 
-![](images/options-1.jpg)
 
-#### Access Code and Hint
+#### Access Options
+
+![](images/access-options.jpg)
+
 Leave this field blank if you want any visitor to be able to access the writing form on your TRU Writer site. If that's too open for you, add a code and give it a hint. If you want a quick workaround here, make the site less accessible by not having any links in the homepage menu bar that go to the editor page--no link to the "writer" page, the harder it is to find the editor and post something.  
 
 If you want to require users to enter an access code (a very weak password), just enter it in the space provided. Any requests to access the editor and write a post will be sent to a front-page where a writer must enter the passcode. As an example, we have "Lassie" and an equally difficult hint. If you enter in "Lassie," you can see the editor and begin the process of writing a post--but don't actually do that; we haven't set everything up yet! This is a hypothetical situation. For now, decide if you want a passcode. If you do, put it in, with a hint. If you don't, moving on!
 
-#### Status for New Writings
 The TRU Writer is a moderated publishing theme. And "moderated" means that when a writer submits something, it is not  immediately visible to the world. Instead, unless you set it otherwise (more on that below), when a writer submits a post (or "writing" as above) they are automatically set as drafts with a  *Pending Approval* status. You'll get notifications that a submissions has been made to the Email address you enter in the "Notifications Email" option. 
 
 In order to make a post (or "writing" as above) visible, a user with the permission status of "Editor" or "Administrator" needs to change the status of the "pending approval" writing to "published (or ignore an "Editor" or "Administrator" could just ignore it forever, such power is theirs).
 
+#### Publish Options
+
+![](images/publish-options1.jpg)
+
 You can also choose the "status for new writings" as "publish immediately" and there are no checks and balances--the writing goes right up and is publicly visible immediately. Immediate gratification goes a long way. Note though, that because of the hollow tunnel this might create, this option works best with an access code as described above in place--right Lassie!?
 
-#### Default Writing Prompt
-Enter this field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. HTML is acceptable, but for now, there is no rich text editor here. *Learn some web code!* It will set you free.
+Enter the **Default Writing Prompt** field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. The editor is now full rich text enabled (including images).
 
-![](images/options-2.jpg)
 
-#### Allow Comments
-Check this box to add a standard blog comment field at the bottom of all published pieces. Writers like comments. Don't you?
+![](images/publish-options2.jpg)
 
-If you allow comments--and you should--be sure to install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/) (instructions above), or else there could be trouble. 
+Check the **Allow Comments** box to add a standard blog comment field at the bottom of all published pieces. 
 
-#### Extra Information Field
-On the editor where people will be composing their madness, this represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
+
+On the editor where people will be composing their madness, the **Extra Information Field** represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
 
 These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
 
-![](images/options-3.jpg)
-
-#### Default Header Image
-Click **Set/Change Image** to open the Wordpress media editor. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
+Under **Default Header Image** click **Set/Change Image** to open the Wordpress media editor to choose a default media header image. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
 
 ![](images/header-image-caption.jpg)
 
 Before choosing the image, be sure to add a caption (we suggest a creative commons license!) as this is what is used to display atop the image when published. Attribute and model attribution! FTW!
-
-Without proper attribute, the post / writing will not move forward. Attribution must be in there. 
 
 ![](images/header-image-selected.jpg)
 
 Once selected you will see a preview of your default image. Isn't Cadu a nice looking dog?
 
 
-![](images/options-4.jpg)
+![](images/publish-options3.jpg)
 
-#### Default Category for New Writing
-If you have not set up any categories, this menu will not do much. You might want to save your options and go edit your **Writing Categories**. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.
+Disable **Show the categories menu on writing form and display** if you do not want writers or readers to use/see categories.
+
+If you have not set up any categories, the **Default Category for New Writing** menu will not do much. You might want to save your options and go edit your **Writing Categories**. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.
 
 ![](images/categories.jpg)
 
@@ -216,27 +214,28 @@ The `In Progress` category is where all submitted writings go if they need appro
 
 So we suggest making a few pre-set categories for a new site. As an Administrator you can always add new ones at any time. Any text you add as a description will be included on the writing form.
 
-#### Notification Emails
-Enter any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
+Disable **Show the tags entry on writing form and single items displays?** if you do not want writers or readers to use/see tags. Likewise use **Show the footer entry field on the writing form?** to use/disable the footer field writers can append to their works.
 
-![](images/est-reading-time.jpg)
+Enter in **Notification Emails** any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
+
+
 
 #### Twitter Settings
 
-You can now choose to disable the Tweet This button on published items via a new setting as of theme version 1.1. In enabled, you can enter one or more hashtags to be used when a published item is shared via the Tweet This button. Do not include "#" and separate multiple ones with commas
+![](images/twitter-settings.jpg)
 
-![](images/twitter-button-hashtags.jpg)
+You can now choose to disable the Tweet This button on published items In enabled, you can enter one or more hashtags to be used when a published item is shared via the **Tweet This** button. Do not include "#" and separate multiple ones with commas
 
 #### Estimated Reading Time Plugin
 This plugin is optional, if installed and activated, it will add to all published works an estimate of the reading time based on a crude formula. If it is not installed, you will see the notes shown above. This plugin is available in the Wordpress repository, so it is an easy install.
 
-![](images/reading-times-settings.jpg)
 
-If installed, you should check the settings under **Settings** -- **Post Reading Time**. Set `Show in Home Page` and `Show in Archives` to display in listings of published works.
+
+
+#### Author Account Setup
 
 ![](images/author-account-none.jpg)
 
-#### Author Account Setup
 To provide access to the media uploader, this site uses a Wordpress Authoring Role account that is logged into invisibly to your site visitors (for anyone logged in with an Editor or Administrator account, like you this account is not used.). So your site needs an active user with a name of **writer** and a role of **Author**.
 
 ![](images/add-author.jpg)
