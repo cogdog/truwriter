@@ -68,8 +68,6 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 
 *Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
 
-
-
 ### Installing TRU Writer from Scratch
 
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. 
@@ -100,21 +98,11 @@ Now that you've installed TRU Writer and can see the barebones theme staring bac
 
 While your doing all that uploading, you should know that this theme uses the [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read.
 
-**Note that previous versions of this theme used the [Estimated Post Reading Time plugin](https://wordpress.org/plugins/estimated-post-reading-time/) which is no longer available. Delete this plugin, and replace with [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/).**
-
-You can use all the default settings for **Reading Time WP** but be sure to deselect the bottom two checkboxes `Insert Reading Time before content:` and  `Insert Reading Time before excerpt:` (look under **Settings** -> **Reading Time WP**)
-
-![Reading Time WP settings](images/reading-time-wp-settings.jpg "Reading Time WP settings")
-
 Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. This plugin is not critical for the Writer to work, it just closes the back door a bit tighter.
 
 In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
 
 ![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
-
-At the same time, and you already know this because you know Wordpress, but activate the [Akismet plugin](https://wordpress.org/plugins/akismet/). Get that rolling so things don't get nuts in the comment box. 
-
-Your admin password is solid, right? Really? You updated Wordpress to the latest version, right? And you do regular backups of Wordpress right? ... maybe you have a set schedule for backing up the site content? You wouldn't want to lose people's stuff. No, no you would not. 
 
 ## Demo Content
 
@@ -126,7 +114,7 @@ You can also get a copy of the Widgets used on that site too. First intall/activ
 
 
 ### Page Setup
-This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. The theme should create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
+This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Activating the theme *should* create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
 
 If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions, but do not change the slug or short name.
 
@@ -139,6 +127,7 @@ If the theme does not do so automatically (and it should) create these Wordpress
 * **Get Edit Link** -- No one ever sees this page, but it's important! - it is used to generate an email to send an editing link to an author. The the slug (url name) must be `get-edit-link` .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/get-edit-link`
 
 ### Customize Your Menus
+
 The default menus are not what you want (it will add menu items for some pages that users should not see! Wordpress will generate one based on all Pages set up.
 
 ![](images/default-menus.jpg)
@@ -242,24 +231,23 @@ You can follow the link from the options page to create this account; for an ema
 
 ** Note: As of version 0.3 of this theme, the password no longer needs to be copied and entered into the options screen.** If you are using a version of the theme that has a password field in the options, maybe it's a good time to update? Otherwise, [see an older version of this ReadMe](https://github.com/cogdog/truwriter/blob/50d86fdfe039aec4575a2eaa29c16ad3374d3596/README.md#author-account-setup) for instructions.
 
-#### Creative Commons Settings
+#### Creative Commons / Rights Settings
 
 ![](images/creative-commons.jpg)
 
+Creative Commons licenses or other usage rights (including copyright) can be attached to all works published on your site. Choose **Apply one license to all challenges** to place the same license on all works (a notice will be displayed on the writing form).
 
-Creative commons licenses can be attached to all works published on your site. Choose **Apply one license to all challenges** to place the same license on all works (a notice will be displayed on the writing form).
+Or you can set the option to **Enable users to choose license** which places the same menu on the writing form so users can choose a license (or set to All Rights Reserved).
 
-Or you can the Creative Commons options to **Enable users to choose license** which will put the menu on the submission form so users can choose a license (or set to All Rights Reserved). At this time, the only way to edit the licenses displayed (e.g. if you do not want certain ones) is to edit `functions.php` in the template directory. Look for the function `function cc_license_select_options` and comment out the lines containing license options to hide.
+## Customize the Write Form
 
-## Customize the Write form
+You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and  activate the Wordpress Customizer from the admin bar. 
 
-You can now customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and  activate the Wordpress Customizer from the admin bar. 
-
-There is a special section at the bottom to open:
+Look for a special section at the bottom to open:
 
 ![](images/customizer-writer-tab.jpg)
 
-Then from this pane, open "Write Form" tab (eventually the theme options will live here too)
+Then from this pane, open "Write Form" tab
 
 ![](images/customizer-writer-form-tab.jpg)
 
@@ -269,6 +257,12 @@ For each, you can edit the title/label of the field and the prompt that appears 
 
 ![](images/customizer-form-edit.jpg)
 
+## Customize the Content Layout
+
+You can  also customize the content layout. On your site navigate to any content post or page, and activate the Wordpress Customizer from the admin bar. From the **TRU Writer** pane, open **Writer Layout**. Here you can choose from the Thin or Medium layout widths (Wide will only affect very large screens).
+
+![](images/customizer-layout.jpg)
+
 ## Some Complexish Stuff for Nerds, Who Are Awesome
 
 If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
@@ -277,7 +271,13 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
-**Under the Hood** Fixed bug where choosing no comments hid the Reading Time display, changed options editor for default content to be rich text editor, enabled drag and drop media uploading for front page writing form.
+**Better Front End Editor** Customizer options for choosing a this or wider content layout. URLs for media that [WordPress natively can oembed](https://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F) will now do so in the front end editor.
+
+![](images/autoembed-splot-editor.gif)
+
+Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long `functions.php` is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.
+
+**Under the Hood** Fixed bug where choosing no comments hid the Reading Time display, changed options editor for default content to be rich text editor, enabled drag and drop media uploading for front page writing form. Also, URLs that WordPress can autoembed (e.g. YouTube, Twitter, Giphy) will now do so automatically in the editor.
 
 **Theme Option to Remove Tweet This Button** to enable better GDPR compliance.
 
@@ -302,6 +302,3 @@ When published, any writing with an email is published with a `Get Edit Link` bu
 **Admins Can Get Edit Link for Anybody** Even if the author does not provide an email address, in the Wordpress Dashboard interface, editors and admins can click and copy an edit like they can provide directly to a writer (this is added as a side metabox).
 
 ![](images/re-edit-link.jpg "Admin Re-edit Link")
-
-
-

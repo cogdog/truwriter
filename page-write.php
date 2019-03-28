@@ -312,7 +312,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						// Reset content-type to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
 						remove_filter( 'wp_mail_content_type', 'set_html_content_type' );				
 
-					} //is re-edit
+					} //is final publish or re-edit
 					
 				} else {
 					// in draft mode, first save
@@ -418,7 +418,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 														
 			</div><!-- .post-header section -->
 			    
-		    <div class="post-content section-inner thin">
+		    <div class="post-content section-inner medium">
 		    
 		    	<?php if ( $firstview ) the_content(); ?>
 		    		
@@ -484,7 +484,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 <a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
 						<?php
 						// set up for inserting the WP post editor
-						$settings = array( 'textarea_name' => 'wText', 'editor_height' => '400',  'tabindex'  => "3", 'drag_drop_upload' => true);
+						$settings = array( 
+							'textarea_name' => 'wText', 
+							'editor_height' => '400', 
+							'tabindex'  => "3", 
+							'drag_drop_upload' => true, 
+						);
 
 						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
 						?>

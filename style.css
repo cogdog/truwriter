@@ -1,8 +1,8 @@
 /*
 Theme Name: 	TRU Writer
-Theme URI: 		http://splot.ca
-Description: 	TRU Writer (Child of Radcliffe) is a SPLOT for rich media writing on the web, suitable for essays, magazines, and more.
-Version: 		1.4
+Theme URI: 		https://github.com/cogdog/truwriter
+Description: 	TRU Writer (Child of Radcliffe) is a SPLOT (http://splot.ca/) for rich media writing on the web suitable for essays, magazines, conference session proposals, and more. It creates a place for people to publish in a site without them needing a WordPress account or providing identifying information. 
+Version: 		1.51
 Template:       radcliffe
 Author: 		CogDog
 Author URI: 	https://cog.dog
@@ -197,6 +197,15 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 
 }
 
+
+
+.post-content input[type="submit"],
+.post-content input[type="reset"],
+.post-content input[type="button"], button.wp-switch-editor, #insert-media-button,   span.mce-txt
+ {
+    font-family: "Open Sans", sans-serif;
+}
+
 .post-content input[type="text"]:focus,
 .post-content input[type="tel"]:focus,
 .post-content input[type="url"]:focus,
@@ -262,8 +271,8 @@ form#writerform { padding: 30px 20px; }
 #writerform .writerfield {
 	width:100%;
 	padding:0.5rem;
-
 }
+
 
 /* -------------------- style the autocomplete stuff ----------------------------------*/
 /* h/t http://sudarmuthu.com/blog/using-wordpress-built-in-tag-auto-complete-script-in-your-plugins/#comment-644312 */

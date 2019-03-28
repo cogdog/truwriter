@@ -64,6 +64,16 @@
 			    
 		    <div class="post-content section-inner thin">
 		    
+		    <?php  if ( is_preview() ):?>
+				<div class="notify"><span class="symbol icon-info"></span>
+This is a preview of your entry that shows how it will look when published. Close this window/tab when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click <strong>Final Publish</strong>.
+							
+					</div>
+							
+							
+							<?php endif?>
+		    
+		    
 		    	<?php the_content(); ?>
 		    	
 		    	<hr />
@@ -145,7 +155,7 @@
 				
 				<div class="meta-block post-cat-tags">
 				
-					<h3 class="meta-title"><?php _e('ORAGANIZED BY','radcliffe'); ?></h3>
+					<h3 class="meta-title"><?php _e('ORGANIZED BY','radcliffe'); ?></h3>
 				
 				
 					<?php if (truwriter_option('show_cats') ):?>
