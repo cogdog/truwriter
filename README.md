@@ -21,6 +21,14 @@ The site invisibly logs in visitors to a special account to make available advan
 
 The TRU Writer Theme was developed along with the [TRU Collector](http://splot.ca/splots/the-comparator/), the [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
+## With Thanks
+
+SPLOTs have no venture capital, no IPOs, no real funding at all. But they have been helped along by a few groups worth recognizing with an icon and a link.
+
+The original TRU Writer was developed under a [Thompson Rivers University Open Learning Fellowship](http://cogdog.trubox.ca/) and further development was supported in part by a [Reclaim Hosting Fellowship](http://reclaimhosting.com), an [OpenETC grant](https://opened.ca), and ongoing support by [Patreon patrons](https://patreon.com/cogdog).
+
+[![Thompson Rivers University](http://cogdog.github.io/images/tru.jpg)](https://tru.ca) [![Reclaim Hosting](http://cogdog.github.io/images/reclaim.jpg)](https://reclaimhosting.com) [![OpenETC](http://cogdog.github.io/images/reclaim.jpg)](https://opened.ca)   [![Supporters on Patreon](http://cogdog.github.io/images/patreon.jpg)](https://patreon.com/cogdog) 
+
 
 ## Examples in Action 
 
