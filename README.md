@@ -44,6 +44,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
+* [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College
 * [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
 * [#femedtech OER19 Open Space](http://femedtech.net/)
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
@@ -53,9 +54,12 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [My TRU Writer](http://bsolivan.wescreates.wesleyan.edu/MyTruWriter/) Wesleyan University
 * [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
+* [OpenMed Project Works Showcase](https://showcase.openmedproject.eu/)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
+* [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
 * [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
+* [Stories & Tales](http://mkr12.coventry.domains/tales) English Language and Culture Summer School at  Coventry University
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)

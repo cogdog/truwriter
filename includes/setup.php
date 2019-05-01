@@ -259,10 +259,12 @@ function add_truwriter_scripts() {
 		// Build in tag auto complete script
    		wp_enqueue_script( 'suggest' );
    		
-   		// More functionality in rich text editor
+   		// Autoembed functionality in rich text editor
+   		// needs dependency on tiny_mce
    		// h/t https://wordpress.stackexchange.com/a/287623
-   		wp_enqueue_script( 'mce-view' );
-
+   		
+   		wp_enqueue_script( 'mce-view', '', array('tiny_mce') );		
+   		
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', 'suggest' , '1.23', TRUE );
 		wp_enqueue_script( 'jquery.writer' );
