@@ -99,8 +99,8 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 	}
 }
 
-function truwriter_publish ( $post ) {
-	 truwriter_mail_edit_link ( $post->ID, 'published' );
+function truwriter_publish ( $ID, $post ) {
+	truwriter_mail_edit_link ( $ID, 'published' );
     // Send edit link when published  
 }
 

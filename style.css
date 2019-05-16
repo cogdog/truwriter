@@ -2,7 +2,7 @@
 Theme Name: 	TRU Writer
 Theme URI: 		https://github.com/cogdog/truwriter
 Description: 	TRU Writer (Child of Radcliffe) is a SPLOT (http://splot.ca/) for rich media writing on the web suitable for essays, magazines, conference session proposals, and more. It creates a place for people to publish in a site without them needing a WordPress account or providing identifying information. 
-Version: 		1.51
+Version: 		1.6
 Template:       radcliffe
 Author: 		CogDog
 Author URI: 	https://cog.dog
@@ -271,6 +271,15 @@ form#writerform { padding: 30px 20px; }
 #writerform .writerfield {
 	width:100%;
 	padding:0.5rem;
+}
+
+/* ---------------------- for easy footnotes plugin -----------------------------------*/
+
+ol.easy-footnotes-wrapper {
+    margin-top: 8em;
+    font-size: 0.8em;
+    border-top: 1px #ddd solid;
+    padding-top: 1em;
 }
 
 

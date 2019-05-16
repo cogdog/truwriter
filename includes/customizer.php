@@ -622,7 +622,7 @@ function truwriter_form_re_edit_prompt() {
 	 if ( get_theme_mod( 're_edit_prompt') != "" ) {
 	 	return get_theme_mod( 're_edit_prompt');
 	 }	else {
-	 	return 'You can now re-edit any part of this previously published writing. If you do not save any final changes, it will be left as it was before.';
+	 	return 'You can now re-edit any part of this previously published writing and then click "Republish Changes" to update your work.';
 	 }
 }
 

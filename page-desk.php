@@ -129,7 +129,7 @@ if ( 	isset( $_POST['truwriter_form_access_submitted'] )
 														
 			</div><!-- .post-header section -->
 			    
-		   <div class="post-content section-inner thin">
+		   <div class="post-content section-inner <?php truwriter_layout_width()?>">
 		    
 		    	<?php the_content(); ?>
 

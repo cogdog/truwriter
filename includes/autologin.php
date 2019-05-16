@@ -36,7 +36,7 @@ function splot_redirect_url() {
 	return ( home_url('/') . 'write' );
 }
 
-function splot_user_login( $user_login = 'writer' ) {
+function splot_user_login( $user_login = 'writer', $redirect = true ) {
 	// login the special user account to allow authoring
 	
 	// check for the correct user
@@ -48,16 +48,16 @@ function splot_user_login( $user_login = 'writer' ) {
 		wp_clear_auth_cookie(); 
 		
 		// set the user directly
-		wp_set_current_user( $autologin_user->id, $autologin_user->user_login );
+		wp_set_current_user( $autologin_user->ID, $autologin_user->user_login );
 		
 		// new cookie
-		wp_set_auth_cookie( $autologin_user->id);
+		wp_set_auth_cookie( $autologin_user->ID);
 		
 		// do the login
 		do_action( 'wp_login', $autologin_user->user_login );
 		
 		// send 'em on their way
-		wp_redirect( splot_redirect_url() );
+		if ($redirect) wp_redirect( splot_redirect_url() );
 		
 		
 	} else {
