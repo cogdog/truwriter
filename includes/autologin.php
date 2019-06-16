@@ -6,7 +6,7 @@
 // Add custom logo to entry screen... because we can
 // While we are at it, use CSS to hide the back to blog and retried password links
 
-// You know like my logo? Whatsamatta you? Then chenage the image in the theme folder images/site-login-logo.png
+// You know like my logo? Whatsamatta you? Then change the image in the theme folder images/site-login-logo.png
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
 
 function my_login_logo() { ?>
@@ -36,8 +36,10 @@ function splot_redirect_url() {
 	return ( home_url('/') . 'write' );
 }
 
-function splot_user_login( $user_login = 'writer', $redirect = true ) {
+function splot_user_login( $user_login = 'writer', $redirect = true, $query_str = '' ) {
 	// login the special user account to allow authoring
+	// somestimes we want to do it without redirection
+	// other times we have to pass a query string
 	
 	// check for the correct user
 	$autologin_user = get_user_by( 'login', $user_login ); 
@@ -57,7 +59,7 @@ function splot_user_login( $user_login = 'writer', $redirect = true ) {
 		do_action( 'wp_login', $autologin_user->user_login );
 		
 		// send 'em on their way
-		if ($redirect) wp_redirect( splot_redirect_url() );
+		if ($redirect) wp_redirect( splot_redirect_url() . $query_str  );
 		
 		
 	} else {

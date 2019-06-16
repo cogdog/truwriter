@@ -3,7 +3,6 @@
 Template Name: Writing Pad
 */
 
-
 // ------------------------ defaults ------------------------
 
 // Parent category for published topics
@@ -20,7 +19,7 @@ $post_id = $revcount = 0;
 $formclass = 'writenew';
 $wStatus = "New, not saved";
 
-$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $firstview = '';	
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense =  '';	
 
 // default welcome message
 $feedback_msg = truwriter_form_default_prompt();
@@ -53,28 +52,9 @@ if ( ( $wid  and $tk )  ) {
 	if ( !is_user_logged_in() ) {
 		splot_user_login( 'writer', false );
 	}
-} else {
-	// normal entry check for author
-	if ( !is_user_logged_in() ) {
-		// not already logged in? go to desk.
-		wp_redirect ( home_url('/') . 'desk'  );
-		exit;
-	
-	} elseif ( !current_user_can( 'edit_others_posts' ) ) {
-		// okay user, who are you? we know you are not an admin or editor
-		
-		// if the writer user not found, we send you to the desk
-		if ( !truwriter_check_user() ) {
-			// now go to the desk and check in properly
-			wp_redirect ( home_url('/') . 'desk'  );
-			exit;
-		}
-	}
-}
+} 
 
-
-
-if ( $is_re_edit and !isset( $_POST['wPublish'] )) {
+if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
 	// check for first entry of re-edit.
 
 	// look up the stored edit key
@@ -182,9 +162,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  			
  		} else { // good enough, let's set up a post! 
  			
- 			
- 			   	
- 			// the default category for in progress
+  			// the default category for in progress
  			$def_category_id = get_cat_ID( 'In Progress' );
  			
 			$w_information = array(
@@ -299,6 +277,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 							$subject = 'Recently published writing at ' . get_bloginfo();
 					
 							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a> and review / edit if needed, or just enjoy the feeling of being published.';
+							
+							// if user provided email address, send instructions to use link to edit
+							if ( !isset($wEmail) ) truwriter_mail_edit_link();
 						
 						} // is_status pending
 						
@@ -332,9 +313,6 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 					$feedback_msg = 'Your edits have been saved. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
 				}
 							
-				
-				
-				
 				
 				// add the id to our array of post information so we can issue an update
 				$w_information['ID'] = $post_id;
@@ -388,18 +366,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 			} // post_id = 0
 						 	
 		} // count errors	
-		
-} else {
-	// brand new writing, let's set up defaults
-	
-	// flag for stuff to show in first page view
-	$firstview = true;	
-				
+						
 } // end form submmitted check
+
+get_header();
 ?>
 
-<?php get_header('write'); ?>
-			
 <div class="content">		
 
 	<?php if ( have_posts() ) : 
@@ -408,7 +380,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 	
 			<div <?php post_class( 'post single' ); ?>>
 		
-				<?php if ( has_post_thumbnail()  AND  $firstview  ) : ?>
+				<?php if ( has_post_thumbnail() ) : ?>
 					
 					<div class="featured-media" style="background-image: url( <?php the_post_thumbnail_url( $post->ID, 'post-image' ); ?> );">
 			
@@ -444,7 +416,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 			    
 		    <div class="post-content section-inner medium">
 		    
-		    	<?php if ( $firstview ) the_content(); ?>
+		    	<?php the_content(); ?>
 		    		
 			    		
 		    	<?php  

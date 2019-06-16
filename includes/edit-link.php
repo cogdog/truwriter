@@ -59,14 +59,14 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 	$wEmail = get_post_meta( $wid, 'wEmail', 1 );
 
 	// Link for the written thing
-	$wLink = get_permalink( $wid);
+	$wLink = get_permalink( $wid );
 	
 	// who gets mail? They do.
 	$to_recipient = $wEmail;
 
 	$wTitle = htmlspecialchars_decode( get_the_title( $wid ) );
 	
-	$edit_instructions = '<p>To be able to edit this work, just follow these steps</p> <ol><li><a href="' . get_bloginfo('url') . '/desk">Activate the writer</a>. This will send you to the blank writing form. Ignore it. </li><li>Now, use this link to access your work<br />&nbsp; &nbsp; <a href="' . get_bloginfo('url') . '/write/?wid=' . $wid . '&tk=' . $wEditKey  . '">' . get_bloginfo('url') . '/write/?wid=' . $wid . '&tk=' . $wEditKey  . '</a></li></ol><p>That link should open your last edited version in the writer so you can make any modifications to it. Save this email as a way to always return to edit your writing.</p>';
+	$edit_instructions = '<p>To be able to edit this work use this special access link <a href="' . get_bloginfo('url') . '/write/?wid=' . $wid . '&tk=' . $wEditKey  . '">' . get_bloginfo('url') . '/write/?wid=' . $wid . '&tk=' . $wEditKey  . '</p>It should open your last edited version so you can make any modifications to it. Save this email as a way to always return to edit your writing or use the Request Edit Link button at the bottom of your published work.</p>';
 	
 	if ( $mode == 'request' ) {
 		// subject and message for a edut link request
@@ -94,7 +94,7 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 		if 	($mail_sent) {
 			echo 'Instructions sent via email';
 		} else {
-			echo 'Uh op mail not sent';
+			echo 'Uh oh mail not sent';
 		}
 	}
 }
@@ -104,5 +104,5 @@ function truwriter_publish ( $ID, $post ) {
     // Send edit link when published  
 }
 
-add_action(  'publish_post',  'truwriter_publish', 10, 2 );
+// add_action(  'publish_post',  'truwriter_publish', 10, 2 );
 ?>

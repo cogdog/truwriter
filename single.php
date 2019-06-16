@@ -116,7 +116,7 @@ This is a preview of your entry that shows how it will look when published. Clos
 							
 							// show the request edit link button if they have provided an email and post is published
 							if ( get_post_meta( $post->ID, 'wEmail', 1 ) and get_post_status() == 'publish' ) {
-								echo '<p class="author-description"><strong>Edit Link:</strong> <em>(emailed to author)</em><br /> <a href="#" id="getEditLink" class="pretty-button pretty-button-blue" data-widurl="' . get_bloginfo('url') . '/get-edit-link/?wid=' .   $post->ID . '">Request Now</a> <span id="getEditLinkResponse" class="writenew"></span></p>';
+								echo '<p class="author-description"><strong>Edit Link:</strong> <em>(emailed to author)</em><br /> <a href="#" id="getEditLink" class="pretty-button pretty-button-blue" data-widurl="' . get_bloginfo('url') . '/get-edit-link/' .   $post->ID . '">Request Now</a> <span id="getEditLinkResponse" class="writenew"></span></p>';
 							}
 							?>
 							

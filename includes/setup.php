@@ -8,14 +8,10 @@
 add_action('after_switch_theme', 'truwriter_setup');
 
 function truwriter_setup () { 
-	// Let's get this show on the road! 
-
 
     // make sure our categories are present, accounted for, named
 	wp_insert_term( 'In Progress', 'category' );
 	wp_insert_term( 'Published', 'category' );
-
-
 
 	// Look for existence of pages with the appropriate template, if not found
 	// make 'em cause it's good to make the pages
@@ -58,76 +54,21 @@ function truwriter_setup () {
 	
 		wp_insert_post( $page_data );
 	}
-
 	
-	if (! page_with_template_exists( 'page-random.php' ) ) {
-  
-		// create the writing form page if it does not exist
-		// backdate creation date 2 days just to make sure they do not end up future dated
-		
-		$page_data = array(
-			'post_title' 	=> 'Random',
-			'post_content'	=> 'You should never see this page, it is for random redirects. What are you doing looking at this page? Get back to writing, willya?',
-			'post_name'		=> 'random',
-			'post_status'	=> 'publish',
-			'post_type'		=> 'page',
-			'post_author' 	=> 1,
-			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
-			'page_template'	=> 'page-random.php',
-		);
-	
-		wp_insert_post( $page_data );
-	}
-
-	if (! page_with_template_exists( 'page-get-edit-link.php' ) ) {
-  
-		// create the writing form page if it does not exist
-		// backdate creation date 2 days just to make sure they do not end up future dated
-		
-		$page_data = array(
-			'post_title' 	=> 'Get Edit Link',
-			'post_content'	=> 'You should never see this page, it is for doing a few chores. What did your mom tell you about peeking?',
-			'post_name'		=> 'get-edit-link',
-			'post_status'	=> 'publish',
-			'post_type'		=> 'page',
-			'post_author' 	=> 1,
-			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
-			'page_template'	=> 'page-get-edit-link.php',
-		);
-	
-		wp_insert_post( $page_data );
-	}
-	
-
+	flush_rewrite_rules( );
 }
-
 
 # -----------------------------------------------------------------
 # Set up the table and put the napkins out, stuff we do every visit
 # -----------------------------------------------------------------
 
-// we need to load the options this before the auto login so we can use the pass
+// get theme options early in the flow
 add_action( 'after_setup_theme', 'truwriter_load_theme_options', 9 );
 
 // change the name of admin menu items from "New Posts"
 // -- h/t http://wordpress.stackexchange.com/questions/8427/change-order-of-custom-columns-for-edit-panels
 // and of course the Codex http://codex.wordpress.org/Function_Reference/add_submenu_page
 
-add_action( 'admin_menu', 'truwriter_change_post_label' );
-
-function truwriter_change_post_label() {
-    global $menu;
-    global $submenu;
-    
-    $thing_name = 'Writing';
-    
-    $menu[5][0] = $thing_name . 's';
-    $submenu['edit.php'][5][0] = 'All ' . $thing_name . 's';
-    $submenu['edit.php'][10][0] = 'Add ' . $thing_name;
-    $submenu['edit.php'][15][0] = $thing_name .' Categories';
-    $submenu['edit.php'][16][0] = $thing_name .' Tags';
-    echo '';
-}
 
 // Here we further move the Wordpress interface from it's Post centric personality, to rename the labels for posts
 add_action( 'init', 'truwriter_change_post_object' );
@@ -153,14 +94,144 @@ function truwriter_change_post_object() {
 }
 
 
-// Add some menu items to the admin menu to porvide easy access to the In Progress category items
-// and the pending status ones
-add_action('admin_menu', 'truwriter_drafts_menu');
+/* set up rewrite rules */
+add_action('init','truwriter_rewrite_rules');
 
-function truwriter_drafts_menu() {
-	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
+
+function truwriter_rewrite_rules() {
+	// for sending to random item
+   add_rewrite_rule('random/?$', 'index.php?random=1', 'top');
+
+   // for edit link requests
+   add_rewrite_rule( '^get-edit-link/([^/]+)/?',  'index.php?elink=1&wid=$matches[1]','top');	 
+ }
+ 
+ 
+ /* handle redirects */
+ 
+add_action( 'template_redirect', 'truwriter_write_director' );
+
+function truwriter_write_director() {
+
+	if ( is_page('write') and !isset( $_POST['truwriter_form_make_submitted'] ) ) {
 	
-	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
+		// check for query vars that indicate this is a edit request/ build qstring
+		$wid = get_query_var( 'wid' , 0 );   // id of post
+		$tk  = get_query_var( 'tk', 0 );    // magic token to check
+
+		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
+		
+			// normal entry check for author
+		if ( !is_user_logged_in() ) {
+			// not already logged in? go to desk.
+			wp_redirect ( home_url('/') . 'desk'  . $args );
+			exit;
+	
+		} elseif ( !current_user_can( 'edit_others_posts' ) ) {
+			// okay user, who are you? we know you are not an admin or editor
+		
+			// if the writer user not found, we send you to the desk
+			if ( !truwriter_check_user() ) {
+				// now go to the desk and check in properly
+				wp_redirect ( home_url('/') . 'desk' . $args  );
+				exit;
+			} 
+		}
+
+	}
+	
+	if ( is_page('desk') ) {
+	
+	
+		// check for query vars that indicate this is a edit request/ build qstring
+		$wid = get_query_var( 'wid' , 0 );   // id of post
+		$tk  = get_query_var( 'tk', 0 );    // magic token to check
+
+		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
+
+	
+		// already logged in? go directly to the tool
+		if ( is_user_logged_in() ) {
+
+			if ( current_user_can( 'edit_others_posts' ) ) {
+				// If user has edit/admin role, send them to the tool
+				wp_redirect( splot_redirect_url() . $args );
+				exit;
+
+			} else {
+
+				// if the correct user already logged in, go directly to the tool
+				if ( truwriter_check_user() ) {			
+					wp_redirect( splot_redirect_url()  . $args );
+					exit;
+				} 
+			}	
+	
+		} elseif ( truwriter_option('accesscode') == '')  {
+			splot_user_login('writer', true, $args );
+			exit;
+		} elseif ( isset( $_POST['truwriter_form_access_submitted'] ) 
+		&& wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
+ 
+			// access code from the form
+			if ( stripslashes( $_POST['wAccess'] ) == truwriter_option('accesscode') ) {
+				splot_user_login('writer', true, $args );
+				exit;
+			}
+			
+		}
+			
+	}
+	
+  if ( get_query_var('random') == 1 ) {
+		 // set arguments for WP_Query on published posts to get 1 at random
+		$args = array(
+			'post_type' => 'post',
+			'post_status' => 'publish',
+			'posts_per_page' => 1,
+			'orderby' => 'rand'
+		);
+
+		// It's time! Go someplace random
+		$my_random_post = new WP_Query ( $args );
+
+		while ( $my_random_post->have_posts () ) {
+		  $my_random_post->the_post ();
+  
+		  // redirect to the random post
+		  wp_redirect ( get_permalink () );
+		  exit;
+		}  
+   } elseif ( get_query_var('elink') == 1 and get_query_var('wid')  ) {
+   
+   		// get the id parameter from URL
+		$wid = get_query_var( 'wid' , 0 );   // id of post
+
+		truwriter_mail_edit_link ($wid);
+   		exit;
+   }
+
+
+}
+
+
+// filter content on writing page so we do not submit the page content if form is submitted
+add_filter( 'the_content', 'truwriter_firstview' );
+ 
+function truwriter_firstview( $content ) {
+ 
+    // Check if we're inside the main loop on the writing page
+    if ( is_page('write') && in_the_loop() && is_main_query() ) {
+    
+    	if ( isset( $_POST['truwriter_form_make_submitted'] ) ) {
+    		return '';
+    	} else {
+    		 return $content;
+    	}
+       
+    }
+ 
+    return $content;
 }
 
 
@@ -220,14 +291,44 @@ function truwriter_tinymce_2_buttons($buttons)
 
 
 // -----  add allowable url parameters so we can do reall cool stuff, wally
-add_filter('query_vars', 'truwriter_tqueryvars' );
+add_filter('query_vars', 'truwriter_queryvars' );
 
-function truwriter_tqueryvars( $qvars ) {
+function truwriter_queryvars( $qvars ) {
 	$qvars[] = 'tk'; // token key for editing previously made stuff
 	$qvars[] = 'wid'; // post id for editing
+	$qvars[] = 'random'; // random flag
+	$qvars[] = 'elink'; // edit link flag
 	
 	return $qvars;
 } 
+
+add_action( 'admin_menu', 'truwriter_change_post_label' );
+
+function truwriter_change_post_label() {
+    global $menu;
+    global $submenu;
+    
+    $thing_name = 'Writing';
+    
+    $menu[5][0] = $thing_name . 's';
+    $submenu['edit.php'][5][0] = 'All ' . $thing_name . 's';
+    $submenu['edit.php'][10][0] = 'Add ' . $thing_name;
+    $submenu['edit.php'][15][0] = $thing_name .' Categories';
+    $submenu['edit.php'][16][0] = $thing_name .' Tags';
+    echo '';
+}
+
+// Add some menu items to the admin menu to porvide easy access to the In Progress category items
+// and the pending status ones
+add_action('admin_menu', 'truwriter_drafts_menu');
+
+function truwriter_drafts_menu() {
+	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
+	
+	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
+}
+
+
 
 # -----------------------------------------------------------------
 # For the Writing Form

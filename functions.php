@@ -13,5 +13,4 @@ require_once( __DIR__ . '/includes/edit-link.php'); // manage editing links
 require_once( __DIR__ . '/includes/licences.php'); // licenses are cool
 require_once( __DIR__ . '/includes/tools.php'); // misc utilities
 require_once( __DIR__ . '/includes/splot-plugins.php'); //  plugin admin notices.
-
 ?>
