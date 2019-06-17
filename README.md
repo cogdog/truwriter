@@ -56,6 +56,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
 * [OpenMed Project Works Showcase](https://showcase.openmedproject.eu/)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
+* [Refugee Learning Stories](http://refugeelearningstories.org/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
 * [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
