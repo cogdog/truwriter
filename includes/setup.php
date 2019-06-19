@@ -113,7 +113,7 @@ add_action( 'template_redirect', 'truwriter_write_director' );
 
 function truwriter_write_director() {
 
-	if ( is_page('write') and !isset( $_POST['truwriter_form_make_submitted'] ) ) {
+	if ( is_page( truwriter_get_write_page() ) and !isset( $_POST['truwriter_form_make_submitted'] ) ) {
 	
 		// check for query vars that indicate this is a edit request/ build qstring
 		$wid = get_query_var( 'wid' , 0 );   // id of post
@@ -124,7 +124,7 @@ function truwriter_write_director() {
 			// normal entry check for author
 		if ( !is_user_logged_in() ) {
 			// not already logged in? go to desk.
-			wp_redirect ( home_url('/') . 'desk'  . $args );
+			wp_redirect ( home_url('/') . truwriter_get_desk_page()  . $args );
 			exit;
 	
 		} elseif ( !current_user_can( 'edit_others_posts' ) ) {
@@ -133,14 +133,14 @@ function truwriter_write_director() {
 			// if the writer user not found, we send you to the desk
 			if ( !truwriter_check_user() ) {
 				// now go to the desk and check in properly
-				wp_redirect ( home_url('/') . 'desk' . $args  );
+				wp_redirect ( home_url('/') . truwriter_get_desk_page() . $args  );
 				exit;
 			} 
 		}
 
 	}
 	
-	if ( is_page('desk') ) {
+	if ( is_page(truwriter_get_desk_page()) ) {
 	
 	
 		// check for query vars that indicate this is a edit request/ build qstring
@@ -210,9 +210,22 @@ function truwriter_write_director() {
 		truwriter_mail_edit_link ($wid);
    		exit;
    }
-
-
 }
+
+
+function truwriter_no_featured_image() {
+	if ( is_page( truwriter_get_write_page() ) and isset( $_POST['truwriter_form_make_submitted'] ) ) {
+    ?>
+        <style>
+            .featured-media {
+                display:none;
+            }
+        </style>
+    <?php
+    }
+}
+
+add_action('wp_head', 'truwriter_no_featured_image');
 
 
 // filter content on writing page so we do not submit the page content if form is submitted
@@ -221,7 +234,7 @@ add_filter( 'the_content', 'truwriter_firstview' );
 function truwriter_firstview( $content ) {
  
     // Check if we're inside the main loop on the writing page
-    if ( is_page('write') && in_the_loop() && is_main_query() ) {
+    if ( is_page( truwriter_get_write_page() ) && in_the_loop() && is_main_query() ) {
     
     	if ( isset( $_POST['truwriter_form_make_submitted'] ) ) {
     		return '';
@@ -350,7 +363,7 @@ function add_truwriter_scripts() {
 	);
 	
 
- 	if ( is_page('write') ) { // use on just our form page
+ 	if ( is_page( truwriter_get_write_page() ) ) { // use on just our form page
     
 		 // add media scripts if we are on our maker page and not an admin
 		 // after http://wordpress.stackexchange.com/a/116489/14945
@@ -425,6 +438,6 @@ function splot_default_menu() {
 	// site home with trailing slash
 	$splot_home = home_url('/');
   
- 	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . 'write' . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
+ 	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . truwriter_get_write_page() . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
 }
 ?>

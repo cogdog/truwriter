@@ -148,7 +148,57 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
-
+		
+		$this->settings['pages_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Pages Setup',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+		
+		// get all pages on site with template for the Writing Desk
+		$found_pages = get_pages_with_template('page-desk.php');
+		
+		// the function returns an array of id => page title, first item is the menu selection item
+		if ( count( $found_pages ) > 1 ) {
+			$page_desc = 'Set the Page that should be used for the access code entry.';
+			$page_std =  array_keys( $found_pages)[1];
+		} else {
+			$page_desc = 'No pages have been created with the Writing Desk template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Desk</code> for the Template.'; 
+			$page_std = '';
+		}
+	
+		$this->settings['desk_page'] = array(
+			'section' => 'general',
+			'title'   => __( 'Page For Access Code (Writing Desk)'),
+			'desc'    => $page_desc,
+			'type'    => 'select',
+			'std'     =>  $page_std,
+			'choices' => $found_pages
+		);
+		
+		// get all pages on site with template for the Writing Form
+		$found_pages = get_pages_with_template('page-write.php');
+		
+		// the function returns an array of id => page title, first item is the menu selection item
+		if ( count( $found_pages ) > 1 ) {
+			$page_desc = 'Set the Page that should be used for the Writing form.';
+			$page_std =  array_keys( $found_pages)[1];
+		} else {
+			$page_desc = 'No pages have been created with the Writing Pad template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Pad</code> for the Template.'; 
+			$page_std = '';
+		}
+	
+		$this->settings['write_page'] = array(
+			'section' => 'general',
+			'title'   => __( 'Page For Writing Form (Writing Pad)'),
+			'desc'    => $page_desc,
+			'type'    => 'select',
+			'std'     =>  $page_std,
+			'choices' => $found_pages
+		);
+		
 
 		$this->settings['publish_heading'] = array(
 			'section' => 'general',

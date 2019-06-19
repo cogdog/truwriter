@@ -20,6 +20,51 @@ function page_with_template_exists ( $template ) {
 	return ($pages_found);
 }
 
+function get_pages_with_template ( $template ) {
+	// returns array of pages with a given template
+	
+	// look for pages that use the given template
+	$seekpages = get_posts (array (
+				'post_type' => 'page',
+				'meta_key' => '_wp_page_template',
+				'meta_value' => $template,
+				'posts_per_page' => -1
+	));
+	
+	// holder for results
+	$tpages = array(0 => 'Select Page');
+	
+
+	// Walk those results, store ID of pages found
+	foreach ( $seekpages as $p ) {
+		$tpages[$p->ID] = $p->post_title;
+	}
+	
+	return $tpages;
+}
+
+function truwriter_get_write_page() {
+
+	// return slud for page set in theme options for writing page (newer versions of SPLOT)
+	if ( truwriter_option( 'write_page' ) )  {
+		return ( get_post_field( 'post_name', get_post( truwriter_option( 'write_page' ) ) ) ); 
+	} else {
+		// older versions of SPLOT use the slug
+		return ('write');
+	}
+}
+
+
+function truwriter_get_desk_page() {
+
+	// return slug for page set in theme options for writing page (newer versions of SPLOT)
+	if (  truwriter_option( 'desk_page' ) ) {
+		return ( get_post_field( 'post_name', get_post( truwriter_option( 'desk_page' ) ) ) ); 
+	} else {
+		// older versions of SPLOT use the slug
+		return ('desk');
+	}
+}
 
 // function to get the caption for an attachment (stored as post_excerpt)
 // -- h/t http://wordpress.stackexchange.com/a/73894/14945
@@ -173,6 +218,5 @@ function truwriter_get_splot_meta_for_api( $object ) {
 	 }
 	 
 	 return ($splot_meta);
- 
 } 
 ?>

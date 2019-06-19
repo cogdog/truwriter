@@ -33,7 +33,7 @@ function login_link( $url ) {
 
 function splot_redirect_url() {
 	// where to send them after login ok
-	return ( home_url('/') . 'write' );
+	return ( home_url('/') . truwriter_get_write_page() );
 }
 
 function splot_user_login( $user_login = 'writer', $redirect = true, $query_str = '' ) {

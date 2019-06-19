@@ -129,11 +129,11 @@ You can also get a copy of the Widgets used on that site too. First intall/activ
 ### Page Setup
 This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Activating the theme *should* create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
 
-If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions, but do not change the slug or short name.
+If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions. As of version 1.8, you can edit the url short name as well.
 
-* **Write** -- The page that provides the writing form see [http://splot.ca/writer/write](http://splot.ca/writer/write). You can title it whatever you like, but the slug (url name) must be `write`  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/write`
+* **Write** -- The page that provides the writing form, see [http://splot.ca/writer/write](http://splot.ca/writer/write).  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page can be published at `http://coolest.site.org/writing` When you create a Writing Form page, under **Page Atributes**, select the Template named `Writing Pad`
 
-* **Desk** -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk). You can title it whatever you like, but the slug (url name) must be `desk` Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page must be published at `http://coolest.site.org/desk`
+* **Desk** -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk).  Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page might be published at `http://coolest.site.org/guard_dog` When you create a Writing Form page, under **Page Atributes**, select the Template named `Welcome Desk`
 
 
 ### Customize Your Menus
@@ -169,6 +169,19 @@ If you want to require users to enter an access code (a very weak password), jus
 The TRU Writer is a moderated publishing theme. And "moderated" means that when a writer submits something, it is not  immediately visible to the world. Instead, unless you set it otherwise (more on that below), when a writer submits a post (or "writing" as above) they are automatically set as drafts with a  *Pending Approval* status. You'll get notifications that a submissions has been made to the Email address you enter in the "Notifications Email" option. 
 
 In order to make a post (or "writing" as above) visible, a user with the permission status of "Editor" or "Administrator" needs to change the status of the "pending approval" writing to "published (or ignore an "Editor" or "Administrator" could just ignore it forever, such power is theirs).
+
+#### Pages Setup
+
+Use this area to assign the WordPress Page to be used for the Welcome Desk (where users are sent if there is a required access code) as well as the Page for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be `write` and `desk`-- this is no longer required.
+
+If no Pages are found with the correct template, you will see a prompt to create one:
+
+![](images/pages-make.jpg)
+
+If pages are found (and there might even be more than one, you can select the one you want used for each special page.
+
+![](images/pages-setup.jpg)
+
 
 #### Publish Options
 
@@ -281,9 +294,12 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
+
+**Options for Special Pages**  No longer are pages for the Welcome Desk (where access codes are entered) and Writer form required to have a set URL; you can create any Page desired for these functions, and set them as the active ones via the theme options.
+
 **Better Front End Editor**  Reduced reliance on special pages. The links to the random entry and the one use to get the edit link are no longer needed, and are handle now in the code. These pages should be deleted from your site. On an update to version 1.7 or later, you might have to go to **Settings** - **Permalinks** and just click save to update the url rules. Also the method for using the special link to edit an entry is now done in a single click. Much better!
 
-**Better Front End Editor** Customizer options for choosing a this or wider content layout. URLs for media that [WordPress natively can oembed](https://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F) will now do so in the front end editor.
+**Better Layout and Media Support** Customizer options for choosing a this or wider content layout. URLs for media that [WordPress natively can oembed](https://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F) will now do so in the front end editor.
 
 ![](images/autoembed-splot-editor.gif)
 
