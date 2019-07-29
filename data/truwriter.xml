@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.2.1" created="2019-06-19 08:25" -->
+	<!-- generator="WordPress/5.2.2" created="2019-07-29 20:16" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>SPLOT Writer</title>
 	<link>https://lab.cogdogblog.com/writer</link>
 	<description>demo version of TRU Writer SPLOT</description>
-	<pubDate>Wed, 19 Jun 2019 08:25:15 +0000</pubDate>
+	<pubDate>Mon, 29 Jul 2019 20:16:35 +0000</pubDate>
 	<language>en</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>https://lab.cogdogblog.com/writer</wp:base_site_url>
@@ -266,7 +266,7 @@
 			<wp:term><wp:term_id>19</wp:term_id><wp:term_taxonomy>nav_menu</wp:term_taxonomy><wp:term_slug><![CDATA[mein]]></wp:term_slug><wp:term_name><![CDATA[mein]]></wp:term_name>
 </wp:term>
 
-	<generator>https://wordpress.org/?v=5.2.1</generator>
+	<generator>https://wordpress.org/?v=5.2.2</generator>
 
 		<item>
 		<title>Write Here!</title>
@@ -1001,6 +1001,14 @@ Got ideas? <a href="https://github.com/cogdog/truwriter/issues">Submit as an iss
 		<wp:meta_key><![CDATA[_oembed_time_efc21a89fbe329409d5aabed80b96232]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1474603947]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_time_40461d94f889702f91fdbd92959b631d]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1564380201]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_oembed_40461d94f889702f91fdbd92959b631d]]></wp:meta_key>
+		<wp:meta_value><![CDATA[<iframe title="A skunk sat on a stump..." width="640" height="360" src="https://www.youtube.com/embed/8CW6B0w7r8U?feature=oembed" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title>About</title>
@@ -1240,12 +1248,14 @@ The writing form <a href="http://connectedcourses.stateu.org/seeds/writer/write/
 <h2>TRU Writer Options</h2>
 Access the site specific settings from the <code>TRU Writer Options</code> menu on the top black admin menu.
 
-There are two suggested approaches to setting up access to the writing form -- because it works without login, you may want to consider how open you want your own one to be.
+Under "<strong>Access to Writing Tool</strong>" are two suggested approaches to setting up access to the writing form -- because it works without login, you may want to consider how open you want your own one to be.
 <ul>
  	<li>Enter in the <code>Access Code</code> field a code you share with your writers/students.  When the try to access the Writer, they will first have to pass the Welcome Desk where they enter the code. It is like a weal password. Then use the <code>Status for New Writings</code> to be Publish Immediately so your writers can see their work (this is not require, you are more then welcome to moderate all input).</li>
  	<li>If you leave the <code>Access Code</code> blank, users will go directly to the form. In this case you should set the <code>Status for New Writings</code> to be Moderated (this will end up in the <strong>Writings</strong> -&gt; <strong>Pending Approval</strong> area).</li>
 </ul>
-There are places for you to define the default content that appears in the blank writing form (HTML allowed).  Also, you can elect whether to allow comments or not on all writings.
+The next section, "<strong>Pages Setup</strong>" is where you can select the Page thats serves as the Writing Desk (this is where users are sent if an access code is required) and the one that serves as the Writing form. These pages should be created for you when the theme is activated at URLs that end in <code>/desk</code> and <code>/write</code> but you can now designate any page desired for each of these (just use the appropriate template settings in Page Attributes).
+
+Under "<strong>Publish Settings</strong>" You can define if new entries are moderated or published directly, a place for you to define the default content that appears in the blank writing form (HTML allowed).  Also, you can elect whether to allow comments or not on all entries.
 
 You might have a reason to require users to enter Extra Required Information (e.g. a real name, contact info, or other confidential information that will not be published).
 
@@ -1255,7 +1265,7 @@ Select a default category for the new content (you may also elect to not use cat
 
 Enter your (or other) email addresses for anyone who should be notified of new submissions if you want to know when new content is added.  And if you want hashtags included in all times an item is shared to twitter, well, there is a field for that too.
 
-The writing magic happens because authors on your site never see the WordPress dashboard; they are secretly logged in as user named <strong>writer</strong>.  This account will need to be set up with details and even a link to make it easy from the TRU Writer Options screen.
+The writing magic happens because authors on your site never see the WordPress dashboard; they are secretly logged in as user named <strong>writer</strong>.  The options page will notify you if this account needs to be created.
 
 The Options (and also the dashboard) will notify you of two plugins the site uses, one to display a reading time value in all content (this us optional) and another one that keeps the secret users from seeing the dashboard (this is very highly recommended).
 
@@ -1269,7 +1279,7 @@ Hopefully you will say...
 
 <a href="https://giphy.com/gifs/reaction-office-space-that-was-easy-zcCGBRQshGdt6"><img class="aligncenter wp-image-32" src="https://lab.cogdogblog.com/writer/wp-content/uploads/2016/09/easy.gif" alt="easy" width="605" height="418" /></a>
 
-&nbsp;]]></content:encoded>
+And you may want to set the publishing formats of this content to be Draft so it does not appear on your site.]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>35</wp:post_id>
 		<wp:post_date><![CDATA[2018-10-31 05:08:54]]></wp:post_date>
@@ -1325,29 +1335,7 @@ Hopefully you will say...
 		<wp:meta_key><![CDATA[_wp_old_slug]]></wp:meta_key>
 		<wp:meta_value><![CDATA[assembling-the-splot-writer]]></wp:meta_value>
 		</wp:postmeta>
-							<wp:comment>
-			<wp:comment_id>2</wp:comment_id>
-			<wp:comment_author><![CDATA[Double SPLOT: 2 New One Click Installs at Reclaim Hosting &#8211; CogDogBlog]]></wp:comment_author>
-			<wp:comment_author_email><![CDATA[]]></wp:comment_author_email>
-			<wp:comment_author_url>https://cogdogblog.com/2018/11/double-splot/</wp:comment_author_url>
-			<wp:comment_author_IP><![CDATA[167.99.190.14]]></wp:comment_author_IP>
-			<wp:comment_date><![CDATA[2018-11-08 18:20:23]]></wp:comment_date>
-			<wp:comment_date_gmt><![CDATA[2018-11-08 18:20:23]]></wp:comment_date_gmt>
-			<wp:comment_content><![CDATA[[&#8230;] The first item in each one includes information you might need for final customizing of your site (see Setting Up Your Image Collector SPLOT or Assembling your SPLOT Writer. [&#8230;]]]></wp:comment_content>
-			<wp:comment_approved><![CDATA[trash]]></wp:comment_approved>
-			<wp:comment_type><![CDATA[pingback]]></wp:comment_type>
-			<wp:comment_parent>0</wp:comment_parent>
-			<wp:comment_user_id>0</wp:comment_user_id>
-						<wp:commentmeta>
-	<wp:meta_key><![CDATA[_wp_trash_meta_status]]></wp:meta_key>
-			<wp:meta_value><![CDATA[0]]></wp:meta_value>
-			</wp:commentmeta>
-						<wp:commentmeta>
-	<wp:meta_key><![CDATA[_wp_trash_meta_time]]></wp:meta_key>
-			<wp:meta_value><![CDATA[1560434030]]></wp:meta_value>
-			</wp:commentmeta>
-							</wp:comment>
-					</item>
+							</item>
 				</channel>
 </rss>
 	
