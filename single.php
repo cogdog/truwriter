@@ -64,15 +64,7 @@
 			    
 		    <div class="post-content section-inner <?php truwriter_layout_width()?>">
 		    
-		    <?php  if ( is_preview() ): // preview notice?>
-				<div class="notify"><span class="symbol icon-info"></span>
-This is a preview of your entry that shows how it will look when published. Close this window/tab when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click <strong>Final Publish</strong>.
-							
-					</div>
-							
-							
-				<?php endif?>
-		    
+		    	<?php if ( is_preview() ) echo truwriter_preview_notice(); // preview notice ?>
 		    
 		    	<?php the_content(); ?>
 		    	
@@ -82,6 +74,9 @@ This is a preview of your entry that shows how it will look when published. Clos
 		    			$wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); 
 		    			if ($wFooter) echo '<p><em>' . make_clickable( $wFooter ) . '</em></p>';
 		    		 }
+		    		 
+		    	if ( is_preview() ) echo truwriter_preview_notice();	 
+		    		
 		    	?>
 		    	
 

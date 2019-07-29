@@ -7,15 +7,7 @@
 */
 
 
-function getWPURL( page_slug ) {
-/* return the base wordpress URL based on a page name passed as parameter
-    which should be something like "/slug"                              */
-
-    var loc = window.location.href;
-    return loc.substring(0,loc.lastIndexOf(page_slug));
-}
-
-jQuery('#wTags').suggest( getWPURL('/write') + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
+jQuery('#wTags').suggest( writerObject.siteURL + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
 
 	
 jQuery(document).ready(function() { 

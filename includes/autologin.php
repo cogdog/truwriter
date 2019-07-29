@@ -4,7 +4,7 @@
 # -----------------------------------------------------------------
 
 // Add custom logo to entry screen... because we can
-// While we are at it, use CSS to hide the back to blog and retried password links
+// While we are at it, use CSS to hide the "back to blog" and retrieve password links
 
 // You know like my logo? Whatsamatta you? Then change the image in the theme folder images/site-login-logo.png
 add_action( 'login_enqueue_scripts', 'my_login_logo' );
@@ -30,20 +30,16 @@ function login_link( $url ) {
 	return get_bloginfo( 'url' );
 }
 
-
-function splot_redirect_url() {
-	// where to send them after login ok
-	return ( home_url('/') . truwriter_get_write_page() );
-}
-
 function splot_user_login( $user_login = 'writer', $redirect = true, $query_str = '' ) {
-	// login the special user account to allow authoring
-	// somestimes we want to do it without redirection
-	// other times we have to pass a query string
+	/* login the special user account to allow authoring
+	   Somestimes we want to do it without redirection
+	   other times we have to pass a query string
+	*/
 	
 	// check for the correct user
 	$autologin_user = get_user_by( 'login', $user_login ); 
 	
+	// is this user logged in?
 	if ( $autologin_user ) {
 	
 		// just in case we have old cookies
@@ -64,23 +60,28 @@ function splot_user_login( $user_login = 'writer', $redirect = true, $query_str 
 		
 	} else {
 		// uh on, problem
-		die ('Bad news. Looks like there is a missing account for "' . $user_login . '".');
+		die ('Required account missing. Looks like there is not an account set up for "' . $user_login . '". See the theme options to set up.');
 	
 	}
-	
-
-
 }
+
+function splot_redirect_url() {
+	// where to send visitors after login ok
+	return ( home_url('/') . truwriter_get_write_page() );
+}
+
+function splot_is_admin() {
+	// test current author as above basic level of splot user
+	return ( current_user_can( 'edit_others_posts' )  );
+}
+
 
 // remove admin tool bar for non-admins, remove access to dashboard
 // -- h/t http://www.wpbeginner.com/wp-tutorials/how-to-disable-wordpress-admin-bar-for-all-users-except-administrators/
 
-add_action('after_setup_theme', 'remove_admin_bar');
+add_action('after_setup_theme', 'splot_remove_admin_bar');
 
-function remove_admin_bar() {
-	if ( !current_user_can('edit_others_posts')  ) {
-	  show_admin_bar(false);
-	}
-
+function splot_remove_admin_bar() {
+	if ( !splot_is_admin()  ) show_admin_bar(false);
 }
 ?>

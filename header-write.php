@@ -1,4 +1,3 @@
-<?php header('X-XSS-Protection:0');?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
@@ -25,7 +24,7 @@
 	
 	</head>
 	
-	<body <?php body_class(); ?>>
+	<body <?php body_class('writerform'); ?>>
 	
 		<div class="header-search-block section light-padding hidden">
 		
@@ -144,6 +143,3 @@
 				</form>
 			 
 		</div> <!-- /mobile-menu-container -->
-		
-		
-		

@@ -27,7 +27,7 @@ function truwriter_editlink_meta_box_callback( $post ) {
 	
 	// Create an edit link if it does not exist
 	if ( !$ekey ) {
-		truwriter_make_edit_link( $post->ID );
+		truwriter_make_edit_link( $post->ID, $post->post_title );
 		$ekey = get_post_meta( $post->ID, 'wEditKey', 1 );
 	}
 
@@ -50,7 +50,7 @@ function truwriter_make_edit_link( $post_id, $post_title='') {
 function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 
 	// for post id = $wid
-	// requested means by click of button vs one sent when published.
+	// requested means by click of button vs one sent when published/saved.
 	
 	// look up the stored edit key 
 	$wEditKey = get_post_meta( $wid, 'wEditKey', 1 );
@@ -64,20 +64,27 @@ function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 	// who gets mail? They do.
 	$to_recipient = $wEmail;
 
+	// title cleanup
 	$wTitle = htmlspecialchars_decode( get_the_title( $wid ) );
 	
-	
+	// general how to use this link info
 	$edit_instructions = '<p>To be able to edit this work use this special access link <a href="' . get_bloginfo('url') . '/' . truwriter_get_write_page() . '/?wid=' . $wid . '&tk=' . $wEditKey  . '">' . get_bloginfo('url') . '/' . truwriter_get_write_page() . '?wid=' . $wid . '&tk=' . $wEditKey  . '</p>It should open your last edited version so you can make any modifications to it. Save this email as a way to always return to edit your writing or use the Request Edit Link button at the bottom of your published work.</p>';
 	
 	if ( $mode == 'request' ) {
-		// subject and message for a edut link request
+		// subject and message for a edit link request from the button press
 		$subject ='Edit Link for "' . $wTitle . '"';
 		
-		$message = '<p>A request was made hopefully by you for the link to edit the content of <a href="' . $wLink . '">' . $wTitle . '</a> published on ' . get_bloginfo( 'name')  . ' at <strong>' . $wLink . '</strong>. (If this was not done by you, just ignore this message)</p>' . $edit_instructions;
+		$message = '<p>A request was made to send the link to edit the content of <a href="' . $wLink . '">' . $wTitle . '</a> published on ' . get_bloginfo( 'name')  . ' at <strong>' . $wLink . '</strong>. If this was not requested by you, just ignore this message.</p>' . $edit_instructions;
+		
+	} elseif ( $mode == 'draft' ) {		
+		// message for a draft notification
+
+		$subject = '"' . $wTitle . '" ' . ' saved as draft';
+		$message = '<a href="' . $wLink . '">' . $wTitle . '</a> has been saved as a draft on ' . get_bloginfo( 'name')  . '. </p>' . $edit_instructions;
 		
 	} else {
 		// message for a just been published notification
-		$subject = '"' . $wTitle . '" ' . 'is now published';
+		$subject = '"' . $wTitle . '" ' . ' is now published';
 		
 		$message = 'Your writing <a href="' . $wLink . '">' . $wTitle . '</a> has been published on ' . get_bloginfo( 'name')  . ' and is now available at <strong><a href="' . $wLink . '">' . $wLink . '</a></strong>.</p>' . $edit_instructions;
 	}

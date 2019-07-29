@@ -55,7 +55,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	
 	// Add setting for default prompt
 	$wp_customize->add_setting( 'default_prompt', array(
-		 'default'           => __( 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  "Publish Final" when you are done. If you include your email address, we can send you a link that will allow you to make changes later.', 'radcliffe'),
+		 'default'           => __( 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  "Publish Now" when you are ready for your work to be published. If you include your email address, we can send you a link that will allow you to make changes later. Otherwise you should finish your writing and publish it in this session.', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
@@ -78,7 +78,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	
 	// Add setting for re-edit prompt
 	$wp_customize->add_setting( 're_edit_prompt', array(
-		 'default'           => __( 'You can now re-edit any part of this previously published writing. If you do not save any final changes, it will be left as it was before.', 'radcliffe'),
+		 'default'           => __( 'You can now edit this previously saved writing, save the changes as a draft, or if done, submit for final publishing.', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
@@ -613,7 +613,7 @@ function truwriter_form_default_prompt() {
 	 if ( get_theme_mod( 'default_prompt') != "" ) {
 	 	return get_theme_mod( 'default_prompt');
 	 }	else {
-	 	return 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  "Publish Final" when you are done. If you include your email address, we can send you a link that will allow you to make changes later.';
+	 	return 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  "Publish Now" when you are ready for your work to be published. If you include your email address, we can send you a link that will allow you to make changes later. Otherwise you should finish your writing and publish it in this session.';
 	 }
 }
 
@@ -622,7 +622,7 @@ function truwriter_form_re_edit_prompt() {
 	 if ( get_theme_mod( 're_edit_prompt') != "" ) {
 	 	return get_theme_mod( 're_edit_prompt');
 	 }	else {
-	 	return 'You can now re-edit any part of this previously published writing and then click "Republish Changes" to update your work.';
+	 	return 'You can now edit this previously saved writing, save the changes as a draft, or if done, submit for final publishing.';
 	 }
 }
 

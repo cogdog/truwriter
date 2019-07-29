@@ -382,6 +382,16 @@ function add_truwriter_scripts() {
    		
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', 'suggest' , '1.23', TRUE );
+		
+		// add a local variable for the site's home url
+		wp_localize_script(
+		  jquery.writer,
+		  'writerObject',
+		  array(
+			'siteUrl' => esc_url(home_url())
+		  )
+		);
+		
 		wp_enqueue_script( 'jquery.writer' );
 		
 		// add scripts for fancybox (used for help) 

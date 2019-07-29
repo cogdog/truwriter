@@ -150,6 +150,12 @@ function twitternameify( $str ) {
 	return $str;
 }
 
+function truwriter_preview_notice() {
+	return ('<div class="notify"><span class="symbol icon-info"></span>
+This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click "Publish Now".		
+				</div>');
+}
+
 function splot_the_author() {
 	// utility to put in template to show status of special logins
 	// nothing is printed if there is not current user, 
@@ -177,6 +183,11 @@ function get_page_id_by_slug( $page_slug ) {
 	} else {
 		return null;
 	}
+}
+
+function truwriter_get_writing_status ( $pid ) {
+	$the_post = get_post( $pid );
+	return $the_post->post_status;
 }
 
 function set_html_content_type() {

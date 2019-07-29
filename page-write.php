@@ -14,12 +14,12 @@ $errors = array();
 // creative commons usage mode
 $my_cc_mode = truwriter_option( 'use_cc' ); 
 
-$is_published = $is_re_edit = false; 
+$is_published = $is_re_edit = $linkEmailed = false; 
 $post_id = $revcount = 0;
 $formclass = 'writenew';
 $wStatus = "New, not saved";
 
-$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense =  '';	
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = '';	
 
 // default welcome message
 $feedback_msg = truwriter_form_default_prompt();
@@ -35,7 +35,8 @@ $wLicense = truwriter_option( 'cc_site' ); //default if used
 // Get the attachment excerpt as a default caption
 $wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
 
-
+// default notifation box style
+$box_style = '<div class="notify"><span class="symbol icon-info"></span> ';
 
 // ------------------------ front gate ------------------------
 	
@@ -74,6 +75,8 @@ if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
 		$wEmail =  get_post_meta( $wid, 'wEmail', 1 );
 		$wText = $writing->post_content; 
 		$wHeaderImage_id = get_post_thumbnail_id( $wid);
+		$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';	
+		$post_status = get_post_status( $wid );
 
 		// get categories
 		$categories = get_the_category( $wid);
@@ -83,20 +86,23 @@ if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
 		// Get the attachment excerpt as a default caption
 		$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
 
+		// notes
 		$wNotes = get_post_meta( $wid, 'wEditorNotes', 1 );
 
+		// license
 		$wLicense = get_post_meta( $wid, 'wLicense', 1 );
 
 		// load the tags
 		$wTags = implode(', ', wp_get_post_tags( $wid, array( 'fields' => 'names' ) ) );
-	
-
-		$revcount = 1;
-		$post_id = $wid;
-		$wStatus = 'Re-edit (revision #' . $revcount . ' last saved ' . get_the_time( '', $wid) . ')';
 		
-
-	
+		// revision count
+		$revcount = 1;
+		
+		// post id
+		$post_id = $wid;
+		
+		// status note
+		$wStatus = 'Re-edit (revision #' . $revcount . ' last saved ' . get_the_date( '', $wid) . ' ' .  get_the_time( '', $wid) . ')';
 	
 		} else {
 
@@ -110,9 +116,7 @@ if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
 			$feedback_msg = 'This URL does not match the edit key. Please check the link from your email again, or return to your published writing and click the button at the bottom to send an edit link.';
 			$is_published = true;  // not really but it serves to hide the form.
 		}
-
 } 
-
 
 // verify that a form was submitted and it passes the nonce check
 if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
@@ -126,6 +130,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
  		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
  		$wHeaderImage_id = 			$_POST['wHeaderImage'];
+ 		$linkEmailed = 				$_POST['linkEmailed'];
  		$post_id = 					$_POST['post_id'];
  		$wCats = 					( isset ($_POST['wCats'] ) ) ? $_POST['wCats'] : array();
  		$wLicense = 				( isset ($_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
@@ -157,10 +162,35 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  			// updates for display
  			$revcount =	$_POST['revcount'];		
  			$wStatus = 'Form input error';
- 
  			$formclass = 'writeoops';
- 			
+ 			$box_style = '<div class="notify notify-red"><span class="symbol icon-error"></span> ';
+ 	
  		} else { // good enough, let's set up a post! 
+ 		
+ 			// set notifications and display status
+			if ( isset( $_POST['wPublish'] ) ) {
+				// set to status defined as option
+				$post_status = truwriter_option('pub_status');
+			
+				if ( truwriter_option('pub_status') == 'pending' ) {
+					$wStatus = 'Submitted for Review';
+					$formclass = 'writedraft';
+					$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
+				} else {
+					$wStatus = 'Published';
+					$formclass = 'writepublished';
+					$box_style = '<div class="notify notify-blue"><span class="symbol icon-tick"></span> ';
+				}
+			
+				$wStatus .= ' (version #' . $revcount . ' last saved ' . get_the_date( '', $post_id) . ' '  . get_the_time( '', $post_id) . ')';
+			
+			} else {
+				// stay as draft
+				$formclass = 'writedraft';
+				$post_status = 'draft';
+				$wStatus = 'In Draft (revision #' . $revcount . ' last saved ' . get_the_date( '', $post_id) . ' '  . get_the_time( '', $post_id) . ')';
+				$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
+			}
  			
   			// the default category for in progress
  			$def_category_id = get_cat_ID( 'In Progress' );
@@ -168,19 +198,17 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 			$w_information = array(
 				'post_title' => $wTitle,
 				'post_content' => $wText,
-				'post_status' => 'draft', 
+				'post_status' => $post_status, 
 				'post_category' => 	array( $def_category_id )		
 			);
 			
-			
 			// updates for display
-			
 			$wStatus = 'In Draft (revision #' . $revcount . ' last saved ' . get_the_time( '', $post_id) . ')';
 			$formclass = 'writedraft';
- 		
+						
  			// is this a first draft?
 			if ( $post_id == 0 ) {
-			
+						
 				// insert as a new post
 				$post_id = wp_insert_post( $w_information );
 				
@@ -224,96 +252,104 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				truwriter_make_edit_link( $post_id,  $wTitle );
 				
 				$feedback_msg = 'We have saved this first version of your writing. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
+						
+				
+				// if user provided email address, send instructions to use link to edit
+				if ( $wEmail != '' ) {
+					truwriter_mail_edit_link( $post_id, 'draft' );
+					$linkEmailed = true;
+					$feedback_msg .= ' Since you provided an email address, a message has been sent to <strong>' . $wEmail . '</strong>  with a special link that can be used at any time later to edit and publish your writing. '; 
+				}
+			
 									
 			 } else { // the post exists, let's update
 					
 				// make a copy of the category array so we can append the default category ID
 				$copy_cats = $wCats;
 
-				// check if we have a publish button click or this is a re-edit,
-				// in this case we update the post with the form information
-				if ( isset( $_POST['wPublish'] ) OR  $is_re_edit ) {
+				// check if we have a publish button click
+
+				if ( isset( $_POST['wPublish'] ) ) {
 											
 					// roger, we have ignition
 					$is_published = true;
+
+					// for status message links		
+					$returnlink = site_url();
+					$postlink = get_permalink( $post_id );
 					
 					// set the published category
 					$copy_cats[] = $published_cat_id;
-																	
-					 if ( $is_re_edit ) { 
-					 
-					 	$formclass = 'writedraft';	
-					 	
-					 	// set it as published
-						$w_information['post_status'] = 'publish';
-
-						$feedback_msg = 'Your edits to <strong>"' . $wTitle . '"</strong> has been updated. You can at  <a href="'.  get_permalink( $post_id )   . '"  target="_blank" >view the updated version now</a> (opens in a new window), make more edits, or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
-					 
-					} else { // not re-edit
-					
-						// revise status to pending (new ones) 
-						$w_information['post_status'] = truwriter_option('pub_status');
+									
+					// revise status to pending (new ones) 
+					$w_information['post_status'] = truwriter_option('pub_status');
+										
+					if ( truwriter_option('pub_status') == 'pending' ) {
+						// theme options for saving as reviewed
 						
-						if ( truwriter_option('pub_status') == 'pending' ) {
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. ';
+						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> is now in the queue for publishing and will appear on <strong>' . get_bloginfo() . '</strong> as soon as it has been reviewed. ';
 
-							if ( $wEmail == '' ) {
-								$feedback_msg .= '';
-							} else {
-								$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
-							}
-							
-							$feedback_msg .= ' Now please <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
-							
-							// set up admin email
-							$subject = 'Review newly submitted writing at ' . get_bloginfo();
-					
-							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
-							
-						} else {
-							$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can  <a href="'.  get_permalink( $post_id )   . '" >view it now</a> or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
-							
-							// set up admin email
-							$subject = 'Recently published writing at ' . get_bloginfo();
-					
-							$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a> and review / edit if needed, or just enjoy the feeling of being published.';
-							
-							// if user provided email address, send instructions to use link to edit
-							if ( !isset($wEmail) ) truwriter_mail_edit_link();
+						if ( $wEmail != ''  ) {
+							$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
+						}
 						
-						} // is_status pending
+						$feedback_msg .= ' Now please <a href="' . $returnlink  . '">clear the writing tool and return to ' . get_bloginfo() . '</a>.';
 						
-
-						// Let's do some EMAIL! 
-					
-						// who gets mail? They do.
-						$to_recipients = explode( "," ,  truwriter_option( 'notify' ) );
-								
-						if ( $wNotes ) $message .= '<br /><br />There are some extra notes from the author:<blockquote>' . $wNotes . '</blockquote>';
-					
-						// turn on HTML mail
-						add_filter( 'wp_mail_content_type', 'set_html_content_type' );
-					
-						// mail it!
-						wp_mail( $to_recipients, $subject, $message);
-					
-						// Reset content-type to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
-						remove_filter( 'wp_mail_content_type', 'set_html_content_type' );				
-
-					} //is re-edit
-					
-					// logout the special user if we are publishing				
-																	
-				} else {
-					// in draft mode, first save
+						// set up admin email
+						$subject = 'Review newly submitted writing at ' . get_bloginfo();
 				
-					// not published, attach the default category ID
+						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
+						
+					} else {
+						// theme options for saving as published
+						
+						$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can now exit the writing tool to  <a href="'.  $postlink   . '" >view it now</a> or <a href="' . $returnlink  . '">return to ' . get_bloginfo() . '</a>.';
+						
+						// set up admin email
+						$subject = 'Recently published writing at ' . get_bloginfo();
+				
+						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a>,  review / edit if needed, or just enjoy the feeling of being published on your site.';
+						
+						// if user provided email address, send instructions to use link to edit if not done before
+						if ( $wEmail != '' and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, truwriter_option('pub_status') );
+					
+					} // is_status pending
+						
+
+					// Let's do some EMAIL! 
+				
+					// who gets mail? They do.
+					$to_recipients = explode( "," ,  truwriter_option( 'notify' ) );
+							
+					if ( $wNotes ) $message .= '<br /><br />There are some extra notes from the author:<blockquote>' . $wNotes . '</blockquote>';
+				
+					// turn on HTML mail
+					add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+				
+					// mail it!
+					wp_mail( $to_recipients, $subject, $message);
+				
+					// Reset content-type to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
+					remove_filter( 'wp_mail_content_type', 'set_html_content_type' );	
+					
+					// clear out the login
+					if ( truwriter_check_user()=== true and isset( $_POST['wPublish'] ) ) wp_logout();	
+																										
+				} else {
+					// updated but still in draft mode
+					
+					// if user provided email address, send instructions to use link to edit if not done before
+					if ( isset( $wEmail ) and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, 'draft' );
+				
+					// attach the default category ID
 					$copy_cats[] = $def_category_id ;
 					
-					$feedback_msg = 'Your edits have been saved. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
-				}
-							
-				
+					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, or if you are ready, submit it for publishing. ';
+					
+					if (  $wEmail != '' )  $feedback_msg .= ' Since you provided an email address, you should have a message that provides instructions on how to return and make edits in a later session.';
+					
+				} // isset( $_POST['wPublish'] 
+
 				// add the id to our array of post information so we can issue an update
 				$w_information['ID'] = $post_id;
 				$w_information['post_category'] = $copy_cats;
@@ -333,6 +369,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				if ( !get_attachment_caption_by_id( $wHeaderImage_id ) ) {
 					$i_information = array(
 						'ID' => $wHeaderImage_id,
+						'post_status' => 'draft', 
 						'post_excerpt' => $wHeaderImageCaption
 					);
 					
@@ -342,15 +379,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				// store the author's name
 				update_post_meta($post_id, 'wAuthor', $wAuthor);
 
-
 				// update the email as post meta data
 				update_post_meta($post_id, 'wEmail', $wEmail);	
-				
 																			
 				// store the header image caption as post metadata
 				update_post_meta($post_id, 'wHeaderCaption', $wHeaderImageCaption);
 
-				
 				// user selected license
 				if ( $my_cc_mode != 'none' ) update_post_meta( $post_id,  'wLicense', $wLicense);
 
@@ -359,9 +393,6 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 
 				// store any end notes
 				if ( $wFooter ) update_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
-				
-				if ( truwriter_check_user()=== true and isset( $_POST['wPublish'] ) ) wp_logout();
-
 								
 			} // post_id = 0
 						 	
@@ -369,7 +400,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 						
 } // end form submmitted check
 
-get_header();
+get_header('write');
 ?>
 
 <div class="content">		
@@ -419,19 +450,7 @@ get_header();
 		    	<?php the_content(); ?>
 		    		
 			    		
-		    	<?php  
-		    	// set up box code colors CSS
-
-		    	if ( count( $errors ) ) {
-		    		$box_style = '<div class="notify notify-red"><span class="symbol icon-error"></span> ';
-		    	} elseif ( $post_id == 0 ) {
-		    		$box_style = '<div class="notify"><span class="symbol icon-info"></span> ';
-		    	} else {
-		    		$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
-		    	}
-		    			    	
-		    	echo $box_style . $feedback_msg . '</div>';
-		    	?>   
+		    	<?php echo $box_style . $feedback_msg . '</div>';?>   
 		    	
 				<div class="clear"></div>
 							
@@ -440,31 +459,29 @@ get_header();
 					
 		<?php endwhile; else: ?>
 	
-			<p><?php _e("Danger, danger Will Robinson, somethng bad happened.", "radcliffe"); ?></p>
+			<p><?php _e("Danger, danger Will Robinson, somethng bad happened inside the engine room. Have Scotty radio the bridge and ask for more dilithium crystals", "radcliffe"); ?></p>
 
 		<?php endif; ?>
 			
 			
 		
 			
-	<?php if ( is_user_logged_in() and (!$is_published or $is_re_edit) ) : // show form in logged in and it has not been published ?>
+	<?php if ( is_user_logged_in() and (!$is_published or $is_re_edit) ) : // show form if logged in and it has not been published ?>
 		
 		<form  id="writerform" class="<?php echo $formclass?>" method="post" action="">
 		
 		<div class="writestatus">STATUS: <span class="statnow"><?php echo $wStatus?></span></div>
 		
 		<input name="post_id" type="hidden" value="<?php echo $post_id?>" />
-		<input name="revcount" type="hidden" value="<?php echo $revcount?>" />	
+		<input name="revcount" type="hidden" value="<?php echo $revcount?>" />
+		<input name="linkEmailed" type="hidden" value="<?php echo $linkEmailed?>" />	
 		
-			
-			
 				<fieldset id="theTitle">
 					<label for="wTitle"><?php truwriter_form_item_title() ?></label><br />
 					<p><?php truwriter_form_item_title_prompt()?></p>
 					<input type="text" name="wTitle" id="wTitle" class="required writerfield" value="<?php echo $wTitle; ?>" tabindex="1" />
 				</fieldset>	
 			
-
 				<fieldset id="theAuthor">
 					<label for="wAuthor"><?php truwriter_form_item_byline() ?></label><br />
 					<p><?php truwriter_form_item_byline_prompt() ?></p>
@@ -475,8 +492,8 @@ get_header();
 						<label for="wText"><?php truwriter_form_item_writing_area() ?></label>
 						<p><?php truwriter_form_item_writing_area_prompt() ?></p>
 						
-						<p> See details on the  tools in the  
-<a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tips</a>.</p>
+						<p> See details on the formatting tools in the  
+<a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tool tips</a>.</p>
 						<?php
 						// set up for inserting the WP post editor
 						$settings = array( 
@@ -627,21 +644,20 @@ get_header();
 							
 						<?php
 						// set up button names
+
 						if ( $is_re_edit ) {
-							$save_btn_txt = "Republish Changes";
+							$save_btn_txt = "Update and Publish";
 						} else {
 							$save_btn_txt = "Publish Now";
-							echo '<input type="submit" class="pretty-button pretty-button-green" value="Revise Draft" id="wSubDraft" name="wSubDraft" tabindex="10"> Save changes, preview again.<br /><br />';
 						}
-					
 					?>
+						<input type="submit" class="pretty-button pretty-button-green" value="Update and Save Draft" id="wSubDraft" name="wSubDraft" tabindex="10"> Save changes as draft and continue writing.<br /><br />
 						
-						
-						<input type="submit" class="pretty-button pretty-button-blue" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" tabindex="11"> All changes completed. 
+						<input type="submit" class="pretty-button pretty-button-blue" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" tabindex="11"> All edits complete, publish to site. 
 					
 					<?php else:?>
 					
-						<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="makeit" name="makeit" tabindex="12"> Save your first draft, then preview.
+						<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="wSubDraft" name="wSubDraft" tabindex="1o"> Save your first draft, then preview.
 					
 					<?php endif?>
 					

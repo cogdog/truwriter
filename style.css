@@ -197,8 +197,6 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 
 }
 
-
-
 .post-content input[type="submit"],
 .post-content input[type="reset"],
 .post-content input[type="button"], button.wp-switch-editor, #insert-media-button,   span.mce-txt
@@ -220,6 +218,7 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 form#writerform { padding: 30px 20px; }
 .writenew { background-color: #8ed9f6; }
 .writedraft { background-color: #D1FAB6; }
+.writepublished { background-color: #e3f7fc; }
 .writeoops { background-color: #fad9d7; }
 
 .writestatus
