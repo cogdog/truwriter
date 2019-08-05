@@ -305,6 +305,8 @@ You can copy and paste from that .txt file into the import field of the settings
 
 Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long `functions.php` is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.
 
+**Options for Email Address** the form field for users entering email addresses can be hidden if not used (this as well will remove and past "request edit link" from published sites. In addition, a new admin option is added to restruct the email addresses allowed to a list of domains.
+
 **Under the Hood** Fixed bug where choosing no comments hid the Reading Time display, changed options editor for default content to be rich text editor, enabled drag and drop media uploading for front page writing form. Also, URLs that WordPress can autoembed (e.g. YouTube, Twitter, Giphy) will now do so automatically in the editor.
 
 **Theme Option to Remove Tweet This Button** to enable better GDPR compliance.

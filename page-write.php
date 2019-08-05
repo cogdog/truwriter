@@ -148,6 +148,22 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  		
  		if ( $wNotes_required == 1  AND $wNotes == '' ) $errors[] = '<strong>Extra Information Missing</strong> - please provide the requested extra information.';
  		
+		// test for email only if enabled in options
+		if ( truwriter_option('show_email') )   {
+		
+			// check first for valid email address
+			if ( is_email( $wEmail ) ) {
+				// if email is good then check if we are limiting to domains
+				if ( !empty(truwriter_option('email_domains'))  AND !truwriter_allowed_email_domain( $wEmail ) ) {
+					$errors[] = '<strong>Email Address Not Allowed</strong> - The email address you entered <code>' . $wEmail . '</code> is not from an domain accepted in this site. This site requests that  addresses are ones with domains <code>' .  truwriter_option('email_domains') . '</code>. ';
+				}
+		
+			} else {
+				// bad email, sam.
+				$errors[] = '<strong>Invalid Email Address</strong> - the email address entered <code>' . $wEmail . '</code> is not a valid address. Pleae check and try again.';
+			}
+		}
+ 		
  		if ( count($errors) > 0 ) {
  			// form errors, build feedback string to display the errors
  			$feedback_msg = 'Sorry, but there are a few errors in your entry. Please correct and try again.<ul>';
@@ -589,11 +605,21 @@ get_header('write');
 
 				<?php endif?>
 
+				<?php if (truwriter_option('show_email') ):?>
 				<fieldset id="theEmail">
 					<label for="wEmail"><?php truwriter_form_item_email() ?> (optional)</label><br />
-					<p><?php truwriter_form_item_email_prompt() ?> </p>
+					<p><?php truwriter_form_item_email_prompt() ?> 
+					<?php 
+						if  ( !empty( truwriter_option('email_domains') ) ) {
+							echo 'Allowable email addresses must be ones from domains <code>' . truwriter_option('email_domains') . '</code>.';
+						}
+					?>
+					
+					</p>
 					<input type="text" name="wEmail" id="wTitle" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
 				</fieldset>	
+				
+				<?php endif?>
 				
 
 				<?php if ( $wNotes_required != -1 ):?>

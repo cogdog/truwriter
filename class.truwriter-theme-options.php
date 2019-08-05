@@ -127,7 +127,7 @@ class truwriter_Theme_Options {
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
 			'desc'	 => 'Access to Writing Tool',
-			'std'    => '',
+			'std'    => 'Use to require a access code to use the writing form.',
 			'type'    => 'heading'
 		);
 
@@ -143,8 +143,8 @@ class truwriter_Theme_Options {
 
 		$this->settings['accesshint'] = array(
 			'title'   => __( 'Access Hint' ),
-			'desc'    => __( 'Suggestion if someone cannot guess the code. Not super secure, but hey.' ),
-			'std'     => 'Name of this site (lower the case, Ace!)',
+			'desc'    => __( 'Suggestion if someone cannot guess the code. Not super secure' ),
+			'std'     => 'Enter a good suggestion here. ',
 			'type'    => 'text',
 			'section' => 'general'
 		);
@@ -152,8 +152,8 @@ class truwriter_Theme_Options {
 		$this->settings['pages_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
-			'desc'	 => 'Pages Setup',
-			'std'    => '',
+			'desc'	 => 'Special Pages Setup',
+			'std'    => 'Choose the pages for the two ones that create access to the writing form',
 			'type'    => 'heading'
 		);
 		
@@ -221,18 +221,6 @@ class truwriter_Theme_Options {
 			)
 		);		
 
-		$this->settings['def_text'] = array(
-			'title'   => __( 'Default Writing Prompt' ),
-			'desc'    => __( 'The default content that will appear in a new blank editor.' ),
-			'std'     => 'Introduction
-
-This is what I have to say, which of course is something important. 
-
-Edit this to be more appropriate for your TRU Writer SPLOT.',
-			'type'    => 'richtextarea',
-			'section' => 'general'
-		);
-		
 		$this->settings['allow_comments'] = array(
 			'section' => 'general',
 			'title'   => __( 'Allow Comments?' ),
@@ -240,20 +228,31 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 			'type'    => 'checkbox',
 			'std'     => 0 // Set to 1 to be checked by default, 0 to be unchecked by default.
 		);
-		
-		$this->settings['require_extra_info'] = array(
+
+
+		$this->settings['form_heading'] = array(
 			'section' => 'general',
-			'title'   => __( 'Require Extra Information Field Filled In?'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => '0',
-			'choices' => array (
-							'0' => 'No',
-							'1' => 'Yes',
-							'-1' => 'Hide this field',
-					)
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Writer Form Settings',
+			'std'    => 'Options for the form where visitors compose their writing.',
+			'type'    => 'heading'
 		);
-			
+
+
+
+		$this->settings['def_text'] = array(
+			'title'   => __( 'Default Writing Prompt' ),
+			'desc'    => __( 'The default content that will appear in a new blank editor.' ),
+			'std'     => '<h1>Introduction</h1>
+
+This is what I have to say, which of course is something <em>really</em> important. 
+
+Edit this to be more appropriate for your onw site as sample starting content.',
+			'type'    => 'richtextarea',
+			'section' => 'general'
+		);
+		
+		
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
 			'desc'    => __( 'Used on articles as a default. Be sure to enter a default caption in the upload.' ),
@@ -265,7 +264,7 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 		
 		$this->settings['show_cats'] = array(
 			'section' => 'general',
-			'title'   => __( 'Show the categories menu on writing form and display'),
+			'title'   => __( 'Show the categories menu on writing form and display the categories when published.'),
 			'desc'    => '',
 			'type'    => 'radio',
 			'std'     => '1',
@@ -289,8 +288,8 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 
 		$this->settings['def_cat'] = array(
 			'section' => 'general',
-			'title'   => __( 'Default Category for New Writing'),
-			'desc'    => '',
+			'title'   => __( 'Set the default category for new items (choose from child categories of "Published").'),
+			'desc'    => '<a href="' . admin_url( 'edit-tags.php?taxonomy=category') . '">Edit categories now</a>.',
 			'type'    => 'select',
 			'std'     => get_option('default_category'),
 			'choices' => $cat_options
@@ -299,19 +298,7 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 		
 		$this->settings['show_tags'] = array(
 			'section' => 'general',
-			'title'   => __( 'Show the tags entry on writing form and single items displays?'),
-			'desc'    => '',
-			'type'    => 'radio',
-			'std'     => '1',
-			'choices' => array (
-							'0' => 'No',
-							'1' => 'Yes'
-					)
-		);
-			
-		$this->settings['show_footer'] = array(
-			'section' => 'general',
-			'title'   => __( 'Show the footer entry field on the writing form?'),
+			'title'   => __( 'Show the tags entry on writing form and display the tags when published.'),
 			'desc'    => '',
 			'type'    => 'radio',
 			'std'     => '1',
@@ -321,13 +308,51 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 					)
 		);
 
-			
-		$this->settings['notify'] = array(
-			'title'   => __( 'Notification Emails' ),
-			'desc'    => __( 'Send notifications to these addresses (separate multiple wth commas). They must have an Editor Role on this site to be able to moderate' ),
+		$this->settings['show_email'] = array(
+			'section' => 'general',
+			'title'   => __( 'Activate email address field for providing access to editing after publication.'),
+			'desc'    => ' Setting to <strong>No</strong> will remove this feature from being available on published items.',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
+		);
+		
+		$this->settings['email_domains'] = array(
+			'title'   => __( 'Limit email addresses to domain(s).' ),
+			'desc'    => __( 'Seperate multiple domains by commas' ),
 			'std'     => '',
 			'type'    => 'text',
 			'section' => 'general'
+		);
+
+
+		$this->settings['require_extra_info'] = array(
+			'section' => 'general',
+			'title'   => __( 'Require extra information field filled in?'),
+			'desc'    => 'Use this to enable and/or require additional information entered in the web form that only site admins can view.',
+			'type'    => 'radio',
+			'std'     => '0',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes',
+							'-1' => 'Hide this field',
+					)
+		);
+
+			
+		$this->settings['show_footer'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show the footer entry field on the writing form?'),
+			'desc'    => 'A field to add extra information like an original source or credit; this gets published at the bottom of the published item.',
+			'type'    => 'radio',
+			'std'     => '1',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
 		);
 
 		$this->settings['twitter_heading'] = array(
@@ -355,6 +380,23 @@ Edit this to be more appropriate for your TRU Writer SPLOT.',
 			'title'   => __( 'Twitter Button Hashtag(s)' ),
 			'desc'    => __( 'When a writing is tweeted add these hashtags. Do not include # and separate multiple hashtags with commas.' ),
 			'std'     => 'splotwriter',
+			'type'    => 'text',
+			'section' => 'general'
+		);
+
+		$this->settings['admin_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Admin Settings',
+			'std'    => '',
+			'type'    => 'heading'
+		);
+
+
+		$this->settings['notify'] = array(
+			'title'   => __( 'Notification Emails' ),
+			'desc'    => __( 'Send notifications to these addresses (separate multiple wth commas). They must have an Editor Role on this site to be able to moderate' ),
+			'std'     => '',
 			'type'    => 'text',
 			'section' => 'general'
 		);

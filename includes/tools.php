@@ -230,4 +230,20 @@ function truwriter_get_splot_meta_for_api( $object ) {
 	 
 	 return ($splot_meta);
 } 
+
+
+function truwriter_allowed_email_domain( $email ) {
+	// checks if an email address is within a list of allowed domains
+
+	// extract domain h/t https://www.fraudlabspro.com/resources/tutorials/how-to-extract-domain-name-from-email-address/
+	$domain = substr($email, strpos($email, '@') + 1);
+
+	$allowables = explode(",", truwriter_option('email_domains'));
+
+	foreach ( $allowables as $item) {
+		if ( $domain == trim($item)) return true;
+	}
+
+	return false;
+}
 ?>
