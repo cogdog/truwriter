@@ -235,6 +235,9 @@ function truwriter_get_splot_meta_for_api( $object ) {
 function truwriter_allowed_email_domain( $email ) {
 	// checks if an email address is within a list of allowed domains
 
+	// allow for empty entries
+	if ( empty($email) ) return true;
+
 	// extract domain h/t https://www.fraudlabspro.com/resources/tutorials/how-to-extract-domain-name-from-email-address/
 	$domain = substr($email, strpos($email, '@') + 1);
 

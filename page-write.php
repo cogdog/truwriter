@@ -151,16 +151,17 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 		// test for email only if enabled in options
 		if ( truwriter_option('show_email') )   {
 		
-			// check first for valid email address
-			if ( is_email( $wEmail ) ) {
+			// check first for valid email address, blank is ok
+			if ( is_email( $wEmail ) OR empty($wEmail) ) {
+
 				// if email is good then check if we are limiting to domains
 				if ( !empty(truwriter_option('email_domains'))  AND !truwriter_allowed_email_domain( $wEmail ) ) {
-					$errors[] = '<strong>Email Address Not Allowed</strong> - The email address you entered <code>' . $wEmail . '</code> is not from an domain accepted in this site. This site requests that  addresses are ones with domains <code>' .  truwriter_option('email_domains') . '</code>. ';
+					$errors[] = '<strong>Email Address Not Allowed</strong> - The email address you entered <code>' . $wEmail . '</code> is not from an domain accepted in this site. This site requests that addresses are ones with domains <code>' .  truwriter_option('email_domains') . '</code>. ';
 				}
 		
 			} else {
 				// bad email, sam.
-				$errors[] = '<strong>Invalid Email Address</strong> - the email address entered <code>' . $wEmail . '</code> is not a valid address. Pleae check and try again.';
+				$errors[] = '<strong>Invalid Email Address</strong> - the email address entered <code>' . $wEmail . '</code> is not a valid address. To skip entering an email address, make sure the field is empty. Pleae check and try again. ';
 			}
 		}
  		
@@ -611,7 +612,7 @@ get_header('write');
 					<p><?php truwriter_form_item_email_prompt() ?> 
 					<?php 
 						if  ( !empty( truwriter_option('email_domains') ) ) {
-							echo 'Allowable email addresses must be ones from domains <code>' . truwriter_option('email_domains') . '</code>.';
+							echo ' Allowable email addresses must be ones from domains <code>' . truwriter_option('email_domains') . '</code>.';
 						}
 					?>
 					
