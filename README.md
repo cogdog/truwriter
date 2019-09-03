@@ -264,9 +264,9 @@ Or you can set the option to **Enable users to choose license** which places the
 
 ## Customize the Write Form
 
-You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and  activate the Wordpress Customizer from the admin bar. 
+You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and activate the Wordpress Customizer from the admin bar. 
 
-Look for a special section at the bottom to open:
+Look for a special section just below **Site Identity** to open:
 
 ![](images/customizer-writer-tab.jpg)
 
@@ -286,6 +286,12 @@ You can  also customize the content layout. On your site navigate to any content
 
 ![](images/customizer-layout.jpg)
 
+## Customize Heading for Single Page Metadata
+
+A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the singl post template; this is now something that can be changed in the Customizer. From the **TRU Writer** pane, open **Writer Layout**.
+
+![](images/meta-heading.jpg)
+
 ## Some Complexish Stuff for Nerds, Who Are Awesome
 
 If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
@@ -295,7 +301,7 @@ You can copy and paste from that .txt file into the import field of the settings
 ## Relatively Cool New Features & Updates
 
 
-**Options for Special Pages**  No longer are pages for the Welcome Desk (where access codes are entered) and Writer form required to have a set URL; you can create any Page desired for these functions, and set them as the active ones via the theme options.
+**Options for Special Pages**  No longer are pages for the Welcome Desk (where access codes are entered) and Writer form required to have a set URL; you can create any Page desired for these functions, and set them as the active ones via the theme options. Version 2.0 does some better set up for defaults.
 
 **Better Front End Editor**  Reduced reliance on special pages. The links to the random entry and the one use to get the edit link are no longer needed, and are handle now in the code. These pages should be deleted from your site. On an update to version 1.7 or later, you might have to go to **Settings** - **Permalinks** and just click save to update the url rules. Also the method for using the special link to edit an entry is now done in a single click. Much better!
 
