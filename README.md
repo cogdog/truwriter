@@ -268,11 +268,11 @@ You can  customize the field labels and the descriptions of the form where peopl
 
 Look for a special section just below **Site Identity** to open:
 
-![](images/customizer-writer-tab.jpg)
+![](images/customizer-writer-tab2.jpg)
 
 Then from this pane, open "Write Form" tab
 
-![](images/customizer-writer-form-tab.jpg)
+![](images/customizer-writer-form-tab2.jpg)
 
 And then you will see a series of fields to edit for all form field elements. 
 
