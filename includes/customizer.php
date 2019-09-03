@@ -9,7 +9,7 @@ add_action( 'customize_register', 'truwriter_register_theme_customizer' );
 function truwriter_register_theme_customizer( $wp_customize ) {
 	// Create custom panel.
 	$wp_customize->add_panel( 'customize_writer', array(
-		'priority'       => 500,
+		'priority'       => 25,
 		'theme_supports' => '',
 		'title'          => __( 'TRU Writer', 'radcliffe'),
 		'description'    => __( 'Customizer Stuff', 'radcliffe'),
@@ -50,6 +50,31 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		  )
 	   )
 	);
+	
+	// setting for header image upload label
+	$wp_customize->add_setting( 'meta_heading', array(
+		 'default'           => __( 'And So It Was Written', 'radcliffe'),
+		 'type' => 'theme_mod',
+		 'sanitize_callback' => 'sanitize_text'
+	) );
+	
+	// Control for header image upload  label
+	$wp_customize->add_control( new WP_Customize_Control(
+	    $wp_customize,
+		'meta_heading',
+		    array(
+		        'label'    => __( 'Metadata Heading', 'radcliffe'),
+		        'priority' => 30,
+		        'description' => __( 'On single page views, the heading above the left side post meta data below the content' ),
+		        'section'  => 'write_display',
+		        'settings' => 'meta_heading',
+		        'type'     => 'text'
+		    )
+	    )
+	); 
+	
+		
+	
 	
 	
 	
@@ -803,4 +828,15 @@ function truwriter_form_item_editor_notes_prompt() {
 	 	echo 'This information will *not* be published with your work, it is only to sent to the editor of ' . get_bloginfo('name') . '.';
 	 }
 }
+
+function truwriter_metadate_heading() {
+	 if ( get_theme_mod( 'meta_heading') != "" ) {
+	 	echo get_theme_mod( 'meta_heading');
+	 }	else {
+	 	echo 'And So It Was Written';
+	 }
+}
+
+
+
 ?>

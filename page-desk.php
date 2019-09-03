@@ -56,14 +56,14 @@ Template Name: Welcome Desk
 			//passcode to enter
 			$wAccessCode = truwriter_option('accesscode');
 	
-			// holder for output
+			// holder for output and the passcode needed to enter
 			$output = $wAccess =  '';
 
 			// already logged in but as different user on multisite?
 	
 			if ( is_user_logged_in() and !truwriter_check_user()  ) {
 				// we need to force a click through a logout
-				return '<div class="notify notify-green"><span class="symbol icon-tick"></span>' .'Now <a href="' . wp_logout_url( home_url('/') . 'write' ) . '" class="pretty-button pretty-button-green">activate the writing tool</a>.</div>';	  	
+				return '<div class="notify notify-green"><span class="symbol icon-tick"></span>' .'First! <a href="' . splot_redirect_url() . '" class="pretty-button pretty-button-green">activate the writing tool</a>.</div>';	  	
 			}
 
 			// verify that a  form was submitted and it passes the nonce check
@@ -73,7 +73,7 @@ Template Name: Welcome Desk
 				// grab the variables from the form
 				$wAccess = 	stripslashes( $_POST['wAccess'] );
 
-				// let's do some validation, store  error message for code mismatch
+				// let's do some validation of the code
 
 				if ( $wAccess != $wAccessCode ) {
 					$output .= '<div class="notify notify-red"><span class="symbol icon-error"></span> <p><strong>Incorrect Access Code</strong> - try again? Hint: ' . truwriter_option('accesshint') . '</p></div>'; 	

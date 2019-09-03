@@ -160,13 +160,23 @@ class truwriter_Theme_Options {
 		// get all pages on site with template for the Writing Desk
 		$found_pages = get_pages_with_template('page-desk.php');
 		
-		// the function returns an array of id => page title, first item is the menu selection item
+		$page_desc = 'Select the Page that should be used for the access code entry.';
+
 		if ( count( $found_pages ) > 1 ) {
-			$page_desc = 'Set the Page that should be used for the access code entry.';
+			
 			$page_std =  array_keys( $found_pages)[1];
+			
 		} else {
-			$page_desc = 'No pages have been created with the Writing Desk template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Desk</code> for the Template.'; 
-			$page_std = '';
+			$trypage = get_page_by_path('desk');
+		
+			if ( $trypage ) {
+				$page_std = $trypage->ID;
+				$found_pages = array( 0 => 'Select Page', $page_std => $trypage->post_title );
+		
+			} else {
+				$page_desc = 'No pages have been created with the Writing Desk template. This is required to enable access to the sharing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Desk</code> for the Template.'; 
+				$page_std = '';
+			}
 		}
 	
 		$this->settings['desk_page'] = array(
@@ -180,14 +190,24 @@ class truwriter_Theme_Options {
 		
 		// get all pages on site with template for the Writing Form
 		$found_pages = get_pages_with_template('page-write.php');
+		$page_desc = 'Set the Page that should be used for the Writing form.';
 		
 		// the function returns an array of id => page title, first item is the menu selection item
 		if ( count( $found_pages ) > 1 ) {
-			$page_desc = 'Set the Page that should be used for the Writing form.';
 			$page_std =  array_keys( $found_pages)[1];
 		} else {
-			$page_desc = 'No pages have been created with the Writing Pad template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Pad</code> for the Template.'; 
-			$page_std = '';
+	
+			$trypage = get_page_by_path('write');
+		
+			if ( $trypage ) {
+				$page_std = $trypage->ID;
+				$found_pages = array( 0 => 'Select Page', $page_std => $trypage->post_title );
+		
+			} else {
+				$page_desc = 'No pages have been created with the Writing Pad template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Pad</code> for the Template.'; 
+				$page_std = '';
+			}
+	
 		}
 	
 		$this->settings['write_page'] = array(

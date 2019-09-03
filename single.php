@@ -90,7 +90,7 @@
 			
 				<div class="meta-block post-author">
 				
-					<h3 class="meta-title"><?php _e('AND SO IT WAS WRITTEN...','radcliffe'); ?></h3>
+					<h3 class="meta-title"><?php truwriter_metadate_heading() ?></h3>
 					
 					<div class="post-author-container">
 				

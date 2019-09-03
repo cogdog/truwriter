@@ -379,13 +379,12 @@ function add_truwriter_scripts() {
    		
    		wp_enqueue_script( 'mce-view', '', array('tiny_mce') );		
    		
-   		
 		// custom jquery for the uploader on the form
-		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', 'suggest' , '1.23', TRUE );
+		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
 		
 		// add a local variable for the site's home url
 		wp_localize_script(
-		  jquery.writer,
+		  'jquery.writer',
 		  'writerObject',
 		  array(
 			'siteUrl' => esc_url(home_url())
@@ -405,7 +404,7 @@ function add_truwriter_scripts() {
 	} elseif ( is_single() ) {
 		// single writings, give is the jQuery for edit link stuff
 		
-		wp_register_script( 'jquery.editlink' , get_stylesheet_directory_uri() . '/js/jquery.editlink.js', null , '0.1', TRUE );
+		wp_register_script( 'jquery.editlink' , get_stylesheet_directory_uri() . '/js/jquery.editlink.js', null , '0.2', TRUE );
 		wp_enqueue_script( 'jquery.editlink' );
 	}
 }
