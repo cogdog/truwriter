@@ -1,0 +1,5 @@
+/* hide the "new posts" button for admin */
+
+.wp-admin.post-type-post a.page-title-action {
+    display: none;
+}
