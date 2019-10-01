@@ -55,6 +55,9 @@ function truwriter_setup () {
 		wp_insert_post( $page_data );
 	}
 	
+	
+   flush_rewrite_rules();		
+	
 }
 
 # -----------------------------------------------------------------
@@ -142,11 +145,13 @@ function truwriter_remove_admin_menus() {
     $wp_admin_bar->remove_node( 'new-post' );
 }
 
+add_action('admin_enqueue_scripts', 'truwriter_custom_admin_styles');
+
 function truwriter_custom_admin_styles(){
     wp_enqueue_style( 'admin_css',  get_stylesheet_directory_uri() . '/includes/admin.css');
 }
 
-add_action('admin_enqueue_scripts', 'truwriter_custom_admin_styles');
+
 
  
 # -----------------------------------------------------------------
@@ -163,47 +168,76 @@ function truwriter_rewrite_rules() {
 
    // for edit link requests
    add_rewrite_rule( '^get-edit-link/([^/]+)/?',  'index.php?elink=1&wid=$matches[1]','top');
-   
-   // they say this is "expensive" but I know of no other way to ensure it happens on updates
-   flush_rewrite_rules();	 
- }
+    
+}
 
- 
+
 add_action( 'template_redirect', 'truwriter_write_director' );
 
 function truwriter_write_director() {
 
-	if ( is_page( truwriter_get_write_page() ) and !isset( $_POST['truwriter_form_make_submitted'] ) and !empty(truwriter_option('accesscode') ) ) {
+	if ( is_page( truwriter_get_write_page() ) and !isset( $_POST['truwriter_form_make_submitted'] ) ) {
 	
-		// redirect for checking of access code
-		
 		// check for query vars that indicate this is a edit request/ build qstring
-		$wid = get_query_var( 'wid', 0 );   // id of post
+		$wid = get_query_var( 'wid' , 0 );   // id of post
 		$tk  = get_query_var( 'tk', 0 );    // magic token to check
-
-		// pass argument string if we got 'em
 		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
 		
-		wp_redirect ( home_url('/') . truwriter_get_desk_page()  . $args );
-		exit;
-	}
-
-	// redirect for checking access code
-	if ( is_page( truwriter_get_desk_page() ) and  isset( $_POST['truwriter_form_access_submitted'] ) 
-		and wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) )  {
-	
-		if ( stripslashes( $_POST['wAccess'] ) == truwriter_option('accesscode') ) {
-		
-			// check for query vars that indicate this is a edit request/ build qstring
-			$wid = get_query_var( 'wid' , 0 );   // id of post
-			$tk  = get_query_var( 'tk', 0 );    // magic token to check
-
-			$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
-
-			wp_redirect( splot_redirect_url()  . $args );
+			// normal entry check for author
+		if ( !is_user_logged_in() ) {
+			// not already logged in? go to desk.
+			wp_redirect ( home_url('/') . truwriter_get_desk_page()  . $args );
 			exit;
-		}	
+	
+		} elseif ( !current_user_can( 'edit_others_posts' ) ) {
+			// okay user, who are you? we know you are not an admin or editor
+		
+			// if the writer user not found, we send you to the desk
+			if ( !truwriter_check_user() ) {
+				// now go to the desk and check in properly
+				wp_redirect ( home_url('/') . truwriter_get_desk_page() . $args  );
+				exit;
+			} 
+		}
 	}
+	
+	if ( is_page(truwriter_get_desk_page()) ) {
+	
+	
+		// check for query vars that indicate this is a edit request/ build qstring
+		$wid = get_query_var( 'wid' , 0 );   // id of post
+		$tk  = get_query_var( 'tk', 0 );    // magic token to check
+		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
+	
+		// already logged in? go directly to the tool
+		if ( is_user_logged_in() ) {
+			if ( current_user_can( 'edit_others_posts' ) ) {
+				// If user has edit/admin role, send them to the tool
+				wp_redirect( splot_redirect_url() . $args );
+				exit;
+			} else {
+				// if the correct user already logged in, go directly to the tool
+				if ( truwriter_check_user() ) {			
+					wp_redirect( splot_redirect_url()  . $args );
+					exit;
+				} 
+			}	
+	
+		} elseif ( truwriter_option('accesscode') == '')  {
+			splot_user_login('writer', true, $args );
+			exit;
+		} elseif ( isset( $_POST['truwriter_form_access_submitted'] ) 
+		&& wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
+ 
+			// access code from the form
+			if ( stripslashes( $_POST['wAccess'] ) == truwriter_option('accesscode') ) {
+				splot_user_login('writer', true, $args );
+				exit;
+			}
+			
+		}
+			
+	}		
 	
   if ( get_query_var('random') == 1 ) {
 		 // set arguments for WP_Query on published posts to get 1 at random
@@ -344,7 +378,9 @@ function add_truwriter_scripts() {
 		array( $parent_style ),
 		wp_get_theme()->get('Version')
 	);
-	
+
+	// special tools shhhh
+    wp_enqueue_script( 'toolkit' , get_stylesheet_directory_uri() . '/js/toolkit.js', '' , '', TRUE );  	
 
  	if ( is_page( truwriter_get_write_page() ) ) { // use on just our form page
     
