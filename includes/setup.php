@@ -5,7 +5,7 @@
 # -----------------------------------------------------------------
 
 // run when this theme is activated
-add_action('after_switch_theme', 'truwriter_setup');
+add_action( 'after_switch_theme', 'truwriter_setup' );
 
 function truwriter_setup () { 
 
@@ -55,8 +55,9 @@ function truwriter_setup () {
 		wp_insert_post( $page_data );
 	}
 	
-	
-   flush_rewrite_rules();		
+	// add rewrite rules, then flush to make sure they stick.
+	truwriter_rewrite_rules();
+	flush_rewrite_rules();		
 	
 }
 
