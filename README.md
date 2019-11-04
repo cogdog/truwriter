@@ -99,16 +99,17 @@ If you have ftp/sftp access to your site (or this can be done in a cpanel file m
 
 For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
 
-If you are updating a site built with a previous version of the theme, and something wonky happens, try the following:
+If you are updating a site built with a previous version of the theme and something wonky happens, try the following:
 
 * Don't Panic
-* Go to Settings -&gt; Permalinks, and just click **Save**. 
-* Go to Appearances, and change the theme to any other theme, then change it back to TRU Writer.
-* All that fails, [report an issue](https://github.com/cogdog/truwriter/issues) with as much detail that describes the situation.
+* Go to Settings -&gt; Permalinks, and just click **Save**. Some errors are related to the way URLs are re-written in WordPress.
+* Go to Appearances, and change the theme to any other theme, then change it back to TRU Writer. There are some things the theme does on activation that can clear some issues.
+* Go to the TRU Writer Options and click **Save** as new option values may need a reset.
+* If all that fails, [report an issue](https://github.com/cogdog/truwriter/issues) with as much detail that describes the situation.
 
 ## Setting Up TRU Writer
 
-Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
+Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet. Get rid of any "Hello World" posts, say good bye. Set your TRU Theme Options (see below). Set up a menu. Try using the Write page to create some initial content. 
 
 ### Recommended Plugins for TRU Writer
 
