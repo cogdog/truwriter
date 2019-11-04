@@ -2,7 +2,7 @@
 Theme Name:	TRU Writer
 Theme URI:	https://github.com/cogdog/truwriter
 Description:	TRU Writer (Child of Radcliffe) is a SPLOT (http://splot.ca/) for rich media writing on the web suitable for essays, magazines, conference session proposals, and more. It creates a place for people to publish in a site without them needing a WordPress account or providing identifying information. 
-Version:	2.0
+Version:	2.5
 Template:	 radcliffe
 Author:	CogDog
 Author URI:	https://cog.dog
@@ -45,9 +45,6 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 .posts .featured-media {
     max-height: 240px;
 }
-
-
-
 
 /* --------------------  pretty buttons all done in CSS ---------------------------------
    h/t http://www.graemeboy.com/modern-css-buttons                                     */
@@ -271,6 +268,61 @@ form#writerform { padding: 30px 20px; }
 	width:100%;
 	padding:0.5rem;
 }
+
+/* -------------------------------  image drop zone ----------------------------------*/
+
+
+#footlocker {
+	display: none;
+}
+
+#uploadresponse {
+    color: #673ab7;
+}
+
+img#headerthumb {
+    float: left;
+    margin: 0 1em 0 0;
+    cursor: pointer;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+}
+
+#splotdropzone {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0 0 1em 0;
+    width: 100%;
+    height: 200px;
+    border: 3px dashed #999;
+    background: url(images/upload-icon.png) no-repeat center 20%, url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAH0lEQVQoU2NkIAIwEqGGgfaK/jMwIGyhvXUonibKOgCoygEKFVx9rwAAAABJRU5ErkJggg==) repeat !important;
+    cursor: pointer;
+}
+
+#dropmessage {
+	width: 100%;
+	height: 100%;
+	padding-top: 70px;
+	text-align: center;
+	word-break: break-word;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 1em;
+	font-weight:bold;  
+	color: #333;
+}
+
+#splotdropzone input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+
 
 /* ---------------------- for easy footnotes plugin -----------------------------------*/
 

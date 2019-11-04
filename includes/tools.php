@@ -1,6 +1,6 @@
 <?php
 # -----------------------------------------------------------------
-# Useful spanners and wrenches
+# Page and Template Checks
 # -----------------------------------------------------------------
 
 function page_with_template_exists ( $template ) {
@@ -54,16 +54,28 @@ function truwriter_get_write_page() {
 	}
 }
 
+function splot_redirect_url() {
+	// where to send visitors after login ok
+	return ( home_url('/') . truwriter_get_write_page() );
+}
 
-function truwriter_get_desk_page() {
+# -----------------------------------------------------------------
+# Media
+# -----------------------------------------------------------------
 
-	// return slug for page set in theme options for writing page (newer versions of SPLOT)
-	if (  truwriter_option( 'desk_page' ) ) {
-		return ( get_post_field( 'post_name', get_post( truwriter_option( 'desk_page' ) ) ) ); 
-	} else {
-		// older versions of SPLOT use the slug
-		return ('desk');
-	}
+// for uploading images 
+function truwriter_insert_attachment( $file_handler, $post_id ) {
+	
+	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) return (false);
+
+	require_once( ABSPATH . "wp-admin" . '/includes/image.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/file.php' );
+	require_once( ABSPATH . "wp-admin" . '/includes/media.php' );
+
+	$attach_id = media_handle_upload( $file_handler, $post_id );
+	
+	return ($attach_id);
+	
 }
 
 // function to get the caption for an attachment (stored as post_excerpt)
@@ -72,6 +84,25 @@ function get_attachment_caption_by_id( $post_id ) {
     $the_attachment = get_post( $post_id );
     return ( $the_attachment->post_excerpt ); 
 }
+
+# -----------------------------------------------------------------
+# Grab bag
+# -----------------------------------------------------------------
+
+function truwriter_word_count( $content ) {
+    return str_word_count( strip_tags( $content ) );
+}
+
+function truwriter_preview_notice() {
+	return ('<div class="notify"><span class="symbol icon-info"></span>
+This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click "Publish Now".		
+				</div>');
+}
+
+# -----------------------------------------------------------------
+# Plugin Checks
+# -----------------------------------------------------------------
+
 
 function reading_time_check() {
 // checks for installation of Reading Time WP plugin https://wordpress.org/plugins/reading-time-wp/
@@ -95,6 +126,11 @@ function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
 	}
 }
 
+
+# -----------------------------------------------------------------
+# Twittering
+# -----------------------------------------------------------------
+
 function splot_get_twitter_name( $str ) {
 	// takes an author string and extracts a twitter handle if there is one 
 	
@@ -107,41 +143,6 @@ function splot_get_twitter_name( $str ) {
 	}
 }
 
-function truwriter_author_user_check( $expected_user = 'writer' ) {
-// checks for the proper authoring account set up
-
-	$auser = get_user_by( 'login', $expected_user );
-		
-	if ( !$auser) {
-		return ('The Authoring account not set up. You need to <a href="' . admin_url( 'user-new.php') . '">create a user account</a> with login name <strong>' . $expected_user . '</strong> with a role of <strong>Author</strong>. Make a killer strong password; no one uses it. Not even you.');
-	} elseif ( $auser->roles[0] != 'author') {
-	
-		// for multisite let's check if user is not member of blog
-		if ( is_multisite() AND !is_user_member_of_blog( $auser->ID, get_current_blog_id() ) )  {
-			return ('The user account <strong>' . $expected_user . '</strong> is set up but it has not been added as a user to this site (and needs to have a role of <strong>Author</strong>). You can <a href="' . admin_url( 'user-edit.php?user_id=' . $auser->ID ) . '">edit the account now</a>'); 
-			
-		} else {
-		
-			return ('The user account <strong>' . $expected_user . '</strong> is set up but needs to have it\'s role set to <strong>Author</strong>. You can <a href="' . admin_url( 'user-edit.php?user_id=' . $auser->ID ) . '">edit it now</a>'); 
-		}
-		
-		
-		
-	} else {
-		return ('The authoring account <strong>' . $expected_user . '</strong> is correctly set up.');
-	}
-}
-
-
-function truwriter_check_user( $allowed='writer' ) {
-	// checks if the current logged in user is who we expect
-   $current_user = wp_get_current_user();
-	
-	// return check of match
-	return ( $current_user->user_login == $allowed );
-}
-
-
 function twitternameify( $str ) {
 	// convert any "@" in astring to a linked twitter name
 	// ----- h/t http://snipe.net/2009/09/php-twitter-clickable-links/
@@ -150,57 +151,38 @@ function twitternameify( $str ) {
 	return $str;
 }
 
-function truwriter_preview_notice() {
-	return ('<div class="notify"><span class="symbol icon-info"></span>
-This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click "Publish Now".		
-				</div>');
-}
-
-function splot_the_author() {
-	// utility to put in template to show status of special logins
-	// nothing is printed if there is not current user, 
-	//   echoes (1) if logged in user is the special account
-	//   echoes (0) if logged in user is the another account
-	//   in both cases the code is linked to a logout script
-
-	
-	if ( is_user_logged_in() and !current_user_can( 'edit_others_posts' ) )  {
-	
-		$user_code = ( truwriter_check_user() ) ? 1 : 0;
-		echo '<a href="' . wp_logout_url( site_url() ). '">(' . $user_code  .')</a>';
-	}
-}
-
-function get_page_id_by_slug( $page_slug ) {
-	// pass the slug and get it's id, so we can use most basic permalink structure
-	// ----- h/t https://gist.github.com/davidpaulsson/9224518
-	
-	// get page as object
-	$page = get_page_by_path( $page_slug );
-	
-	if ( $page ) {
-		return $page->ID;
-	} else {
-		return null;
-	}
-}
-
-function truwriter_get_writing_status ( $pid ) {
-	$the_post = get_post( $pid );
-	return $the_post->post_status;
-}
+# -----------------------------------------------------------------
+# Email
+# -----------------------------------------------------------------
 
 function set_html_content_type() {
 	// from http://codex.wordpress.org/Function_Reference/wp_mail
 	return 'text/html';
 }
 
-function br2nl ( $string )
-// convert HTML <br> tags to new lines
-// from http://php.net/manual/en/function.nl2br.php#115182
-{
-    return preg_replace('/\<br(\s*)?\/?\>/i', PHP_EOL, $string);
+function truwriter_allowed_email_domain( $email ) {
+	// checks if an email address is within a list of allowed domains
+
+	// allow for empty entries
+	if ( empty($email) ) return true;
+
+	// extract domain h/t https://www.fraudlabspro.com/resources/tutorials/how-to-extract-domain-name-from-email-address/
+	$domain = substr($email, strpos($email, '@') + 1);
+
+	$allowables = explode(",", truwriter_option('email_domains'));
+
+	foreach ( $allowables as $item) {
+		if ( $domain == trim($item)) return true;
+	}
+
+	return false;
 }
+
+
+# -----------------------------------------------------------------
+# API
+# -----------------------------------------------------------------
+
 
 // -----  expose post meta date to API
 add_action( 'rest_api_init', 'truwriter_create_api_posts_meta_field' );
@@ -229,24 +211,5 @@ function truwriter_get_splot_meta_for_api( $object ) {
 	 }
 	 
 	 return ($splot_meta);
-} 
-
-
-function truwriter_allowed_email_domain( $email ) {
-	// checks if an email address is within a list of allowed domains
-
-	// allow for empty entries
-	if ( empty($email) ) return true;
-
-	// extract domain h/t https://www.fraudlabspro.com/resources/tutorials/how-to-extract-domain-name-from-email-address/
-	$domain = substr($email, strpos($email, '@') + 1);
-
-	$allowables = explode(",", truwriter_option('email_domains'));
-
-	foreach ( $allowables as $item) {
-		if ( $domain == trim($item)) return true;
-	}
-
-	return false;
 }
 ?>

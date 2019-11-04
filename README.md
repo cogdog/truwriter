@@ -15,16 +15,13 @@ This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that a
 
 Once installed the TRU Writer theme allows individuals to generate content online using an rich text editor interface. Writers can also add content by cutting and then pasting into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
 
-Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!)
+Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
 
-The site invisibly logs in visitors to a special account to make available advanced publication and editing tools, but those individuals will not need to navigate the Wordpress dashboard or login structure (we love dashboards, but hey, not everyone needs to see that mess, right?). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
-
-The TRU Writer Theme was developed along with the [TRU Collector](http://splot.ca/splots/the-comparator/), the [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
+The TRU Writer Theme was developed along with  [TRU Collector](http://splot.ca/splots/the-comparator/),  [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
 ## With Thanks
 
 SPLOTs have no venture capital backers, no IPOs, no real funding at all. But they have been helped along by a few groups worth recognizing with an icon and a link.
-
 
 The original TRU Writer was developed under a [Thompson Rivers University Open Learning Fellowship](http://cogdog.trubox.ca/) and further development was supported in part by a [Reclaim Hosting Fellowship](http://reclaimhosting.com), an [OpenETC grant](https://opened.ca), Coventry University's [Disruptive Media Learning Lab](https://dmll.org.uk/),  plus  ongoing support by [Patreon patrons](https://patreon.com/cogdog).
 
@@ -102,21 +99,21 @@ If you have ftp/sftp access to your site (or this can be done in a cpanel file m
 
 For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
 
+If you are updating a site built with a previous version of the theme, and something wonky happens, try the following:
+
+* Don't Panic
+* Go to Settings -&gt; Permalinks, and just click **Save**. 
+* Go to Appearances, and change the theme to any other theme, then change it back to TRU Writer.
+* All that fails, [report an issue](https://github.com/cogdog/truwriter/issues) with as much detail that describes the situation.
+
 ## Setting Up TRU Writer
 
 Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.
 
 ### Recommended Plugins for TRU Writer
 
-*Note: The newest versions of this theme present dashboard notifications for suggested plugins and one click links to install and/or activate.*
 
 While your doing all that uploading, you should know that this theme uses the [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read.
-
-Also install and activate the [Remove Dashboard Access plugin](https://wordpress.org/plugins/remove-dashboard-access-for-non-admins/). This plugin this keeps anyone logged in as the secret user from even seeing the Wordpress dashboard. It also stops someone who is leaving a comment from getting inside the secret user profile and changing your "writer" password, which blows everything up. This plugin is not critical for the Writer to work, it just closes the back door a bit tighter.
-
-In the settings for Remove Dashboard Access plugin, restrict access to **Editors and Administrators** or just **Administrators** depending if you will have a moderator user. The default redirect should be for the main URL of the site.
-
-![Remove Dashboard Access settings](images/dashboard-access-settings.jpg "Remove Dashboard Access settings")
 
 ## Demo Content
 
@@ -128,36 +125,31 @@ You can also get a copy of the Widgets used on that site too. First intall/activ
 
 
 ### Page Setup
-This theme has several pages that must be created; each is associated with a specific template that provide it's functionality. Activating the theme *should* create these all for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** and **Desk** pages to customize the prompt seen by writers on your site.
+This theme has one special page for your writing form that must be created; associated with a specific template that provides it's functionality. Activating the theme *should* create the page for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** page to customize the welcome seen by writers on your site.
 
-If the theme does not do so automatically (and it should) create these Wordpress **Pages**. You can modify the titles, and add whatever content you want to appear at the top as instructions. As of version 1.8, you can edit the url short name as well.
+If the theme does not do so automatically (and it should) create this Wordpress **Page**.  As of version 1.8, you can edit the url short name as well.
 
 * **Write** -- The page that provides the writing form, see [http://splot.ca/writer/write](http://splot.ca/writer/write).  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page can be published at `http://coolest.site.org/writing` When you create a Writing Form page, under **Page Atributes**, select the Template named `Writing Pad`
-
-* **Desk** -- The page that provides users will see first if they must enter an access code to access the writing tool (see below). If no access code is required, it redirects to the page above for the writing form-- like  [http://splot.ca/writer/desk](http://splot.ca/writer/desk).  Whatever you include in the body (not required) is added to the top of the form, maybe for a friendly prompt .e.g. for a site at `http://coolest.site.org/` the page might be published at `http://coolest.site.org/guard_dog` When you create a Writing Form page, under **Page Atributes**, select the Template named `Welcome Desk`
 
 
 ### Customize Your Menus
 
-The default menus are not what you want (it will add menu items for some pages that users should not see! Wordpress will generate one based on all Pages set up.
+The default menus are not what you want Wordpress will generate one based on all Pages set up.
 
 ![](images/default-menus.jpg)
 
-In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link, and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/Writer
+In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link (your site URL followed by `/random`), and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/Writer
 
 ![](images/writer-menus.jpg)
 
-You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  It will list as menu items a bunch of pages that users never should see (e.g. Welcome Desk, Get Edit Link).
+You can of course, create any menu structure that works for your site- but don't use the default! And hey, if you're being all fancy and don't check the "Primary" box above, remember to go into the "Manage Menus" tab and change it from the default menu to the new awesome menu you just created or all you'll see is the default menu popping up again and again and that will be frustrating.  
 
 ### Theme Options and Settings
 Upon activation the theme will set up a **TRU Writer Options** link that appears in the black admin bar at the top of your Wordpress Dashboard interface (when logged in), and in the "Appearance" tab on your Wordpress Dashboard. 
 
 Click **TRU Writer Options** to see or change the settings outlined below. 
-    
-*(For extra fun "writer" from here on, in lower case, refers to the person using your site; the person who comes and wants to write something on your awesome Writer site.)*
 
 In the TRU Writer Theme, traditional "posts" in Wordpress are renamed "writings," but they still have all the attributes of garden variety Wordpress blog posts. Yum.
-
 
 #### Access Options
 
@@ -171,15 +163,15 @@ The TRU Writer is a moderated publishing theme. And "moderated" means that when 
 
 In order to make a post (or "writing" as above) visible, a user with the permission status of "Editor" or "Administrator" needs to change the status of the "pending approval" writing to "published (or ignore an "Editor" or "Administrator" could just ignore it forever, such power is theirs).
 
-#### Pages Setup
+#### Special Page Setup
 
-Use this area to assign the WordPress Page to be used for the Welcome Desk (where users are sent if there is a required access code) as well as the Page for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be `write` and `desk`-- this is no longer required.
+Use this area to assign the WordPress Page to be used for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be `write` -- this is no longer required.
 
-If no Pages are found with the correct template, you will see a prompt to create one:
+If no Page is found with the correct template, you will see a prompt to create one:
 
 ![](images/pages-make.jpg)
 
-If pages are found (and there might even be more than one, you can select the one you want used for each special page.
+If page is found (and there might even be more than one, you can select the one you want used for each special page.
 
 ![](images/pages-setup.jpg)
 
@@ -197,12 +189,13 @@ Enter the **Default Writing Prompt** field to pre-populate the field that visito
 
 Check the **Allow Comments** box to add a standard blog comment field at the bottom of all published pieces. 
 
-
 On the editor where people will be composing their madness, the **Extra Information Field** represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
 
 These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
 
 Under **Default Header Image** click **Set/Change Image** to open the Wordpress media editor to choose a default media header image. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
+
+You can now also set a limit for the file size upload.
 
 ![](images/header-image-caption.jpg)
 
@@ -231,8 +224,6 @@ Disable **Show the tags entry on writing form and single items displays?** if yo
 
 Enter in **Notification Emails** any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
 
-
-
 #### Twitter Settings
 
 ![](images/twitter-settings.jpg)
@@ -241,19 +232,6 @@ You can now choose to disable the Tweet This button on published items In enable
 
 #### Estimated Reading Time Plugin
 This plugin is optional, if installed and activated, it will add to all published works an estimate of the reading time based on a crude formula. If it is not installed, you will see the notes shown above. This plugin is available in the Wordpress repository, so it is an easy install.
-
-
-
-
-#### Author Account Setup
-
-To provide access to the media uploader, this site uses a Wordpress Authoring Role account that is logged into invisibly to your site visitors (for anyone logged in with an Editor or Administrator account, like you this account is not used.). So your site needs an active user with a name of **writer** and a role of **Author**.
-
-![](images/add-author.jpg)
-
-You can follow the link from the options page to create this account; for an email you can use a fictitious one on your domain; nothing is ever sent to it. We suggest using the strong password that Wordpress suggests. If this site is on a multi-site Wordpress, and the TRU Writer has been used on another site, the writer account already exists, so you need to add it to the site via the Author tools.  
-
-** Note: As of version 0.3 of this theme, the password no longer needs to be copied and entered into the options screen.** If you are using a version of the theme that has a password field in the options, maybe it's a good time to update? Otherwise, [see an older version of this ReadMe](https://github.com/cogdog/truwriter/blob/50d86fdfe039aec4575a2eaa29c16ad3374d3596/README.md#author-account-setup) for instructions.
 
 #### Creative Commons / Rights Settings
 
@@ -301,14 +279,13 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
+**No More Secret User** This theme no longer requires setting up of a special authoring account, and there is no secret logging in behind the scenes. The writing form has a new drag and drop upload interface for featured image (and a new option for limiting the file size if uploads). The theme has also been simplified by not having a separate Welcome Desk Page for handing the access codes, everything is managed in the Writing Pad template.
 
 **Options for Special Pages**  No longer are pages for the Welcome Desk (where access codes are entered) and Writer form required to have a set URL; you can create any Page desired for these functions, and set them as the active ones via the theme options. Version 2.0 does some better set up for defaults.
 
 **Better Front End Editor**  Reduced reliance on special pages. The links to the random entry and the one use to get the edit link are no longer needed, and are handle now in the code. These pages should be deleted from your site. On an update to version 1.7 or later, you might have to go to **Settings** - **Permalinks** and just click save to update the url rules. Also the method for using the special link to edit an entry is now done in a single click. Much better!
 
-**Better Layout and Media Support** Customizer options for choosing a this or wider content layout. URLs for media that [WordPress natively can oembed](https://codex.wordpress.org/Embeds#Okay.2C_So_What_Sites_Can_I_Embed_From.3F) will now do so in the front end editor.
-
-![](images/autoembed-splot-editor.gif)
+**Better Layout and Media Support** Customizer options for choosing a this or wider content layout.
 
 Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long `functions.php` is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.
 

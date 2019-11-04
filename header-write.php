@@ -24,7 +24,7 @@
 	
 	</head>
 	
-	<body <?php body_class('writerform'); ?>>
+	<body <?php body_class('writerform, dropper'); ?>>
 	
 		<div class="header-search-block section light-padding hidden">
 		

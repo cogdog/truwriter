@@ -61,8 +61,7 @@
 		<p class="fleft">
 		
 			A <a href="http://splot.ca/">SPLOT</a> on the web: <a href="<?php echo home_url(); ?>" title="<?php esc_attr( bloginfo('name') ); ?>"><?php bloginfo('name'); ?></a> 
-			
-			<?php splot_the_author(); ?>
+
 			</p>
 
 		

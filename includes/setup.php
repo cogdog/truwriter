@@ -36,29 +36,9 @@ function truwriter_setup () {
 		wp_insert_post( $page_data );
 	}
 
-	if (! page_with_template_exists( 'page-desk.php' ) ) {
-  
-		// create the welcome entrance to the tool if it does not exist
-		// backdate creation date 2 days just to make sure they do not end up future dated
-		
-		$page_data = array(
-			'post_title' 	=> 'Welcome Desk',
-			'post_content'	=> 'You are but one special key word away from being able to write. Hopefully the kind owner of this site has provided you the key phrase. Spelling and capitalization do count. If you are said owner, editing this page will let you personalize this bit. ',
-			'post_name'		=> 'desk',
-			'post_status'	=> 'publish',
-			'post_type'		=> 'page',
-			'post_author' 	=> 1,
-			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
-			'page_template'	=> 'page-desk.php',
-		);
-	
-		wp_insert_post( $page_data );
-	}
-	
 	// add rewrite rules, then flush to make sure they stick.
 	truwriter_rewrite_rules();
-	flush_rewrite_rules();		
-	
+	flush_rewrite_rules();
 }
 
 # -----------------------------------------------------------------
@@ -67,11 +47,6 @@ function truwriter_setup () {
 
 // get theme options early in the flow
 add_action( 'after_setup_theme', 'truwriter_load_theme_options', 9 );
-
-// change the name of admin menu items from "New Posts"
-// -- h/t http://wordpress.stackexchange.com/questions/8427/change-order-of-custom-columns-for-edit-panels
-// and of course the Codex http://codex.wordpress.org/Function_Reference/add_submenu_page
-
 
 # -----------------------------------------------------------------
 # Dashboard menus
@@ -127,11 +102,9 @@ function truwriter_drafts_menu() {
 	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
 }
 
-
 # -----------------------------------------------------------------
-# Remove the New Post buttons, links from dashboard
+# Remove the New Post buttons, links from dashboard (use front end only)
 # -----------------------------------------------------------------
-
 
 add_action( 'admin_menu', 'truwriter_remove_admin_submenus', 999 );
 
@@ -152,12 +125,22 @@ function truwriter_custom_admin_styles(){
     wp_enqueue_style( 'admin_css',  get_stylesheet_directory_uri() . '/includes/admin.css');
 }
 
-
-
- 
 # -----------------------------------------------------------------
-# Redirects
+# Query vars and Redirects
 # -----------------------------------------------------------------
+
+// -----  add allowable url parameters so we can do reall cool stuff, wally
+add_filter('query_vars', 'truwriter_queryvars' );
+
+function truwriter_queryvars( $qvars ) {
+	$qvars[] = 'tk'; // token key for editing previously made stuff
+	$qvars[] = 'wid'; // post id for editing
+	$qvars[] = 'random'; // random flag
+	$qvars[] = 'elink'; // edit link flag
+	$qvars[] =  'ispre'; // another preview flag
+	
+	return $qvars;
+} 
 
 
 /* set up rewrite rules */
@@ -172,74 +155,11 @@ function truwriter_rewrite_rules() {
     
 }
 
-
+// redirections for rewrites on the /random and /get-edit-link
 add_action( 'template_redirect', 'truwriter_write_director' );
 
 function truwriter_write_director() {
 
-	if ( is_page( truwriter_get_write_page() ) and !isset( $_POST['truwriter_form_make_submitted'] ) ) {
-	
-		// check for query vars that indicate this is a edit request/ build qstring
-		$wid = get_query_var( 'wid' , 0 );   // id of post
-		$tk  = get_query_var( 'tk', 0 );    // magic token to check
-		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
-		
-			// normal entry check for author
-		if ( !is_user_logged_in() ) {
-			// not already logged in? go to desk.
-			wp_redirect ( home_url('/') . truwriter_get_desk_page()  . $args );
-			exit;
-	
-		} elseif ( !current_user_can( 'edit_others_posts' ) ) {
-			// okay user, who are you? we know you are not an admin or editor
-		
-			// if the writer user not found, we send you to the desk
-			if ( !truwriter_check_user() ) {
-				// now go to the desk and check in properly
-				wp_redirect ( home_url('/') . truwriter_get_desk_page() . $args  );
-				exit;
-			} 
-		}
-	}
-	
-	if ( is_page(truwriter_get_desk_page()) ) {
-	
-	
-		// check for query vars that indicate this is a edit request/ build qstring
-		$wid = get_query_var( 'wid' , 0 );   // id of post
-		$tk  = get_query_var( 'tk', 0 );    // magic token to check
-		$args = ( $wid and $tk )  ? '?wid=' . $wid . '&tk=' . $tk : '';
-	
-		// already logged in? go directly to the tool
-		if ( is_user_logged_in() ) {
-			if ( current_user_can( 'edit_others_posts' ) ) {
-				// If user has edit/admin role, send them to the tool
-				wp_redirect( splot_redirect_url() . $args );
-				exit;
-			} else {
-				// if the correct user already logged in, go directly to the tool
-				if ( truwriter_check_user() ) {			
-					wp_redirect( splot_redirect_url()  . $args );
-					exit;
-				} 
-			}	
-	
-		} elseif ( truwriter_option('accesscode') == '')  {
-			splot_user_login('writer', true, $args );
-			exit;
-		} elseif ( isset( $_POST['truwriter_form_access_submitted'] ) 
-		&& wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
- 
-			// access code from the form
-			if ( stripslashes( $_POST['wAccess'] ) == truwriter_option('accesscode') ) {
-				splot_user_login('writer', true, $args );
-				exit;
-			}
-			
-		}
-			
-	}		
-	
   if ( get_query_var('random') == 1 ) {
 		 // set arguments for WP_Query on published posts to get 1 at random
 		$args = array(
@@ -269,8 +189,9 @@ function truwriter_write_director() {
    }
 }
 
-
-
+# -----------------------------------------------------------------
+# Comments
+# -----------------------------------------------------------------
 
 // Customize the headings for the comment form
 add_filter('comment_form_defaults', 'truwriter_comment_mod');
@@ -281,6 +202,11 @@ function truwriter_comment_mod( $defaults ) {
 	$defaults['title_reply_to'] = 'Provide Feedback for %s';
 	return $defaults;
 }
+
+
+# -----------------------------------------------------------------
+# Tiny-MCE mods
+# -----------------------------------------------------------------
 
 
 // remove  buttons from the visual editor
@@ -310,20 +236,6 @@ function truwriter_tinymce_2_buttons($buttons)
 	return array_diff($buttons,$remove);
  }
 
-// -----  add allowable url parameters so we can do reall cool stuff, wally
-add_filter('query_vars', 'truwriter_queryvars' );
-
-function truwriter_queryvars( $qvars ) {
-	$qvars[] = 'tk'; // token key for editing previously made stuff
-	$qvars[] = 'wid'; // post id for editing
-	$qvars[] = 'random'; // random flag
-	$qvars[] = 'elink'; // edit link flag
-	
-	return $qvars;
-} 
-
-
-
 
 
 # -----------------------------------------------------------------
@@ -349,7 +261,6 @@ function truwriter_no_featured_image() {
 add_filter( 'the_content', 'truwriter_firstview' );
  
 function truwriter_firstview( $content ) {
- 
     // Check if we're inside the main loop on the writing page
     if ( is_page( truwriter_get_write_page() ) && in_the_loop() && is_main_query() ) {
     
@@ -365,6 +276,11 @@ function truwriter_firstview( $content ) {
 }
 
 
+# -----------------------------------------------------------------
+# Enqueue scripts and styles
+# -----------------------------------------------------------------
+
+
 add_action('wp_enqueue_scripts', 'add_truwriter_scripts');
 
 function add_truwriter_scripts() {	
@@ -378,17 +294,14 @@ function add_truwriter_scripts() {
 		get_stylesheet_directory_uri() . '/style.css',
 		array( $parent_style ),
 		wp_get_theme()->get('Version')
-	);
-
-	// special tools shhhh
-    wp_enqueue_script( 'toolkit' , get_stylesheet_directory_uri() . '/js/toolkit.js', '' , '', TRUE );  	
+	);	
 
  	if ( is_page( truwriter_get_write_page() ) ) { // use on just our form page
     
 		 // add media scripts if we are on our maker page and not an admin
 		 // after http://wordpress.stackexchange.com/a/116489/14945
     	 
-		if (! is_admin() ) wp_enqueue_media();
+		wp_enqueue_media();
 		
 		// Build in tag auto complete script
    		wp_enqueue_script( 'suggest' );
@@ -397,8 +310,8 @@ function add_truwriter_scripts() {
    		// needs dependency on tiny_mce
    		// h/t https://wordpress.stackexchange.com/a/287623
    		
-   		wp_enqueue_script( 'mce-view', '', array('tiny_mce') );		
-   		
+   		wp_enqueue_script( 'mce-view', '', array('tiny_mce'), '', true );		
+	
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
 		
@@ -407,7 +320,8 @@ function add_truwriter_scripts() {
 		  'jquery.writer',
 		  'writerObject',
 		  array(
-			'siteUrl' => esc_url(home_url())
+			'siteUrl' => esc_url(home_url()),
+			'uploadMax' => truwriter_option('upload_max' )
 		  )
 		);
 		
@@ -429,6 +343,12 @@ function add_truwriter_scripts() {
 	}
 }
 
+
+# -----------------------------------------------------------------
+# Grab Bag
+# -----------------------------------------------------------------
+
+
 // set the default upload image size to "large' cause medium is puny
 // ----- h/t http://stackoverflow.com/a/20019915/2418186
 
@@ -437,6 +357,76 @@ add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 function my_default_image_size () {
     return 'large'; 
 }
+
+
+
+function  truwriter_show_drafts( $query ) {
+
+    if ( is_user_logged_in() || is_feed() )
+        return;
+
+    $query->set( 'post_status', array( 'publish', 'draft' ) );
+}
+
+add_action( 'pre_get_posts', 'truwriter_show_drafts' );
+
+// enable previews of posts for non-logged in users
+// ----- h/t https://wordpress.stackexchange.com/a/164088/14945
+
+add_filter( 'the_posts', 'truwriter_reveal_previews', 10, 2 );
+
+function truwriter_reveal_previews( $posts, $wp_query ) {
+
+    //making sure the post is a preview to avoid showing published private posts
+    if ( !is_preview() )        
+        return $posts;
+        
+    if ( is_user_logged_in() )
+    	 return $posts;
+
+    if ( count( $posts ) )
+        return $posts;
+
+    if ( !empty( $wp_query->query['p'] ) ) {
+        return array ( get_post( $wp_query->query['p'] ) );
+    }
+}
+
+function truwriter_is_preview() {
+	return ( get_query_var( 'ispre', 0 ) == 1);
+}
+
+# -----------------------------------------------------------------
+# login stuff
+# -----------------------------------------------------------------
+
+// Add custom logo to entry screen... because we can
+// While we are at it, use CSS to hide the "back to blog" and retrieve password links
+
+// You know like my logo? Whatsamatta you? Then change the image in the theme folder images/site-login-logo.png
+add_action( 'login_enqueue_scripts', 'my_login_logo' );
+
+function my_login_logo() { ?>
+    <style type="text/css">
+        body.login div#login h1 a {
+            background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/images/site-login-logo.png);
+            padding-bottom: 30px;
+        }    
+	#backtoblog {display:none;}
+	#nav {display:none;}
+    </style>
+<?php }
+
+
+// Make logo link points to blog, not Wordpress.org Change Dat
+// -- h/t http://www.sitepoint.com/design-a-stylized-custom-wordpress-login-screen/
+
+add_filter( 'login_headerurl', 'login_link' );
+
+function login_link( $url ) {
+	return get_bloginfo( 'url' );
+}
+
 
 # -----------------------------------------------------------------
 # Menu Setup
@@ -458,8 +448,6 @@ function splot_is_menu_location_used( $location = 'primary' ) {
 	// othewise look for the menu location in the list
 	return in_array( $location , $menulocations);
 }
-
-
 
 // create a basic menu if one has not been define for primary
 function splot_default_menu() {

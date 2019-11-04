@@ -239,7 +239,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 
 	// setting for description  label prompt
 	$wp_customize->add_setting( 'item_writing_area_prompt', array(
-		 'default'           => __( 'Use the editing area below the toolbar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images to include in your writing or choose from the media already in the media library (click on the tab labelled "media library"). You can also embed audio and video from many social sites simply by putting the URL of the media on a blank line.  Click and drag the icon in the lower right to resize the editing space.', 'radcliffe'),
+		 'default'           => __( 'Use the editing area below the toolbar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links.  You can also embed audio and video from many social sites simply by putting the URL of the media on a blank line (you will see them embedded in previews and when saved).', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
@@ -327,7 +327,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 
 	// setting for header image upload prompt
 	$wp_customize->add_setting( 'item_header_image_prompt', array(
-		 'default'           => __( 'You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be at least 1440px wide for photos. Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.', 'radcliffe'),
+		 'default'           => __( 'Upload an image file to be used in the header for your writing. Ideally the image should be at least 1440px wide and &lt; ' . truwriter_option('upload_max' ) . ' Mb in size. Images should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
@@ -695,7 +695,7 @@ function truwriter_form_item_header_image_prompt() {
 	 if ( get_theme_mod( 'item_header_image_prompt') != "" ) {
 	 	echo get_theme_mod( 'item_header_image_prompt');
 	 }	else {
-	 	echo 'You can upload any image file to be used in the header or choose from ones that have already been added to the site. Ideally this image should be at least 1440px wide for photos. Any uploaded image should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.';
+	 	echo 'Upload an image file to be used in the header for your writing. Ideally the image should be at least 1440px wide and &lt; ' . truwriter_option('upload_max' ) . ' Mb in size. Images should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.';
 	 }
 }
 
@@ -728,7 +728,7 @@ function truwriter_form_item_writing_area_prompt() {
 	 if ( get_theme_mod( 'item_writing_area_prompt') != "" ) {
 	 	echo get_theme_mod( 'item_writing_area_prompt');
 	 }	else {
-	 	echo 'Use the editing area below the toolbar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links. Click "Add Media" to upload images to include in your writing or choose from the media already in the media library (click on the tab labelled "media library"). You can also embed audio and video from many social sites simply by putting the URL of the media on a blank line.  Click and drag the icon in the lower right to resize the editing space.';
+	 	echo 'Use the editing area below the toolbar to write and format your writing. You can also paste formatted content here (e.g. from MS Word or Google Docs). The editing tool will do its best to preserve standard formatting--headings, bold, italic, lists, footnotes, and hypertext links.  You can also embed audio and video from many social sites simply by putting the URL of the media on a blank line (you will see them embedded in previews and when saved).';
 	 }
 }
 

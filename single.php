@@ -64,18 +64,19 @@
 			    
 		    <div class="post-content section-inner <?php truwriter_layout_width()?>">
 		    
-		    	<?php if ( is_preview() ) echo truwriter_preview_notice(); // preview notice ?>
+		    	<?php if ( truwriter_is_preview() ) echo truwriter_preview_notice(); // preview notice ?>
 		    
 		    	<?php the_content(); ?>
 		    	
-		    	<hr />
+		    	
+		    	
 		    	<?php 
 		    		 if (truwriter_option('show_footer') ) {
 		    			$wFooter = get_post_meta( $post->ID, 'wFooter', 1 ); 
 		    			if ($wFooter) echo '<p><em>' . make_clickable( $wFooter ) . '</em></p>';
 		    		 }
 		    		 
-		    	if ( is_preview() ) echo truwriter_preview_notice();	 
+		    	if ( truwriter_is_preview() ) echo truwriter_preview_notice();	 
 		    		
 		    	?>
 		    	
@@ -103,7 +104,7 @@
 							<p class="author-description"><strong>Author:</strong> <?php echo $wAuthor; ?></p>
 							
 							<p class="author-description"><strong>Published:</strong> <?php the_time(get_option('date_format')); ?></p>
-							<p class="author-description"><strong>Word Count:</strong> <?php  echo str_word_count( get_the_content());?> </p>
+							<p class="author-description"><strong>Word Count:</strong> <?php  echo truwriter_word_count( get_the_content());?> </p>
 							<?php 
 							
 							// output estimated reading time if we are using plugin

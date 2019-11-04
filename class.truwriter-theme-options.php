@@ -119,6 +119,10 @@ class truwriter_Theme_Options {
 	/* Define all settings and their defaults */
 	public function get_settings() {
 	
+		// for file upload checks
+		$max_upload_size = round(wp_max_upload_size() / 1000000);
+
+	
 		/* General Settings
 		===========================================*/
 
@@ -156,38 +160,7 @@ class truwriter_Theme_Options {
 			'std'    => 'Choose the pages for the two ones that create access to the writing form',
 			'type'    => 'heading'
 		);
-		
-		// get all pages on site with template for the Writing Desk
-		$found_pages = get_pages_with_template('page-desk.php');
-		
-		$page_desc = 'Select the Page that should be used for the access code entry.';
 
-		if ( count( $found_pages ) > 1 ) {
-			
-			$page_std =  array_keys( $found_pages)[1];
-			
-		} else {
-			$trypage = get_page_by_path('desk');
-		
-			if ( $trypage ) {
-				$page_std = $trypage->ID;
-				$found_pages = array( 0 => 'Select Page', $page_std => $trypage->post_title );
-		
-			} else {
-				$page_desc = 'No pages have been created with the Writing Desk template. This is required to enable access to the sharing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Desk</code> for the Template.'; 
-				$page_std = '';
-			}
-		}
-	
-		$this->settings['desk_page'] = array(
-			'section' => 'general',
-			'title'   => __( 'Page For Access Code (Writing Desk)'),
-			'desc'    => $page_desc,
-			'type'    => 'select',
-			'std'     =>  $page_std,
-			'choices' => $found_pages
-		);
-		
 		// get all pages on site with template for the Writing Form
 		$found_pages = get_pages_with_template('page-write.php');
 		$page_desc = 'Set the Page that should be used for the Writing form.';
@@ -209,6 +182,8 @@ class truwriter_Theme_Options {
 			}
 	
 		}
+
+
 	
 		$this->settings['write_page'] = array(
 			'section' => 'general',
@@ -271,7 +246,15 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'type'    => 'richtextarea',
 			'section' => 'general'
 		);
-		
+
+		$this->settings['min_words'] = array(
+			'title'   => __( 'Mininum Number of Words' ),
+			'desc'    => __( 'Require this number of words written in an item' ),
+			'std'     => 10,
+			'type'    => 'text',
+			'section' => 'general'
+		);
+				
 		
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
@@ -281,7 +264,14 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'section' => 'general'
 		);
 		
-		
+		$this->settings['upload_max'] = array(
+			'title'   => __( 'Maximum Upload File Size' ),
+			'desc'    => __( 'Set limit for file uploads in Mb (maximum possible for this site is ' . $max_upload_size . ' Mb).' ),
+			'std'     => $max_upload_size,
+			'type'    => 'text',
+			'section' => 'general'
+		);
+
 		$this->settings['show_cats'] = array(
 			'section' => 'general',
 			'title'   => __( 'Show the categories menu on writing form and display the categories when published.'),
@@ -297,7 +287,6 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 		
 		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
 		$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
-	
 	
 		$cat_options = array();
 	
@@ -430,14 +419,6 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 		'std'    =>  reading_time_check(),
 		'type'    => 'heading'
 		);		
-
-		$this->settings['authorcheck'] = array(
-		'section' => 'general',
-		'title' 	=> '' ,// Not used for headings.
-		'desc'   => 'Author Account Setup', 
-		'std'    =>  truwriter_author_user_check( 'writer' ),
-		'type'    => 'heading'
-		);		
 		
 		// ------- creative commons options		
 		$this->settings['cc_heading'] = array(
@@ -497,7 +478,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 	public function display_general() {
 		// section heading for general setttings
 	
-		echo '<p>These settings manaage the behavior and appearance of your TRU Writer site. There are quite a few of them!</p>';		
+		echo '<p>These settings manage the behavior and appearance of your TRU Writer site. See <a href="' . admin_url( 'themes.php?page=truwriter-docs') . '">the documentation</a> for help or visit the <a href="https://github.com/cogdog/truwriter" target="_blank">theme source on GitHub</a>.</p><p>If this kind of stuff has any value to you, please consider supporting me so I can do more!</p><p style="text-align:center"><a href="https://patreon.com/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-patreon.png" alt="donate on patreon"></a> &nbsp; <a href="https://paypal.me/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-paypal.png" alt="donate on paypal"></a></p> ';		
 	}
 
 
@@ -702,13 +683,16 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			if ( $input['notify'] != $options['notify'] ) {
 				$input['notify'] = str_replace(' ', '', $input['notify']);
 			}
-
-					
+	
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[$id] ) && ! isset( $input[$id] ) )
 					unset( $options[$id] );
 			}
 			
+			// make sure the max file upload is integer and less than max possible
+			$max_upload_size = round(wp_max_upload_size() / 1000000);
+			$input['upload_max'] = min( intval( $input['upload_max'] ), $max_upload_size  );
+
 			
 			return $input;
 		}

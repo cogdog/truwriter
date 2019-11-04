@@ -3,124 +3,50 @@
 Template Name: Writing Pad
 */
 
-// ------------------------ defaults ------------------------
 
-// Parent category for published topics
-$published_cat_id = get_cat_ID( 'Published' );
-
-// track errors
+// set blanks
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $w_thumb_status = $wAccess = '';
+$post_id = $revcount = 0;
+$is_published = $is_re_edit = $linkEmailed = $wAccessCodeOk = false; 
 $errors = array();
 
-// creative commons usage mode
-$my_cc_mode = truwriter_option( 'use_cc' ); 
+// see if we have an incoming clear the code form variable only on writing form
+// ignored if options are not to use it
 
-$is_published = $is_re_edit = $linkEmailed = false; 
-$post_id = $revcount = 0;
-$formclass = 'writenew';
-$wStatus = "New, not saved";
+$wAccessCodeOk = isset( $_POST['wAccessCodeOk'] ) ? true : false;
 
-$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = '';	
+// check that an access code is in play and it's not been yet passed
+if ( !empty( truwriter_option('accesscode') ) AND !$wAccessCodeOk ) {
 
-// default welcome message
-$feedback_msg = truwriter_form_default_prompt();
+	// now see if we are to check the access code
+	if ( isset( $_POST['truwriter_form_access_submitted'] ) 
+	  AND wp_verify_nonce( $_POST['truwriter_form_access_submitted'], 'truwriter_form_access' ) ) {
+	    
+	   // grab the entered code from  form
+		$wAccess = 	stripslashes( $_POST['wAccess'] );
 
-$wAuthor = "Anonymous";
-$wText =  truwriter_option('def_text'); // pre-fill the writing area
-$wCats = array( truwriter_option('def_cat')); // preload default category
-
-$wHeaderImage_id = truwriter_option('defheaderimg');
-$wNotes_required = truwriter_option('require_extra_info');
-$wLicense = truwriter_option( 'cc_site' ); //default if used
-
-// Get the attachment excerpt as a default caption
-$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
-
-// default notifation box style
-$box_style = '<div class="notify"><span class="symbol icon-info"></span> ';
-
-// ------------------------ front gate ------------------------
-	
-// check for query vars that indicate this is a edit request
-$wid = get_query_var( 'wid' , 0 );   // id of post
-$tk  = get_query_var( 'tk', 0 );    // magic token to check
-
-if ( ( $wid  and $tk )  ) {
-	// re-edit attempt
-	$is_re_edit = true;
-	$formclass = 'writedraft';	
-	
-	// log in as author
-	if ( !is_user_logged_in() ) {
-		splot_user_login( 'writer', false );
-	}
-} 
-
-if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
-	// check for first entry of re-edit.
-
-	// look up the stored edit key
-	$wEditKey = get_post_meta( $wid, 'wEditKey', 1 );
-
-
-	if (  $tk == $wEditKey) {
-		// keys match, we are GOLDEN
-
-		// default welcome message for a re-edit
-		$feedback_msg = truwriter_form_re_edit_prompt();
-
-		$writing = get_post( $wid );
-
-		$wTitle = get_the_title( $wid );
-		$wAuthor =  get_post_meta( $wid, 'wAuthor', 1 );
-		$wEmail =  get_post_meta( $wid, 'wEmail', 1 );
-		$wText = $writing->post_content; 
-		$wHeaderImage_id = get_post_thumbnail_id( $wid);
-		$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';	
-		$post_status = get_post_status( $wid );
-
-		// get categories
-		$categories = get_the_category( $wid);
-		foreach ( $categories as $category ) { 
-			$wCats[] = $category->term_id;
-		}
-		// Get the attachment excerpt as a default caption
-		$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
-
-		// notes
-		$wNotes = get_post_meta( $wid, 'wEditorNotes', 1 );
-
-		// license
-		$wLicense = get_post_meta( $wid, 'wLicense', 1 );
-
-		// load the tags
-		$wTags = implode(', ', wp_get_post_tags( $wid, array( 'fields' => 'names' ) ) );
-		
-		// revision count
-		$revcount = 1;
-		
-		// post id
-		$post_id = $wid;
-		
-		// status note
-		$wStatus = 'Re-edit (revision #' . $revcount . ' last saved ' . get_the_date( '', $wid) . ' ' .  get_the_time( '', $wid) . ')';
-	
+		// Validation of the code
+		if ( $wAccess != truwriter_option('accesscode') ) {
+			$box_style = '<div class="notify notify-red"><span class="symbol icon-error"></span> ';
+			$feedback_msg = '<p><strong>Incorrect Access Code</strong> - try again? Hint: ' . truwriter_option('accesshint') . '</p>'; 	
 		} else {
-
-			$is_re_edit = false;
-
-			// updates for display	
-			$errors[] = '<strong>Token Mismatch</strong> - please check the url provided.';
-			$wStatus = 'Form input error';
-			$formclass = 'writeoops';	
-			// default welcome message
-			$feedback_msg = 'This URL does not match the edit key. Please check the link from your email again, or return to your published writing and click the button at the bottom to send an edit link.';
-			$is_published = true;  // not really but it serves to hide the form.
+			$wAccessCodeOk = true;
 		}
-} 
+	} else {
+		$box_style = '<div class="notify"><span class="symbol icon-info"></span> ';
+		$feedback_msg = '<p>An access code is required to use the writing form on ' . get_bloginfo('name') . '</p>';
+	} // form check access code
+} else {
+	// set flag true just to clear all the other gates
+	$wAccessCodeOk = true;
+} // access code in  play check
 
-// verify that a form was submitted and it passes the nonce check
-if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
- 
+// Writing form was submitted and it passes the nonce check
+if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST['truwriter_form_make_submitted'], 'truwriter_form_make' )  )  {
+
+		// Parent category for published topics
+		$published_cat_id = get_cat_ID( 'Published' );
+
  		// grab the variables from the form
  		$wTitle = 					sanitize_text_field( stripslashes( $_POST['wTitle'] ) );
  		$wAuthor = 					( isset ($_POST['wAuthor'] ) ) ? sanitize_text_field( stripslashes($_POST['wAuthor']) ) : 'Anonymous';
@@ -129,24 +55,35 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  		$wText = 					wp_kses_post( $_POST['wText'] );
  		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
  		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
- 		$wHeaderImage_id = 			$_POST['wHeaderImage'];
+
+		$wHeaderImage_id =			$_POST['wHeaderImage'];
  		$linkEmailed = 				$_POST['linkEmailed'];
  		$post_id = 					$_POST['post_id'];
  		$wCats = 					( isset ($_POST['wCats'] ) ) ? $_POST['wCats'] : array();
  		$wLicense = 				( isset ($_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
  		$wHeaderImageCaption = 		sanitize_text_field(  $_POST['wHeaderImageCaption']  );
  		$revcount =					$_POST['revcount'] + 1;		
- 		
- 		// let's do some validation, store an error message for each problem found
 
+
+		// upload header image if we got one
+		if ($_FILES) {
+			foreach ( $_FILES as $file => $array ) {
+				$newupload = truwriter_insert_attachment( $file, $post->ID );
+				if ( $newupload ) $wHeaderImage_id = $newupload;
+				$w_thumb_status = 'Header image uploaded. Choose another to replace it.';
+			}
+		}
+		
+
+ 		// let's do some validation, store an error message for each problem found
  		
  		if ( $wTitle == '' ) $errors[] = '<strong>Title Missing</strong> - please enter an interesting title.'; 	
  		
- 		if ( strlen($wText) < 8 ) $errors[] = '<strong>Missing text?</strong> - that\'s not much text, eh?';
+ 		if ( truwriter_word_count( $wText ) < truwriter_option('min_words') ) $errors[] = '<strong>Missing or Insufficient Text</strong> - This site asks that you write at least ' . truwriter_option('min_words') . ' words.';
  		
- 		if ( $wHeaderImageCaption == '' ) $errors[] = '<strong>Header Image Caption Missing</strong> - please provide a description or a credit for your header image. We would like to assume it is your own image or one that is licensed for re-use.'; 
+ 		if ( $wHeaderImageCaption == '' ) $errors[] = '<strong>Header Image Caption Missing</strong> - please provide a description or an attribution for your header image. We would like to show that it is either your own image or one that is licensed for re-use.'; 
  		
- 		if ( $wNotes_required == 1  AND $wNotes == '' ) $errors[] = '<strong>Extra Information Missing</strong> - please provide the requested extra information.';
+ 		if ( truwriter_option('require_extra_info') == 1  AND $wNotes == '' ) $errors[] = '<strong>Extra Information Missing</strong> - please provide the requested extra information.';
  		
 		// test for email only if enabled in options
 		if ( truwriter_option('show_email') )   {
@@ -168,12 +105,10 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
  		if ( count($errors) > 0 ) {
  			// form errors, build feedback string to display the errors
  			$feedback_msg = 'Sorry, but there are a few errors in your entry. Please correct and try again.<ul>';
- 			
  			// Hah, each one is an oops, get it? 
  			foreach ($errors as $oops) {
  				$feedback_msg .= '<li>' . $oops . '</li>';
- 			}
- 			
+ 			}			
  			$feedback_msg .= '</ul>';
  			
  			// updates for display
@@ -263,12 +198,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				if ( $wFooter ) add_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
 				
 				// user selected license
-				if ( $my_cc_mode != 'none' ) add_post_meta( $post_id,  'wLicense', $wLicense);
+				if ( truwriter_option( 'use_cc' ) != 'none' ) add_post_meta( $post_id,  'wLicense', $wLicense);
 				
 				// add a token for editing
 				truwriter_make_edit_link( $post_id,  $wTitle );
 				
-				$feedback_msg = 'We have saved this first version of your writing. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
+				$feedback_msg = 'We have saved this first version of your writing. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true&ispre=1' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
 						
 				
 				// if user provided email address, send instructions to use link to edit
@@ -315,7 +250,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 						// set up admin email
 						$subject = 'Review newly submitted writing at ' . get_bloginfo();
 				
-						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">preview it now</a>.<br /><br /> To  publish simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
+						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been submitted to ' . get_bloginfo() . ' for editorial review. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true' . '">preview it now</a>.<br /><br /> To  publish simply <a href="' . admin_url( 'edit.php?post_status=pending&post_type=post') . '">find it in the submitted works</a> and change it\'s status from <strong>Draft</strong> to <strong>Publish</strong>';
 						
 					} else {
 						// theme options for saving as published
@@ -325,7 +260,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 						// set up admin email
 						$subject = 'Recently published writing at ' . get_bloginfo();
 				
-						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '">view it now</a>,  review / edit if needed, or just enjoy the feeling of being published on your site.';
+						$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true' . '">view it now</a>,  review / edit if needed, or just enjoy the feeling of being published on your site.';
 						
 						// if user provided email address, send instructions to use link to edit if not done before
 						if ( $wEmail != '' and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, truwriter_option('pub_status') );
@@ -348,10 +283,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				
 					// Reset content-type to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
 					remove_filter( 'wp_mail_content_type', 'set_html_content_type' );	
-					
-					// clear out the login
-					if ( truwriter_check_user()=== true and isset( $_POST['wPublish'] ) ) wp_logout();	
-																										
+																															
 				} else {
 					// updated but still in draft mode
 					
@@ -361,7 +293,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 					// attach the default category ID
 					$copy_cats[] = $def_category_id ;
 					
-					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, or if you are ready, submit it for publishing. ';
+					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true&ispre=1' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, or if you are ready, submit it for publishing. ';
 					
 					if (  $wEmail != '' )  $feedback_msg .= ' Since you provided an email address, you should have a message that provides instructions on how to return and make edits in a later session.';
 					
@@ -403,7 +335,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 				update_post_meta($post_id, 'wHeaderCaption', $wHeaderImageCaption);
 
 				// user selected license
-				if ( $my_cc_mode != 'none' ) update_post_meta( $post_id,  'wLicense', $wLicense);
+				if ( truwriter_option( 'use_cc' ) != 'none' ) update_post_meta( $post_id,  'wLicense', $wLicense);
 
 				// store notes for editor
 				if ( $wNotes ) update_post_meta($post_id, 'wEditorNotes', $wNotes);
@@ -415,7 +347,107 @@ if ( isset( $_POST['truwriter_form_make_submitted'] )  )  {
 						 	
 		} // count errors	
 						
-} // end form submmitted check
+} elseif ( $wAccessCodeOk ) { 
+	// first time entry
+	// ------------------------ writing form defaults ------------------------
+
+	// defaults from theme options
+	$wText =  truwriter_option('def_text'); // pre-fill the writing area
+	$wCats = array( truwriter_option('def_cat')); // preload default category
+
+	// set default image
+	$wHeaderImage_id = truwriter_option('defheaderimg');
+	$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
+
+	//default license if used
+	$wLicense = truwriter_option( 'cc_site' );
+
+	// default is anon, that's how we roll
+	$wAuthor = "Anonymous";
+
+	//  notification box style, classes, status
+	$box_style = '<div class="notify"><span class="symbol icon-info"></span> ';
+	$wStatus = "New, not saved";
+	$formclass = 'writenew';
+
+	// default welcome message
+	$feedback_msg = truwriter_form_default_prompt();	
+	
+	// ------------------------ re-edit check ------------------------
+
+	// check for query vars that indicate this is a edit request
+	$wid = get_query_var( 'wid' , 0 );   // id of post
+	$tk  = get_query_var( 'tk', 0 );    // magic token to check
+
+	if ( ( $wid  and $tk )  ) {
+		// re-edit attempt
+		$is_re_edit = true;
+		$formclass = 'writedraft';	
+	} 
+
+	if ( $is_re_edit and !isset( $_POST['truwriter_form_make_submitted'] )) {
+		// check for first entry of a re-edit.
+
+		// look up the stored edit key
+		$wEditKey = get_post_meta( $wid, 'wEditKey', 1 );
+
+		if (  $tk == $wEditKey ) {
+			// keys match, we are GOLDEN
+
+			// default welcome message for a re-edit
+			$feedback_msg = truwriter_form_re_edit_prompt();
+
+			$writing = get_post( $wid );
+			$wTitle = get_the_title( $wid );
+			$wAuthor =  get_post_meta( $wid, 'wAuthor', 1 );
+			$wEmail =  get_post_meta( $wid, 'wEmail', 1 );
+			$wText = $writing->post_content; 
+			$wHeaderImage_id = get_post_thumbnail_id( $wid);
+			$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';	
+			$post_status = get_post_status( $wid );
+
+			// get categories
+			$categories = get_the_category( $wid);
+			foreach ( $categories as $category ) { 
+				$wCats[] = $category->term_id;
+			}
+			// Get the attachment excerpt as a default caption
+			$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
+
+			// notes
+			$wNotes = get_post_meta( $wid, 'wEditorNotes', 1 );
+
+			// license
+			$wLicense = get_post_meta( $wid, 'wLicense', 1 );
+
+			// load the tags
+			$wTags = implode(', ', wp_get_post_tags( $wid, array( 'fields' => 'names' ) ) );
+		
+			// revision count
+			$revcount = 1;
+		
+			// post id
+			$post_id = $wid;
+		
+			// status note
+			$wStatus = 'Re-edit (revision #' . $revcount . ' last saved ' . get_the_date( '', $wid) . ' ' .  get_the_time( '', $wid) . ')';
+	
+			} else {
+				// attempted re-edit but keys dont match
+				$is_re_edit = false;
+
+				// updates for display	
+				$errors[] = '<strong>Token Mismatch</strong> - please check the url provided.';
+				$wStatus = 'Form input error';
+				$formclass = 'writeoops';	
+				// default welcome message is error
+				$feedback_msg = 'This URL does not match the edit key. Please check the link from your email again, or return to your published writing and click the button at the bottom to send an edit link.';
+				$is_published = true;  // not really but it serves to hide the form.
+			}
+	} 	
+}
+
+// end form submmitted check
 
 get_header('write');
 ?>
@@ -479,30 +511,45 @@ get_header('write');
 			<p><?php _e("Danger, danger Will Robinson, somethng bad happened inside the engine room. Have Scotty radio the bridge and ask for more dilithium crystals", "radcliffe"); ?></p>
 
 		<?php endif; ?>
-			
-			
 		
-			
-	<?php if ( is_user_logged_in() and (!$is_published or $is_re_edit) ) : // show form if logged in and it has not been published ?>
 		
-		<form  id="writerform" class="<?php echo $formclass?>" method="post" action="">
+	<?php if (!$wAccessCodeOk) : // show the access code form ?>
+	
+		<form  id="writerform" class="writenew" method="post" action="">
+			<fieldset>
+				<label for="wAccess">Access Code</label><br />
+				<p>Enter the special code to access the writing tool</p>
+				<input type="text" name="wAccess" id="wAccess" class="required" value="<?php echo $wAccess?>"  />
+			</fieldset>	
+		
+			<fieldset> 
+			<?php wp_nonce_field( 'truwriter_form_access', 'truwriter_form_access_submitted' )?>
+			
+			<input type="submit" class="pretty-button pretty-button-blue" value="Check Code" id="checkit" name="checkit">
+			</fieldset>
+		</form>
+			
+	<?php elseif ( !$is_published or $is_re_edit ) : // show form if logged in and it has not been published ?>
+		
+		<form  id="writerform" class="<?php echo $formclass?>" method="post" action="" enctype="multipart/form-data">
 		
 		<div class="writestatus">STATUS: <span class="statnow"><?php echo $wStatus?></span></div>
 		
 		<input name="post_id" type="hidden" value="<?php echo $post_id?>" />
 		<input name="revcount" type="hidden" value="<?php echo $revcount?>" />
-		<input name="linkEmailed" type="hidden" value="<?php echo $linkEmailed?>" />	
+		<input name="linkEmailed" type="hidden" value="<?php echo $linkEmailed?>" />
+		<input name="wAccessCodeOk" type="hidden" value="true" />
 		
 				<fieldset id="theTitle">
 					<label for="wTitle"><?php truwriter_form_item_title() ?></label><br />
 					<p><?php truwriter_form_item_title_prompt()?></p>
-					<input type="text" name="wTitle" id="wTitle" class="required writerfield" value="<?php echo $wTitle; ?>" tabindex="1" />
+					<input type="text" name="wTitle" id="wTitle" class="required writerfield" value="<?php echo $wTitle; ?>"  />
 				</fieldset>	
 			
 				<fieldset id="theAuthor">
 					<label for="wAuthor"><?php truwriter_form_item_byline() ?></label><br />
 					<p><?php truwriter_form_item_byline_prompt() ?></p>
-					<input type="text" name="wAuthor" id="wAuthor" class="required writerfield" value="<?php echo $wAuthor; ?>" tabindex="2" />
+					<input type="text" name="wAuthor" id="wAuthor" class="required writerfield" value="<?php echo $wAuthor; ?>"  />
 				</fieldset>	
 				
 				<fieldset id="theText">
@@ -516,7 +563,6 @@ get_header('write');
 						$settings = array( 
 							'textarea_name' => 'wText', 
 							'editor_height' => '400', 
-							'tabindex'  => "3", 
 							'drag_drop_upload' => true, 
 						);
 
@@ -529,7 +575,7 @@ get_header('write');
 				<fieldset id="theFooter">
 						<label for="wFooter"><?php truwriter_form_item_footer() ?></label>						
 						<p><?php truwriter_form_item_footer_prompt() ?></p>
-						<textarea name="wFooter" id="wFooter" class="writerfield" rows="15"  tabindex="4"><?php echo stripslashes( $wFooter );?></textarea>
+						<textarea name="wFooter" id="wFooter" class="writerfield" rows="15"  ><?php echo stripslashes( $wFooter );?></textarea>
 				</fieldset>
 				<?php endif?>
 				
@@ -551,18 +597,23 @@ get_header('write');
 						}
 						
 						?>
-					
-						<img src="<?php echo $defthumb[0]?>" alt="article banner image" id="headerthumb" /><br />
-					
-						<input type="button" id="wHeaderImage_button"  class="btn btn-success btn-medium  upload_image_button" name="_wImage_button"  data-uploader_title="Set Header Image" data-uploader_button_text="Select Image" value="Set Header Image" tabindex="5" />
+						<input id="wDefThumbURL" name="wDefThumbURL" type="hidden" value="<?php echo $defthumb[0]?>" />
+						<img src="<?php echo $defthumb[0]?>" alt="thumbnail image to represent featured one for this item" id="headerthumb" />
+
 						
 						</div>
 						
-						<p><p><?php truwriter_form_item_header_image_prompt() ?><br clear="left"></p>
+						<p><?php truwriter_form_item_header_image_prompt() ?> <span id="uploadresponse"><?php echo $w_thumb_status?></span><br clear="left"></p>
+						<p id="footlocker"></p>
+						
+						<div id="splotdropzone">
+							<input type="file" accept="image/*" name="wUploadImage" id="wUploadImage">
+							<p id="dropmessage">Drag file or click to select file to upload</p>
+						</div>
 						
 						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?></label>
 						<p><?php truwriter_form_item_header_caption_prompt() ?></p>
-						<input type="text" name="wHeaderImageCaption" class="writerfield" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" tabindex="6" />
+						<input type="text" name="wHeaderImageCaption" class="writerfield" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" />
 				
 				</fieldset>						
 				
@@ -586,7 +637,7 @@ get_header('write');
 					
 						$checked = ( in_array( $acat->term_id, $wCats) ) ? ' checked="checked"' : '';
 						
-						echo '<br /><input type="checkbox" name="wCats[]" tabindex="7" value="' . $acat->term_id . '"' . $checked . '> ' . $acat->name . ' <em style="font-size:smaller">' . $acat->description . '</em>';
+						echo '<br /><input type="checkbox" name="wCats[]" value="' . $acat->term_id . '"' . $checked . '> ' . $acat->name . ' <em style="font-size:smaller">' . $acat->description . '</em>';
 					}
 					
 					?>
@@ -601,7 +652,7 @@ get_header('write');
 					<label for="wTags"><?php truwriter_form_item_tags() ?></label>
 					<p><?php truwriter_form_item_tags_prompt() ?></p>
 					
-					<input type="text" name="wTags" id="wTags" class="writerfield" value="<?php echo $wTags; ?>" tabindex="8"  />
+					<input type="text" name="wTags" id="wTags" class="writerfield" value="<?php echo $wTags; ?>"  />
 				</fieldset>
 
 				<?php endif?>
@@ -617,30 +668,30 @@ get_header('write');
 					?>
 					
 					</p>
-					<input type="text" name="wEmail" id="wTitle" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" tabindex="9" />
+					<input type="text" name="wEmail" id="wTitle" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" />
 				</fieldset>	
 				
 				<?php endif?>
 				
 
-				<?php if ( $wNotes_required != -1 ):?>
+				<?php if ( truwriter_option('require_extra_info') != -1 ):?>
 				
 				<fieldset id="theNotes">
-						<?php $req_state = ( $wNotes_required == 1 ) ? 'required' : 'optional';?>
+						<?php $req_state = ( truwriter_option('require_extra_info') == 1 ) ? 'required' : 'optional';?>
 						<label for="wNotes"><?php truwriter_form_item_editor_notes(); _e(' (' . $req_state . ')' , 'radcliffe') ?></label>						
 						<p><?php truwriter_form_item_editor_notes_prompt()?></p>
-						<textarea name="wNotes" class="writerfield" id="wNotes" rows="15"  tabindex="12"><?php echo stripslashes( $wNotes );?></textarea>
+						<textarea name="wNotes" class="writerfield" id="wNotes" rows="15"  ><?php echo stripslashes( $wNotes );?></textarea>
 				</fieldset>
 				<?php endif?>
 
 
 
-					<?php if ( $my_cc_mode != 'none' ):?>
+					<?php if ( truwriter_option( 'use_cc' ) != 'none' ):?>
 						<!-- creative commons options -->
 						<fieldset  id="theLicense">
 				
 							<label for="wLicense"><?php truwriter_form_item_license()?></label>
-							<?php if ( $my_cc_mode == 'site' ) :?>
+							<?php if ( truwriter_option( 'use_cc' ) == 'site' ) :?>
 					
 								<p>All writing added to this site will be published under a rights statement like:</p>
 								
@@ -648,7 +699,7 @@ get_header('write');
 								<input type="hidden" name="wLicense" id="wLicense" value="<?php echo truwriter_option( 'cc_site' )?>">
 								
 				
-							<?php elseif  ( $my_cc_mode == 'user' ) :?>
+							<?php elseif  ( truwriter_option( 'use_cc' ) == 'user' ) :?>
 								
 								<p><?php truwriter_form_item_license_prompt()?></p>
 								
@@ -678,13 +729,13 @@ get_header('write');
 							$save_btn_txt = "Publish Now";
 						}
 					?>
-						<input type="submit" class="pretty-button pretty-button-green" value="Update and Save Draft" id="wSubDraft" name="wSubDraft" tabindex="10"> Save changes as draft and continue writing.<br /><br />
+						<input type="submit" class="pretty-button pretty-button-green" value="Update and Save Draft" id="wSubDraft" name="wSubDraft" > Save changes as draft and continue writing.<br /><br />
 						
-						<input type="submit" class="pretty-button pretty-button-blue" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" tabindex="11"> All edits complete, publish to site. 
+						<input type="submit" class="pretty-button pretty-button-blue" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" > All edits complete, publish to site. 
 					
 					<?php else:?>
 					
-						<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="wSubDraft" name="wSubDraft" tabindex="1o"> Save your first draft, then preview.
+						<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="wSubDraft" name="wSubDraft" > Save your first draft, then preview.
 					
 					<?php endif?>
 					
