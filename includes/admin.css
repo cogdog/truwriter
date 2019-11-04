@@ -3,3 +3,9 @@
 .wp-admin.post-type-post a.page-title-action {
     display: none;
 }
+
+img#previewimage_defheaderimg {
+    object-fit: cover;
+    width: 640px;
+    height: auto;
+}

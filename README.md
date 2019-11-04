@@ -112,7 +112,6 @@ Now that you've installed TRU Writer and can see the barebones theme staring bac
 
 ### Recommended Plugins for TRU Writer
 
-
 While your doing all that uploading, you should know that this theme uses the [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read.
 
 ## Demo Content
@@ -125,6 +124,7 @@ You can also get a copy of the Widgets used on that site too. First intall/activ
 
 
 ### Page Setup
+
 This theme has one special page for your writing form that must be created; associated with a specific template that provides it's functionality. Activating the theme *should* create the page for you when the theme is activated, but if not, create them as described below. You can edit the content of the **Write** page to customize the welcome seen by writers on your site.
 
 If the theme does not do so automatically (and it should) create this Wordpress **Page**.  As of version 1.8, you can edit the url short name as well.
@@ -165,33 +165,31 @@ In order to make a post (or "writing" as above) visible, a user with the permiss
 
 #### Special Page Setup
 
+
+
 Use this area to assign the WordPress Page to be used for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be `write` -- this is no longer required.
 
-If no Page is found with the correct template, you will see a prompt to create one:
+If no Page is found with the correct template, you will see a prompt to create one. If the Page is found (and there might even be more than one, you can select the one you want used for each special page.
 
-![](images/pages-make.jpg)
-
-If page is found (and there might even be more than one, you can select the one you want used for each special page.
-
-![](images/pages-setup.jpg)
+![](images/special-page.jpg)
 
 
-#### Publish Options
+#### Publish Settings
 
-![](images/publish-options1.jpg)
+![](images/publish.jpg)
 
 You can also choose the "status for new writings" as "publish immediately" and there are no checks and balances--the writing goes right up and is publicly visible immediately. Immediate gratification goes a long way. Note though, that because of the hollow tunnel this might create, this option works best with an access code as described above in place--right Lassie!?
 
-Enter the **Default Writing Prompt** field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. The editor is now full rich text enabled (including images).
-
-
-![](images/publish-options2.jpg)
-
 Check the **Allow Comments** box to add a standard blog comment field at the bottom of all published pieces. 
 
-On the editor where people will be composing their madness, the **Extra Information Field** represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you" or "tell me why your writing is so late."
 
-These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
+#### Writing Form Settings
+
+![](images/writing-form.jpg)
+
+Enter the **Default Writing Prompt** field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. The editor is now full rich text enabled (including images).
+
+You can also set a minimum number of words required for publishing.
 
 Under **Default Header Image** click **Set/Change Image** to open the Wordpress media editor to choose a default media header image. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
 
@@ -203,10 +201,14 @@ Before choosing the image, be sure to add a caption (we suggest a creative commo
 
 ![](images/header-image-selected.jpg)
 
-Once selected you will see a preview of your default image. Isn't Cadu a nice looking dog?
+Once selected you will see a preview of your default image. Isn't Felix a nice looking dog?
+
+Note that you can set a maximum size for uploaded images.
 
 
-![](images/publish-options3.jpg)
+![](images/category-tags.jpg)
+
+
 
 Disable **Show the categories menu on writing form and display** if you do not want writers or readers to use/see categories.
 
@@ -222,7 +224,25 @@ So we suggest making a few pre-set categories for a new site. As an Administrato
 
 Disable **Show the tags entry on writing form and single items displays?** if you do not want writers or readers to use/see tags. Likewise use **Show the footer entry field on the writing form?** to use/disable the footer field writers can append to their works.
 
+![](images/email.jpg)
+
+Enabling the email fields creates the option for users of your site to provide an address if they wish to have a special link sent to them that allows for post-publishing edits. (or be able to request one when published).
+
+As an option you can enter a comma-separated list of domains to restruct the email addresses entered (e.g. if you wish students to use an school provided email address).
+
+
+![](images/extra-fields.jpg)
+
+
+The **Extra Information Field** represents a place for them to add a message that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. Perhaps if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like "Include your name and course section" or, "name the dog that best represents you".
+
+These end up in a **Custom Field** named "wEditorNotes," which you can view when editing the post in order to publish it (not the "quick edit"; the full monty "edit" please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.
+
+
+#### Admin Settings
+
 Enter in **Notification Emails** any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what's going on in your site.
+
 
 #### Twitter Settings
 
@@ -267,7 +287,7 @@ You can  also customize the content layout. On your site navigate to any content
 
 ## Customize Heading for Single Page Metadata
 
-A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the singl post template; this is now something that can be changed in the Customizer. From the **TRU Writer** pane, open **Writer Layout**.
+A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the single post template; this is now something that can be changed in the Customizer. From the **TRU Writer** pane, open **Writer Layout**.
 
 ![](images/meta-heading.jpg)
 

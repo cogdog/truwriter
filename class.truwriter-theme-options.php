@@ -569,8 +569,8 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				echo '<div id="uploader_' . $id . '">';
 
 				if ( $options[$id] )  {
-					$front_img = wp_get_attachment_image_src( $options[$id], 'radcliffe' );
-					echo '<img id="previewimage_' . $id . '" src="' . $front_img[0] . '" width="640" height="300" alt="default thumbnail" />';
+					$front_img = wp_get_attachment_image_src( $options[$id], 'large' );
+					echo '<img id="previewimage_' . $id . '" src="' . $front_img[0] . '" alt="default thumbnail" />';
 				} else {
 					echo '<img id="previewimage_' . $id . '" src="' . get_stylesheet_directory_uri() . '/images/default-header-640.jpg" alt="default header image" />';
 				}

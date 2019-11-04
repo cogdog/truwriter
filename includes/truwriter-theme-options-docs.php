@@ -12,6 +12,14 @@
 
  
 
+
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+
 <h2 id="setting-up-tru-writer">Setting Up TRU Writer</h2>
 <p>Now that you’ve installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet.</p>
 <h3 id="recommended-plugins-for-tru-writer">Recommended Plugins for TRU Writer</h3>
@@ -44,25 +52,24 @@
 <p>In order to make a post (or “writing” as above) visible, a user with the permission status of “Editor” or “Administrator” needs to change the status of the “pending approval” writing to “published (or ignore an”Editor" or “Administrator” could just ignore it forever, such power is theirs).</p>
 <h4 id="special-page-setup">Special Page Setup</h4>
 <p>Use this area to assign the WordPress Page to be used for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be <code>write</code> – this is no longer required.</p>
-<p>If no Page is found with the correct template, you will see a prompt to create one:</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/pages-make.jpg" /></p>
-<p>If page is found (and there might even be more than one, you can select the one you want used for each special page.</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/pages-setup.jpg" /></p>
-<h4 id="publish-options">Publish Options</h4>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/publish-options1.jpg" /></p>
+<p>If no Page is found with the correct template, you will see a prompt to create one. If the Page is found (and there might even be more than one, you can select the one you want used for each special page.</p>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/special-page.jpg" /></p>
+<h4 id="publish-settings">Publish Settings</h4>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/publish.jpg" /></p>
 <p>You can also choose the “status for new writings” as “publish immediately” and there are no checks and balances–the writing goes right up and is publicly visible immediately. Immediate gratification goes a long way. Note though, that because of the hollow tunnel this might create, this option works best with an access code as described above in place–right Lassie!?</p>
-<p>Enter the <strong>Default Writing Prompt</strong> field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. The editor is now full rich text enabled (including images).</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/publish-options2.jpg" /></p>
 <p>Check the <strong>Allow Comments</strong> box to add a standard blog comment field at the bottom of all published pieces.</p>
-<p>On the editor where people will be composing their madness, the <strong>Extra Information Field</strong> represents a place for them to add extra information that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. As an example, if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like “Include your name and course section” or, “name the dog that best represents you” or “tell me why your writing is so late.”</p>
-<p>These end up in a <strong>Custom Field</strong> named “wEditorNotes,” which you can view when editing the post in order to publish it (not the “quick edit”; the full monty “edit” please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.</p>
+<h4 id="writing-form-settings">Writing Form Settings</h4>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/writing-form.jpg" /></p>
+<p>Enter the <strong>Default Writing Prompt</strong> field to pre-populate the field that visitors write use to compose their work. You can provide a prompt or set up a structure. The editor is now full rich text enabled (including images).</p>
+<p>You can also set a minimum number of words required for publishing.</p>
 <p>Under <strong>Default Header Image</strong> click <strong>Set/Change Image</strong> to open the Wordpress media editor to choose a default media header image. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The <code>640 x 300</code> dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.</p>
 <p>You can now also set a limit for the file size upload.</p>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/header-image-caption.jpg" /></p>
 <p>Before choosing the image, be sure to add a caption (we suggest a creative commons license!) as this is what is used to display atop the image when published. Attribute and model attribution! FTW!</p>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/header-image-selected.jpg" /></p>
-<p>Once selected you will see a preview of your default image. Isn’t Cadu a nice looking dog?</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/publish-options3.jpg" /></p>
+<p>Once selected you will see a preview of your default image. Isn’t Felix a nice looking dog?</p>
+<p>Note that you can set a maximum size for uploaded images.</p>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/category-tags.jpg" /></p>
 <p>Disable <strong>Show the categories menu on writing form and display</strong> if you do not want writers or readers to use/see categories.</p>
 <p>If you have not set up any categories, the <strong>Default Category for New Writing</strong> menu will not do much. You might want to save your options and go edit your <strong>Writing Categories</strong>. On activation the TRU Writer will pre-create two categories it uses to organize what is submitted and published.</p>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/categories.jpg" /></p>
@@ -70,6 +77,13 @@
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/categories-published.jpg" /></p>
 <p>So we suggest making a few pre-set categories for a new site. As an Administrator you can always add new ones at any time. Any text you add as a description will be included on the writing form.</p>
 <p>Disable <strong>Show the tags entry on writing form and single items displays?</strong> if you do not want writers or readers to use/see tags. Likewise use <strong>Show the footer entry field on the writing form?</strong> to use/disable the footer field writers can append to their works.</p>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/email.jpg" /></p>
+<p>Enabling the email fields creates the option for users of your site to provide an address if they wish to have a special link sent to them that allows for post-publishing edits. (or be able to request one when published).</p>
+<p>As an option you can enter a comma-separated list of domains to restruct the email addresses entered (e.g. if you wish students to use an school provided email address).</p>
+<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/extra-fields.jpg" /></p>
+<p>The <strong>Extra Information Field</strong> represents a place for them to add a message that is not part of the final published item, but that the administrator or editor might need to know, or might have requested. Perhaps if you are using this theme to host multiple sections of a class or course of study, you might want to populate the prompt for this field with something like “Include your name and course section” or, “name the dog that best represents you”.</p>
+<p>These end up in a <strong>Custom Field</strong> named “wEditorNotes,” which you can view when editing the post in order to publish it (not the “quick edit”; the full monty “edit” please). You will need to open the Screen Options toggle at the top of the Wordpress Dashboard interface and click the box that makes the Custom Fields available. The information is also included in the notification emails announcing a new writing in need of approval.</p>
+<h4 id="admin-settings">Admin Settings</h4>
 <p>Enter in <strong>Notification Emails</strong> any email addresses who should be notified if new submissions; you have multiple ones if you separate them by a comma. Or leave blank if you never want to know what’s going on in your site.</p>
 <h4 id="twitter-settings">Twitter Settings</h4>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/twitter-settings.jpg" /></p>
@@ -93,28 +107,9 @@
 <p>You can also customize the content layout. On your site navigate to any content post or page, and activate the Wordpress Customizer from the admin bar. From the <strong>TRU Writer</strong> pane, open <strong>Writer Layout</strong>. Here you can choose from the Thin or Medium layout widths (Wide will only affect very large screens).</p>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/customizer-layout.jpg" /></p>
 <h2 id="customize-heading-for-single-page-metadata">Customize Heading for Single Page Metadata</h2>
-<p>A small thing, but a corny heading of “SO IT WAS WRITTEN” was hardwired into the singl post template; this is now something that can be changed in the Customizer. From the <strong>TRU Writer</strong> pane, open <strong>Writer Layout</strong>.</p>
+<p>A small thing, but a corny heading of “SO IT WAS WRITTEN” was hardwired into the single post template; this is now something that can be changed in the Customizer. From the <strong>TRU Writer</strong> pane, open <strong>Writer Layout</strong>.</p>
 <p><img src="<?php echo get_stylesheet_directory_uri()?>/images/meta-heading.jpg" /></p>
 <h2 id="some-complexish-stuff-for-nerds-who-are-awesome">Some Complexish Stuff for Nerds, Who Are Awesome</h2>
 <p>If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install <a href="https://wordpress.org/plugins/tinymce-advanced/">TinyMCE Advanced</a>. There is <a href="includes/tinymce-advanced-settings.txt">a file in the theme</a> with the typical settings for this plugin I use when I set up these sites.</p>
 <p>You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it’s a small chunk of json).</p>
-<h2 id="relatively-cool-new-features-updates">Relatively Cool New Features &amp; Updates</h2>
-<p><strong>No More Secret User</strong> This theme no longer requires setting up of a special authoring account, and there is no secret logging in behind the scenes. The writing form has a new drag and drop upload interface for featured image (and a new option for limiting the file size if uploads). The theme has also been simplified by not having a separate Welcome Desk Page for handing the access codes, everything is managed in the Writing Pad template.</p>
-<p><strong>Options for Special Pages</strong> No longer are pages for the Welcome Desk (where access codes are entered) and Writer form required to have a set URL; you can create any Page desired for these functions, and set them as the active ones via the theme options. Version 2.0 does some better set up for defaults.</p>
-<p><strong>Better Front End Editor</strong> Reduced reliance on special pages. The links to the random entry and the one use to get the edit link are no longer needed, and are handle now in the code. These pages should be deleted from your site. On an update to version 1.7 or later, you might have to go to <strong>Settings</strong> - <strong>Permalinks</strong> and just click save to update the url rules. Also the method for using the special link to edit an entry is now done in a single click. Much better!</p>
-<p><strong>Better Layout and Media Support</strong> Customizer options for choosing a this or wider content layout.</p>
-<p>Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long <code>functions.php</code> is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.</p>
-<p><strong>Options for Email Address</strong> the form field for users entering email addresses can be hidden if not used (this as well will remove and past “request edit link” from published sites. In addition, a new admin option is added to restruct the email addresses allowed to a list of domains.</p>
-<p><strong>Under the Hood</strong> Fixed bug where choosing no comments hid the Reading Time display, changed options editor for default content to be rich text editor, enabled drag and drop media uploading for front page writing form. Also, URLs that WordPress can autoembed (e.g. YouTube, Twitter, Giphy) will now do so automatically in the editor.</p>
-<p><strong>Theme Option to Remove Tweet This Button</strong> to enable better GDPR compliance.</p>
-<p><strong>Customize the Writing Form Instructions</strong> You can now modify all form field labels and descriptions / prompts for the entry fields.</p>
-<p><strong>Default Menu</strong> On new installs where no menus are defined, the theme generates a simple menu rather than listing all pages</p>
-<p><strong>Reading Time Plugin</strong> The <a href="https://wordpress.org/plugins/estimated-post-reading-time/">Estimated Reading Time Plugin</a> is no longer available, so the theme now uses <a href="https://wordpress.org/plugins/reading-time-wp/">Reading Time WP</a>.</p>
-<p><strong>Separate CSS / Functions for Custom Installs</strong> Fixed quote bug for captions, and changed writing form so it only displays featured image and intro text for first view of the form (so you can add really long instructions).</p>
-<p><strong>Tweet This Button</strong> There is a new option so you can have your own hashtags added when someone tweets a published item. Also, twitter card meta data has been added so these tweets have the extended card display that shows the featured image, the site’s title, and an excerpt from the item– example https://twitter.com/cogdog/status/822656183769198593</p>
-<p><strong>Options Refreshed, Auto Page Creation, Better Reading Time Display</strong> Recoded the theme options so documentation in its own tab. When he theme is activated now, the necessary pages will be created automagically. And if the Estimated reading time plugin is not activated, nothing will be displayed where it normally displays.</p>
-<p><strong>Provide an Email, Edit your Work Later</strong> A major limitation of the first versions was that authors had no ability to edit their work after publishing (that’s what happens when you don’t have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.</p>
-<p>When published, any writing with an email is published with a <code>Get Edit Link</code> button at the bottom which will resend the link to the email associated with it.</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/email-request.jpg" title="Email Request Link" /></p>
-<p><strong>Admins Can Get Edit Link for Anybody</strong> Even if the author does not provide an email address, in the Wordpress Dashboard interface, editors and admins can click and copy an edit like they can provide directly to a writer (this is added as a side metabox).</p>
-<p><img src="<?php echo get_stylesheet_directory_uri()?>/images/re-edit-link.jpg" title="Admin Re-edit Link" /></p>
+
