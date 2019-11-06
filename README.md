@@ -13,9 +13,14 @@ by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 
 This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including rich media content, without needing to login or understand the backend of Wordpress. 
 
-Once installed the TRU Writer theme allows individuals to generate content online using an rich text editor interface. Writers can also add content by cutting and then pasting into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
+![](images/tru-writer-i-can-writer.jpg "Sample TRU Writer site front page with image of dog and and an overlay of the writing form")
 
-Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are contributing or for classroom applications where many individuals need to publish content on the same site. It focuses on the writing rather than Wordpress (not that we do not love you, Wordpress!). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. 
+
+Once installed, the TRU Writer theme powers sites for generating content online using an rich text editor interface. Writers can also  cut and paste into the editor from word-processing software such as MS Word or Google Docs, carrying forward most structural formatting (here's an example of a post [created by using the copy/paste function (cmd/ctrl + V) from a Word document](http://splot.ca/writer/2014/101). 
+
+Because it requires no login or CMS knowledge, TRU writer is great for projects where multiple people are [contributing to classroom activities](https://biol420.opened.ca/) where many individuals [can publish content on the same site]((http://femedtech.net/), even as a means for [running an online journal](http://journal.arganee.world/), [anonymous exposés](http://refugeelearningstories.org/), or even [a conference proposal submission system](http://conf.owlteh.org/contributions/). 
+
+It focuses on the *writing* rather than Wordpress (not that we do not love you, Wordpress!). The TRU Writer allows individuals to publish anonymously, or under an assumed name, or their own name, or whatever. It never requires personal information (entering email is an option that allows a writer to edit their content after publishing).
 
 The TRU Writer Theme was developed along with  [TRU Collector](http://splot.ca/splots/the-comparator/),  [TRU Sounder](http://splot.ca/splots/tru-sounder/), [The Comparator](http://splot.ca/splots/the-comparator/), and the [Daily Blank](http://splot.ca/splots/the-daily-blank/) [while on a fellowship](http://cogdog.trubox.ca) at [Thompson Rivers University](http://tru.ca/)--that's why the "TRU" in the theme name.
 
@@ -65,7 +70,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
 * [When I Needed Help](http://web.archive.org/web/20170925000738/http://whenineededhelp.com/) (WayBack Machine archive)
 
-And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site, et me know via twitter [@cogdog](http://twitter.com/cogdog), or issues below. 
+And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site or let me know via twitter [@cogdog](http://twitter.com/cogdog).
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
