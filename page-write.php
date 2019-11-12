@@ -10,6 +10,10 @@ $post_id = $revcount = 0;
 $is_published = $is_re_edit = $linkEmailed = $wAccessCodeOk = false; 
 $errors = array();
 
+// get the parent category for published topics
+$published_cat_id = get_cat_ID( 'Published' );
+
+
 // see if we have an incoming clear the code form variable only on writing form
 // ignored if options are not to use it
 
@@ -43,9 +47,6 @@ if ( !empty( truwriter_option('accesscode') ) AND !$wAccessCodeOk ) {
 
 // Writing form was submitted and it passes the nonce check
 if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST['truwriter_form_make_submitted'], 'truwriter_form_make' )  )  {
-
-		// Parent category for published topics
-		$published_cat_id = get_cat_ID( 'Published' );
 
  		// grab the variables from the form
  		$wTitle = 					sanitize_text_field( stripslashes( $_POST['wTitle'] ) );
@@ -563,11 +564,14 @@ get_header('write');
 						$settings = array( 
 							'textarea_name' => 'wText', 
 							'editor_height' => '400', 
-							'drag_drop_upload' => true, 
 						);
 
 						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
+						
+						
 						?>
+						
+						<input name="image" type="file" id="upload" class="hidden" onchange="">
 				</fieldset>
 
 

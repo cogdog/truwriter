@@ -209,33 +209,73 @@ function truwriter_comment_mod( $defaults ) {
 # -----------------------------------------------------------------
 
 
-// remove  buttons from the visual editor
-add_filter('mce_buttons','truwriter_tinymce_buttons');
+// add plugin script for image uploader
+// h/t https://www.gavick.com/blog/wordpress-tinymce-custom-buttons
+function truwriter_tinymce_plugin( $plugin_array ) {
+    $plugin_array['splot_upload_btn'] = get_stylesheet_directory_uri() . ( '/js/splot_upload.js' ); 
+    return $plugin_array;
+}
 
-function truwriter_tinymce_buttons($buttons)
- {
+
+// remove  buttons from the visual editor
+//add_filter('mce_buttons','truwriter_tinymce_buttons');
+
+function truwriter_tinymce_buttons($buttons) {
 	//Remove the more button
 	$remove = 'wp_more';
 
-	//Find the array key and then unset
+	// Find the array key and then unset
 	if ( ( $key = array_search($remove,$buttons) ) !== false )
 		unset($buttons[$key]);
 
+	// now add the image button in
+	$buttons[] = 'image';
+	// array_push($buttons, "splot_upload_btn");
 	return $buttons;
  }
 
 // remove  more buttons from the visual editor
 
-add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
 
-function truwriter_tinymce_2_buttons($buttons)
- {
+function truwriter_tinymce_2_buttons( $buttons)  {
 	//Remove the keybord shortcut and paste text buttons
 	$remove = array('wp_help','pastetext');
 
 	return array_diff($buttons,$remove);
  }
 
+
+/*
+add_action( 'wp_ajax_nopriv_splotdropzone_upload_action', 'truwriter_upload_action' ); //allow on front-end
+add_action( 'wp_ajax_splotdropzone_upload_action', 'truwriter_upload_action' );
+
+function truwriter_upload_action() {	
+
+    $newupload = 0;
+
+    if ( !empty($_FILES) ) {
+        $files = $_FILES;
+        foreach($files as $file) {
+            $newfile = array (
+                    'name' => $file['name'],
+                    'type' => $file['type'],
+                    'tmp_name' => $file['tmp_name'],
+                    'error' => $file['error'],
+                    'size' => $file['size']
+            );
+
+            $_FILES = array('upload'=>$newfile);
+            foreach($_FILES as $file => $array) {
+                $newupload = media_handle_upload( $file, 0 );
+            }
+        }
+    }
+    echo json_encode( array('id'=> $newupload, 'url' => wp_get_attachment_image_src( $newupload )[0], 'caption' => get_attachment_caption_by_id( $newupload ) ) );
+    die();	
+	
+}
+
+*/
 
 
 # -----------------------------------------------------------------
@@ -300,8 +340,9 @@ function add_truwriter_scripts() {
     
 		 // add media scripts if we are on our maker page and not an admin
 		 // after http://wordpress.stackexchange.com/a/116489/14945
-    	 
-		wp_enqueue_media();
+
+  		if (! is_admin() ) wp_enqueue_media();
+  	 
 		
 		// Build in tag auto complete script
    		wp_enqueue_script( 'suggest' );
@@ -311,6 +352,13 @@ function add_truwriter_scripts() {
    		// h/t https://wordpress.stackexchange.com/a/287623
    		
    		wp_enqueue_script( 'mce-view', '', array('tiny_mce'), '', true );		
+
+
+		// tinymce mods
+		// add_filter("mce_external_plugins", "truwriter_tinymce_plugin");
+		add_filter('mce_buttons','truwriter_tinymce_buttons');
+		add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
+
 	
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
@@ -320,6 +368,7 @@ function add_truwriter_scripts() {
 		  'jquery.writer',
 		  'writerObject',
 		  array(
+		  	'ajaxUrl' => admin_url('admin-ajax.php'),
 			'siteUrl' => esc_url(home_url()),
 			'uploadMax' => truwriter_option('upload_max' )
 		  )
@@ -327,12 +376,15 @@ function add_truwriter_scripts() {
 		
 		wp_enqueue_script( 'jquery.writer' );
 		
+		
+
+			
+		
 		// add scripts for fancybox (used for help) 
 		//-- h/t http://code.tutsplus.com/tutorials/add-a-responsive-lightbox-to-your-wordpress-theme--wp-28100
 		wp_enqueue_script( 'fancybox', get_stylesheet_directory_uri() . '/includes/lightbox/js/jquery.fancybox.pack.js', array( 'jquery' ), false, true );
     	wp_enqueue_script( 'lightbox', get_stylesheet_directory_uri() . '/includes/lightbox/js/lightbox.js', array( 'fancybox' ), '1.1',
-    null , '1.0', TRUE );
-    
+    null , '1.0', TRUE );  
     	wp_enqueue_style( 'lightbox-style', get_stylesheet_directory_uri() . '/includes/lightbox/css/jquery.fancybox.css' );
 
 	} elseif ( is_single() ) {
