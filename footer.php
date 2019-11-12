@@ -60,7 +60,7 @@
 	
 		<p class="fleft">
 		
-			A <a href="http://splot.ca/">SPLOT</a> on the web: <a href="<?php echo home_url(); ?>" title="<?php esc_attr( bloginfo('name') ); ?>"><?php bloginfo('name'); ?></a> 
+			A <a href="https://github.com/cogdog/truwriter">TRU Writer</a> powered  <a href="http://splot.ca/">SPLOT</a>: <a href="<?php echo home_url(); ?>" title="<?php esc_attr( bloginfo('name') ); ?>"><?php bloginfo('name'); ?></a> 
 
 			</p>
 
@@ -69,7 +69,7 @@
 		
 		<p class="fright">
 			
-			<span><?php _e( 'Blame', 'radcliffe' ); ?> <a href="http://cogdog.info">@cogdog</a> &mdash; </span><a title="<?php _e('To the top', 'radcliffe'); ?>" href="#" class="tothetop"><?php _e('Up', 'radcliffe' ); ?> &uarr;</a>
+			<span><?php _e( 'Blame', 'radcliffe' ); ?> <a href="https://cog.dog">@cogdog</a> &mdash; </span><a title="<?php _e('To the top', 'radcliffe'); ?>" href="#" class="tothetop"><?php _e('Up', 'radcliffe' ); ?> &uarr;</a>
 			
 		</p>
 		
