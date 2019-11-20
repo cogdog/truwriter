@@ -2,7 +2,7 @@
 Theme Name:	TRU Writer
 Theme URI:	https://github.com/cogdog/truwriter
 Description:	TRU Writer (Child of Radcliffe) is a SPLOT (http://splot.ca/) for rich media writing on the web suitable for essays, magazines, conference session proposals, and more. It creates a place for people to publish in a site without them needing a WordPress account or providing identifying information. 
-Version:	2.51
+Version:	2.6
 Template:	 radcliffe
 Author:	CogDog
 Author URI:	https://cog.dog
@@ -98,14 +98,12 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 }
 
 /* The next blocks of code are specific to the color. Copy the color you want. */
-.pretty-button-red { background: #e54028; }
-.pretty-button-red:hover { background: #FF530D; }
-.pretty-button-blue, #writerform input.pretty-button-blue { background: #0971B2; }
-.pretty-button-blue:hover, #writerform input.pretty-button-blue:hover { background: #0B88D6; }
-.pretty-button-green, #writerform input.pretty-button-green { background: #00B233; }
-.pretty-button-green:hover, #writerform input.pretty-button-green:hover { background: #00BD36; }
-.pretty-button-dark-green { background: #007F25; }
-.pretty-button-dark-green:hover { background: #008F29; }
+.pretty-button-final, #writerform input.pretty-button-final { background: #0971B2; }
+.pretty-button-update, #writerform input.pretty-button-update { background: #00B233; }
+
+.pretty-button-update:hover, #writerform input.pretty-button-update:hover {opacity:0.8; }
+.pretty-button-final:hover, #writerform input.pretty-button-final:hover { opacity:0.8; }
+
 
 /* --------------------  alert/message boxes 100% CSS ------------------------------------
   h/t http://aviaryan.github.io/blog/css-notification-bubble-box.html                   */
@@ -215,7 +213,6 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 form#writerform { padding: 30px 20px; }
 .writenew { background-color: #8ed9f6; }
 .writedraft { background-color: #D1FAB6; }
-.writepublished { background-color: #e3f7fc; }
 .writeoops { background-color: #fad9d7; }
 
 .writestatus

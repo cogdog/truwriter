@@ -103,21 +103,8 @@ function truwriter_drafts_menu() {
 }
 
 # -----------------------------------------------------------------
-# Remove the New Post buttons, links from dashboard (use front end only)
+# Admin has style!
 # -----------------------------------------------------------------
-
-add_action( 'admin_menu', 'truwriter_remove_admin_submenus', 999 );
-
-function truwriter_remove_admin_submenus() {
-	remove_submenu_page( 'edit.php', 'post-new.php' );
-}
-
-add_action( 'admin_bar_menu', 'truwriter_remove_admin_menus', 999 );
-
-function truwriter_remove_admin_menus() {
-    global $wp_admin_bar;   
-    $wp_admin_bar->remove_node( 'new-post' );
-}
 
 add_action('admin_enqueue_scripts', 'truwriter_custom_admin_styles');
 
@@ -208,17 +195,54 @@ function truwriter_comment_mod( $defaults ) {
 # Tiny-MCE mods
 # -----------------------------------------------------------------
 
+add_filter( 'tiny_mce_before_init', 'truwriter_tinymce_settings' );
 
-// add plugin script for image uploader
-// h/t https://www.gavick.com/blog/wordpress-tinymce-custom-buttons
-function truwriter_tinymce_plugin( $plugin_array ) {
-    $plugin_array['splot_upload_btn'] = get_stylesheet_directory_uri() . ( '/js/splot_upload.js' ); 
-    return $plugin_array;
+function truwriter_tinymce_settings( $settings ) {
+
+	// $settings['file_picker_types'] = 'image';
+	$settings['images_upload_handler'] = 'function (blobInfo, success, failure) {
+    var xhr, formData;
+
+    xhr = new XMLHttpRequest();
+    xhr.withCredentials = false;
+    xhr.open(\'POST\', \'' . admin_url('admin-ajax.php') . '\');
+
+    xhr.onload = function() {
+      var json;
+
+      if (xhr.status != 200) {
+        failure(\'HTTP Error: \' + xhr.status);
+        return;
+      }
+
+      json = JSON.parse(xhr.responseText);
+
+      if (!json || typeof json.location != \'string\') {
+        failure(\'Invalid JSON: \' + xhr.responseText);
+        return;
+      }
+
+      success(json.location);
+    };
+
+    formData = new FormData();
+    formData.append(\'file\', blobInfo.blob(), blobInfo.filename());
+	formData.append(\'action\', \'truwriter_upload_action\');
+    xhr.send(formData);
+  }';
+  
+
+	return $settings;
 }
 
 
+
+function truwriter_register_buttons( $plugin_array ) {
+	$plugin_array['imgbutton'] = get_stylesheet_directory_uri() . '/js/image-button.js';
+	return $plugin_array;
+}
+
 // remove  buttons from the visual editor
-//add_filter('mce_buttons','truwriter_tinymce_buttons');
 
 function truwriter_tinymce_buttons($buttons) {
 	//Remove the more button
@@ -228,9 +252,10 @@ function truwriter_tinymce_buttons($buttons) {
 	if ( ( $key = array_search($remove,$buttons) ) !== false )
 		unset($buttons[$key]);
 
-	// now add the image button in
+	// now add the image button in, and the second one that acts like a label
 	$buttons[] = 'image';
-	// array_push($buttons, "splot_upload_btn");
+	$buttons[] = 'imgbutton';
+
 	return $buttons;
  }
 
@@ -245,9 +270,9 @@ function truwriter_tinymce_2_buttons( $buttons)  {
  }
 
 
-/*
-add_action( 'wp_ajax_nopriv_splotdropzone_upload_action', 'truwriter_upload_action' ); //allow on front-end
-add_action( 'wp_ajax_splotdropzone_upload_action', 'truwriter_upload_action' );
+// this is the handler used in the tiny_mce editor to manage iage upload
+add_action( 'wp_ajax_nopriv_truwriter_upload_action', 'truwriter_upload_action' ); //allow on front-end
+add_action( 'wp_ajax_truwriter_upload_action', 'truwriter_upload_action' );
 
 function truwriter_upload_action() {	
 
@@ -266,17 +291,14 @@ function truwriter_upload_action() {
 
             $_FILES = array('upload'=>$newfile);
             foreach($_FILES as $file => $array) {
-                $newupload = media_handle_upload( $file, 0 );
+                $newupload = media_handle_upload( $file, 0);
             }
         }
     }
-    echo json_encode( array('id'=> $newupload, 'url' => wp_get_attachment_image_src( $newupload )[0], 'caption' => get_attachment_caption_by_id( $newupload ) ) );
+    echo json_encode( array('id'=> $newupload, 'location' => wp_get_attachment_image_src( $newupload, 'large' )[0], 'caption' => get_attachment_caption_by_id( $newupload ) ) );
     die();	
 	
 }
-
-*/
-
 
 # -----------------------------------------------------------------
 # For the Writing Form
@@ -355,11 +377,10 @@ function add_truwriter_scripts() {
 
 
 		// tinymce mods
-		// add_filter("mce_external_plugins", "truwriter_tinymce_plugin");
+		add_filter("mce_external_plugins", "truwriter_register_buttons");
 		add_filter('mce_buttons','truwriter_tinymce_buttons');
 		add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
-
-	
+		
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
 		
@@ -375,10 +396,6 @@ function add_truwriter_scripts() {
 		);
 		
 		wp_enqueue_script( 'jquery.writer' );
-		
-		
-
-			
 		
 		// add scripts for fancybox (used for help) 
 		//-- h/t http://code.tutsplus.com/tutorials/add-a-responsive-lightbox-to-your-wordpress-theme--wp-28100

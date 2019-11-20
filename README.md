@@ -45,6 +45,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [NRES 701 @ UNBC](https://nres701.opened.ca/) Natural Resources and Evironmental Studies Graduate Colloquia (University of Northern British Columbia)
 * [BIOL 421 @ UNBC](https://biol421.opened.ca/) Insects, Fungi and Society (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
+* [Community Performace Toolbox](http://communityperformancetoolbox.org/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College
@@ -138,7 +139,7 @@ If the theme does not do so automatically (and it should) create this Wordpress 
 * **Write** -- The page that provides the writing form, see [http://splot.ca/writer/write](http://splot.ca/writer/write).  Whatever you include in the body (not required) is added to the top of the form, maybe for extra instructions.e.g. for a site at `http://coolest.site.org/` the page can be published at `http://coolest.site.org/writing` When you create a Writing Form page, under **Page Atributes**, select the Template named `Writing Pad`
 
 
-### Customize Your Menus
+### Set Out Your Menus
 
 The default menus are not what you want Wordpress will generate one based on all Pages set up.
 
@@ -171,13 +172,13 @@ In order to make a post (or "writing" as above) visible, a user with the permiss
 
 #### Special Page Setup
 
-
-
 Use this area to assign the WordPress Page to be used for the writing form. With version 1.8 of TRU Writer, you can now use any name you want for the URL (previously these were forced to be `write` -- this is no longer required.
 
 If no Page is found with the correct template, you will see a prompt to create one. If the Page is found (and there might even be more than one, you can select the one you want used for each special page.
 
 ![](images/special-page.jpg)
+
+Only one special page is needed now (there was at one time four!)
 
 
 #### Publish Settings
@@ -267,15 +268,15 @@ Creative Commons licenses or other usage rights (including copyright) can be att
 
 Or you can set the option to **Enable users to choose license** which places the same menu on the writing form so users can choose a license (or set to All Rights Reserved).
 
-## Customize the Write Form
+## Customize the Writing Form Prompts
 
-You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the write form, and activate the Wordpress Customizer from the admin bar. 
+You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the writer form, and activate the Wordpress Customizer from the admin bar. 
 
 Look for a special section just below **Site Identity** to open:
 
 ![](images/customizer-writer-tab2.jpg)
 
-Then from this pane, open "Write Form" tab
+Then from this pane, open "Writing Form Prompts" tab
 
 ![](images/customizer-writer-form-tab2.jpg)
 
@@ -285,15 +286,28 @@ For each, you can edit the title/label of the field and the prompt that appears 
 
 ![](images/customizer-form-edit.jpg)
 
-## Customize the Content Layout
+## Customize the Form and Button Colors
 
-You can  also customize the content layout. On your site navigate to any content post or page, and activate the Wordpress Customizer from the admin bar. From the **TRU Writer** pane, open **Writer Layout**. Here you can choose from the Thin or Medium layout widths (Wide will only affect very large screens).
+On your site navigate to the writer form, and activate the Wordpress Customizer from the admin bar. 
+
+In the Customizer, under TRU Writer, look for a pane for **Form and Button Colors**:
+
+
+![](images/colors-customizer.jpg)
+
+Use these settings to change the colors of the two buttons used on the Writing Form (one to update/submit drafts, the other for the final submission. There are also controls to modify the background colors on the form- for a new entry, for one that hs in draft, and a warning for form errors. 
+
+Finally, you can modify the roundness of buttons. Why? Because we can
+
+## Customize the Published Layout
+
+You can  also customize the content layout. On your site navigate to any content post or page, and activate the Wordpress Customizer from the admin bar. From the **TRU Writer** pane, open **Published Layout**. 
+
+Here you can choose from the Thin or Medium layout widths (Wide will only affect very large screens).
 
 ![](images/customizer-layout.jpg)
 
-## Customize Heading for Single Page Metadata
-
-A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the single post template; this is now something that can be changed in the Customizer. From the **TRU Writer** pane, open **Writer Layout**.
+A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the single post template; this is now something that can be changed in the Customizer:
 
 ![](images/meta-heading.jpg)
 

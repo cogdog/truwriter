@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 		  jQuery("#"+options_id).val(attachment.id);  	
   
 		  // update the src of the preview image so you can see it
-		  jQuery('img#previewimage_'+options_id).attr( 'src', attachment.sizes.medium.url ); 
+		  jQuery('img#previewimage_'+options_id).attr( 'src', attachment.sizes.large.url ); 
   
 		});
 

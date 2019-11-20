@@ -70,12 +70,23 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 		if ($_FILES) {
 			foreach ( $_FILES as $file => $array ) {
 				$newupload = truwriter_insert_attachment( $file, $post->ID );
-				if ( $newupload ) $wHeaderImage_id = $newupload;
-				$w_thumb_status = 'Header image uploaded. Choose another to replace it.';
+				if ( $newupload ) {
+					$wHeaderImage_id = $newupload;
+					$w_thumb_status = 'Header image uploaded. Choose another to replace it.';
+					
+					// check image meta?
+					$imgmeta = wp_get_attachment_metadata( $wHeaderImage_id ); 
+
+					// add image meta data title to caption
+					if ( $imgmeta['image_meta']['title'] ) $wHeaderImageCaption .= ' "' . $imgmeta['image_meta']['title'] . '" ';
+					
+					// add image meta data copytight to caption
+					if ( $imgmeta['image_meta']['copyright'] ) $wHeaderImageCaption .= $imgmeta['image_meta']['copyright'];
+					
+				}
 			}
 		}
 		
-
  		// let's do some validation, store an error message for each problem found
  		
  		if ( $wTitle == '' ) $errors[] = '<strong>Title Missing</strong> - please enter an interesting title.'; 	
@@ -131,7 +142,6 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
 				} else {
 					$wStatus = 'Published';
-					$formclass = 'writepublished';
 					$box_style = '<div class="notify notify-blue"><span class="symbol icon-tick"></span> ';
 				}
 			
@@ -312,11 +322,11 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				
 				// update featured image
 				set_post_thumbnail( $post_id, $wHeaderImage_id);
-				
-				// Update caption to featured image if there is none, this is 
+								
+				// Update caption to featured image if it changed
 				// stored as post_excerpt for attachment entry in posts table
 
-				if ( !get_attachment_caption_by_id( $wHeaderImage_id ) ) {
+				if ( get_attachment_caption_by_id( $wHeaderImage_id ) != $wHeaderImageCaption  ) {
 					$i_information = array(
 						'ID' => $wHeaderImage_id,
 						'post_status' => 'draft', 
@@ -526,7 +536,7 @@ get_header('write');
 			<fieldset> 
 			<?php wp_nonce_field( 'truwriter_form_access', 'truwriter_form_access_submitted' )?>
 			
-			<input type="submit" class="pretty-button pretty-button-blue" value="Check Code" id="checkit" name="checkit">
+			<input type="submit" class="pretty-button pretty-button-final" value="Check Code" id="checkit" name="checkit">
 			</fieldset>
 		</form>
 			
@@ -564,14 +574,15 @@ get_header('write');
 						$settings = array( 
 							'textarea_name' => 'wText', 
 							'editor_height' => '400', 
+							'media_buttons' => FALSE,
 						);
 
-						wp_editor(  stripslashes( $wText ), 'wtext', $settings );
+						wp_editor(  stripslashes( $wText ), 'wText', $settings );
 						
 						
 						?>
 						
-						<input name="image" type="file" id="upload" class="hidden" onchange="">
+						
 				</fieldset>
 
 
@@ -733,13 +744,13 @@ get_header('write');
 							$save_btn_txt = "Publish Now";
 						}
 					?>
-						<input type="submit" class="pretty-button pretty-button-green" value="Update and Save Draft" id="wSubDraft" name="wSubDraft" > Save changes as draft and continue writing.<br /><br />
+						<input type="submit" class="pretty-button pretty-button-update" value="Update and Save Draft" id="wSubDraft" name="wSubDraft" > Save changes as draft and continue writing.<br /><br />
 						
-						<input type="submit" class="pretty-button pretty-button-blue" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" > All edits complete, publish to site. 
+						<input type="submit" class="pretty-button pretty-button-final" value="<?php echo $save_btn_txt?>" id="wPublish" name="wPublish" > All edits complete, publish to site. 
 					
 					<?php else:?>
 					
-						<input type="submit" class="pretty-button pretty-button-green" value="Save Draft" id="wSubDraft" name="wSubDraft" > Save your first draft, then preview.
+						<input type="submit" class="pretty-button pretty-button-update" value="Save Draft" id="wSubDraft" name="wSubDraft" > Save your first draft, then preview.
 					
 					<?php endif?>
 					

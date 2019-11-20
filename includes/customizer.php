@@ -15,19 +15,30 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		'description'    => __( 'Customizer Stuff', 'radcliffe'),
 	) );
 	
-	// Add section for display settings
-	$wp_customize->add_section( 'write_display' , array(
-		'title'    => __('Writing Layout','radcliffe'),
-		'panel'    => 'customize_writer',
-		'priority' => 10
-	) );
 
 	// Add section for the collect form
 	$wp_customize->add_section( 'write_form' , array(
-		'title'    => __('Writing Form','radcliffe'),
+		'title'    => __('Writing Form Prompts','radcliffe'),
 		'panel'    => 'customize_writer',
 		'priority' => 12
 	) );
+	
+	// Add section for display settings
+	$wp_customize->add_section( 'write_colors' , array(
+		'title'    => __('Form and Button Colors','radcliffe'),
+		'panel'    => 'customize_writer',
+		'priority' => 18
+	) );
+
+
+
+	// Add section for display settings
+	$wp_customize->add_section( 'write_display' , array(
+		'title'    => __('Published Layout','radcliffe'),
+		'panel'    => 'customize_writer',
+		'priority' => 20
+	) );
+
 	
 	$wp_customize->add_setting( 'layout_width',
 	   array(
@@ -73,10 +84,96 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	    )
 	); 
 	
+
+// ------ color controls for form and buttons
+
+/*
+.pretty-button-final, #writerform input.pretty-button-final { background: #0971B2; }
+.pretty-button-update, #writerform input.pretty-button-update { background: #00B233; }
+
+.writenew { background-color: #8ed9f6; }
+.writedraft { background-color: #D1FAB6; }
+.writeoops { background-color: #fad9d7; }
+*/
+
+	// Final button  color 
+	
+	$btnformcolors[] = array(
+		'slug'=>'button_draft', 
+		'default' => '#00B233',
+		'label' => 'Draft Submit Button'
+	);
+	
+	$btnformcolors[] = array(
+		'slug'=>'button_final', 
+		'default' => '#0971B2',
+		'label' => 'Submit Final Submit Button'
+	);
+
+	$btnformcolors[] = array(
+		'slug'=>'form_bg_new', 
+		'default' => '#8ed9f6',
+		'label' => 'Form Background for New Entry'
+	);
 		
+	$btnformcolors[] = array(
+		'slug'=>'form_bg_draft', 
+		'default' => '#D1FAB6',
+		'label' => 'Form Background for Draft'
+	);
+
+	$btnformcolors[] = array(
+		'slug'=>'form_bg_error', 
+		'default' => '#fad9d7',
+		'label' => 'Form Background for Error'
+	);
 	
-	
-	
+
+	// add the settings and controls for each color
+	foreach( $btnformcolors as $thecolor ) {
+ 
+		// SETTINGS
+		$wp_customize->add_setting(
+			$thecolor['slug'], array(
+				'default' => $thecolor['default'],
+				'type' => 'option', 
+				'capability' =>  'edit_theme_options'
+			)
+		);
+		
+		// CONTROLS
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control(
+				$wp_customize,
+				$thecolor['slug'], 
+				array('label' => $thecolor['label'], 
+				'section' => 'write_colors',
+				'settings' => $thecolor['slug'])
+			)
+		);
+
+     } // foreach
+
+
+	// Add setting for footer
+	$wp_customize->add_setting( 'button_roundness', array(
+		 'default'           => __( 0, 'radcliffe' ),
+		 'type' => 'option', 
+		  'capability' =>  'edit_theme_options'
+	) );     
+     
+     $wp_customize->add_control( 'button_roundness', array(
+		  'type' => 'range',
+		  'section' => 'write_colors',
+		  'label' => __( 'Button Corner Roundness' ),
+		  'description' => __( 'From square to curved' ),
+		  'input_attrs' => array(
+			'min' => 0,
+			'max' => 50,
+			'step' => 5,
+		  ),
+		) );
+		     	
 	
 	// Add setting for default prompt
 	$wp_customize->add_setting( 'default_prompt', array(
@@ -837,6 +934,40 @@ function truwriter_metadate_heading() {
 	 }
 }
 
+// Add the Customizer set CSS
+add_action( 'wp_head', 'truwriter_customize_prettify' );
 
+function truwriter_customize_prettify() {
+
+	// draft button color
+	$button_draft_color= get_option( 'button_draft' );
+	
+	// final button color
+	$button_final_color= get_option( 'button_final' );
+
+	// form backgrund new entry
+	$form_bg_new = get_option( 'form_bg_new' );
+ 
+	// form backgrund new entry
+	$form_bg_draft = get_option( 'form_bg_draft' );
+
+	// form backgrund new entry
+	$form_bg_error = get_option( 'form_bg_error' );
+	
+	// button roundness
+	$button_roundness = get_option( 'button_roundness' ); 
+	
+	// styling! 
+	?>
+<style>
+/* customizer set styles */
+	.pretty-button-final, #writerform input.pretty-button-final { background: <?php echo $button_final_color?>; border-radius: <?php echo $button_roundness; ?>px; ?>; }
+	.pretty-button-update, #writerform input.pretty-button-update { background: <?php echo $button_draft_color?>; border-radius: <?php echo $button_roundness; ?>px; }
+	.writenew { background-color: <?php echo $form_bg_new; ?> }
+	.writedraft { background-color: <?php echo $form_bg_draft; ?> }
+	.writeoops { background-color: <?php echo $form_bg_error; ?> }
+</style>	
+	<?php
+}
 
 ?>

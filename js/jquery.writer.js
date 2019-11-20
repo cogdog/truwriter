@@ -7,7 +7,6 @@
 
 jQuery('#wTags').suggest( writerObject.siteURL + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
 
-	
 jQuery(document).ready(function() { 
 	// called for change in input drop zone (or click)
 
@@ -64,7 +63,7 @@ jQuery(document).ready(function() {
 	jQuery("#headerthumb").click(function(){
 		jQuery("#splotdropzone input").click();
 	});	
-
+	
 	function reset_dropzone() {
 		//reset thumbnail preview
 		jQuery('#headerthumb').attr('src', jQuery('#wDefThumbURL').text());
@@ -79,5 +78,6 @@ jQuery(document).ready(function() {
 		jQuery("#wHeaderImageCaption").val(jQuery("#footlocker").text());
 
 	}
+
 	
 });

@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+
 <div class="content">
 											        
 	<?php if ( have_posts() ) : 
@@ -113,7 +114,7 @@
 							
 							// show the request edit link button if option set and they have provided an email and post is published
 							if ( truwriter_option('show_email') and get_post_meta( $post->ID, 'wEmail', 1 ) and get_post_status() == 'publish' ) {
-								echo '<p class="author-description"><strong>Edit Link:</strong> <em>(emailed to author)</em><br /> <a href="#" id="getEditLink" class="pretty-button pretty-button-blue" data-widurl="' . get_bloginfo('url') . '/get-edit-link/' .   $post->ID . '">Request Now</a> <span id="getEditLinkResponse" class="writenew"></span></p>';
+								echo '<p class="author-description"><strong>Edit Link:</strong> <em>(emailed to author)</em><br /> <a href="#" id="getEditLink" class="pretty-button pretty-button-final" data-widurl="' . get_bloginfo('url') . '/get-edit-link/' .   $post->ID . '">Request Now</a> <span id="getEditLinkResponse" class="writenew"></span></p>';
 							}
 							?>
 							
