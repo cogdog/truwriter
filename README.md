@@ -307,7 +307,7 @@ Here you can choose from the Thin or Medium layout widths (Wide will only affect
 
 ![](images/customizer-layout.jpg)
 
-A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the single post template; this is now something that can be changed in the Customizer:
+A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the single post template; this is now something that can be changed in the Customizer: 
 
 ![](images/meta-heading.jpg)
 
@@ -318,6 +318,8 @@ If you want to customize/re-arrange the buttons and controls on the rich text ed
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 ## Relatively Cool New Features & Updates
+
+**Inline Image Uploader** The writing form has a new button for inserting images in the body of text (previously done via the secret login) now all done without using the WordPress media library. Images can be selected or drag/dropped to the control, and are uploaded behind the scenes to the site. Also the Customizer now has controls for changing the colors of the Writing Form background colors and buttons, even for making the buttons *round*. Woah, Neo. Does anyone read this?
 
 **No More Secret User** This theme no longer requires setting up of a special authoring account, and there is no secret logging in behind the scenes. The writing form has a new drag and drop upload interface for featured image (and a new option for limiting the file size if uploads). The theme has also been simplified by not having a separate Welcome Desk Page for handing the access codes, everything is managed in the Writing Pad template.
 
