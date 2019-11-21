@@ -526,4 +526,56 @@ function splot_default_menu() {
   
  	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . truwriter_get_write_page() . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
 }
+
+/**
+ * This function assumes you have a Customizer export file in your theme directory
+ * at 'data/customizer.dat'. That file must be created using the Customizer Export/Import
+ * plugin found here... https://wordpress.org/plugins/customizer-export-import/
+ * h/t - https://gist.github.com/fastlinemedia/9a8070b9a636e38b510f
+ */
+ 
+add_action( 'after_switch_theme', 'splot_import_customizer_settings' );
+ 
+function splot_import_customizer_settings()
+{
+	// Check to see if the settings have already been imported.
+	$template = get_template();
+	$imported = get_option( $template . '_customizer_import', false );
+	
+	// Bail if already imported.
+	if ( $imported ) {
+		return;
+	}
+	
+	// Get the path to the customizer export file.
+	$path = trailingslashit( get_stylesheet_directory() ) . 'data/customizer.dat';
+	
+	// Return if the file doesn't exist.
+	if ( ! file_exists( $path ) ) {
+		return;
+	}
+	
+	// Get the settings data.
+	$data = @unserialize( file_get_contents( $path ) );
+	
+	// Return if something is wrong with the data.
+	if ( 'array' != gettype( $data ) || ! isset( $data['mods'] ) ) {
+		return;
+	}
+	
+	// Import options.
+	if ( isset( $data['options'] ) ) {
+		foreach ( $data['options'] as $option_key => $option_value ) {
+			update_option( $option_key, $option_value );
+		}
+	}
+	
+	// Import mods.
+	foreach ( $data['mods'] as $key => $val ) {
+		set_theme_mod( $key, $val );
+	}
+	
+	// Set the option so we know these have already been imported.
+	update_option( $template . '_customizer_import', true );
+}
 ?>
