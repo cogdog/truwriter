@@ -199,7 +199,6 @@ add_filter( 'tiny_mce_before_init', 'truwriter_tinymce_settings' );
 
 function truwriter_tinymce_settings( $settings ) {
 
-	// $settings['file_picker_types'] = 'image';
 	$settings['images_upload_handler'] = 'function (blobInfo, success, failure) {
     var xhr, formData;
 
@@ -230,6 +229,7 @@ function truwriter_tinymce_settings( $settings ) {
 	formData.append(\'action\', \'truwriter_upload_action\');
     xhr.send(formData);
   }';
+  
   
 
 	return $settings;
@@ -297,7 +297,6 @@ function truwriter_upload_action() {
     }
     echo json_encode( array('id'=> $newupload, 'location' => wp_get_attachment_image_src( $newupload, 'large' )[0], 'caption' => get_attachment_caption_by_id( $newupload ) ) );
     die();	
-	
 }
 
 # -----------------------------------------------------------------
@@ -465,9 +464,6 @@ function truwriter_is_preview() {
 	return ( get_query_var( 'ispre', 0 ) == 1);
 }
 
-# -----------------------------------------------------------------
-# login stuff
-# -----------------------------------------------------------------
 
 # -----------------------------------------------------------------
 # login stuff - things to set up special user, prevent access to WP

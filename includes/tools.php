@@ -95,7 +95,7 @@ function truwriter_word_count( $content ) {
 
 function truwriter_preview_notice() {
 	return ('<div class="notify"><span class="symbol icon-info"></span>
-This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Revise Draft" again or if it is ready, click "Publish Now".		
+This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Update and Save Draft" again or if it is ready, click "Publish Now".		
 				</div>');
 }
 
@@ -155,11 +155,6 @@ function twitternameify( $str ) {
 # Email
 # -----------------------------------------------------------------
 
-function set_html_content_type() {
-	// from http://codex.wordpress.org/Function_Reference/wp_mail
-	return 'text/html';
-}
-
 function truwriter_allowed_email_domain( $email ) {
 	// checks if an email address is within a list of allowed domains
 
@@ -176,6 +171,11 @@ function truwriter_allowed_email_domain( $email ) {
 	}
 
 	return false;
+}
+
+function set_html_content_type() {
+	// from http://codex.wordpress.org/Function_Reference/wp_mail
+	return 'text/html';
 }
 
 

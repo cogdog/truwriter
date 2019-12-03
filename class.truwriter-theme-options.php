@@ -157,7 +157,7 @@ class truwriter_Theme_Options {
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
 			'desc'	 => 'Special Pages Setup',
-			'std'    => 'Choose the pages for the two ones that create access to the writing form',
+			'std'    => 'Choose the pages for the two ones that create access to the writingform',
 			'type'    => 'heading'
 		);
 
@@ -183,8 +183,6 @@ class truwriter_Theme_Options {
 	
 		}
 
-
-	
 		$this->settings['write_page'] = array(
 			'section' => 'general',
 			'title'   => __( 'Page For Writing Form (Writing Pad)'),
@@ -211,7 +209,7 @@ class truwriter_Theme_Options {
 			'type'    => 'radio',
 			'std'     => 'pending',
 			'choices' => array(
-				'pending' => 'Moderated: new submissions will not appear until an admin edits status in Wordpress',
+				'pending' => 'Moderated. New submissions are set with a <strong>Pending</strong> status and will not appear until an admin updates the status in Wordpress',
 				'publish' => 'Published immediately to site',
 			)
 		);		

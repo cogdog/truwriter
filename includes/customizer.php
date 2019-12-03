@@ -83,18 +83,6 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		    )
 	    )
 	); 
-	
-
-// ------ color controls for form and buttons
-
-/*
-.pretty-button-final, #writerform input.pretty-button-final { background: #0971B2; }
-.pretty-button-update, #writerform input.pretty-button-update { background: #00B233; }
-
-.writenew { background-color: #8ed9f6; }
-.writedraft { background-color: #D1FAB6; }
-.writeoops { background-color: #fad9d7; }
-*/
 
 	// Final button  color 
 	
