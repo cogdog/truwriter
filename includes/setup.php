@@ -131,8 +131,6 @@ function truwriter_queryvars( $qvars ) {
 
 
 /* set up rewrite rules */
-add_action('init','truwriter_rewrite_rules');
-
 function truwriter_rewrite_rules() {
 	// for sending to random item
    add_rewrite_rule('random/?$', 'index.php?random=1', 'top');
