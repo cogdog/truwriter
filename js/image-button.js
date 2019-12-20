@@ -4,7 +4,9 @@
             text: 'Insert Image',
             icon: false,
 			onclick: function() {
-				jQuery('#mceu_12-button').click();
+				// find image button id
+				btnid = jQuery('.mce-btn[aria-label="Insert/edit image (⌃⌥M)"]').attr('id');
+				jQuery('#' + btnid).click();
 			}
         });
     });
