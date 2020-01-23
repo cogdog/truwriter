@@ -7,7 +7,7 @@
 // run when this theme is activated
 add_action( 'after_switch_theme', 'truwriter_setup' );
 
-function truwriter_setup () { 
+function truwriter_setup () {
 
     // make sure our categories are present, accounted for, named
 	wp_insert_term( 'In Progress', 'category' );
@@ -15,13 +15,13 @@ function truwriter_setup () {
 
 	// Look for existence of pages with the appropriate template, if not found
 	// make 'em cause it's good to make the pages
-	
+
 	if (! page_with_template_exists( 'page-write.php' ) ) {
-  
+
 		// create the writing form page if it does not exist
 		// backdate creation date 2 days just to make sure they do not end up future dated
 		// which causes all kinds of disturbances in the force
-		
+
 		$page_data = array(
 			'post_title' 	=> 'Write? Write. Right.',
 			'post_content'	=> 'Here is the place to compose, preview, and hone your fine words. If you are building this site, maybe edit this page to customize this wee bit of text.',
@@ -32,7 +32,7 @@ function truwriter_setup () {
 			'post_date' 	=> date('Y-m-d H:i:s', time() - 172800),
 			'page_template'	=> 'page-write.php',
 		);
-	
+
 		wp_insert_post( $page_data );
 	}
 
@@ -81,9 +81,9 @@ add_action( 'admin_menu', 'truwriter_change_post_label' );
 function truwriter_change_post_label() {
     global $menu;
     global $submenu;
-    
+
     $thing_name = 'Writing';
-    
+
     $menu[5][0] = $thing_name . 's';
     $submenu['edit.php'][5][0] = 'All ' . $thing_name . 's';
     $submenu['edit.php'][15][0] = $thing_name .' Categories';
@@ -97,9 +97,9 @@ function truwriter_change_post_label() {
 add_action('admin_menu', 'truwriter_drafts_menu');
 
 function truwriter_drafts_menu() {
-	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) ); 
-	
-	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' ); 
+	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) );
+
+	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' );
 }
 
 # -----------------------------------------------------------------
@@ -125,9 +125,9 @@ function truwriter_queryvars( $qvars ) {
 	$qvars[] = 'random'; // random flag
 	$qvars[] = 'elink'; // edit link flag
 	$qvars[] =  'ispre'; // another preview flag
-	
+
 	return $qvars;
-} 
+}
 
 
 /* set up rewrite rules */
@@ -137,7 +137,7 @@ function truwriter_rewrite_rules() {
 
    // for edit link requests
    add_rewrite_rule( '^get-edit-link/([^/]+)/?',  'index.php?elink=1&wid=$matches[1]','top');
-    
+
 }
 
 // redirections for rewrites on the /random and /get-edit-link
@@ -159,13 +159,13 @@ function truwriter_write_director() {
 
 		while ( $my_random_post->have_posts () ) {
 		  $my_random_post->the_post ();
-  
+
 		  // redirect to the random post
 		  wp_redirect ( get_permalink () );
 		  exit;
-		}  
+		}
    } elseif ( get_query_var('elink') == 1 and get_query_var('wid')  ) {
-   
+
    		// get the id parameter from URL
 		$wid = get_query_var( 'wid' , 0 );   // id of post
 
@@ -227,8 +227,8 @@ function truwriter_tinymce_settings( $settings ) {
 	formData.append(\'action\', \'truwriter_upload_action\');
     xhr.send(formData);
   }';
-  
-  
+
+
 
 	return $settings;
 }
@@ -272,7 +272,7 @@ function truwriter_tinymce_2_buttons( $buttons)  {
 add_action( 'wp_ajax_nopriv_truwriter_upload_action', 'truwriter_upload_action' ); //allow on front-end
 add_action( 'wp_ajax_truwriter_upload_action', 'truwriter_upload_action' );
 
-function truwriter_upload_action() {	
+function truwriter_upload_action() {
 
     $newupload = 0;
 
@@ -294,7 +294,7 @@ function truwriter_upload_action() {
         }
     }
     echo json_encode( array('id'=> $newupload, 'location' => wp_get_attachment_image_src( $newupload, 'large' )[0], 'caption' => get_attachment_caption_by_id( $newupload ) ) );
-    die();	
+    die();
 }
 
 # -----------------------------------------------------------------
@@ -318,19 +318,19 @@ function truwriter_no_featured_image() {
 
 // filter content on writing page so we do not submit the page content if form is submitted
 add_filter( 'the_content', 'truwriter_firstview' );
- 
+
 function truwriter_firstview( $content ) {
     // Check if we're inside the main loop on the writing page
     if ( is_page( truwriter_get_write_page() ) && in_the_loop() && is_main_query() ) {
-    
+
     	if ( isset( $_POST['truwriter_form_make_submitted'] ) ) {
     		return '';
     	} else {
     		 return $content;
     	}
-       
+
     }
- 
+
     return $content;
 }
 
@@ -342,10 +342,10 @@ function truwriter_firstview( $content ) {
 
 add_action('wp_enqueue_scripts', 'add_truwriter_scripts');
 
-function add_truwriter_scripts() {	
+function add_truwriter_scripts() {
 
 	// set up main styles
-	$parent_style = 'radcliffe_style'; 
+	$parent_style = 'radcliffe_style';
 
 	wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
 
@@ -353,34 +353,34 @@ function add_truwriter_scripts() {
 		get_stylesheet_directory_uri() . '/style.css',
 		array( $parent_style ),
 		wp_get_theme()->get('Version')
-	);	
+	);
 
  	if ( is_page( truwriter_get_write_page() ) ) { // use on just our form page
-    
+
 		 // add media scripts if we are on our maker page and not an admin
 		 // after http://wordpress.stackexchange.com/a/116489/14945
 
   		if (! is_admin() ) wp_enqueue_media();
-  	 
-		
+
+
 		// Build in tag auto complete script
    		wp_enqueue_script( 'suggest' );
-   		
+
    		// Autoembed functionality in rich text editor
    		// needs dependency on tiny_mce
    		// h/t https://wordpress.stackexchange.com/a/287623
-   		
-   		wp_enqueue_script( 'mce-view', '', array('tiny_mce'), '', true );		
+
+   		wp_enqueue_script( 'mce-view', '', array('tiny_mce'), '', true );
 
 
 		// tinymce mods
 		add_filter("mce_external_plugins", "truwriter_register_buttons");
 		add_filter('mce_buttons','truwriter_tinymce_buttons');
 		add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
-		
+
 		// custom jquery for the uploader on the form
 		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
-		
+
 		// add a local variable for the site's home url
 		wp_localize_script(
 		  'jquery.writer',
@@ -391,19 +391,19 @@ function add_truwriter_scripts() {
 			'uploadMax' => truwriter_option('upload_max' )
 		  )
 		);
-		
+
 		wp_enqueue_script( 'jquery.writer' );
-		
-		// add scripts for fancybox (used for help) 
+
+		// add scripts for fancybox (used for help)
 		//-- h/t http://code.tutsplus.com/tutorials/add-a-responsive-lightbox-to-your-wordpress-theme--wp-28100
 		wp_enqueue_script( 'fancybox', get_stylesheet_directory_uri() . '/includes/lightbox/js/jquery.fancybox.pack.js', array( 'jquery' ), false, true );
     	wp_enqueue_script( 'lightbox', get_stylesheet_directory_uri() . '/includes/lightbox/js/lightbox.js', array( 'fancybox' ), '1.1',
-    null , '1.0', TRUE );  
+    null , '1.0', TRUE );
     	wp_enqueue_style( 'lightbox-style', get_stylesheet_directory_uri() . '/includes/lightbox/css/jquery.fancybox.css' );
 
 	} elseif ( is_single() ) {
 		// single writings, give is the jQuery for edit link stuff
-		
+
 		wp_register_script( 'jquery.editlink' , get_stylesheet_directory_uri() . '/js/jquery.editlink.js', null , '0.2', TRUE );
 		wp_enqueue_script( 'jquery.editlink' );
 	}
@@ -421,14 +421,14 @@ function add_truwriter_scripts() {
 add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 
 function my_default_image_size () {
-    return 'large'; 
+    return 'large';
 }
 
 
 
 function  truwriter_show_drafts( $query ) {
-
-    if ( is_user_logged_in() || is_feed() )
+// show drafts oly for single previews
+    if ( is_user_logged_in() || is_feed() || !is_single() )
         return;
 
     $query->set( 'post_status', array( 'publish', 'draft' ) );
@@ -444,9 +444,9 @@ add_filter( 'the_posts', 'truwriter_reveal_previews', 10, 2 );
 function truwriter_reveal_previews( $posts, $wp_query ) {
 
     //making sure the post is a preview to avoid showing published private posts
-    if ( !is_preview() )        
+    if ( !is_preview() )
         return $posts;
-        
+
     if ( is_user_logged_in() )
     	 return $posts;
 
@@ -480,7 +480,7 @@ function splot_login_logo() { ?>
 			background-size: 320px 90px;
 			background-repeat: no-repeat;
 			padding-bottom: 0px;
-        } 
+        }
     </style>
 <?php }
 
@@ -515,18 +515,18 @@ function splot_login_logo_url_title() {
 # -----------------------------------------------------------------
 
 // checks to see if a menu location is used.
-function splot_is_menu_location_used( $location = 'primary' ) {	
+function splot_is_menu_location_used( $location = 'primary' ) {
 
 	// get locations of all menus
 	$menulocations = get_nav_menu_locations();
-	
+
 	// get all nav menus
 	$navmenus = wp_get_nav_menus();
-	
-	
+
+
 	// if either is empty we have no menus to use
 	if ( empty( $menulocations ) OR empty( $navmenus ) ) return false;
-	
+
 	// othewise look for the menu location in the list
 	return in_array( $location , $menulocations);
 }
@@ -536,7 +536,7 @@ function splot_default_menu() {
 
 	// site home with trailing slash
 	$splot_home = home_url('/');
-  
+
  	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . truwriter_get_write_page() . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
 }
 
@@ -546,48 +546,48 @@ function splot_default_menu() {
  * plugin found here... https://wordpress.org/plugins/customizer-export-import/
  * h/t - https://gist.github.com/fastlinemedia/9a8070b9a636e38b510f
  */
- 
+
 add_action( 'after_switch_theme', 'splot_import_customizer_settings' );
- 
+
 function splot_import_customizer_settings()
 {
 	// Check to see if the settings have already been imported.
 	$template = get_template();
 	$imported = get_option( $template . '_customizer_import', false );
-	
+
 	// Bail if already imported.
 	if ( $imported ) {
 		return;
 	}
-	
+
 	// Get the path to the customizer export file.
 	$path = trailingslashit( get_stylesheet_directory() ) . 'data/customizer.dat';
-	
+
 	// Return if the file doesn't exist.
 	if ( ! file_exists( $path ) ) {
 		return;
 	}
-	
+
 	// Get the settings data.
 	$data = @unserialize( file_get_contents( $path ) );
-	
+
 	// Return if something is wrong with the data.
 	if ( 'array' != gettype( $data ) || ! isset( $data['mods'] ) ) {
 		return;
 	}
-	
+
 	// Import options.
 	if ( isset( $data['options'] ) ) {
 		foreach ( $data['options'] as $option_key => $option_value ) {
 			update_option( $option_key, $option_value );
 		}
 	}
-	
+
 	// Import mods.
 	foreach ( $data['mods'] as $key => $val ) {
 		set_theme_mod( $key, $val );
 	}
-	
+
 	// Set the option so we know these have already been imported.
 	update_option( $template . '_customizer_import', true );
 }
