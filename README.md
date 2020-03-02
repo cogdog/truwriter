@@ -75,7 +75,7 @@ And if you make a TRU Writer site, please please pretty please fork this repo to
 
 If you have problems, feature suggestions, small bags of gold coin for me, please [contact me via the issues area](https://github.com/cogdog/truwriter/issues) on this repo.
 
-## Installing From Reclaim Hosting
+## Installing in One Click From Reclaim Hosting (and automatic updates!)
 
 If you are wise enough to host your web sites at [Reclaim Hosting](http://reclaimhosting.com/) you have the option of installing a fully functioning site with this theme ([a copy of the demo site](http://lab.cogdogblog.com/writer/)) including recommended plugins, configured settings and sample content, all done  in one click. *But wait there is more!* With this method of installing your site, future updates to the theme are automatically added to your site.
 
@@ -84,6 +84,30 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 ![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
 
 *Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
+
+
+** Installing TRU Writer in One Click with WP Pusher (and automatic updates!)
+
+If all  downloading and uploading is making you dizzy, I recommend trying the [WP Pusher plugin](https://wppusher.com/) which makes it easier to install themes and plugins that are published in GitHub. It takes a few steps to set up, but it's a thing of beauty when done.
+
+Not that TRU Writer is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`. Just install it, no need to activate.
+
+To use WP-Pusher you will need to have or create an account on [GitHub](https://github.com/) (free). Log in. Groovy?
+
+Next [download WP Pusher plugin](https://wppusher.com/download) as a ZIP file. From the plugins area of your Wordpress dashboard, click the **Upload Plugin** button, select that zip file to upload, and activate the plugin.
+
+Then click the **WP Pusher** option in your Wordpress Dashboard, and then click the **GitHub** tab. Next click the **Obtain a GitHub Token** button to get an authentication token. Copy the one that is generated, paste into the field for it, and finally, click **Save GitHub** Token.
+
+Now you are ready to install TRU Writer! 
+
+![](images/wp-pusher.jpg "WP Pusher Settings")
+
+Look under **WP Pusher** for **Install Theme**. In the form that appears, under **Theme Repository**, enter `cogdog/truwriter`. Also check the option for **Push-to-Deploy** (this will automatically update your site when the theme is updated) finally, click **Install Theme**.
+
+Woah Neo?
+
+Not only does this install the theme without any messy download/uploads, each time I update the theme on GitHub, your site will be automatically updated to the newest version. 
+
 
 ### Installing TRU Writer from Scratch
 
@@ -99,35 +123,43 @@ To get the TRU Writer working all you need to do is activate the "TRU Writer" th
 
 ### Updating the TRU Writer Theme (manually)
 
-*Note (Dec 11, 2018) If your site's featured images are blank, it's likely because of a change to the parent Radcliffe theme that was automatically updated on your site. An update to TRU Writer version 1.2 or later will fix this issue.*
 
 If you have ftp/sftp access to your site (or this can be done in a cpanel file manager), simply upload the new theme files to the `wp-content/themes` directory that includes the older version theme. 
 
 For those that lack direct file upload access or maybe that idea sends shivers down the spine, upload and activate the [Easy Theme and Plugin Upgrades](https://wordpress.org/plugins/easy-theme-and-plugin-upgrades/) plugin -- this will allow you to upload a newer version of a theme as a ZIP archive, the same way you add a theme by uploading.
 
-If you are updating a site built with a previous version of the theme and something wonky happens, try the following:
 
-* Don't Panic
+## Inserting Demo Content
+
+If you want a site that is not completely empty, after setting up with WP-Pusher or from scratch, you can import all the content set up on the [public demo site](https://lab.cogdogblog.com/writer). 
+
+Install all content by [downloading the WordPress export for that site](https://github.com/cogdog/truwriter/blob/master/data/truwriter.xml).  Running the WordPress Importer (under **Tools** -- **Import**) and upload that file when prompted.
+
+You can also get a copy of the Widgets used on that site too. First intall/activate the [Widget Importer & Exporter plugin](https://wordpress.org/plugins/widget-importer-exporter/). Download the [Writer Widgets data file](https://github.com/cogdog/truwriter/blob/master/data/writer-widgets.wie). Look under the **Tools** menu for **[Widget Importer & Exporter** and use the Import Widgets section to upload the data file. Boom! You got my widgets.
+
+
+
+## Troubleshooting
+
+*Note (Dec 11, 2018) If your site's featured images are blank, it's likely because of a change to the parent Radcliffe theme that was automatically updated on your site. An update to TRU Writer version 1.2 or later will fix this issue.*
+
+
+If you are updating a site built with a previous version of the theme and something wonky happens after an update, try the following:
+
+* Don't panic!
 * Go to Settings -&gt; Permalinks, and just click **Save**. Some errors are related to the way URLs are re-written in WordPress.
-* Go to Appearances, and change the theme to any other theme, then change it back to TRU Writer. There are some things the theme does on activation that can clear some issues.
-* Go to the TRU Writer Options and click **Save** as new option values may need a reset.
+* Go to Appearances and change the theme to any other theme, then change it back to TRU Writer. There are some things the theme does on activation that can clear some issues with links not working.
+* Go to the TRU Writer Options and click **Save** as new option values may need a reset
+* Close down the computer, go out for a walk. Fresh air works wonders.
 * If all that fails, [report an issue](https://github.com/cogdog/truwriter/issues) with as much detail that describes the situation.
 
 ## Setting Up TRU Writer
 
-Now that you've installed TRU Writer and can see the barebones theme staring back at you. It is not very interesting. Yet. Get rid of any "Hello World" posts, say good bye. Set your TRU Theme Options (see below). Set up a menu. Try using the Write page to create some initial content. 
+Now that you've installed TRU Writer and can see the barebones theme staring back at you or maybe dome cheesy demo content. It is not very interesting. Yet. Get rid of any "Hello World" posts, say bye bye. Set your TRU Theme Options (see below). Set up a menu. Try using the Write page to create some initial content. Poke around the Customizer settings. Fiddle with your footer widgets.
 
 ### Recommended Plugins for TRU Writer
 
 While your doing all that uploading, you should know that this theme uses the [Reading Time WP plugin](https://wordpress.org/plugins/reading-time-wp/) to insert those commonplace estimates of reading time -- blame [Medium](http://www.medium.com) if you hate knowing how long a post might take to read.
-
-## Demo Content
-
-If you want a site that is not completely empty, you can get one with the content set up on the [public demo site](https://lab.cogdogblog.com/writer). 
-
-Install all content by [downloading the WordPress export for that site](https://github.com/cogdog/truwriter/blob/master/data/truwriter.xml).  Running the WordPress Importer (under **Tools** -- **Import**) and upload that file when prompted.
-
-You can also get a copy of the Widgets used on that site too. First intall/activate the [Widget Importer & Exporter plugin](https://wordpress.org/plugins/widget-importer-exporter/). Download the [Writer Widgets data file](https://github.com/cogdog/truwriter/blob/master/data/writer-widgets.wie). Look under the **Tools** menu for **[Widget Importer & Exporter** and use the Import Widgets section to upload the data file. Boom! You got Widgets.
 
 
 ### Page Setup
