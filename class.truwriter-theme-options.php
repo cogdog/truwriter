@@ -16,9 +16,9 @@ class truwriter_Theme_Options {
 		// This will keep track of the checkbox options for the validate_settings function.
 		$this->checkboxes = array();
 		$this->settings = array();
-		
+
 		$this->get_settings();
-		
+
 		$this->sections['general'] = __( 'General Settings' );
 
 		// create a colllection of callbacks for each section heading
@@ -28,10 +28,10 @@ class truwriter_Theme_Options {
 
 		// enqueue scripts for media uploader
         add_action( 'admin_enqueue_scripts', 'truwriter_enqueue_options_scripts' );
-		
+
 		add_action( 'admin_menu', array( &$this, 'add_pages' ) );
 		add_action( 'admin_init', array( &$this, 'register_settings' ) );
-		
+
 		if ( ! get_option( 'truwriter_options' ) )
 			$this->initialize_settings();
 	}
@@ -39,42 +39,42 @@ class truwriter_Theme_Options {
 	/* Add page(s) to the admin menu */
 	public function add_pages() {
 		$admin_page = add_theme_page( 'TRU Writer Options', 'TRU Writer Options', 'manage_options', 'truwriter-options', array( &$this, 'display_page' ) );
-		
-		// documents page, but don't add to menu		
+
+		// documents page, but don't add to menu
 		$docs_page = add_theme_page( 'TRU Writer Documentation', '', 'manage_options', 'truwriter-docs', array( &$this, 'display_docs' ) );
-		
+
 	}
 
 	/* HTML to display the theme options page */
 	public function display_page() {
 		echo '<div class="wrap">
 		<h1>TRU Writer Options</h1>';
-		
+
 		if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == true )
 			echo '<div class="updated fade"><p>' . __( 'Theme options updated.' ) . '</p></div>';
-				
+
 		echo '<form action="options.php" method="post" enctype="multipart/form-data">';
 
 		settings_fields( 'truwriter_options' );
-			
+
 		echo  '<h2 class="nav-tab-wrapper"><a class="nav-tab nav-tab-active" href="?page=truwriter-options">Settings</a>
 		<a class="nav-tab" href="?page=truwriter-docs">Documentation</a></h2>';
 
 		do_settings_sections( $_GET['page'] );
-		
+
 		echo '<p class="submit"><input name="Submit" type="submit" class="button-primary" value="' . __( 'Save Changes' ) . '" /></p>
 
 		</form>
 		</div>
-		
+
 		<script type="text/javascript">
 		jQuery(document).ready(function($) {
-			
+
 			$("input[type=text], textarea").each(function() {
 				if ($(this).val() == $(this).attr("placeholder") || $(this).val() == "")
 					$(this).css("color", "#999");
 			});
-			
+
 			$("input[type=text], textarea").focus(function() {
 				if ($(this).val() == $(this).attr("placeholder") || $(this).val() == "") {
 					$(this).val("");
@@ -86,7 +86,7 @@ class truwriter_Theme_Options {
 					$(this).css("color", "#999");
 				}
 			});
-			
+
 			// This will make the "warning" checkbox class really stand out when checked.
 			// I use it here for the Reset checkbox.
 			$(".warning").change(function() {
@@ -95,34 +95,34 @@ class truwriter_Theme_Options {
 				else
 					$(this).parent().css("background", "none").css("color", "inherit").css("fontWeight", "normal");
 			});
-			
+
 		});
-		</script>';	
+		</script>';
 	}
-			
+
 	/*  display documentation in a tab */
-	public function display_docs() {	
-		// This displays on the "Documentation" tab. 
-		
+	public function display_docs() {
+		// This displays on the "Documentation" tab.
+
 	 	echo '<div class="wrap">
 		<h1>TRU Writer Documentation</h1>
 		<h2 class="nav-tab-wrapper">
 		<a class="nav-tab" href="?page=truwriter-options">Settings</a>
 		<a class="nav-tab nav-tab-active" href="?page=truwriter-docs">Documentation</a></h2>';
-		
+
 		include( get_stylesheet_directory() . '/includes/truwriter-theme-options-docs.php');
-		
-		echo '</div>';		
+
+		echo '</div>';
 	}
 
 
 	/* Define all settings and their defaults */
 	public function get_settings() {
-	
+
 		// for file upload checks
 		$max_upload_size = round(wp_max_upload_size() / 1000000);
 
-	
+
 		/* General Settings
 		===========================================*/
 
@@ -152,7 +152,7 @@ class truwriter_Theme_Options {
 			'type'    => 'text',
 			'section' => 'general'
 		);
-		
+
 		$this->settings['pages_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
@@ -164,23 +164,23 @@ class truwriter_Theme_Options {
 		// get all pages on site with template for the Writing Form
 		$found_pages = get_pages_with_template('page-write.php');
 		$page_desc = 'Set the Page that should be used for the Writing form.';
-		
+
 		// the function returns an array of id => page title, first item is the menu selection item
 		if ( count( $found_pages ) > 1 ) {
 			$page_std =  array_keys( $found_pages)[1];
 		} else {
-	
+
 			$trypage = get_page_by_path('write');
-		
+
 			if ( $trypage ) {
 				$page_std = $trypage->ID;
 				$found_pages = array( 0 => 'Select Page', $page_std => $trypage->post_title );
-		
+
 			} else {
-				$page_desc = 'No pages have been created with the Writing Pad template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Pad</code> for the Template.'; 
+				$page_desc = 'No pages have been created with the Writing Pad template. This is required to enable access to the writing form. <a href="' . admin_url( 'post-new.php?post_type=page') . '">Create a new Page</a> and under <strong>Page Attributes</strong> select <code>Writing Pad</code> for the Template.';
 				$page_std = '';
 			}
-	
+
 		}
 
 		$this->settings['write_page'] = array(
@@ -191,7 +191,7 @@ class truwriter_Theme_Options {
 			'std'     =>  $page_std,
 			'choices' => $found_pages
 		);
-		
+
 
 		$this->settings['publish_heading'] = array(
 			'section' => 'general',
@@ -212,7 +212,7 @@ class truwriter_Theme_Options {
 				'pending' => 'Moderated. New submissions are set with a <strong>Pending</strong> status and will not appear until an admin updates the status in Wordpress',
 				'publish' => 'Published immediately to site',
 			)
-		);		
+		);
 
 		$this->settings['allow_comments'] = array(
 			'section' => 'general',
@@ -238,7 +238,7 @@ class truwriter_Theme_Options {
 			'desc'    => __( 'The default content that will appear in a new blank editor.' ),
 			'std'     => '<h1>Introduction</h1>
 
-This is what I have to say, which of course is something <em>really</em> important. 
+This is what I have to say, which of course is something <em>really</em> important.
 
 Edit this to be more appropriate for your onw site as sample starting content.',
 			'type'    => 'richtextarea',
@@ -252,8 +252,8 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'type'    => 'text',
 			'section' => 'general'
 		);
-				
-		
+
+
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
 			'desc'    => __( 'Used on articles as a default. Be sure to enter a default caption in the upload.' ),
@@ -261,7 +261,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'type'    => 'medialoader',
 			'section' => 'general'
 		);
-		
+
 		$this->settings['upload_max'] = array(
 			'title'   => __( 'Maximum Upload File Size' ),
 			'desc'    => __( 'Set limit for file uploads in Mb (maximum possible for this site is ' . $max_upload_size . ' Mb).' ),
@@ -281,14 +281,14 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 							'1' => 'Yes'
 					)
 		);
-		
-		
+
+
 		// ---- Build array to hold options for select, an array of post categories that are children of "Published"
-		$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) ); 
-	
+		$all_cats = get_categories('hide_empty=0&parent=' . get_cat_ID( 'Published' ) );
+
 		$cat_options = array();
-	
-		// Walk those cats, store as array index=ID 
+
+		// Walk those cats, store as array index=ID
 		foreach ( $all_cats as $item ) {
 			$cat_options[$item->term_id] =  $item->name;
 		}
@@ -302,7 +302,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'choices' => $cat_options
 		);
 
-		
+
 		$this->settings['show_tags'] = array(
 			'section' => 'general',
 			'title'   => __( 'Show the tags entry on writing form and display the tags when published.'),
@@ -317,22 +317,35 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 
 		$this->settings['show_email'] = array(
 			'section' => 'general',
-			'title'   => __( 'Activate email address field for providing access to editing after publication.'),
-			'desc'    => ' Setting to <strong>No</strong> will remove this feature from being available on published items.',
+			'title'   => __( 'Enable email address field.'),
+			'desc'    => ' Setting to <strong>No</strong> will remove this feature from being available on published items and remove option for selecting notification of comments.',
 			'type'    => 'radio',
 			'std'     => '1',
 			'choices' => array (
 							'0' => 'No',
-							'1' => 'Yes'
+							'1' => 'Yes, but make it optional',
+							'2' => 'Yes, and make it required'
 					)
 		);
-		
+
 		$this->settings['email_domains'] = array(
 			'title'   => __( 'Limit email addresses to domain(s).' ),
 			'desc'    => __( 'Seperate multiple domains by commas' ),
 			'std'     => '',
 			'type'    => 'text',
 			'section' => 'general'
+		);
+
+		$this->settings['comment_notification'] = array(
+			'section' => 'general',
+			'title'   => __( 'Show option for comment notification.'),
+			'desc'    => ' Setting to <strong>Yes</strong> will provide a check box option for authors to receive notification of comments on their writing (only effective if comments enabled in the <strong>Published</strong> section).',
+			'type'    => 'radio',
+			'std'     => '0',
+			'choices' => array (
+							'0' => 'No',
+							'1' => 'Yes'
+					)
 		);
 
 
@@ -349,7 +362,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 					)
 		);
 
-			
+
 		$this->settings['show_footer'] = array(
 			'section' => 'general',
 			'title'   => __( 'Show the footer entry field on the writing form?'),
@@ -408,17 +421,17 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'section' => 'general'
 		);
 
-		
-		
+
+
 		$this->settings['readingtimecheck'] = array(
 		'section' => 'general',
 		'title' 	=> '' ,// Not used for headings.
-		'desc'   => 'Estimated Reading Time Plugin', 
+		'desc'   => 'Estimated Reading Time Plugin',
 		'std'    =>  reading_time_check(),
 		'type'    => 'heading'
-		);		
-		
-		// ------- creative commons options		
+		);
+
+		// ------- creative commons options
 		$this->settings['cc_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
@@ -426,7 +439,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'std'    => '',
 			'type'    => 'heading'
 		);
-		
+
 		$this->settings['use_cc'] = array(
 			'section' => 'general',
 			'title'   => __( 'Usage Mode' ),
@@ -439,7 +452,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				'user' => 'Enable authors to choose a license'
 			)
 		);
-		
+
 		$this->settings['cc_site'] = array(
 			'section' => 'general',
 			'title'   => __( 'Rights for All Writings'),
@@ -451,7 +464,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 
 		/* Reset
 		===========================================*/
-		
+
 		$this->settings['reset_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.
@@ -459,8 +472,8 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'std'    => '',
 			'type'    => 'heading'
 		);
-		
-		
+
+
 		$this->settings['reset_theme'] = array(
 			'section' => 'general',
 			'title'   => __( 'Reset All Options' ),
@@ -470,13 +483,13 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'desc'    => __( 'Check this box and click "Save Changes" below to reset theme options to their defaults.' )
 		);
 
-		
+
 	}
-	
+
 	public function display_general() {
 		// section heading for general setttings
-	
-		echo '<p>These settings manage the behavior and appearance of your TRU Writer site. See <a href="' . admin_url( 'themes.php?page=truwriter-docs') . '">the documentation</a> for help or visit the <a href="https://github.com/cogdog/truwriter" target="_blank">theme source on GitHub</a>.</p><p>If this kind of stuff has any value to you, please consider supporting me so I can do more!</p><p style="text-align:center"><a href="https://patreon.com/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-patreon.png" alt="donate on patreon"></a> &nbsp; <a href="https://paypal.me/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-paypal.png" alt="donate on paypal"></a></p> ';		
+
+		echo '<p>These settings manage the behavior and appearance of your TRU Writer site. See <a href="' . admin_url( 'themes.php?page=truwriter-docs') . '">the documentation</a> for help or visit the <a href="https://github.com/cogdog/truwriter" target="_blank">theme source on GitHub</a>.</p><p>If this kind of stuff has any value to you, please consider supporting me so I can do more!</p><p style="text-align:center"><a href="https://patreon.com/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-patreon.png" alt="donate on patreon"></a> &nbsp; <a href="https://paypal.me/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-paypal.png" alt="donate on paypal"></a></p> ';
 	}
 
 
@@ -496,14 +509,14 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			$options[$id] = 0;
 
 		$options['new_types'] = 'New Type Name'; // always reset
-		
+
 		$field_class = '';
 		if ( $class != '' )
 			$field_class = ' ' . $class;
-			
-			
+
+
 		switch ( $type ) {
-		
+
 			case 'heading':
 				echo '<tr><td colspan="2" class="alternate"><h3>' . $desc . '</h3><p>' . $std . '</p></td></tr>';
 				break;
@@ -530,7 +543,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			case 'radio':
 				if ( $desc != '' )
 					echo '<span class="description">' . $desc . '</span><br /><br />';
-					
+
 				$i = 0;
 				foreach ( $choices as $value => $label ) {
 					echo '<input class="radio' . $field_class . '" type="radio" name="truwriter_options[' . $id . ']" id="' . $id . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $options[$id], $value, false ) . '> <label for="' . $id . $i . '">' . $label . '</label>';
@@ -549,11 +562,11 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				break;
 
 			case 'richtextarea':
-			
-			
+
+
 				// set up for inserting the WP post editor
 				$rich_settings = array( 'textarea_name' => 'truwriter_options[' . $id . ']' , 'editor_height' => '200',  'tabindex'  => "3", 'editor_class' => $field_class );
-				
+
 				$textdefault = (isset( $options[$id] ) ) ? $options[$id] : $std;
 
 				wp_editor(   $textdefault , $id , $rich_settings );
@@ -562,7 +575,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 					echo '<br /><span class="description">' . $desc . '</span>';
 
 				break;
-				
+
 			case 'medialoader':
 				echo '<div id="uploader_' . $id . '">';
 
@@ -576,7 +589,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				echo '<input type="hidden" name="truwriter_options[' . $id . ']" id="' . $id . '" value="' . $options[$id]  . '" />
   <br /><input type="button" class="upload_image_button button-primary" name="_truwriter_button' . $id .'" id="_truwriter_button' . $id .'" data-options_id="' . $id  . '" data-uploader_title="Set Default Header Image" data-uploader_button_text="Select Image" value="Set/Change Image" />
 </div><!-- uploader -->';
-				
+
 				if ( $desc != '' )
 					echo '<br /><span class="description">' . $desc . '</span>';
 
@@ -595,27 +608,27 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				echo '<input class="regular-text' . $field_class . '" type="text" id="' . $id . '" name="truwriter_options[' . $id . ']" placeholder="' . $std . '" value="' . esc_attr( $options[$id] ) . '" />';
 
 				if ( $desc != '' ) {
-				
+
 					if ($id == 'def_thumb') $desc .= '<br /><a href="' . $options[$id] . '" target="_blank"><img src="' . $options[$id] . '" style="overflow: hidden;" width="' . $options["index_thumb_w"] . '"></a>';
 					echo '<br /><span class="description">' . $desc . '</span>';
 				}
 
 				break;
 		}
-	}	
-			
+	}
+
 
 	/* Initialize settings to their default values */
 	public function initialize_settings() {
-	
+
 		$default_settings = array();
 		foreach ( $this->settings as $id => $setting ) {
 			if ( $setting['type'] != 'heading' )
 				$default_settings[$id] = $setting['std'];
 		}
-	
+
 		update_option( 'truwriter_options', $default_settings );
-	
+
 	}
 
 
@@ -629,15 +642,15 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 		}
 
 		$this->get_settings();
-	
+
 		foreach ( $this->settings as $id => $setting ) {
 			$setting['id'] = $id;
 			$this->create_setting( $setting );
 		}
 
 	}
-	
-	
+
+
 	/* tool to create settings fields */
 	public function create_setting( $args = array() ) {
 
@@ -666,41 +679,41 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 
 		if ( $type == 'checkbox' )
 			$this->checkboxes[] = $id;
-				
+
 
 		add_settings_field( $id, $title, array( $this, 'display_setting' ), 'truwriter-options', $section, $field_args );
 
 	}
-	
-		
+
+
 	public function validate_settings( $input ) {
-		
+
 		if ( ! isset( $input['reset_theme'] ) ) {
 			$options = get_option( 'truwriter_options' );
-			
+
 			if ( $input['notify'] != $options['notify'] ) {
 				$input['notify'] = str_replace(' ', '', $input['notify']);
 			}
-	
+
 			foreach ( $this->checkboxes as $id ) {
 				if ( isset( $options[$id] ) && ! isset( $input[$id] ) )
 					unset( $options[$id] );
 			}
-			
+
 			// make sure the max file upload is integer and less than max possible
 			$max_upload_size = round(wp_max_upload_size() / 1000000);
 			$input['upload_max'] = min( intval( $input['upload_max'] ), $max_upload_size  );
 
-			
+
 			return $input;
 		}
-		
+
 		return false;
-		
-		
+
+
 	}
  }
- 
+
 $theme_options = new truwriter_Theme_Options();
 
 function truwriter_option( $option ) {

@@ -47,6 +47,11 @@ function truwriter_make_edit_link( $post_id, $post_title='') {
 	update_post_meta( $post_id, 'wEditKey', sha1( uniqid( $post_title, true ) ) );
 }
 
+function truwriter_get_edit_link( $post_id ) {
+	return ( get_bloginfo('url') . '/' . truwriter_get_write_page() . '/?wid=' . $post_id . '&tk=' . get_post_meta( $post_id, 'wEditKey', 1) );
+
+}
+
 function truwriter_mail_edit_link ( $wid, $mode = 'request' )  {
 
 	// for post id = $wid

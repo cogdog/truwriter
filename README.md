@@ -46,6 +46,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [BIOL 421 @ UNBC](https://biol421.opened.ca/) Insects, Fungi and Society (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [Community Performace Toolbox](http://communityperformancetoolbox.org/)
+* [EDUHACK Wall](https://wall-it.eduhack.eu/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College

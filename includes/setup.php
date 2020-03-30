@@ -24,7 +24,7 @@ function truwriter_setup () {
 
 		$page_data = array(
 			'post_title' 	=> 'Write? Write. Right.',
-			'post_content'	=> 'Here is the place to compose, preview, and hone your fine words. If you are building this site, maybe edit this page to customize this wee bit of text.',
+			'post_content'	=> 'Here is the place to compose,  , and hone your fine words. If you are building this site, maybe edit this page to customize this wee bit of text.',
 			'post_name'		=> 'write',
 			'post_status'	=> 'publish',
 			'post_type'		=> 'page',
@@ -188,6 +188,60 @@ function truwriter_comment_mod( $defaults ) {
 	return $defaults;
 }
 
+// possibly add writer email to comment notifications
+// add_filter( 'comment_moderation_recipients', 'truwriter_comment_notification_recipients', 15, 2 );
+add_filter( 'comment_notification_recipients', 'truwriter_comment_notification_recipients', 15, 2 );
+
+function truwriter_comment_notification_recipients( $emails, $comment_id ) {
+
+	 $comment = get_comment( $comment_id );
+
+	 // check if we should send notifications
+	 if ( truwriter_ok_to_notify( $comment ) ) {
+	 	// find post id from comment ID and fetch the email address to append to notifications
+		$emails[] = get_post_meta(  $comment->comment_post_ID, 'wEmail', 1 );
+	}
+ 	return ( $emails );
+}
+
+// modify the comment notification for content creators, non users dont need the wordpress comment mod stuff
+// h/t https://wordpress.stackexchange.com/a/170151/14945
+
+add_filter( 'comment_notification_text', 'truwriter_comment_notification_text', 20, 2 );
+
+function truwriter_comment_notification_text( $notify_message, $comment_id ){
+    // get the current comment
+    $comment = get_comment( $comment_id );
+
+    // change notification only for recipient who is the author of this an item (e.g. skip for admins)
+    if ( truwriter_ok_to_notify( $comment ) ) {
+    	// get post data
+    	$post = get_post( $comment->comment_post_ID );
+
+		// don't modify trackbacks or pingbacks
+		if ( '' == $comment->comment_type ){
+			// build the new message text
+			$notify_message  = sprintf( __( 'New comment on  "%s" published at "%s"' ), $post->post_title, get_bloginfo( 'name' ) ) . "\r\n\r\n----------------------------------------\r\n";
+			$notify_message .= sprintf( __('Author : %1$s'), $comment->comment_author ) . "\r\n";
+			$notify_message .= sprintf( __('E-mail : %s'), $comment->comment_author_email ) . "\r\n";
+			$notify_message .= sprintf( __('URL    : %s'), $comment->comment_author_url ) . "\r\n";
+			$notify_message .= sprintf( __('Comment Link: %s'), get_comment_link( $comment_id ) ) . "\r\n\r\n----------------------------------------\r\n";
+			$notify_message .= __('Comment: ') . "\r\n" . $comment->comment_content . "\r\n\r\n----------------------------------------\r\n\r\n";
+
+			$notify_message .= __('See all comments: ') . "\r\n";
+			$notify_message .= get_permalink($comment->comment_post_ID) . "#comments\r\n\r\n";
+
+		}
+	}
+
+	// return the notification text
+    return $notify_message;
+}
+
+function truwriter_ok_to_notify( $comment ) {
+	// check if theme options are set to use comments and that the post associated with comment has the notify flag activated
+	return ( truwriter_option('allow_comments') and get_post_meta( $comment->comment_post_ID, 'wCommentNotify', 1 ) );
+}
 
 # -----------------------------------------------------------------
 # Tiny-MCE mods
@@ -427,7 +481,7 @@ function my_default_image_size () {
 
 
 function  truwriter_show_drafts( $query ) {
-// show drafts oly for single previews
+// show drafts only for single previews
     if ( is_user_logged_in() || is_feed() || !is_single() )
         return;
 
@@ -513,23 +567,6 @@ function splot_login_logo_url_title() {
 # -----------------------------------------------------------------
 # Menu Setup
 # -----------------------------------------------------------------
-
-// checks to see if a menu location is used.
-function splot_is_menu_location_used( $location = 'primary' ) {
-
-	// get locations of all menus
-	$menulocations = get_nav_menu_locations();
-
-	// get all nav menus
-	$navmenus = wp_get_nav_menus();
-
-
-	// if either is empty we have no menus to use
-	if ( empty( $menulocations ) OR empty( $navmenus ) ) return false;
-
-	// othewise look for the menu location in the list
-	return in_array( $location , $menulocations);
-}
 
 // create a basic menu if one has not been define for primary
 function splot_default_menu() {

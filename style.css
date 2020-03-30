@@ -151,6 +151,7 @@ License URI:	http://www.gnu.org/licenses/gpl-2.0.htm
 	padding: 10px 10px 10px 10px;
 	margin: 10px;
 	cursor: default;
+	line-height: 1.5;
 }
 
 .notify-yellow

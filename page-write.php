@@ -6,7 +6,7 @@ Template Name: Writing Pad
 
 // set blanks
 $wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $w_thumb_status = $wAccess = '';
-$post_id = $revcount = 0;
+$post_id = $revcount = $wCommentNotify = 0;
 $is_published = $is_re_edit = $linkEmailed = $wAccessCodeOk = false;
 $errors = array();
 
@@ -60,14 +60,16 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 		$wHeaderImage_id =			$_POST['wHeaderImage'];
  		$linkEmailed = 				$_POST['linkEmailed'];
  		$post_id = 					$_POST['post_id'];
- 		$wCats = 					( isset ($_POST['wCats'] ) ) ? $_POST['wCats'] : array();
- 		$wLicense = 				( isset ($_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
+ 		$wCats = 					( isset ( $_POST['wCats'] ) ) ? $_POST['wCats'] : array();
+ 		$wLicense = 				( isset ( $_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
  		$wHeaderImageCaption = 		sanitize_text_field(  $_POST['wHeaderImageCaption']  );
  		$revcount =					$_POST['revcount'] + 1;
+ 		$wCommentNotify = 			( isset ( $_POST['wCommentNotify'] ) ) ? 1 : 0;
 
 
 		// upload header image if we got one
 		if ($_FILES) {
+
 			foreach ( $_FILES as $file => $array ) {
 				$newupload = truwriter_insert_attachment( $file, $post_id );
 				if ( $newupload ) {
@@ -97,8 +99,8 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
  		if ( truwriter_option('require_extra_info') == 1  AND $wNotes == '' ) $errors[] = '<strong>Extra Information Missing</strong> - please provide the requested extra information.';
 
-		// test for email only if enabled in options
-		if ( truwriter_option('show_email') )   {
+		// test for email only if enabled in options, first test is when email is optional
+		if ( truwriter_option('show_email') == '1' )   {
 
 			// check first for valid email address, blank is ok
 			if ( is_email( $wEmail ) OR empty( $wEmail ) ) {
@@ -112,7 +114,28 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// bad email, sam.
 				$errors[] = '<strong>Invalid Email Address</strong> - the email address entered <code>' . $wEmail . '</code> is not valid. Pleae check and try again. To skip entering an email address, make sure the field is empty. ';
 			}
+
+		} elseif ( truwriter_option('show_email') == '2' )  {
+			// now test for case where email is required
+
+			if (empty( $wEmail ) ) {
+				// ding ding, no email
+				$errors[] = '<strong>Email Address Missing</strong> - an email address is required for this site. Please enter one.';
+
+			} elseif ( is_email( $wEmail ) ) {
+
+				// if email is good then check if we are limiting to domains
+				if ( !empty(truwriter_option('email_domains'))  AND !truwriter_allowed_email_domain( $wEmail ) ) {
+					$errors[] = '<strong>Email Address Not Allowed</strong> - The email address you entered <code>' . $wEmail . '</code> is not from an domain accepted in this site. This site requests that addresses are ones with domains <code>' .  truwriter_option('email_domains') . '</code>. ';
+				}
+
+			} else {
+				// bad email, sam.
+				$errors[] = '<strong>Invalid Email Address</strong> - the email address entered <code>' . $wEmail . '</code> is not valid. Pleae check and try again.';
+			}
+
 		}
+
 
  		if ( count($errors) > 0 ) {
  			// form errors, build feedback string to display the errors
@@ -153,9 +176,11 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 					if ( $wEmail != ''  ) {
 						$feedback_msg .=  'We will notify you by email at <strong>' . $wEmail . '</strong> when it has been published.';
+					} else {
+						$feedback_msg .=  ' You might want to save this link <code>' .  truwriter_get_edit_link( $post_id ) . '</code> in a safe place as it allows you to edit your writing at a later time. ';
 					}
 
-					$feedback_msg .= ' Now you can <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
+					$feedback_msg .= '<br /><br />Now you can <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 
 					// set up admin email
 					$subject = 'Review newly submitted writing at ' . get_bloginfo();
@@ -168,7 +193,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					$box_style = '<div class="notify notify-blue"><span class="symbol icon-tick"></span> ';
 
 					// prep message to writer
-					$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can now exit the writing tool to  <a href="'.  get_permalink( $post_id )   . '" >view it now</a> or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
+					$feedback_msg = 'Your writing <strong>"' . $wTitle . '"</strong> has been published to <strong>' . get_bloginfo(). '</strong>. You can <a href="'.  get_permalink( $post_id )   . '" >view it now</a> or <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 
 					// set up admin email
 					$subject = 'Recently published writing at ' . get_bloginfo();
@@ -177,6 +202,8 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 					// if writer provided email address, send instructions to use link to edit if not done before
 					if ( $wEmail != '' and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, truwriter_option('pub_status') );
+
+					$feedback_msg .=  ' You might want to save this link <code>' . truwriter_get_edit_link( $post_id )  . '</code> in a safe place as it allows you to edit your writing at a later time. ';
 
 				}
 
@@ -241,8 +268,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// store notes for editor
 				if ( $wNotes ) add_post_meta($post_id, 'wEditorNotes', $wNotes);
 
-				// store notes for editor
+				// store footer
 				if ( $wFooter ) add_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
+
+				// track the comment notification preference
+				if ( truwriter_option( 'allow_comments' )  ) add_post_meta($post_id, 'wCommentNotify',  $wCommentNotify);
+
 
 				// user selected license
 				if ( truwriter_option( 'use_cc' ) != 'none' ) add_post_meta( $post_id,  'wLicense', $wLicense);
@@ -250,13 +281,17 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// add a token for editing
 				truwriter_make_edit_link( $post_id,  $wTitle );
 
-				$feedback_msg = 'We have saved this first version of your writing. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true&ispre=1' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
+				$feedback_msg = 'We have saved this version of your writing. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true&ispre=1' . '" target="_blank">preview it now</a> (opens in a new window), or make edits and save again. ';
 
 				// if user provided email address, send instructions to use link to edit
 				if ( $wEmail != '' ) {
 					truwriter_mail_edit_link( $post_id, 'draft' );
 					$linkEmailed = true;
 					$feedback_msg .= ' Since you provided an email address, a message has been sent to <strong>' . $wEmail . '</strong>  with a special link that can be used at any time later to edit and publish your writing. ';
+
+					if  ( truwriter_option( 'allow_comments' ) AND $wCommentNotify ) {
+						$feedback_msg .= 'Also, you will receive email notifications of any comments published on your writing .';
+					}
 				}
 
 			 } else { // the post exists, let's update
@@ -291,7 +326,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true&ispre=1' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, or if you are ready, submit it for publishing. ';
 
-					if (  $wEmail != '' )  $feedback_msg .= ' Since you provided an email address, you should have a message that provides instructions on how to return and make edits in a later session.';
+					if (  $wEmail != '' )  $feedback_msg .= ' Since you provided an email address, you should receive a message that provides instructions on how to return and make edits in a later session.';
 
 				} // isset( $_POST['wPublish'] )
 
@@ -340,6 +375,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 				// store any end notes
 				if ( $wFooter ) update_post_meta($post_id, 'wFooter', nl2br( $wFooter ) );
+
+				// track the comment notification preference
+				if ( truwriter_option( 'allow_comments' )  ) update_post_meta( $post_id, 'wCommentNotify',  $wCommentNotify );
 
 			} // post_id = 0
 
@@ -417,6 +455,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
 			// license
 			$wLicense = get_post_meta( $wid, 'wLicense', 1 );
+
+			// comment notification preference
+			$wCommentNotify = get_post_meta( $wid, 'wCommentNotify', 1 );
 
 			// load the tags
 			$wTags = implode(', ', wp_get_post_tags( $wid, array( 'fields' => 'names' ) ) );
@@ -565,8 +606,6 @@ get_header('write');
 						);
 
 						wp_editor(  stripslashes( $wText ), 'wText', $settings );
-
-
 						?>
 
 
@@ -661,7 +700,8 @@ get_header('write');
 
 				<?php if (truwriter_option('show_email') ):?>
 				<fieldset id="theEmail">
-					<label for="wEmail"><?php truwriter_form_item_email() ?> (optional)</label><br />
+
+					<label for="wEmail"><?php truwriter_form_item_email() ?> (<?php echo ( truwriter_option('show_email') == '2' ) ? 'required' : 'optional'?>) </label><br />
 					<p><?php truwriter_form_item_email_prompt() ?>
 					<?php
 						if  ( !empty( truwriter_option('email_domains') ) ) {
@@ -670,7 +710,16 @@ get_header('write');
 					?>
 
 					</p>
-					<input type="text" name="wEmail" id="wTitle" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" />
+					<input type="text" name="wEmail" id="wEmail" class="writerfield"  value="<?php echo $wEmail; ?>" autocomplete="on" />
+
+					<?php if (truwriter_option('allow_comments') ):?>
+
+						<label for="wCommentNotify" style="display:none;">Comment Notification</label>
+
+						<?php $checked = ( $wCommentNotify ) ? ' checked="checked"' : '';?>
+						<input type="checkbox" name="wCommentNotify" value="1"<?php echo $checked?>>  Send  notifications of comments to this address
+					<?php endif?>
+
 				</fieldset>
 
 				<?php endif?>
