@@ -6,12 +6,18 @@ Template Name: Writing Pad
 
 // set blanks
 $wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $w_thumb_status = $wAccess = '';
-$post_id = $revcount = $wCommentNotify = 0;
+$post_id = $revcount = $wCommentNotify = $wHeaderImage_id = 0;
 $is_published = $is_re_edit = $linkEmailed = $wAccessCodeOk = false;
 $errors = array();
 
 // get the parent category for published topics
 $published_cat_id = get_cat_ID( 'Published' );
+
+
+// check for defaults, versions of themes before these options added will not have them
+$use_header_image = ( truwriter_option('use_header_image')  ) ? truwriter_option('use_header_image') : 2;
+
+$use_header_image_caption = ( truwriter_option('use_header_image_caption')  ) ? truwriter_option('use_header_image_caption') : 2;
 
 
 // see if we have an incoming clear the code form variable only on writing form
@@ -57,12 +63,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
  		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
 
-		$wHeaderImage_id =			$_POST['wHeaderImage'];
+		$wHeaderImage_id =			( isset ( $_POST['wHeaderImage'] ) ) ? $_POST['wHeaderImage'] : 0;
  		$linkEmailed = 				$_POST['linkEmailed'];
  		$post_id = 					$_POST['post_id'];
  		$wCats = 					( isset ( $_POST['wCats'] ) ) ? $_POST['wCats'] : array();
  		$wLicense = 				( isset ( $_POST['wLicense'] ) ) ? $_POST['wLicense'] : '';
- 		$wHeaderImageCaption = 		sanitize_text_field(  $_POST['wHeaderImageCaption']  );
+ 		$wHeaderImageCaption = 		( isset ( $_POST['wHeaderImageCaption'] ) ) ? sanitize_text_field(  $_POST['wHeaderImageCaption']  ) : '';
+
  		$revcount =					$_POST['revcount'] + 1;
  		$wCommentNotify = 			( isset ( $_POST['wCommentNotify'] ) ) ? 1 : 0;
 
@@ -95,7 +102,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
  		if ( truwriter_word_count( $wText ) < truwriter_option('min_words') ) $errors[] = '<strong>Missing or Insufficient Text</strong> - This site asks that you write at least ' . truwriter_option('min_words') . ' words.';
 
- 		if ( $wHeaderImageCaption == '' ) $errors[] = '<strong>Header Image Caption Missing</strong> - please provide a description or an attribution for your header image. We would like to show that it is either your own image or one that is licensed for re-use.';
+ 		if ( $use_header_image_caption == 2 AND $wHeaderImage_id AND  $wHeaderImageCaption == '' ) $errors[] = '<strong>Header Image Caption Missing</strong> - please provide a description or an attribution for your header image. We would like to show that it is either your own image or one that is licensed for re-use.';
 
  		if ( truwriter_option('require_extra_info') == 1  AND $wNotes == '' ) $errors[] = '<strong>Extra Information Missing</strong> - please provide the requested extra information.';
 
@@ -248,22 +255,28 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				wp_set_post_tags( $post_id, $wTags);
 
 				// set featured image
-				set_post_thumbnail( $post_id, $wHeaderImage_id);
+				if ( $use_header_image and $wHeaderImage_id) {
+					set_post_thumbnail( $post_id, $wHeaderImage_id);
+				}
 
 				// Add caption to featured image if there is none, this is
 				// stored as post_excerpt for attachment entry in posts table
 
-				if ( !get_attachment_caption_by_id( $wHeaderImage_id ) ) {
-					$i_information = array(
-						'ID' => $wHeaderImage_id,
-						'post_excerpt' => $wHeaderImageCaption
-					);
+				if ( $use_header_image_caption ) {
+					if ( !get_attachment_caption_by_id( $wHeaderImage_id ) ) {
+						$i_information = array(
+							'ID' => $wHeaderImage_id,
+							'post_excerpt' => $wHeaderImageCaption
+						);
 
-					wp_update_post( $i_information );
+						wp_update_post( $i_information );
+					}
+
+					// store the header image caption as post metadata
+					add_post_meta($post_id, 'wHeaderCaption', $wHeaderImageCaption);
 				}
 
-				// store the header image caption as post metadata
-				add_post_meta($post_id, 'wHeaderCaption', $wHeaderImageCaption);
+
 
 				// store notes for editor
 				if ( $wNotes ) add_post_meta($post_id, 'wEditorNotes', $wNotes);
@@ -342,20 +355,23 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// update the tags
 				wp_set_post_tags( $post_id, $wTags);
 
-				// update featured image
-				set_post_thumbnail( $post_id, $wHeaderImage_id);
+				// set featured image
+				if ( $use_header_image and $wHeaderImage_id) {
+					set_post_thumbnail( $post_id, $wHeaderImage_id);
+				}
 
 				// Update caption to featured image if it changed
 				// stored as post_excerpt for attachment entry in posts table
+				if ( $use_header_image_caption ) {
+					if ( get_attachment_caption_by_id( $wHeaderImage_id ) != $wHeaderImageCaption  ) {
+						$i_information = array(
+							'ID' => $wHeaderImage_id,
+							'post_status' => 'draft',
+							'post_excerpt' => $wHeaderImageCaption
+						);
 
-				if ( get_attachment_caption_by_id( $wHeaderImage_id ) != $wHeaderImageCaption  ) {
-					$i_information = array(
-						'ID' => $wHeaderImage_id,
-						'post_status' => 'draft',
-						'post_excerpt' => $wHeaderImageCaption
-					);
-
-					wp_update_post( $i_information );
+						wp_update_post( $i_information );
+					}
 				}
 
 				// store the author's name
@@ -392,8 +408,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 	$wCats = array( truwriter_option('def_cat')); // preload default category
 
 	// set default image
-	$wHeaderImage_id = truwriter_option('defheaderimg');
-	$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
+	if ( $use_header_image == 2  ) {
+		$wHeaderImage_id = truwriter_option('defheaderimg');
+		$wHeaderImageCaption = get_attachment_caption_by_id( $wHeaderImage_id );
+
+	} elseif ( $use_header_image == 1  ) {
+		$wHeaderImage_id = 0;
+	}
 
 	//default license if used
 	$wLicense = truwriter_option( 'cc_site' );
@@ -438,7 +459,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			$wAuthor =  get_post_meta( $wid, 'wAuthor', 1 );
 			$wEmail =  get_post_meta( $wid, 'wEmail', 1 );
 			$wText = $writing->post_content;
-			$wHeaderImage_id = get_post_thumbnail_id( $wid);
+			$wHeaderImage_id = get_post_thumbnail_id( $wid) ;
 			$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
 			$post_status = get_post_status( $wid );
 
@@ -580,7 +601,7 @@ get_header('write');
 		<input name="wAccessCodeOk" type="hidden" value="true" />
 
 				<fieldset id="theTitle">
-					<label for="wTitle"><?php truwriter_form_item_title() ?></label><br />
+					<label for="wTitle"><?php truwriter_form_item_title() ?> (required)</label><br />
 					<p><?php truwriter_form_item_title_prompt()?></p>
 					<input type="text" name="wTitle" id="wTitle" class="required writerfield" value="<?php echo $wTitle; ?>"  />
 				</fieldset>
@@ -620,8 +641,11 @@ get_header('write');
 				</fieldset>
 				<?php endif?>
 
+
+				<?php if ($use_header_image):?>
+
 				<fieldset id="theHeaderImage">
-					<label for="headerImage"><?php truwriter_form_item_header_image() ?></label>
+					<label for="headerImage"><?php truwriter_form_item_header_image() ?> (<?php echo ( $use_header_image == '2' ) ? 'required' : 'optional'?>)</label>
 
 
 					<div class="uploader">
@@ -630,11 +654,18 @@ get_header('write');
 						<?php
 
 						if ($wHeaderImage_id) {
+							// header image identified
 							$defthumb = wp_get_attachment_image_src( $wHeaderImage_id, 'thumbnail' );
-						} else {
+						} else if ($use_header_image == 2  ) {
+							// header image required, use theme default
 							$defthumb = [];
 							$defthumb[] = get_stylesheet_directory_uri() . '/images/default-header-thumb.jpg';
 							$wHeaderImageCaption = 'flickr photo by Lívia Cristina https://flickr.com/photos/liviacristinalc/3402221680 shared under a Creative Commons (BY-NC-ND) license';
+						} else {
+							// header image optional, use placeholder
+							$defthumb = [];
+							$defthumb[] = get_stylesheet_directory_uri() . '/images/optional-header-thumb.jpg';
+							$wHeaderImageCaption = '';
 						}
 
 						?>
@@ -652,11 +683,15 @@ get_header('write');
 							<p id="dropmessage">Drag file or click to select file to upload</p>
 						</div>
 
-						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?></label>
+
+						<?php if ( $use_header_image_caption ):?>
+						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?> (<?php echo ( $use_header_image_caption == '2' ) ? 'required' : 'optional'?>)</label>
 						<p><?php truwriter_form_item_header_caption_prompt() ?></p>
 						<input type="text" name="wHeaderImageCaption" class="writerfield" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" />
+						<?php endif?>
 
 				</fieldset>
+				<?php endif?>
 
 
 				<?php if (truwriter_option('show_cats') ):?>

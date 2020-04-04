@@ -231,6 +231,8 @@ Enter the **Default Writing Prompt** field to pre-populate the field that visito
 
 You can also set a minimum number of words required for publishing.
 
+Most uses will ask visitors to upload an image to use as a header/featured image. Using the option for **Allow Uploads of Header Images** this can be required (default), optional, or not used. If heade images are not used, all archive/front views will have a simple grey background instead of an image. 
+
 Under **Default Header Image** click **Set/Change Image** to open the Wordpress media editor to choose a default media header image. Drop an image that you wish to be used as a default one if a writer does not include one of their own. The `640 x 300` dimensions are a minimum size, and represent a reasonable aspect ratio for a header image. Larger is better; and the image will be cropped along the middle of the image.
 
 You can now also set a limit for the file size upload.
@@ -245,10 +247,9 @@ Once selected you will see a preview of your default image. Isn't Felix a nice l
 
 Note that you can set a maximum size for uploaded images.
 
+Also, you can now use **Use caption field for uploaded header images** to make captions for attribution of images required (default), optional, or not used on the form.
 
 ![](images/category-tags.jpg)
-
-
 
 Disable **Show the categories menu on writing form and display** if you do not want writers or readers to use/see categories.
 
@@ -351,6 +352,8 @@ If you want to customize/re-arrange the buttons and controls on the rich text ed
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 ## Relatively Cool New Features & Updates
+
+**Header Image and Caption Options** New theme options to make thes fields required (default), optional, or not used. Sometimes people don't want images atop their writing or used on archive listings.
 
 **Inline Image Uploader** The writing form has a new button for inserting images in the body of text (previously done via the secret login) now all done without using the WordPress media library. Images can be selected or drag/dropped to the control, and are uploaded behind the scenes to the site. Also the Customizer now has controls for changing the colors of the Writing Form background colors and buttons, even for making the buttons *round*. Woah, Neo. Does anyone read this?
 

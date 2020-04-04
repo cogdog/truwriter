@@ -253,6 +253,19 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'section' => 'general'
 		);
 
+		$this->settings['use_header_image'] = array(
+			'section' => 'general',
+			'title'   => __( 'Allow uploads of header images'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => '2',
+			'choices' => array (
+							'0' => 'No, do not use uploaded images',
+							'1' => 'Yes, but make it optional',
+							'2' => 'Yes, and make it required'
+					)
+		);
+
 
 		$this->settings['defheaderimg'] = array(
 			'title'   => __( 'Default Header Image' ),
@@ -268,6 +281,20 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 			'std'     => $max_upload_size,
 			'type'    => 'text',
 			'section' => 'general'
+		);
+
+
+		$this->settings['use_header_image_caption'] = array(
+			'section' => 'general',
+			'title'   => __( 'Use caption field for uploaded header images'),
+			'desc'    => 'Mostly used for providing attribution for images',
+			'type'    => 'radio',
+			'std'     => '2',
+			'choices' => array (
+							'0' => 'No, do not use image captions',
+							'1' => 'Yes, but make it optional',
+							'2' => 'Yes, and make it required'
+					)
 		);
 
 		$this->settings['show_cats'] = array(
@@ -541,9 +568,6 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 				break;
 
 			case 'radio':
-				if ( $desc != '' )
-					echo '<span class="description">' . $desc . '</span><br /><br />';
-
 				$i = 0;
 				foreach ( $choices as $value => $label ) {
 					echo '<input class="radio' . $field_class . '" type="radio" name="truwriter_options[' . $id . ']" id="' . $id . $i . '" value="' . esc_attr( $value ) . '" ' . checked( $options[$id], $value, false ) . '> <label for="' . $id . $i . '">' . $label . '</label>';
@@ -551,6 +575,9 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 						echo '<br />';
 					$i++;
 				}
+								if ( $desc != '' )
+					echo '<span class="description">' . $desc . '</span>';
+
 				break;
 
 			case 'textarea':
