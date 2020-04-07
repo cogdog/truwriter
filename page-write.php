@@ -17,7 +17,7 @@ $published_cat_id = get_cat_ID( 'Published' );
 // check for defaults, versions of themes before these options added will not have them
 $use_header_image = ( truwriter_option('use_header_image')  ) ? truwriter_option('use_header_image') : 2;
 
-$use_header_image_caption = ( truwriter_option('use_header_image_caption')  ) ? truwriter_option('use_header_image_caption') : 2;
+$use_header_image_caption =  truwriter_option('use_header_image_caption');
 
 
 // see if we have an incoming clear the code form variable only on writing form
@@ -642,7 +642,7 @@ get_header('write');
 				<?php endif?>
 
 
-				<?php if ($use_header_image):?>
+				<?php if ($use_header_image > 0):?>
 
 				<fieldset id="theHeaderImage">
 					<label for="headerImage"><?php truwriter_form_item_header_image() ?> (<?php echo ( $use_header_image == '2' ) ? 'required' : 'optional'?>)</label>
@@ -683,9 +683,31 @@ get_header('write');
 							<p id="dropmessage">Drag file or click to select file to upload</p>
 						</div>
 
+						<?php if ( $use_header_image_caption  ):?>
 
-						<?php if ( $use_header_image_caption ):?>
-						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?> (<?php echo ( $use_header_image_caption == '2' ) ? 'required' : 'optional'?>)</label>
+						<label for="wHeaderImageCaption"><?php truwriter_form_item_header_caption() ?>
+
+						(<?php
+							if (( $use_header_image_caption == '2' ) ) {
+								//captions are required
+
+								if ( $use_header_image == '2') {
+									// if header images required
+									echo 'required';
+								} else {
+									// if header images optional
+									echo 'required if header image uploaded';
+								}
+							} else {
+								// captions optional
+								echo 'optional';
+							}
+
+
+						?>)
+						</label>
+
+
 						<p><?php truwriter_form_item_header_caption_prompt() ?></p>
 						<input type="text" name="wHeaderImageCaption" class="writerfield" id="wHeaderImageCaption" value="<?php echo htmlentities( stripslashes( $wHeaderImageCaption ), ENT_QUOTES); ?>" />
 						<?php endif?>
