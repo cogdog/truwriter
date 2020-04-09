@@ -51,7 +51,8 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College
 * [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
-* [#femedtech OER19 Open Space](http://femedtech.net/)
+* [#femedtech Open Space](http://femedtech.net/)
+* [Grinnellians in the Time of Coronavirus](https://resilience.sites.grinnell.edu/) Grinnell College
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Learning on/with the Open Web](http://conf.owlteh.org/contributions/) uses TRU Writer for collecting conference event session submissions
