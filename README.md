@@ -45,6 +45,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [NRES 701 @ UNBC](https://nres701.opened.ca/) Natural Resources and Evironmental Studies Graduate Colloquia (University of Northern British Columbia)
 * [BIOL 421 @ UNBC](https://biol421.opened.ca/) Insects, Fungi and Society (University of Northern British Columbia)
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
+* [COVID-19 And LCC: Our Story in Words](https://livetogether.openlcc.net/covid19stories/) Lansing Community College
 * [Community Performace Toolbox](http://communityperformancetoolbox.org/)
 * [EDUHACK Wall](https://wall-it.eduhack.eu/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
@@ -67,6 +68,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
 * [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
 * [Stories & Tales](http://mkr12.coventry.domains/tales) English Language and Culture Summer School at  Coventry University
+* [Student Interdisciplinary Education Festival (IDE)](https://idefestival.opened.ca/) Student presentations for Camosun College School of Health & Human Services virtual conference
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
