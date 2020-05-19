@@ -205,7 +205,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					// set up admin email
 					$subject = 'Recently published writing at ' . get_bloginfo();
 
-					$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. site_url() . '/?p=' . $post_id . '&preview=true&ispre=1' . '">view it now</a>,  review / edit if needed, or just enjoy the feeling of being published on your site.';
+					$message = '<strong>"' . $wTitle . '"</strong> written by <strong>' . $wAuthor . '</strong>  has been published to ' . get_bloginfo() . '. You can <a href="'. get_permalink( $post_id ) . '">view it now</a>,  review / edit if needed, or just enjoy the feeling of being published on your site.';
 
 					// if writer provided email address, send instructions to use link to edit if not done before
 					if ( $wEmail != '' and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, truwriter_option('pub_status') );
@@ -463,6 +463,8 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
 			$post_status = get_post_status( $wid );
 
+			$linkEmailed = true; // if we got this far....
+
 			// get categories
 			$categories = get_the_category( $wid);
 			foreach ( $categories as $category ) {
@@ -597,8 +599,9 @@ get_header('write');
 
 		<input name="post_id" type="hidden" value="<?php echo $post_id?>" />
 		<input name="revcount" type="hidden" value="<?php echo $revcount?>" />
-		<input name="linkEmailed" type="hidden" value="<?php echo $linkEmailed?>" />
 		<input name="wAccessCodeOk" type="hidden" value="true" />
+		<input name="linkEmailed" type="hidden" value="<?php echo $linkEmailed?>" />
+
 
 				<fieldset id="theTitle">
 					<label for="wTitle"><?php truwriter_form_item_title() ?> (required)</label><br />
