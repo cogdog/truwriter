@@ -57,6 +57,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Learning on/with the Open Web](http://conf.owlteh.org/contributions/) uses TRU Writer for collecting conference event session submissions
+* [Learning Parallism](https://edci335pod2parallelism.opened.ca/) A Interactive Learning Resource group project for EDCI 335 (University of Victoria)
 * [L21C Lawyering in the 21st Century, TRU](http://l21c.trubox.ca/)  Thompson Rivers University Law course 
 * [My TRU Writer](http://bsolivan.wescreates.wesleyan.edu/MyTruWriter/) Wesleyan University
 * [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
