@@ -120,7 +120,7 @@ Using this theme requires a self-hosted--or institutionally hosted (lucky you)--
 
 The TRU Writer is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
 
-You can download a ZIP file of this theme via the green **Code*" button above (the Download Zip option) or directly `truwriter-master.zip`. 
+You can download a ZIP file of this theme via the green **Code*" button above (use the Download Zip option). 
 
 The zip can be uploaded directly to your site via **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. If you run into size upload limits or just prefer going old school like me, unzip the package and ftp the entire folder into your `wp-content/themes` directory.
 
