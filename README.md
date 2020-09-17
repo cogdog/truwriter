@@ -55,6 +55,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [#femedtech Open Space](http://femedtech.net/)
 * [Grinnellians in the Time of Coronavirus](https://resilience.sites.grinnell.edu/) Grinnell College
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
+* [Keene State College Teaching Stories](http://cangialosi.kscopen.org/writer/)
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
 * [Learning on/with the Open Web](http://conf.owlteh.org/contributions/) uses TRU Writer for collecting conference event session submissions
 * [Learning Parallism](https://edci335pod2parallelism.opened.ca/) A Interactive Learning Resource group project for EDCI 335 (University of Victoria)
