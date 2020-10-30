@@ -75,6 +75,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
+* [What Works: Remote Teaching and Learning at Kenyon College](https://whatworks.kenyoncip.org/)
 * [When I Needed Help](http://web.archive.org/web/20170925000738/http://whenineededhelp.com/) (WayBack Machine archive)
 
 And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site or let me know via twitter [@cogdog](http://twitter.com/cogdog).
