@@ -5,7 +5,7 @@ Template Name: Writing Pad
 
 
 // set blanks
-$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $w_thumb_status = $wAccess = '';
+$wTitle = $wEmail = $wFooter = $wTags = $wNotes = $wLicense = $w_thumb_status = $wAccess = $wAlt = '';
 $post_id = $revcount = $wCommentNotify = $wHeaderImage_id = 0;
 $is_published = $is_re_edit = $linkEmailed = $wAccessCodeOk = false;
 $errors = array();
@@ -72,6 +72,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 
  		$revcount =					$_POST['revcount'] + 1;
  		$wCommentNotify = 			( isset ( $_POST['wCommentNotify'] ) ) ? 1 : 0;
+ 		$wAlt = 					( isset ($_POST['wAlt'] ) ) ? $_POST['wAlt'] : '';
 
 
 		// upload header image if we got one
@@ -257,6 +258,9 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// set featured image
 				if ( $use_header_image and $wHeaderImage_id) {
 					set_post_thumbnail( $post_id, $wHeaderImage_id);
+
+					// update featured image alt
+					update_post_meta($wHeaderImage_id, '_wp_attachment_image_alt', $wAlt);
 				}
 
 				// Add caption to featured image if there is none, this is
@@ -358,6 +362,10 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 				// set featured image
 				if ( $use_header_image and $wHeaderImage_id) {
 					set_post_thumbnail( $post_id, $wHeaderImage_id);
+
+					// update featured image alt
+					update_post_meta($wHeaderImage_id, '_wp_attachment_image_alt', $wAlt);
+
 				}
 
 				// Update caption to featured image if it changed
@@ -459,7 +467,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 			$wAuthor =  get_post_meta( $wid, 'wAuthor', 1 );
 			$wEmail =  get_post_meta( $wid, 'wEmail', 1 );
 			$wText = $writing->post_content;
+
 			$wHeaderImage_id = get_post_thumbnail_id( $wid) ;
+
+			// get image alt tag
+			$wAlt = get_post_meta($wHeaderImage_id, '_wp_attachment_image_alt', true);
+
 			$box_style = '<div class="notify notify-green"><span class="symbol icon-tick"></span> ';
 			$post_status = get_post_status( $wid );
 
@@ -650,7 +663,6 @@ get_header('write');
 				<fieldset id="theHeaderImage">
 					<label for="headerImage"><?php truwriter_form_item_header_image() ?> (<?php echo ( $use_header_image == '2' ) ? 'required' : 'optional'?>)</label>
 
-
 					<div class="uploader">
 						<input id="wHeaderImage" name="wHeaderImage" type="hidden" value="<?php echo $wHeaderImage_id?>" />
 
@@ -685,6 +697,11 @@ get_header('write');
 							<input type="file" accept="image/*" name="wUploadImage" id="wUploadImage">
 							<p id="dropmessage">Drag file or click to select file to upload</p>
 						</div>
+
+
+						<label for="wAlt">Alternative Description for Image (Recommended)</label><br />
+						<p>To provide better web accessibility and search results, enter a short alternative text that can be substituted for this image.</p>
+						<input type="text" name="wAlt" id="wAlt" value="<?php echo htmlspecialchars(stripslashes($wAlt));?>" />
 
 						<?php if ( $use_header_image_caption  ):?>
 

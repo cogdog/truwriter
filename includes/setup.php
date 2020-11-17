@@ -174,7 +174,7 @@ function truwriter_write_director() {
    }
 }
 
-// prevent posts from being saved to /random (reserved for random post generator
+// prevent posts from being saved to /random (reserved for random post generator)
 
 add_action( 'save_post', 'splot_save_post_random_check' );
 
