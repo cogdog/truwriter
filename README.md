@@ -69,6 +69,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
 * [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
+* [Open Experiments in SDGs](http://sdgs4learning.org/) activity by Jenni Hayman as "a space for sharing open educational resources (OER) related to the United Nations Sustainable Development Goals (SDGs)" 
 * [Stories & Tales](http://mkr12.coventry.domains/tales) English Language and Culture Summer School at  Coventry University
 * [Student Interdisciplinary Education Festival (IDE)](https://idefestival.opened.ca/) Student presentations for Camosun College School of Health & Human Services virtual conference
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
@@ -359,6 +360,8 @@ If you want to customize/re-arrange the buttons and controls on the rich text ed
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
 
 ## Relatively Cool New Features & Updates
+
+**Alternative Text For Header Images** Optional field added that should be used! Provide an alternative text for an image for better web accessibility.
 
 **Header Image and Caption Options** New theme options to make thes fields required (default), optional, or not used. Sometimes people don't want images atop their writing or used on archive listings.
 
