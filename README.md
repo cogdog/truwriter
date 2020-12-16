@@ -63,6 +63,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [My TRU Writer](http://bsolivan.wescreates.wesleyan.edu/MyTruWriter/) Wesleyan University
 * [OER In Other Languages](https://oloer.opened.ca/) Tannis Morgan
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
+* [Open Education Challenge Collection](https://oecollection.opened.ca/) Responses to the [BCcampus OE Challenge Series](https://oechallenge.opened.ca/)
 * [OpenMed Project Works Showcase](https://showcase.openmedproject.eu/)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Refugee Learning Stories](http://refugeelearningstories.org/)
@@ -78,6 +79,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
 * [What Works: Remote Teaching and Learning at Kenyon College](https://whatworks.kenyoncip.org/)
 * [When I Needed Help](http://web.archive.org/web/20170925000738/http://whenineededhelp.com/) (WayBack Machine archive)
+* [Writing on the Web Together](http://truwriter.uwbopenweb.com/)
 
 And if you make a TRU Writer site, please please pretty please fork this repo to edit this Readme with a link to your new site or let me know via twitter [@cogdog](http://twitter.com/cogdog).
 
