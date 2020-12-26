@@ -341,7 +341,7 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					if ( isset( $wEmail ) and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, 'draft' );
 
 
-					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true&ispre=1' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, or if you are ready, submit it for publishing. ';
+					$feedback_msg = 'Your edits have been updated and are still saved as a draft mode. You can <a href="'. site_url() . '/?p=' . $post_id . 'preview=true&ispre=1' . '"  target="_blank">preview it now</a> (opens in a new window), or make edits, review again, and if you are ready, submit it for publishing. ';
 
 					if (  $wEmail != '' )  $feedback_msg .= ' Since you provided an email address, you should receive a message that provides instructions on how to return and make edits in a later session.';
 
@@ -759,7 +759,6 @@ get_header('write');
 					}
 
 					?>
-
 				</fieldset>
 
 				<?php endif?>

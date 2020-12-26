@@ -174,7 +174,7 @@ function truwriter_write_director() {
    }
 }
 
-// prevent posts from being saved to /random (reserved for random post generator)
+// prevent posts from being saved to /random (reserved for random post generator
 
 add_action( 'save_post', 'splot_save_post_random_check' );
 
@@ -183,8 +183,6 @@ function splot_save_post_random_check( $post_id ) {
 
     $new_post = get_post( $post_id );
     if ( ! wp_is_post_revision( $post_id ) and  $new_post->post_name == 'random' ) {
-
-
         // unhook this function to prevent infinite looping
         remove_action( 'save_post', 'splot_save_post_random_check' );
 
@@ -209,11 +207,14 @@ function splot_save_post_random_check( $post_id ) {
 add_filter('comment_form_defaults', 'truwriter_comment_mod');
 
 function truwriter_comment_mod( $defaults ) {
-	$defaults['title_reply'] = 'Provide Feedback';
+	$defaults['title_reply'] = get_truwriter_comment_title();
+	$defaults['title_reply_after'] = '</h3>' . get_truwriter_comment_extra_intro();
 	$defaults['logged_in_as'] = '';
 	$defaults['title_reply_to'] = 'Provide Feedback for %s';
+	$defaults['label_submit'] = get_truwriter_comment_button_label();
 	return $defaults;
 }
+
 
 // possibly add writer email to comment notifications
 // add_filter( 'comment_moderation_recipients', 'truwriter_comment_notification_recipients', 15, 2 );
@@ -349,7 +350,7 @@ function truwriter_tinymce_2_buttons( $buttons)  {
  }
 
 
-// this is the handler used in the tiny_mce editor to manage iage upload
+// this is the handler used in the tiny_mce editor to manage image upload
 add_action( 'wp_ajax_nopriv_truwriter_upload_action', 'truwriter_upload_action' ); //allow on front-end
 add_action( 'wp_ajax_truwriter_upload_action', 'truwriter_upload_action' );
 
@@ -438,14 +439,14 @@ function add_truwriter_scripts() {
 
  	if ( is_page( truwriter_get_write_page() ) ) { // use on just our form page
 
-		 // add media scripts if we are on our maker page and not an admin
-		 // after http://wordpress.stackexchange.com/a/116489/14945
+		if (! is_admin() ) {
+			// add media scripts if we are on our collect page and not an admin
+		 	// after http://wordpress.stackexchange.com/a/116489/14945
+			wp_enqueue_media();
 
-  		if (! is_admin() ) wp_enqueue_media();
-
-
-		// Build in tag auto complete script
-   		wp_enqueue_script( 'suggest' );
+			// Build in tag auto complete script
+			wp_enqueue_script( 'suggest' );
+		}
 
    		// Autoembed functionality in rich text editor
    		// needs dependency on tiny_mce
@@ -460,7 +461,7 @@ function add_truwriter_scripts() {
 		add_filter('mce_buttons_2','truwriter_tinymce_2_buttons');
 
 		// custom jquery for the uploader on the form
-		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , '1.8', TRUE );
+		wp_register_script( 'jquery.writer' , get_stylesheet_directory_uri() . '/js/jquery.writer.js', array( 'suggest') , false, true );
 
 		// add a local variable for the site's home url
 		wp_localize_script(
@@ -490,6 +491,90 @@ function add_truwriter_scripts() {
 	}
 }
 
+# -----------------------------------------------------------------
+# Tag Search
+# -----------------------------------------------------------------
+
+
+add_filter( 'wp_headers', 'splot_send_cors_headers', 11, 1 );
+
+function splot_send_cors_headers( $headers ) {
+	if ( is_page( truwriter_get_write_page() ) ) {
+    	$headers['Access-Control-Allow-Origin'] = '*';
+    }
+    return $headers;
+}
+
+// this is the handler used in the tiny_mce editor to manage image upload
+add_action( 'wp_ajax_nopriv_splot_ajax_tag_search', 'splot_ajax_tag_search' ); //allow on front-end
+add_action( 'wp_ajax_splot_ajax_tag_search', 'splot_ajax_tag_search' );
+
+
+/* local version of wp_ajax_ajax_tag_search without exit for user capabilties
+   (this requires a logged in user which we do not always have
+
+   modified from
+   https://developer.wordpress.org/reference/functions/wp_ajax_ajax_tag_search
+*/
+
+function splot_ajax_tag_search() {
+    if ( ! isset( $_GET['tax'] ) ) {
+        wp_die( 0 );
+    }
+
+    $taxonomy = sanitize_key( $_GET['tax'] );
+    $tax      = get_taxonomy( $taxonomy );
+
+    if ( ! $tax ) {
+        wp_die( 0 );
+    }
+
+    $s = wp_unslash( $_GET['q'] );
+
+    $comma = _x( ',', 'tag delimiter' );
+    if ( ',' !== $comma ) {
+        $s = str_replace( $comma, ',', $s );
+    }
+
+    if ( false !== strpos( $s, ',' ) ) {
+        $s = explode( ',', $s );
+        $s = $s[ count( $s ) - 1 ];
+    }
+
+    $s = trim( $s );
+
+    /**
+     * Filters the minimum number of characters required to fire a tag search via Ajax.
+     *
+     * @since 4.0.0
+     *
+     * @param int         $characters The minimum number of characters required. Default 2.
+     * @param WP_Taxonomy $tax        The taxonomy object.
+     * @param string      $s          The search term.
+     */
+    $term_search_min_chars = (int) apply_filters( 'term_search_min_chars', 2, $tax, $s );
+
+    /*
+     * Require $term_search_min_chars chars for matching (default: 2)
+     * ensure it's a non-negative, non-zero integer.
+     */
+    if ( ( 0 == $term_search_min_chars ) || ( strlen( $s ) < $term_search_min_chars ) ) {
+        wp_die();
+    }
+
+    $results = get_terms(
+        array(
+            'taxonomy'   => $taxonomy,
+            'name__like' => $s,
+            'fields'     => 'names',
+            'hide_empty' => false,
+        )
+    );
+
+    echo implode( "\n", $results );
+    wp_die();
+}
+
 
 # -----------------------------------------------------------------
 # Grab Bag
@@ -504,8 +589,6 @@ add_filter( 'pre_option_image_default_size', 'my_default_image_size' );
 function my_default_image_size () {
     return 'large';
 }
-
-
 
 function  truwriter_show_drafts( $query ) {
 // show drafts only for single previews
@@ -602,57 +685,5 @@ function splot_default_menu() {
 	$splot_home = home_url('/');
 
  	return ( '<li><a href="' . $splot_home . '">Home</a></li><li><a href="' . $splot_home . truwriter_get_write_page() . '">Write</a></li><li><a href="' . $splot_home . 'random' . '">Random</a></li>' );
-}
-
-/**
- * This function assumes you have a Customizer export file in your theme directory
- * at 'data/customizer.dat'. That file must be created using the Customizer Export/Import
- * plugin found here... https://wordpress.org/plugins/customizer-export-import/
- * h/t - https://gist.github.com/fastlinemedia/9a8070b9a636e38b510f
- */
-
-add_action( 'after_switch_theme', 'splot_import_customizer_settings' );
-
-function splot_import_customizer_settings()
-{
-	// Check to see if the settings have already been imported.
-	$template = get_template();
-	$imported = get_option( $template . '_customizer_import', false );
-
-	// Bail if already imported.
-	if ( $imported ) {
-		return;
-	}
-
-	// Get the path to the customizer export file.
-	$path = trailingslashit( get_stylesheet_directory() ) . 'data/customizer.dat';
-
-	// Return if the file doesn't exist.
-	if ( ! file_exists( $path ) ) {
-		return;
-	}
-
-	// Get the settings data.
-	$data = @unserialize( file_get_contents( $path ) );
-
-	// Return if something is wrong with the data.
-	if ( 'array' != gettype( $data ) || ! isset( $data['mods'] ) ) {
-		return;
-	}
-
-	// Import options.
-	if ( isset( $data['options'] ) ) {
-		foreach ( $data['options'] as $option_key => $option_value ) {
-			update_option( $option_key, $option_value );
-		}
-	}
-
-	// Import mods.
-	foreach ( $data['mods'] as $key => $val ) {
-		set_theme_mod( $key, $val );
-	}
-
-	// Set the option so we know these have already been imported.
-	update_option( $template . '_customizer_import', true );
 }
 ?>

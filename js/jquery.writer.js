@@ -5,7 +5,8 @@
 
 */
 
-jQuery('#wTags').suggest( writerObject.siteURL + "/wp-admin/admin-ajax.php?action=ajax-tag-search&tax=post_tag", {multiple:true, multipleSep: ","});
+
+jQuery('#wTags').suggest( writerObject.ajaxUrl + "?action=splot_ajax_tag_search&tax=post_tag", {multiple:true, multipleSep: ","});
 
 jQuery(document).ready(function() {
 	// called for change in input drop zone (or click)
