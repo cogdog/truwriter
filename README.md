@@ -344,11 +344,20 @@ A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the
 
 ![](images/meta-heading.jpg)
 
-## Some Complexish Stuff for Nerds, Who Are Awesome
+## Optional / Suggested Add-ons
+
+### OpenGraph Tags for Social Media Sharing
+
+If you would like Twitter Cards and Facebook shares to use the main images and provide a more complete display, install, activate, and configure a plugin like [Open Graph and Twitter Card Tags](https://wordpress.org/plugins/wonderm00ns-simple-facebook-open-graph-tags/). This adds the special [open graph tags](https://ogp.me/) to your site's pages to enable better social media share previews.
+
+
+### Manage TinyMCE Editor
 
 If you want to customize/re-arrange the buttons and controls on the rich text editor used by writers on your site, install [TinyMCE Advanced](https://wordpress.org/plugins/tinymce-advanced/). There is [a file in the theme](includes/tinymce-advanced-settings.txt)  with the typical settings for this plugin I use when I set up these sites.
 
 You can copy and paste from that .txt file into the import field of the settings for TinyMCE Advanced (it's a small chunk of json).
+
+
 
 ## Relatively Cool New Features & Updates
 
