@@ -633,7 +633,7 @@ get_header('write');
 						<p><?php truwriter_form_item_writing_area_prompt() ?></p>
 
 						<p> See details on the formatting tools in the
-<a class="video fancybox.iframe" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html">editing tool tips</a>.</p>
+<a class="thickbox" href="<?php echo get_stylesheet_directory_uri()?>/includes/edit-help.html?TB_iframe=true&width=480&height=500">editing tool tips</a>.</p>
 						<?php
 						// set up for inserting the WP post editor
 						$settings = array(

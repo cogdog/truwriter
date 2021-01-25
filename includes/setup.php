@@ -476,12 +476,9 @@ function add_truwriter_scripts() {
 
 		wp_enqueue_script( 'jquery.writer' );
 
-		// add scripts for fancybox (used for help)
-		//-- h/t http://code.tutsplus.com/tutorials/add-a-responsive-lightbox-to-your-wordpress-theme--wp-28100
-		wp_enqueue_script( 'fancybox', get_stylesheet_directory_uri() . '/includes/lightbox/js/jquery.fancybox.pack.js', array( 'jquery' ), false, true );
-    	wp_enqueue_script( 'lightbox', get_stylesheet_directory_uri() . '/includes/lightbox/js/lightbox.js', array( 'fancybox' ), '1.1',
-    null , '1.0', TRUE );
-    	wp_enqueue_style( 'lightbox-style', get_stylesheet_directory_uri() . '/includes/lightbox/css/jquery.fancybox.css' );
+		// use built in Thickbox for writing help pop over
+		add_thickbox();
+
 
 	} elseif ( is_single() ) {
 		// single writings, give is the jQuery for edit link stuff
@@ -490,6 +487,7 @@ function add_truwriter_scripts() {
 		wp_enqueue_script( 'jquery.editlink' );
 	}
 }
+
 
 # -----------------------------------------------------------------
 # Tag Search
