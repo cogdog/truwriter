@@ -15,7 +15,7 @@ $published_cat_id = get_cat_ID( 'Published' );
 
 
 // check for defaults, versions of themes before these options added will not have them
-$use_header_image = ( truwriter_option('use_header_image')  ) ? truwriter_option('use_header_image') : 2;
+$use_header_image =  truwriter_option('use_header_image');
 
 $use_header_image_caption =  truwriter_option('use_header_image_caption');
 
@@ -657,8 +657,7 @@ get_header('write');
 				</fieldset>
 				<?php endif?>
 
-
-				<?php if ($use_header_image > 0):?>
+				<?php if ($use_header_image > '0'):?>
 
 				<fieldset id="theHeaderImage">
 					<label for="headerImage"><?php truwriter_form_item_header_image() ?> (<?php echo ( $use_header_image == '2' ) ? 'required' : 'optional'?>)</label>
