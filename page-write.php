@@ -188,6 +188,12 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 						$feedback_msg .=  ' You might want to save this link <code>' .  truwriter_get_edit_link( $post_id ) . '</code> in a safe place as it allows you to edit your writing at a later time. ';
 					}
 
+					// append customizer added extra information, if enabled
+					if ( truwriter_form_item_submission_extra() )  {
+						$feedback_msg .= '<br /><br />' . truwriter_form_item_submission_extra();
+					}
+
+
 					$feedback_msg .= '<br /><br />Now you can <a href="' . site_url()  . '">return to ' . get_bloginfo() . '</a>.';
 
 					// set up admin email
@@ -211,7 +217,13 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
 					// if writer provided email address, send instructions to use link to edit if not done before
 					if ( $wEmail != '' and !$linkEmailed  ) truwriter_mail_edit_link( $post_id, truwriter_option('pub_status') );
 
-					$feedback_msg .=  ' You might want to save this link <code>' . truwriter_get_edit_link( $post_id )  . '</code> in a safe place as it allows you to edit your writing at a later time. ';
+					$feedback_msg .=  '<br /><br />You might want to save this link <code>' . truwriter_get_edit_link( $post_id )  . '</code> in a safe place as it allows you to edit your writing at a later time. ';
+
+					// append customizer added extra information, if enabled
+					if ( truwriter_form_item_submission_extra() )  {
+						$feedback_msg .= '<br /><br />' . truwriter_form_item_submission_extra();
+					}
+
 
 				}
 

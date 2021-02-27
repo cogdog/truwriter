@@ -133,7 +133,7 @@ function truwriter_queryvars( $qvars ) {
 /* set up rewrite rules */
 function truwriter_rewrite_rules() {
 	// for sending to random item
-   add_rewrite_rule('random/?$', 'index.php?random=1', 'top');
+   add_rewrite_rule('random/?$', 'index.php?random=1','top');
 
    // for edit link requests
    add_rewrite_rule( '^get-edit-link/([^/]+)/?',  'index.php?elink=1&wid=$matches[1]','top');

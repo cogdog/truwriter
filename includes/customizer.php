@@ -1,6 +1,60 @@
 <?php
+
+/**
+ * This function assumes you have a Customizer export file in your theme directory
+ * at 'data/customizer.dat'. That file must be created using the Customizer Export/Import
+ * plugin found here... https://wordpress.org/plugins/customizer-export-import/
+ * h/t - https://gist.github.com/fastlinemedia/9a8070b9a636e38b510f
+ */
+
+add_action( 'after_switch_theme', 'splot_import_customizer_settings' );
+
+function splot_import_customizer_settings()
+{
+	// Check to see if the settings have already been imported.
+	$template = get_template();
+	$imported = get_option( $template . '_customizer_import', false );
+
+	// Bail if already imported.
+	if ( $imported ) {
+		return;
+	}
+
+	// Get the path to the customizer export file.
+	$path = trailingslashit( get_stylesheet_directory() ) . 'data/customizer.dat';
+
+	// Return if the file doesn't exist.
+	if ( ! file_exists( $path ) ) {
+		return;
+	}
+
+	// Get the settings data.
+	$data = @unserialize( file_get_contents( $path ) );
+
+	// Return if something is wrong with the data.
+	if ( 'array' != gettype( $data ) || ! isset( $data['mods'] ) ) {
+		return;
+	}
+
+	// Import options.
+	if ( isset( $data['options'] ) ) {
+		foreach ( $data['options'] as $option_key => $option_value ) {
+			update_option( $option_key, $option_value );
+		}
+	}
+
+	// Import mods.
+	foreach ( $data['mods'] as $key => $val ) {
+		set_theme_mod( $key, $val );
+	}
+
+	// Set the option so we know these have already been imported.
+	update_option( $template . '_customizer_import', true );
+}
+
+
 # -----------------------------------------------------------------
-# Customizer Stuff
+# Customizer Setup
 # -----------------------------------------------------------------
 
 add_action( 'customize_register', 'truwriter_register_theme_customizer' );
@@ -14,7 +68,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		'title'          => __( 'TRU Writer', 'radcliffe'),
 		'description'    => __( 'Customizer Stuff', 'radcliffe'),
 	) );
-	
+
 
 	// Add section for the collect form
 	$wp_customize->add_section( 'write_form' , array(
@@ -22,7 +76,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		'panel'    => 'customize_writer',
 		'priority' => 12
 	) );
-	
+
 	// Add section for display settings
 	$wp_customize->add_section( 'write_colors' , array(
 		'title'    => __('Form and Button Colors','radcliffe'),
@@ -39,14 +93,14 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		'priority' => 20
 	) );
 
-	
+
 	$wp_customize->add_setting( 'layout_width',
 	   array(
 		  'default' => 'thin',
 		  'type' => 'theme_mod',
 	   )
 	);
- 
+
 	$wp_customize->add_control( 'layout_width',
 	   array(
 		  'label' => __( 'Display Width' ),
@@ -61,14 +115,14 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		  )
 	   )
 	);
-	
+
 	// setting for header image upload label
 	$wp_customize->add_setting( 'meta_heading', array(
 		 'default'           => __( 'And So It Was Written', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for header image upload  label
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -82,59 +136,131 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		        'type'     => 'text'
 		    )
 	    )
-	); 
+	);
 
-	// Final button  color 
-	
+
+	// show comment customizations if theme enabled
+	if ( truwriter_option('allow_comments') ) {
+		// Add setting for comment titles
+		$wp_customize->add_setting( 'comment_title', array(
+			 'default'  => __( 'Provide Feedback', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'comment_title',
+				array(
+					'label'    => __( 'Title for Comments Section', 'radcliffe'),
+					'priority' => 40,
+					'description' => __( 'Make as specific as needed' ),
+					'section'  => 'write_display',
+					'settings' => 'comment_title',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// Add setting for Extra instructions for comments
+		$wp_customize->add_setting( 'comment_extra_intro', array(
+			 'default'  => __( '', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control fortitle label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'comment_extra_intro',
+				array(
+					'label'    => __( 'Extra Instructions for Comment Area', 'radcliffe'),
+					'priority' => 45,
+					'description' => __( 'Specify suggestions as needed to guide comment input' ),
+					'section'  => 'write_display',
+					'settings' => 'comment_extra_intro',
+					'type'     => 'text'
+				)
+			)
+		);
+
+
+		// Add setting for Extra instructions for comments
+		$wp_customize->add_setting( 'comment_button_label', array(
+			 'default'  => __( 'Post Comment', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control fortitle label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'comment_button_label',
+				array(
+					'label'    => __( 'Comment Button Label', 'radcliffe'),
+					'priority' => 49,
+					'description' => __( '' ),
+					'section'  => 'write_display',
+					'settings' => 'comment_button_label',
+					'type'     => 'text'
+				)
+			)
+		);
+	} // comment customizations if theme enabled
+
+
+	// Final button  color
+
 	$btnformcolors[] = array(
-		'slug'=>'button_draft', 
+		'slug'=>'button_draft',
 		'default' => '#00B233',
 		'label' => 'Draft Submit Button'
 	);
-	
+
 	$btnformcolors[] = array(
-		'slug'=>'button_final', 
+		'slug'=>'button_final',
 		'default' => '#0971B2',
 		'label' => 'Submit Final Submit Button'
 	);
 
 	$btnformcolors[] = array(
-		'slug'=>'form_bg_new', 
+		'slug'=>'form_bg_new',
 		'default' => '#8ed9f6',
 		'label' => 'Form Background for New Entry'
 	);
-		
+
 	$btnformcolors[] = array(
-		'slug'=>'form_bg_draft', 
+		'slug'=>'form_bg_draft',
 		'default' => '#D1FAB6',
 		'label' => 'Form Background for Draft'
 	);
 
 	$btnformcolors[] = array(
-		'slug'=>'form_bg_error', 
+		'slug'=>'form_bg_error',
 		'default' => '#fad9d7',
 		'label' => 'Form Background for Error'
 	);
-	
+
 
 	// add the settings and controls for each color
 	foreach( $btnformcolors as $thecolor ) {
- 
+
 		// SETTINGS
 		$wp_customize->add_setting(
 			$thecolor['slug'], array(
 				'default' => $thecolor['default'],
-				'type' => 'option', 
+				'type' => 'option',
 				'capability' =>  'edit_theme_options'
 			)
 		);
-		
+
 		// CONTROLS
 		$wp_customize->add_control(
 			new WP_Customize_Color_Control(
 				$wp_customize,
-				$thecolor['slug'], 
-				array('label' => $thecolor['label'], 
+				$thecolor['slug'],
+				array('label' => $thecolor['label'],
 				'section' => 'write_colors',
 				'settings' => $thecolor['slug'])
 			)
@@ -146,10 +272,10 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	// Add setting for footer
 	$wp_customize->add_setting( 'button_roundness', array(
 		 'default'           => __( 0, 'radcliffe' ),
-		 'type' => 'option', 
+		 'type' => 'option',
 		  'capability' =>  'edit_theme_options'
-	) );     
-     
+	) );
+
      $wp_customize->add_control( 'button_roundness', array(
 		  'type' => 'range',
 		  'section' => 'write_colors',
@@ -161,15 +287,15 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 			'step' => 5,
 		  ),
 		) );
-		     	
-	
+
+
 	// Add setting for default prompt
 	$wp_customize->add_setting( 'default_prompt', array(
 		 'default'           => __( 'Enter the content for your writing below. You must save first and preview once before it goes into the system as a draft. After that, continue to edit, save, and preview as much as needed. Remember to click  "Publish Now" when you are ready for your work to be published. If you include your email address, we can send you a link that will allow you to make changes later. Otherwise you should finish your writing and publish it in this session.', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Add control for default prompt
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -184,15 +310,16 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		    )
 	    )
 	);
-	
-	
+
+
 	// Add setting for re-edit prompt
 	$wp_customize->add_setting( 're_edit_prompt', array(
 		 'default'           => __( 'You can now edit this previously saved writing, save the changes as a draft, or if done, submit for final publishing.', 'radcliffe'),
 		 'type' => 'theme_mod',
+		 'transport' => 'postMessage',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Add control for re-edit prompt
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -207,18 +334,40 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		    )
 	    )
 	);
-	
-	
-	
-	
+
+	// Add setting post submission confirmation
+	$wp_customize->add_setting( 'item_submission_extra', array(
+		 'default'           => __( '', 'radcliffe'),
+		 'type' => 'theme_mod',
+		 'transport' => 'postMessage',
+		 'sanitize_callback' => 'sanitize_text'
+	) );
+
+	// Add control for re-edit prompt
+	$wp_customize->add_control( new WP_Customize_Control(
+	    $wp_customize,
+		'item_submission_extra',
+		    array(
+		        'label'    => __( 'Extra Information After Submitting a new item', 'radcliffe'),
+		        'priority' => 14,
+		        'description' => __( 'Any additional information that sould be appended to the message after a successful submission. Leave blank to disable adding any extra text.' ),
+		        'section'  => 'write_form',
+		        'settings' => 'item_submission_extra',
+		        'type'     => 'textarea'
+		    )
+	    )
+	);
+
+
+
 	// setting for title label
 	$wp_customize->add_setting( 'item_title', array(
 		 'default'           => __( 'The Title', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
-	// Control fortitle label
+
+	// Control for title label
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
 		'item_title',
@@ -232,14 +381,14 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		    )
 	    )
 	);
-	
+
 	// setting for title description
 	$wp_customize->add_setting( 'item_title_prompt', array(
 		 'default'           => __( 'A good title is important! Create an eye-catching title for your story, one that would make a person who sees it want to stop whatever they are doing and read it.', 'radcliffe'),
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for title description
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -261,7 +410,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for byline label
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -283,7 +432,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for byline  prompt
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -306,7 +455,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for description  label
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -328,7 +477,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 		 'type' => 'theme_mod',
 		 'sanitize_callback' => 'sanitize_text'
 	) );
-	
+
 	// Control for description  label prompt
 	$wp_customize->add_control( new WP_Customize_Control(
 	    $wp_customize,
@@ -344,362 +493,395 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	    )
 	);
 
+
+	 if (truwriter_option('show_footer') ) {
 	// setting for footer  label
-	$wp_customize->add_setting( 'item_footer', array(
-		 'default'           => __( 'Additional Information for Footer', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for description  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_footer',
-		    array(
-		        'label'    => __( 'Footer Entry Label', 'radcliffe'),
-		        'priority' => 24,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_footer',
-		        'type'     => 'text'
-		    )
-	    )
-	);
 
-	// setting for description  label prompt
-	$wp_customize->add_setting( 'item_footer_prompt', array(
-		 'default'           => __( 'Add any endnote / credits information you wish to append to the end of your writing, such as a citation to where it was previously published or any other meta information. URLs will be automatically hyperlinked when published.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for description  label prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_footer_prompt',
-		    array(
-		        'label'    => __( 'Footer Prompt', 'radcliffe'),
-		        'priority' => 26,
-		        'description' => __( 'Directions for the footer entry field' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_footer_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);
 
-	// setting for header image upload label
-	$wp_customize->add_setting( 'item_header_image', array(
-		 'default'           => __( 'Header Image', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for header image upload  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_header_image',
-		    array(
-		        'label'    => __( 'Header Image Upload Label', 'radcliffe'),
-		        'priority' => 30,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_header_image',
-		        'type'     => 'text'
-		    )
-	    )
-	);
+		$wp_customize->add_setting( 'item_footer', array(
+			 'default'           => __( 'Additional Information for Footer', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
 
-	// setting for header image upload prompt
-	$wp_customize->add_setting( 'item_header_image_prompt', array(
-		 'default'           => __( 'Upload an image file to be used in the header for your writing. Ideally the image should be at least 1440px wide and &lt; ' . truwriter_option('upload_max' ) . ' Mb in size. Images should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for image upload prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_header_image_prompt',
-		    array(
-		        'label'    => __( 'Header Image Upload Prompt', 'radcliffe'),
-		        'priority' => 32,
-		        'description' => __( 'Directions for image uploads' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_header_image_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);
-	
-	
-	// setting for header image caption label
-	$wp_customize->add_setting( 'item_header_caption', array(
-		 'default'           => __( 'Caption/Credits for Header Image', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for header image caption   label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_header_caption',
-		    array(
-		        'label'    => __( 'Header Image Caption Label', 'radcliffe'),
-		        'priority' => 34,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_header_caption',
-		        'type'     => 'text'
-		    )
-	    )
-	);
+		// Control for description  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_footer',
+				array(
+					'label'    => __( 'Footer Entry Label', 'radcliffe'),
+					'priority' => 24,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_footer',
+					'type'     => 'text'
+				)
+			)
+		);
 
-	// setting for header image caption   label prompt
-	$wp_customize->add_setting( 'item_header_caption_prompt', array(
-		 'default'           => __( 'Provide full credit / attribution for the header image.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for header image caption   label prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_header_caption_prompt',
-		    array(
-		        'label'    => __( 'Header Image Caption Prompt', 'radcliffe'),
-		        'priority' => 36,
-		        'description' => __( 'Directions for the header caption field' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_header_caption_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);	
-	
+		// setting for description  label prompt
+		$wp_customize->add_setting( 'item_footer_prompt', array(
+			 'default'           => __( 'Add any endnote / credits information you wish to append to the end of your writing, such as a citation to where it was previously published or any other meta information. URLs will be automatically hyperlinked when published.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for description  label prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_footer_prompt',
+				array(
+					'label'    => __( 'Footer Prompt', 'radcliffe'),
+					'priority' => 26,
+					'description' => __( 'Directions for the footer entry field' ),
+					'section'  => 'write_form',
+					'settings' => 'item_footer_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // end use footer if theme enabled
+
+	// header image customizations if theme enabled
+	if ( truwriter_option('use_header_image') > '0' ) {
+		// setting for header image upload label
+		$wp_customize->add_setting( 'item_header_image', array(
+			 'default'           => __( 'Header Image', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for header image upload  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_header_image',
+				array(
+					'label'    => __( 'Header Image Upload Label', 'radcliffe'),
+					'priority' => 30,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_header_image',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// setting for header image upload prompt
+		$wp_customize->add_setting( 'item_header_image_prompt', array(
+			 'default'           => __( 'Upload an image file to be used in the header for your writing. Ideally the image should be at least 1440px wide and &lt; ' . truwriter_option('upload_max' ) . ' Mb in size. Images should either be your own or one licensed for re-use; provide an attribution credit for the image in the caption field below.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for image upload prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_header_image_prompt',
+				array(
+					'label'    => __( 'Header Image Upload Prompt', 'radcliffe'),
+					'priority' => 32,
+					'description' => __( 'Directions for image uploads' ),
+					'section'  => 'write_form',
+					'settings' => 'item_header_image_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+
+		// enable if using header image captions is theme enabled
+		if ( truwriter_option('use_header_image_caption') > '0' ) {
+			// setting for header image caption label
+			$wp_customize->add_setting( 'item_header_caption', array(
+				 'default'           => __( 'Caption/Credits for Header Image', 'radcliffe'),
+				 'type' => 'theme_mod',
+				 'sanitize_callback' => 'sanitize_text'
+			) );
+
+			// Control for header image caption   label
+			$wp_customize->add_control( new WP_Customize_Control(
+				$wp_customize,
+				'item_header_caption',
+					array(
+						'label'    => __( 'Header Image Caption Label', 'radcliffe'),
+						'priority' => 34,
+						'description' => __( '' ),
+						'section'  => 'write_form',
+						'settings' => 'item_header_caption',
+						'type'     => 'text'
+					)
+				)
+			);
+
+			// setting for header image caption   label prompt
+			$wp_customize->add_setting( 'item_header_caption_prompt', array(
+				 'default'           => __( 'Provide full credit / attribution for the header image.', 'radcliffe'),
+				 'type' => 'theme_mod',
+				 'sanitize_callback' => 'sanitize_text'
+			) );
+
+			// Control for header image caption   label prompt
+			$wp_customize->add_control( new WP_Customize_Control(
+				$wp_customize,
+				'item_header_caption_prompt',
+					array(
+						'label'    => __( 'Header Image Caption Prompt', 'radcliffe'),
+						'priority' => 36,
+						'description' => __( 'Directions for the header caption field' ),
+						'section'  => 'write_form',
+						'settings' => 'item_header_caption_prompt',
+						'type'     => 'textarea'
+					)
+				)
+			);
+
+		} // end using header image captions is theme enabled
+
+
+	} // end header image customizations if theme enabled
+
+
 
 	// setting for categories  label
-	$wp_customize->add_setting( 'item_categories', array(
-		 'default'           => __( 'Kind of Writing', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for categories  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_categories',
-		    array(
-		        'label'    => __( 'Categories Label', 'radcliffe'),
-		        'priority' => 40,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_categories',
-		        'type'     => 'text'
-		    )
-	    )
-	);
+	if (truwriter_option('show_cats') ) {
 
-	// setting for categories  prompt
-	$wp_customize->add_setting( 'item_categories_prompt', array(
-		 'default'           => __( 'Check as many that apply.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for categories prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_categories_prompt',
-		    array(
-		        'label'    => __( 'Categories Prompt', 'radcliffe'),
-		        'priority' => 42,
-		        'description' => __( 'Directions for the categories selection' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_categories_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);
-		
+		$wp_customize->add_setting( 'item_categories', array(
+			 'default'           => __( 'Kind of Writing', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for categories  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_categories',
+				array(
+					'label'    => __( 'Categories Label', 'radcliffe'),
+					'priority' => 40,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_categories',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// setting for categories  prompt
+		$wp_customize->add_setting( 'item_categories_prompt', array(
+			 'default'           => __( 'Check as many that apply.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for categories prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_categories_prompt',
+				array(
+					'label'    => __( 'Categories Prompt', 'radcliffe'),
+					'priority' => 42,
+					'description' => __( 'Directions for the categories selection' ),
+					'section'  => 'write_form',
+					'settings' => 'item_categories_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // if using categories theme enabled
+
 	// setting for tags  label
-	$wp_customize->add_setting( 'item_tags', array(
-		 'default'           => __( 'Tags', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for tags  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_tags',
-		    array(
-		        'label'    => __( 'Tags Label', 'radcliffe'),
-		        'priority' => 44,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_tags',
-		        'type'     => 'text'
-		    )
-	    )
-	);
 
-	// setting for tags  prompt
-	$wp_customize->add_setting( 'item_tags_prompt', array(
-		 'default'           => __( 'Add any descriptive tags for your writing. Separate multiple ones with commas.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for tags prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_tags_prompt',
-		    array(
-		        'label'    => __( 'Tags Prompt', 'radcliffe'),
-		        'priority' => 46,
-		        'description' => __( 'Directions for tags entry' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_tags_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);	
-	
+	if (truwriter_option('show_tags') ) {
+
+		$wp_customize->add_setting( 'item_tags', array(
+			 'default'           => __( 'Tags', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for tags  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_tags',
+				array(
+					'label'    => __( 'Tags Label', 'radcliffe'),
+					'priority' => 44,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_tags',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// setting for tags  prompt
+		$wp_customize->add_setting( 'item_tags_prompt', array(
+			 'default'           => __( 'Add any descriptive tags for your writing. Separate multiple ones with commas.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for tags prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_tags_prompt',
+				array(
+					'label'    => __( 'Tags Prompt', 'radcliffe'),
+					'priority' => 46,
+					'description' => __( 'Directions for tags entry' ),
+					'section'  => 'write_form',
+					'settings' => 'item_tags_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // end if tags theme enabled
+
+
+
 	// setting for email address  label
-	$wp_customize->add_setting( 'item_email', array(
-		 'default'           => __( 'Your Email Address', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for email address  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_email',
-		    array(
-		        'label'    => __( 'Email Address Label', 'radcliffe'),
-		        'priority' => 50,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_email',
-		        'type'     => 'text'
-		    )
-	    )
-	);
+	if (truwriter_option('show_email') ) {
 
-	// setting for email address  prompt
-	$wp_customize->add_setting( 'item_email_prompt', array(
-		 'default'           => __( 'If you provide an email address when your writing is published, you can request a special link that will allow you to edit it again in the future.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for email address prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_email_prompt',
-		    array(
-		        'label'    => __( 'Email Address Prompt', 'radcliffe'),
-		        'priority' => 52,
-		        'description' => __( 'Directions for email address entry' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_email_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);		
-	
+		$wp_customize->add_setting( 'item_email', array(
+			 'default'           => __( 'Your Email Address', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for email address  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_email',
+				array(
+					'label'    => __( 'Email Address Label', 'radcliffe'),
+					'priority' => 50,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_email',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// setting for email address  prompt
+		$wp_customize->add_setting( 'item_email_prompt', array(
+			 'default'           => __( 'If you provide an email address when your writing is published, you can request a special link that will allow you to edit it again in the future.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for email address prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_email_prompt',
+				array(
+					'label'    => __( 'Email Address Prompt', 'radcliffe'),
+					'priority' => 52,
+					'description' => __( 'Directions for email address entry' ),
+					'section'  => 'write_form',
+					'settings' => 'item_email_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // end if email options theme enabled
+
 	// setting for editor notes  label
-	$wp_customize->add_setting( 'item_editor_notes', array(
-		 'default'           => __( 'Extra Information for Editors', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for editor notes  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_editor_notes',
-		    array(
-		        'label'    => __( 'Editor Notes Label', 'radcliffe'),
-		        'priority' => 54,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_editor_notes',
-		        'type'     => 'text'
-		    )
-	    )
-	);
 
-	// setting for editor notes  prompt
-	$wp_customize->add_setting( 'item_editor_notes_prompt', array(
-		 'default'           => __( 'This information will *not* be published with your work, it is informational for the editor use only.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for editor notes prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_editor_notes_prompt',
-		    array(
-		        'label'    => __( 'Editor Notes Prompt', 'radcliffe'),
-		        'priority' => 56,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_editor_notes_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);	
-	
+	if ( truwriter_option('require_extra_info') != -1 ) {
 
-	// setting for license  label
-	$wp_customize->add_setting( 'item_license', array(
-		 'default'           => __( 'Rights / Resuse License', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for license  label
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_license',
-		    array(
-		        'label'    => __( 'Rights Label', 'radcliffe'),
-		        'priority' => 27,
-		        'description' => __( '' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_license',
-		        'type'     => 'text'
-		    )
-	    )
-	);
+		$wp_customize->add_setting( 'item_editor_notes', array(
+			 'default'           => __( 'Extra Information for Editors', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
 
-	// setting for license  prompt
-	$wp_customize->add_setting( 'item_license_prompt', array(
-		 'default'           => __( 'Choose your preferred reuse option.', 'radcliffe'),
-		 'type' => 'theme_mod',
-		 'sanitize_callback' => 'sanitize_text'
-	) );
-	
-	// Control for license prompt
-	$wp_customize->add_control( new WP_Customize_Control(
-	    $wp_customize,
-		'item_license_prompt',
-		    array(
-		        'label'    => __( 'Image Source Prompt', 'radcliffe'),
-		        'priority' => 28,
-		        'description' => __( 'Directions for the rights selection' ),
-		        'section'  => 'write_form',
-		        'settings' => 'item_license_prompt',
-		        'type'     => 'textarea'
-		    )
-	    )
-	);
+		// Control for editor notes  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_editor_notes',
+				array(
+					'label'    => __( 'Editor Notes Label', 'radcliffe'),
+					'priority' => 54,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_editor_notes',
+					'type'     => 'text'
+				)
+			)
+		);
 
-			
+		// setting for editor notes  prompt
+		$wp_customize->add_setting( 'item_editor_notes_prompt', array(
+			 'default'           => __( 'This information will *not* be published with your work, it is informational for the editor use only.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for editor notes prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_editor_notes_prompt',
+				array(
+					'label'    => __( 'Editor Notes Prompt', 'radcliffe'),
+					'priority' => 56,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_editor_notes_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // end if extra info options theme enabled
+
+
+	// setting for license label
+	if ( truwriter_option( 'use_cc' ) != 'none' ) {
+
+		$wp_customize->add_setting( 'item_license', array(
+			 'default'           => __( 'Rights / Resuse License', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for license  label
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_license',
+				array(
+					'label'    => __( 'Rights Label', 'radcliffe'),
+					'priority' => 27,
+					'description' => __( '' ),
+					'section'  => 'write_form',
+					'settings' => 'item_license',
+					'type'     => 'text'
+				)
+			)
+		);
+
+		// setting for license  prompt
+		$wp_customize->add_setting( 'item_license_prompt', array(
+			 'default'           => __( 'Choose your preferred reuse option.', 'radcliffe'),
+			 'type' => 'theme_mod',
+			 'sanitize_callback' => 'sanitize_text'
+		) );
+
+		// Control for license prompt
+		$wp_customize->add_control( new WP_Customize_Control(
+			$wp_customize,
+			'item_license_prompt',
+				array(
+					'label'    => __( 'Image Source Prompt', 'radcliffe'),
+					'priority' => 28,
+					'description' => __( 'Directions for the rights selection' ),
+					'section'  => 'write_form',
+					'settings' => 'item_license_prompt',
+					'type'     => 'textarea'
+				)
+			)
+		);
+	} // end if use cc theme enabled
+
+
  	// Sanitize text
 	function sanitize_text( $text ) {
 	    return sanitize_text_field( $text );
@@ -710,7 +892,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 // layout settings
 function truwriter_layout_width() {
 	 if ( get_theme_mod( 'layout_width') != "" ) {
-	 	$thewidth = ( get_theme_mod( 'layout_width') == 'wide' ) ? '' : get_theme_mod( 'layout_width'); 	
+	 	$thewidth = ( get_theme_mod( 'layout_width') == 'wide' ) ? '' : get_theme_mod( 'layout_width');
 	 	echo $thewidth;
 	 }	else {
 	 	echo 'thin';
@@ -733,6 +915,14 @@ function truwriter_form_re_edit_prompt() {
 	 	return get_theme_mod( 're_edit_prompt');
 	 }	else {
 	 	return 'You can now edit this previously saved writing, save the changes as a draft, or if done, submit for final publishing.';
+	 }
+}
+
+function truwriter_form_item_submission_extra() {
+	 if ( get_theme_mod( 'item_submission_extra') != "" ) {
+	 	return get_theme_mod( 'item_submission_extra');
+	 }	else {
+	 	return '';
 	 }
 }
 
@@ -922,6 +1112,32 @@ function truwriter_metadate_heading() {
 	 }
 }
 
+
+function get_truwriter_comment_title() {
+	 if ( get_theme_mod( 'comment_title') != "" ) {
+	 	return ( get_theme_mod( 'comment_title'));
+	 }	else {
+	 	return  ('Provide Feedback');
+	 }
+}
+
+function get_truwriter_comment_extra_intro() {
+	 if ( get_theme_mod( 'comment_extra_intro') != "" ) {
+	 	return ( '<p class="comment_instructions">' . get_theme_mod( 'comment_extra_intro') . '</p>');
+	 }	else {
+	 	return  ('');
+	 }
+}
+
+function get_truwriter_comment_button_label() {
+	 if ( get_theme_mod( 'comment_button_label') != "" ) {
+	 	return ( get_theme_mod( 'comment_button_label'));
+	 }	else {
+	 	return  ('Post Comment');
+	 }
+}
+
+
 // Add the Customizer set CSS
 add_action( 'wp_head', 'truwriter_customize_prettify' );
 
@@ -929,23 +1145,23 @@ function truwriter_customize_prettify() {
 
 	// draft button color
 	$button_draft_color= get_option( 'button_draft' );
-	
+
 	// final button color
 	$button_final_color= get_option( 'button_final' );
 
 	// form backgrund new entry
 	$form_bg_new = get_option( 'form_bg_new' );
- 
+
 	// form backgrund new entry
 	$form_bg_draft = get_option( 'form_bg_draft' );
 
 	// form backgrund new entry
 	$form_bg_error = get_option( 'form_bg_error' );
-	
+
 	// button roundness
-	$button_roundness = get_option( 'button_roundness' ); 
-	
-	// styling! 
+	$button_roundness = get_option( 'button_roundness' );
+
+	// styling!
 	?>
 <style>
 /* customizer set styles */
@@ -954,7 +1170,7 @@ function truwriter_customize_prettify() {
 	.writenew { background-color: <?php echo $form_bg_new; ?> }
 	.writedraft { background-color: <?php echo $form_bg_draft; ?> }
 	.writeoops { background-color: <?php echo $form_bg_error; ?> }
-</style>	
+</style>
 	<?php
 }
 

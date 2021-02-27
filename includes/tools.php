@@ -12,17 +12,17 @@ function page_with_template_exists ( $template ) {
 				'meta_key' => '_wp_page_template',
 				'meta_value' => $template
 			));
-	 
+
 	// did we find any?
 	$pages_found = ( count ($seekpages) ) ? true : false ;
-	
+
 	// report to base
 	return ($pages_found);
 }
 
 function get_pages_with_template ( $template ) {
 	// returns array of pages with a given template
-	
+
 	// look for pages that use the given template
 	$seekpages = get_posts (array (
 				'post_type' => 'page',
@@ -30,16 +30,16 @@ function get_pages_with_template ( $template ) {
 				'meta_value' => $template,
 				'posts_per_page' => -1
 	));
-	
+
 	// holder for results
 	$tpages = array(0 => 'Select Page');
-	
+
 
 	// Walk those results, store ID of pages found
 	foreach ( $seekpages as $p ) {
 		$tpages[$p->ID] = $p->post_title;
 	}
-	
+
 	return $tpages;
 }
 
@@ -47,7 +47,7 @@ function truwriter_get_write_page() {
 
 	// return slud for page set in theme options for writing page (newer versions of SPLOT)
 	if ( truwriter_option( 'write_page' ) )  {
-		return ( get_post_field( 'post_name', get_post( truwriter_option( 'write_page' ) ) ) ); 
+		return ( get_post_field( 'post_name', get_post( truwriter_option( 'write_page' ) ) ) );
 	} else {
 		// older versions of SPLOT use the slug
 		return ('write');
@@ -63,9 +63,9 @@ function splot_redirect_url() {
 # Media
 # -----------------------------------------------------------------
 
-// for uploading images 
+// for uploading images
 function truwriter_insert_attachment( $file_handler, $post_id ) {
-	
+
 	if ($_FILES[$file_handler]['error'] !== UPLOAD_ERR_OK) return (false);
 
 	require_once( ABSPATH . "wp-admin" . '/includes/image.php' );
@@ -73,17 +73,35 @@ function truwriter_insert_attachment( $file_handler, $post_id ) {
 	require_once( ABSPATH . "wp-admin" . '/includes/media.php' );
 
 	$attach_id = media_handle_upload( $file_handler, $post_id );
-	
+
 	return ($attach_id);
-	
+
 }
 
 // function to get the caption for an attachment (stored as post_excerpt)
 // -- h/t http://wordpress.stackexchange.com/a/73894/14945
 function get_attachment_caption_by_id( $post_id ) {
     $the_attachment = get_post( $post_id );
-    return ( $the_attachment->post_excerpt ); 
+    return ( $the_attachment->post_excerpt );
 }
+
+
+
+add_shortcode("vocaroo", "my_embed_vocaroo");
+
+function my_embed_vocaroo( $atts )  {
+  	extract(shortcode_atts( array( "id" => ''), $atts ));
+
+  	// make sure we have a URL that starts with http
+	if ( $id == '') {
+		return 'Sad face: no vocaroo ID found';
+ 	}
+
+ 	return '<div><iframe width="100&" height="60" src="https://vocaroo.com/embed/' . $id . '?autoplay=0" frameborder="0" allow="autoplay"></iframe><br><a href="https://voca.ro/'. $id . '" title="Vocaroo Voice Recorder" target="_blank">View on Vocaroo &gt;&gt;</a></div>';
+
+}
+
+
 
 # -----------------------------------------------------------------
 # Grab bag
@@ -95,9 +113,34 @@ function truwriter_word_count( $content ) {
 
 function truwriter_preview_notice() {
 	return ('<div class="notify"><span class="symbol icon-info"></span>
-This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Update and Save Draft" again or if it is ready, click "Publish Now".		
+This is a preview of your entry that shows how it will look when published. <a href="#" onclick="self.close();return false;">Close this window/tab</a> when done to return to the writing form. Make any changes and click "Update and Save Draft" again or if it is ready, click "Publish Now".
 				</div>');
 }
+
+
+/**
+ * Recursively sort an array of taxonomy terms hierarchically. Child categories will be
+ * placed under a 'children' member of their parent term.
+ * @param Array   $cats     taxonomy term objects to sort
+ * @param Array   $into     result array to put them in
+ * @param integer $parentId the current parent ID to put them in
+   h/t http://wordpress.stackexchange.com/a/99516/14945
+ */
+function truwriter_sort_terms_hierarchicaly( Array &$cats, Array &$into, $parentId = 0 )
+{
+    foreach ($cats as $i => $cat) {
+        if ($cat->parent == $parentId) {
+            $into[$cat->term_id] = $cat;
+            unset($cats[$i]);
+        }
+    }
+
+    foreach ($into as $topCat) {
+        $topCat->children = array();
+        truwriter_sort_terms_hierarchicaly($cats, $topCat->children, $topCat->term_id);
+    }
+}
+
 
 # -----------------------------------------------------------------
 # Plugin Checks
@@ -118,10 +161,10 @@ function reading_time_check() {
 
 
 function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
-	// return the estimated reading time only if the short code (aka plugin) exists. 
+	// return the estimated reading time only if the short code (aka plugin) exists.
 	// Start with the prefix string add an approximation symbol and append suffix
 
-	if ( shortcode_exists( 'rt_reading_time' ) ) {		
+	if ( shortcode_exists( 'rt_reading_time' ) ) {
 		return ( $prefix_string . ' ~' . do_shortcode( '[rt_reading_time postfix="minutes" postfix_singular="minute"]' ) . $suffix_string );
 	}
 }
@@ -132,10 +175,10 @@ function truwriter_get_reading_time( $prefix_string, $suffix_string ) {
 # -----------------------------------------------------------------
 
 function splot_get_twitter_name( $str ) {
-	// takes an author string and extracts a twitter handle if there is one 
-	
+	// takes an author string and extracts a twitter handle if there is one
+
 	$found = preg_match('/@(\\w+)\\b/i', '$str', $matches);
-	
+
 	if ($found) {
 		return $matches[0];
 	} else {
@@ -186,30 +229,30 @@ function set_html_content_type() {
 
 // -----  expose post meta date to API
 add_action( 'rest_api_init', 'truwriter_create_api_posts_meta_field' );
- 
+
 function truwriter_create_api_posts_meta_field() {
- 
+
 	register_rest_field( 'post', 'splot_meta', array(
 								 'get_callback' => 'truwriter_get_splot_meta_for_api',
  								 'schema' => null,)
  	);
 }
- 
+
 function truwriter_get_splot_meta_for_api( $object ) {
 	//get the id of the post object array
 	$post_id = $object['id'];
 
 	// meta data fields we wish to make available
 	$splot_meta_fields = ['author' => 'wAuthor', 'license' => 'wLicense', 'footer' => 'wFooter'];
-	
+
 	// array to hold stuff
 	$splot_meta = [];
- 
+
  	foreach ($splot_meta_fields as $meta_key =>  $meta_value) {
 	 	//return the post meta for each field
 	 	$splot_meta[$meta_key] =  get_post_meta( $post_id, $meta_value, true );
 	 }
-	 
+
 	 return ($splot_meta);
 }
 ?>
