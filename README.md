@@ -301,9 +301,9 @@ Creative Commons licenses or other usage rights (including copyright) can be att
 
 Or you can set the option to **Enable users to choose license** which places the same menu on the writing form so users can choose a license (or set to All Rights Reserved).
 
-## Customize the Writing Form Prompts
+## Customize the Writing Form
 
-You can  customize the field labels and the descriptions of the form where people submit new pieces of writing to a TRU Writer site. On your site navigate to the writer form, and activate the Wordpress Customizer from the admin bar. 
+You can customize the field labels and the descriptions of the form where people submit new pieces of writing. From anywhere viewing your site select **Writing Form** from the **Customize** menu. This opens the Customizer with the form page open.
 
 Look for a special section just below **Site Identity** to open:
 
@@ -363,7 +363,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 * **Tag Suggestions** Tags entry field provides autocomplete suggestions. 
 
-**Alternative Text For Header Images** Optional field added that should be used! Provide an alternative text for an image for better web accessibility.
+**Alternative Text For Header Images** Optional field added that should be used by all! Provide an alternative text for an image for better web accessibility.
 
 **Header Image and Caption Options** New theme options to make thes fields required (default), optional, or not used. Sometimes people don't want images atop their writing or used on archive listings.
 
