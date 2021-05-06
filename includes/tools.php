@@ -60,6 +60,19 @@ function splot_redirect_url() {
 }
 
 # -----------------------------------------------------------------
+# Shortcodes
+# -----------------------------------------------------------------
+
+
+// ----- short code for number of assignments in the bank
+add_shortcode('splotcount', 'splot_count_splots');
+
+function splot_count_splots() {
+	return wp_count_posts()->publish;
+}
+
+
+# -----------------------------------------------------------------
 # Media
 # -----------------------------------------------------------------
 
@@ -86,21 +99,80 @@ function get_attachment_caption_by_id( $post_id ) {
 }
 
 
+# -----------------------------------------------------------------
+# Override the Radcliffe Comment Function
+# -----------------------------------------------------------------
 
-add_shortcode("vocaroo", "my_embed_vocaroo");
 
-function my_embed_vocaroo( $atts )  {
-  	extract(shortcode_atts( array( "id" => ''), $atts ));
+if ( ! function_exists( 'truwriter_comment' ) ) {
 
-  	// make sure we have a URL that starts with http
-	if ( $id == '') {
-		return 'Sad face: no vocaroo ID found';
- 	}
+	function truwriter_comment( $comment, $args, $depth ) {
+		switch ( $comment->comment_type ) :
+			case 'pingback' :
+			case 'trackback' :
+		?>
 
- 	return '<div><iframe width="100&" height="60" src="https://vocaroo.com/embed/' . $id . '?autoplay=0" frameborder="0" allow="autoplay"></iframe><br><a href="https://voca.ro/'. $id . '" title="Vocaroo Voice Recorder" target="_blank">View on Vocaroo &gt;&gt;</a></div>';
+		<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+
+			<?php __( 'Pingback:', 'radcliffe' ); ?> <?php comment_author_link(); ?> <?php edit_comment_link( __( '(Edit)', 'radcliffe' ), '<span class="edit-link">', '</span>' ); ?>
+
+		</li>
+		<?php
+				break;
+			default :
+			global $post;
+		?>
+		<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+
+			<div id="comment-<?php comment_ID(); ?>" class="comment">
+
+				<?php
+				echo get_avatar( $comment, 150 );
+				// we have removed the Radcliffe code to display post author
+
+
+				?>
+
+				<div class="comment-inner">
+
+					<div class="comment-header">
+
+						<cite><?php echo get_comment_author_link(); ?></cite>
+
+						<span><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php echo get_comment_date() . ' &mdash; ' . get_comment_time(); ?></a></span>
+
+					</div>
+
+					<div class="comment-content">
+
+						<?php if ( '0' == $comment->comment_approved ) : ?>
+
+							<p class="comment-awaiting-moderation"><?php __( 'Your comment is awaiting moderation.', 'radcliffe' ); ?></p>
+
+						<?php endif; ?>
+
+						<?php comment_text(); ?>
+
+					</div><!-- .comment-content -->
+
+					<div class="comment-actions">
+
+						<?php edit_comment_link( __( 'Edit', 'radcliffe' ), '', '' ); ?>
+
+						<?php comment_reply_link( array_merge( $args, array( 'reply_text' => __( 'Reply', 'radcliffe' ), 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+
+					</div><!-- .comment-actions -->
+
+				</div><!-- .comment-inner -->
+
+			</div><!-- .comment-## -->
+
+		<?php
+			break;
+		endswitch;
+	}
 
 }
-
 
 
 # -----------------------------------------------------------------
@@ -108,7 +180,7 @@ function my_embed_vocaroo( $atts )  {
 # -----------------------------------------------------------------
 
 function truwriter_word_count( $content ) {
-    return str_word_count( strip_tags( $content ) );
+   return str_word_count( strip_tags( $content ) );
 }
 
 function truwriter_preview_notice() {

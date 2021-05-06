@@ -51,6 +51,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College
+* [ETUG Stories](https://etugwriter.opened.ca/)
 * [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
 * [#femedtech Open Space](http://femedtech.net/)
 * [Grinnellians in the Time of Coronavirus](https://resilience.sites.grinnell.edu/) Grinnell College
@@ -65,6 +66,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [OWLTECH Stories](http://stories.owlteh.org/) Open Web For Learning & Teaching Expertise Hub -- a selection of accounts narrating how specific instances of the Open Web can be used for teaching and learning.
 * [Open Education Challenge Collection](https://oecollection.opened.ca/) Responses to the [BCcampus OE Challenge Series](https://oechallenge.opened.ca/)
 * [OpenMed Project Works Showcase](https://showcase.openmedproject.eu/)
+* [Pandemic Whispers](http://whisper.arganee.world)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
 * [Refugee Learning Stories](http://refugeelearningstories.org/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
@@ -361,7 +363,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
-* **Tag Suggestions** Tags entry field provides autocomplete suggestions. 
+* **Tag Suggestions** Tags entry field provides autocomplete suggestions (or at least is working now). 
 
 **Alternative Text For Header Images** Optional field added that should be used by all! Provide an alternative text for an image for better web accessibility.
 
