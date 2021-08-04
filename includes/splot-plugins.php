@@ -58,8 +58,8 @@ class Splot_Theme_Plugin_Enhancements {
 					'<strong>' . esc_html__( 'Reading Time WP plugin', 'truwriter' ) . '</strong>' ),
 			),
 		);
-		
-		
+
+
 		// Set the status of each of these enhancements and determine if a notice is necessary.
 		$this->set_plugin_status();
 
@@ -215,7 +215,7 @@ function splot_enqueue_scripts() {
 	if ( is_admin() && get_user_meta( get_current_user_id(), 'splot_admin_notice', true ) !== 'dismissed' ) {
 
 		// Adds our JS file to the queue that WordPress will load
-		wp_enqueue_script( 'splot_admin_script', get_stylesheet_directory_uri() . '/inc/splot-plugins.js', array( 'jquery' ), '20180901', true );
+		wp_enqueue_script( 'splot_admin_script', get_stylesheet_directory_uri() . '/includes/splot-plugins.js', array( 'jquery' ), '20180901', true );
 
 		// Make some data available to our JS file
 		wp_localize_script( 'splot_admin_script', 'splot_admin', array(
