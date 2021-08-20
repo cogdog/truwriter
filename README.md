@@ -39,6 +39,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 
 * [30,000,000 ACA Stories](http://bones.cogdogblog.com/30million/) (archived)
 * [Alan Levine’s Publications for a portfolio](http://cogdogpapers.trubox.ca/)
+* [Amanda Notes](https://acoolidge.opened.ca/) 
 * [Arganee Journal](http://journal.arganee.world/) open online journal for Networked Narratives and ResNetSem courses
 * [BIOL 312 @ UNBC](https://biol312.opened.ca/) Molecular Cell Physiology (University of Northern British Columbia)
 * [BIOL 420 @ UNBC](https://biol420.opened.ca/) Animal Behaviour (University of Northern British Columbia)
@@ -48,14 +49,16 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Comics and Mass Media](http://graphixia.ca/comicsandmassmedia) (Graphixia)
 * [COVID-19 And LCC: Our Story in Words](https://livetogether.openlcc.net/covid19stories/) Lansing Community College
 * [Community Performace Toolbox](http://communityperformancetoolbox.org/)
+* [Ed Tech F20](https://fall20edtech.trubox.ca/) Thompson Rivers University
 * [EDUHACK Wall](https://wall-it.eduhack.eu/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
 * [English 1102.002: Reading Themes in Literature (Digital Culture)](http://digitalcultureslab.ca/hybrid1102/fall2016-classleads-002) Douglas College
-* [ETUG Stories](https://etugwriter.opened.ca/)
+* [ETUG Stories](https://etugwriter.opened.ca/) Edtech and  instructional design stories from the Educational Technology Users Group (BC)
 * [Farm to School BC](http://trubox.farmtoschoolbc.ca/)
 * [#femedtech Open Space](http://femedtech.net/)
 * [Grinnellians in the Time of Coronavirus](https://resilience.sites.grinnell.edu/) Grinnell College
+* [History 3010](https://hist3010.trubox.ca/) Thompson Rivers University
 * [iTeach](https://iteach.csu.edu.au/) used by Charles Sturt University staff to share their learning and teaching practice
 * [Keene State College Teaching Stories](http://cangialosi.kscopen.org/writer/)
 * [Lee and Brenna's Class Blog](http://www.english2point0.ca/nationalistsuperhero/) Nationalist Superhero (Douglas College)
@@ -75,9 +78,12 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
 * [Salmon in the Tree: Biology 1210](https://biol1210.trubox.ca/) (Thompson Rivers University) is used by teams of "students researching and answering a current biological question using academic sources of information, where the questions have an evolutionary, ecological or diversity theme."
 * [Open Experiments in SDGs](http://sdgs4learning.org/) activity by Jenni Hayman as "a space for sharing open educational resources (OER) related to the United Nations Sustainable Development Goals (SDGs)" 
+* [Sociology Field Reports](https://soci1110.trubox.ca/)  Thompson Rivers University
 * [Stories & Tales](http://mkr12.coventry.domains/tales) English Language and Culture Summer School at  Coventry University
 * [Student Interdisciplinary Education Festival (IDE)](https://idefestival.opened.ca/) Student presentations for Camosun College School of Health & Human Services virtual conference
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
+* [Travellers](https://travellers.trubox.ca/) Study abroad site at Thompson Rivers University
+
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
