@@ -838,7 +838,7 @@ function truwriter_register_theme_customizer( $wp_customize ) {
 	if ( truwriter_option( 'use_cc' ) != 'none' ) {
 
 		$wp_customize->add_setting( 'item_license', array(
-			 'default'           => __( 'Rights / Resuse License', 'radcliffe'),
+			 'default'           => __( 'Resuse License', 'radcliffe'),
 			 'type' => 'theme_mod',
 			 'sanitize_callback' => 'sanitize_text'
 		) );
@@ -1027,7 +1027,7 @@ function truwriter_form_item_license() {
 	 if ( get_theme_mod( 'item_license') != "" ) {
 	 	echo get_theme_mod( 'item_license');
 	 }	else {
-	 	echo 'Rights / Resuse License';
+	 	echo 'Resuse License';
 	 }
 }
 

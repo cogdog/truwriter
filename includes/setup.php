@@ -7,7 +7,7 @@
 // run when this theme is activated
 add_action( 'after_switch_theme', 'truwriter_setup' );
 
-function truwriter_setup () {
+function truwriter_setup() {
 
     // make sure our categories are present, accounted for, named
 	wp_insert_term( 'In Progress', 'category' );
@@ -196,6 +196,58 @@ function splot_save_post_random_check( $post_id ) {
         add_action( 'save_post', 'splot_save_post_random_check' );
 
     }
+}
+
+
+# -----------------------------------------------------------------
+# Sorting posts
+# -----------------------------------------------------------------
+
+add_action( 'pre_get_posts', 'truwriter_order_items' );
+
+function truwriter_order_items( $query ) {
+
+	if ( !is_admin() && $query->is_main_query()  ) {
+
+
+		switch (truwriter_option('sort_applies')) {
+
+			case 'all':
+				if (  $query->is_home() OR $query->is_archive() ) {
+					$query->set( 'orderby', truwriter_option('sort_by')  );
+					$query->set( 'order', truwriter_option('sort_direction') );
+				}
+				break;
+
+			case 'front':
+				if (  $query->is_home() ) {
+					$query->set( 'orderby', truwriter_option('sort_by')  );
+					$query->set( 'order', truwriter_option('sort_direction') );
+				}
+				break;
+			case 'tag':
+				if (  $query->is_tag() ) {
+					$query->set( 'orderby', truwriter_option('sort_by')  );
+					$query->set( 'order', truwriter_option('sort_direction') );
+				}
+				break;
+			case 'cat':
+				if (  $query->is_category() ) {
+					$query->set( 'orderby', truwriter_option('sort_by')  );
+					$query->set( 'order', truwriter_option('sort_direction') );
+				}
+				break;
+			case 'tagcat':
+				if (  $query->is_archive() ) {
+					$query->set( 'orderby', truwriter_option('sort_by')  );
+					$query->set( 'order', truwriter_option('sort_direction') );
+				}
+				break;
+
+		} // switch
+
+	} // if  main query
+
 }
 
 

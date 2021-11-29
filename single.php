@@ -5,7 +5,11 @@
 
 	<?php if ( have_posts() ) :
 
-		while ( have_posts() ) : the_post(); ?>
+		while ( have_posts() ) : the_post();
+
+
+		$wAuthor = ( get_post_meta( $post->ID, 'wAuthor', 1 )) ? get_post_meta( $post->ID, 'wAuthor', 1 ) : get_the_author() ;
+		 ?>
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -56,7 +60,7 @@
 
 					<?php the_title( '<h1 class="post-title">', '</h1>' ); ?>
 
-					<p class="theauthor"><?php $wAuthor=  get_post_meta( $post->ID, 'wAuthor', 1 ); echo twitternameify( $wAuthor );?></p>
+					<p class="theauthor"><?php echo twitternameify( $wAuthor );?></p>
 
 
 					</div><!-- .post-header-inner section-inner -->
@@ -119,9 +123,9 @@
 
 
 
-							<?php if ( truwriter_option( 'use_cc' ) != 'none' ):?>
+							<?php if ( truwriter_option( 'use_cc' ) != 'none'  AND get_post_meta($post->ID, 'wLicense', true) ):?>
 								<!-- creative commons -->
-								<p class="author-description"><strong>Rights: </strong><br />
+								<p class="author-description"><strong><?php truwriter_form_item_license()?>: </strong><br />
 								<?php
 									// get the license code, either define for site or post meta for user assigned
 									$cc_code = ( truwriter_option( 'use_cc' ) == 'site') ? truwriter_option( 'cc_site' ) : get_post_meta($post->ID, 'wLicense', true);

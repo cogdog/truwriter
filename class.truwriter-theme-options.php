@@ -245,6 +245,56 @@ class truwriter_Theme_Options {
 		);
 
 
+
+		// ------- sort options
+		$this->settings['sort_heading'] = array(
+			'section' => 'general',
+			'title'   => '', // Not used for headings.
+			'desc'	 => 'Sorting',
+			'std'    => 'Set the order of published items on home page and archives.',
+			'type'    => 'heading'
+		);
+
+
+		$this->settings['sort_by'] = array(
+			'section' => 'general',
+			'title'   => __( 'Sort by'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'date',
+			'choices' => array (
+							'date' => 'Date Published (default)',
+							'title' => 'Title',
+					)
+		);
+
+		$this->settings['sort_direction'] = array(
+			'section' => 'general',
+			'title'   => __( 'Sort Order'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'DESC',
+			'choices' => array (
+							'DESC' => 'Descending  (default)',
+							'ASC' => 'Ascending',
+					)
+		);
+
+		$this->settings['sort_applies'] = array(
+			'section' => 'general',
+			'title'   => __( 'Sort Applied To'),
+			'desc'    => '',
+			'type'    => 'radio',
+			'std'     => 'all',
+			'choices' => array (
+							'all' => 'All Items',
+							'front' => 'Front Page Only',
+							'cat' => 'Categories Only',
+							'tag' => 'Tags Only',
+							'tagcat' => 'Categories and Tags'
+					)
+		);
+
 		$this->settings['form_heading'] = array(
 			'section' => 'general',
 			'title'   => '', // Not used for headings.

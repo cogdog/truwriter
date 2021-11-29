@@ -231,6 +231,18 @@ You can also choose the "status for new writings" as "publish immediately" and t
 
 Check the **Allow Comments** box to add a standard blog comment field at the bottom of all published pieces. 
 
+### Sort Options
+
+The default settings are for typical blogs where newest content is displayed first. The sort options allow you to change that across the site- the home page and category/tag archives, as well as making that change only in certain areas.
+
+![](images/sort-options.jpg)
+
+**Date Published** is the default option, the order is **Descending**, or newest first, change to **Ascending** to have oldest items appear first. 
+
+Change the sort otder to **Title** to... yes... sort items alphabetically by each item's title.  Use **Ascending** for alphabetical order (A-Z) or **Descending** to reverse (Z-A).
+
+Use the Sort Applies To option to specify where the alternative sorting is applied (for example, just on tags archive, or just the home page).
+
 
 #### Writing Form Settings
 
@@ -380,6 +392,9 @@ You can copy and paste from that .txt file into the import field of the settings
 
 
 ## Relatively Cool New Features & Updates
+
+
+* **Sort Options** TRU Options provides settings to change the sorting of published items to be by date or alphabetical, and can be ascending or descending. There are also settings to apply it only to the home page, or just to tag and/or category archives. Also updated template to properly display archive headings and descriptions (for tag and category archives)
 
 * **Import/Export Settings** The TRU Options interface now features tab or exporting a sites SPLOT settings as a JSON file that can be imported to another site. The documentation tab is gone in lieu of a link to GitHub and mention of a future new documentation site. Hah.
 
