@@ -241,7 +241,8 @@ The default settings are for typical blogs where newest content is displayed fir
 
 Change the sort otder to **Title** to... yes... sort items alphabetically by each item's title.  Use **Ascending** for alphabetical order (A-Z) or **Descending** to reverse (Z-A).
 
-Use the Sort Applies To option to specify where the alternative sorting is applied (for example, just on tags archive, or just the home page).
+
+Use the **Sort Applies To** option to specify where the alternative sorting is applied (for example, just on tags archive, or just the home page).
 
 
 #### Writing Form Settings
@@ -376,6 +377,34 @@ A small thing, but a corny heading of "SO IT WAS WRITTEN" was hardwired into the
 
 ![](images/meta-heading.jpg)
 
+## Shortcodes
+
+### Display All Tags
+
+The basic use is just
+
+`[taglist]`
+
+which displays all tags used in alphabetical order, each linked to an archive, and the number of times used listed.
+
+Optional parameters include:
+
+* `number=10` limit to ten tags (default=0 or all tags)
+* `show_count=false` hides the display of the number of times tag used (default=true)
+* `mincount=2` will only show tags used 2 or more times (default=1)
+* `orderby="count"` to order results by the number of times tag used (default="name")
+* `order="DESC"` to list in descending order (default="ASC")
+* `hide_empty=0` to list tags not used (default=1)
+
+In use, this will display the 20 most used tags
+
+`[taglist number=20 orderby="count" order="DESC"]`
+
+### Count of Published items
+
+Use [splotcount] to display the number of all published items
+
+
 ## Optional / Suggested Add-ons
 
 ### OpenGraph Tags for Social Media Sharing
@@ -393,6 +422,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Relatively Cool New Features & Updates
 
+* **Tag List** Shortcode provides a way to list all tags used, set the sorting, and optionally limit number of tags shown
 
 * **Sort Options** TRU Options provides settings to change the sorting of published items to be by date or alphabetical, and can be ascending or descending. There are also settings to apply it only to the home page, or just to tag and/or category archives. Also updated template to properly display archive headings and descriptions (for tag and category archives)
 
