@@ -426,6 +426,8 @@ You can copy and paste from that .txt file into the import field of the settings
 
 * **Sort Options** TRU Options provides settings to change the sorting of published items to be by date or alphabetical, and can be ascending or descending. There are also settings to apply it only to the home page, or just to tag and/or category archives. Also updated template to properly display archive headings and descriptions (for tag and category archives)
 
+* **Admin Only Use of Tags/Categories** Teme options can be set to let tags and categories be set only by admins for internal organization, and not shown on writing form
+
 * **Import/Export Settings** The TRU Options interface now features tab or exporting a sites SPLOT settings as a JSON file that can be imported to another site. The documentation tab is gone in lieu of a link to GitHub and mention of a future new documentation site. Hah.
 
 * **Tag Suggestions** Tags entry field provides autocomplete suggestions (or at least is working now). 

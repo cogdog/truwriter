@@ -748,7 +748,7 @@ get_header('write');
 				<?php endif?>
 
 
-				<?php if (truwriter_option('show_cats') ):?>
+				<?php if (truwriter_option('show_cats') == '1' ):?>
 
 				<fieldset  id="theCats">
 					<label for="wCats"><?php truwriter_form_item_categories() ?></label>
@@ -775,7 +775,7 @@ get_header('write');
 
 				<?php endif?>
 
-				<?php if (truwriter_option('show_tags') ):?>
+				<?php if (truwriter_option('show_tags') == '1' ):?>
 
 				<fieldset id="theTags">
 					<label for="wTags"><?php truwriter_form_item_tags() ?></label>
