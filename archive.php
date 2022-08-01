@@ -1,4 +1,8 @@
-<?php get_header(); ?>
+<?php 
+
+$archive_description = ''; // initialize empty
+
+get_header(); ?>
 
 <div class="content">
 
@@ -39,7 +43,7 @@
 					<?php
 						$archive_description = get_the_archive_description();
 
-						if ( ! empty( archive_description ) )
+						if ( ! empty( $archive_description ) )
 							echo '<div class="archive-description">' .
 								wp_kses_post( wpautop( $archive_description ) ) .
 							'</div><!-- .archive-description -->';
