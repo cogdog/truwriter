@@ -40,6 +40,9 @@ function truwriter_enqueue_options_scripts() {
 	// custom jquery for the options admin screen
 	wp_register_script( 'truwriter_options_js' , get_stylesheet_directory_uri() . '/js/jquery.truwriter-options.js', null , '1.0', TRUE );
 	wp_enqueue_script( 'truwriter_options_js' );
+	
+	// css for splot  options
+	wp_enqueue_style( 'truwriter-options', get_stylesheet_directory_uri() . '/css/truwriter-options.css' );
 }
 
 // load theme options Settings

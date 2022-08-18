@@ -1,0 +1,16 @@
+/* h/t https://www.benmarshall.me/responsive-iframes/ */
+
+.iframe-container {
+  overflow: hidden;
+  /* 9:16 aspect ratio */
+  padding-top: 56%;
+  position: relative;
+}
+.iframe-container iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}

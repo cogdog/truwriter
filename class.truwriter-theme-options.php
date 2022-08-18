@@ -45,6 +45,9 @@ class truwriter_Theme_Options {
 	public function add_pages() {
 		add_theme_page( 'TRU Writer Options', 'TRU Writer Options', 'manage_options', 'truwriter-options', array( &$this, 'display_options_page' ) );
 
+		// documents page, but don't add to menu
+		$docs_page = add_theme_page( 'TRU Writer Documentation', '', 'manage_options', 'truwriter-docs', array( &$this, 'display_docs' ) );
+		
 		// import/export settings page
 		add_theme_page( 'Import/Export', 'Import/Export TRU Writer Options', 'manage_options', 'splot-settings', array( &$this, 'display_import_export_settings' ) );
 	}
@@ -68,7 +71,7 @@ class truwriter_Theme_Options {
 
 		settings_fields( 'truwriter_options' );
 
-		echo  '<h2 class="nav-tab-wrapper"><a class="nav-tab nav-tab-active" href="?page=truwriter-options">Settings</a><a class="nav-tab" href="?page=splot-settings">Import/Export</a></h2>';
+		echo  '<h2 class="nav-tab-wrapper"><a class="nav-tab nav-tab-active" href="?page=truwriter-options">Settings</a><a class="nav-tab" href="?page=truwriter-docs">Documentation</a><a class="nav-tab" href="?page=splot-settings">Import/Export</a></h2>';
 
 		do_settings_sections( $_GET['page'] );
 
@@ -109,6 +112,30 @@ class truwriter_Theme_Options {
 		</script>';
 	}
 
+
+	/*  display documentation in a tab */
+	public function display_docs() {
+		// This displays on the "Documentation" using docsify-this to render directly from repo
+
+	 	echo '<div class="wrap">
+		<h1>TRU Writer Documentation</h1>
+		<h2 class="nav-tab-wrapper">
+		<a class="nav-tab" href="?page=truwriter-options">Settings</a>
+		<a class="nav-tab nav-tab-active" href="?page=truwriter-docs">Documentation</a><a class="nav-tab" href="?page=splot-settings">Import/Export</a></h2>
+		<p>The most current TRU Writer documentation is displayed below (<a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/&amp;toc=true" target="_blank">view in a new window</a>). Generated with <a href="https://docsify-this.net/" target="_blank">Docsify This</a>.</p>';
+
+		echo '<div class="iframe-container">
+		
+		
+		<iframe src="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/" title="TRU Collector Documentation" allowfullscreen><a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/&toc=true" target="_blank">View Documentation</a></iframe>
+		</div>
+	</div>';
+
+
+	}
+	
+	
+
 	/*  display import/export options in a tab */
 	public function display_import_export_settings() {
 		// ------h/t https://pippinsplugins.com/building-settings-import-export-feature/
@@ -120,8 +147,10 @@ class truwriter_Theme_Options {
 		echo '<form method="post">
 
 		<h2 class="nav-tab-wrapper">
-		<a class="nav-tab" href="?page=truwriter-options">Settings</a>
-		<a class="nav-tab nav-tab-active" href="?page=splot-settings">Import/Export</a></h2><h3>Export Settings</h3><p>Export the TRU Writer settings for this site as a .json file. This allows you to easily import the configuration into another site. </p><p><input type="hidden" name="splot_action" value="export_settings" /></p>
+		<a class="nav-tab" href="?page=truwriter-options">Settings</a><a class="nav-tab" href="?page=truwriter-docs">Documentation</a>
+		<a class="nav-tab nav-tab-active" href="?page=splot-settings">Import/Export</a></h2>
+		
+		<h3>Export Settings</h3><p>Export the TRU Writer settings for this site as a .json file. This allows you to easily import the configuration into another site. </p><p><input type="hidden" name="splot_action" value="export_settings" /></p>
 			<p>';
 			wp_nonce_field( 'splot_settings_export_nonce', 'splot_settings_export_nonce' );
 			submit_button( __( 'Export Settings' ), 'secondary', 'do_export_settings', false );
@@ -589,7 +618,7 @@ Edit this to be more appropriate for your onw site as sample starting content.',
 	public function display_general() {
 		// section heading for general setttings
 
-		echo '<p>These settings manage the behavior and appearance of your TRU Writer site. See the <a href="https://github.com/cogdog/truwriter" target="_blank">the documentation at the theme source on GitHub</a> (a new SPLOT documentation site is in development) .</p><p>If this kind of stuff has any value to you, please consider supporting me so I can do more!</p><p style="text-align:center"><a href="https://patreon.com/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-patreon.png" alt="donate on patreon"></a> &nbsp; <a href="https://paypal.me/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-paypal.png" alt="donate on paypal"></a></p> ';
+		echo '<p>These settings manage the behavior and appearance of your TRU Writer site. Check the documentation tab for all the details.</p><p>If this kind of stuff has any value to you, please consider supporting me so I can do more!</p><p style="text-align:center"><a href="https://patreon.com/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-patreon.png" alt="donate on patreon"></a> &nbsp; <a href="https://paypal.me/cogdog" target="_blank"><img src="https://cogdog.github.io/images/badge-paypal.png" alt="donate on paypal"></a></p> ';
 	}
 
 

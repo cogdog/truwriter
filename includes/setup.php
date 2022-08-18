@@ -393,9 +393,8 @@ function truwriter_tinymce_buttons($buttons) {
 	if ( ( $key = array_search($remove,$buttons) ) !== false )
 		unset($buttons[$key]);
 
-	// now add the image button in, and the second one that acts like a label
+	// now add the image button in,
 	$buttons[] = 'image';
-	$buttons[] = 'imgbutton';
 
 	return $buttons;
  }
