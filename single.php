@@ -186,30 +186,8 @@
 
 					<div class="post-nav">
 					<h3 class="meta-title"><?php _e('MORE TO READ','radcliffe'); ?></h3>
-						<?php
-						$next_post = get_next_post();
-						if (!empty( $next_post )): ?>
-
-							<p class="post-nav-next">
-
-								<a title="<?php _e('Next Writing:', 'radcliffe'); echo ' ' . get_the_title($next_post->ID); ?>" href="<?php echo get_permalink( $next_post->ID ); ?>"><?php echo get_the_title($next_post->ID); ?></a>
-
-							</p>
-
-						<?php endif; ?>
-
-						<?php
-						$prev_post = get_previous_post();
-						if (!empty( $prev_post )): ?>
-
-							<p class="post-nav-prev">
-
-							<a title="<?php _e('Previous Writing:', 'radcliffe'); echo ' ' . get_the_title($prev_post->ID); ?>" href="<?php echo get_permalink( $prev_post->ID ); ?>"><?php echo get_the_title($prev_post->ID); ?></a>
-
-							</p>
-
-						<?php endif; ?>
-
+						<?php the_post_navigation( array( 'class' => 'post-nav' ) );?>
+						
 						<div class="clear"></div>
 
 					</div> <!-- /post-nav -->
