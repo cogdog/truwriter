@@ -4,9 +4,7 @@ by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 [![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-## What is this?
-
-This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish their writing, including rich media content, without needing to login or understand the backend of Wordpress. 
+This Wordpress Theme powers [TRU Writer](http://splot.ca/writer/); a site that allows people to publish writing to your site, including rich media content, without needing to login or understand the backend of Wordpress. 
 
 ![](images/tru-writer-i-can-writer.jpg "Sample TRU Writer site front page with image of dog and and an overlay of the writing form")
 
