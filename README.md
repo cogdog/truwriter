@@ -139,12 +139,17 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 *Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
 
 ## Updating TRU Writer
-Latest version:[![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
+Current version [![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 
-Compare to version reported in your list of themes. Note that WordPress's reporting of themes being up to date does not reflect custom themes such as this one. 
+Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does not reflect custom themes such as this one, if what you see is less than the version above, here is how to update your copy of the theme. 
 
-As of WordPress version 5.5, themes uploaded as .ZIP files can now be updated the same way you installed it. Just download the newest version, and update it by going to **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
+*This applies if you are running WordPress on your own web hosting platform where you have the ability to install themes and plugins. If you are on a shared/multisite WordPress server, please contact your friendly technical admins and request that they update TRU Writer.*
 
+Custom (a.k.a unique!) theme like TRU Writer are installed by uploading a `.zip` file and they can now be updated the same way you installed it. It's that easy! 
+
+Just [download the newest version of TRU Writer as a .zip ](https://github.com/cogdog/truwriter/archive/refs/heads/master.zip). Now in your WordPress Dashboard, go to **Themes**, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
+
+When done, your site should report this current version as active.
 
 
 ## Inserting Demo Content
