@@ -1,6 +1,10 @@
 # TRU Writer Wordpress Theme
 by Alan Levine http://cogdog.info/ or http://cogdogblog.com/
 
+
+[![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 -----
 *If this kind of stuff has any value to you, please consider supporting me so I can do more!*
 
@@ -73,6 +77,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [OpenMed Project Works Showcase](https://showcase.openmedproject.eu/)
 * [Pandemic Whispers](http://whisper.arganee.world)
 * [Prototype for Small Cities Imprint journal](http://smallcities.trubox.ca/)
+* [Public Domain Stories](http://lauragibbs.net/pdstories/) Laura Gibbs
 * [Refugee Learning Stories](http://refugeelearningstories.org/)
 * [Research Methodology in Education](http://lled500.trubox.ca/) (University of British Columbia)
 * [Rethink Learning Design](https://rethinkldsplot.opened.ca/)
@@ -83,7 +88,7 @@ Beyond [the demo site used as a pre-made import](https://lab.cogdogblog.com/writ
 * [Student Interdisciplinary Education Festival (IDE)](https://idefestival.opened.ca/) Student presentations for Camosun College School of Health & Human Services virtual conference
 * [The Apocalypse in Film and Literature](http://engl3140.trubox.ca/) Thompson Rivers University English course
 * [Travellers](https://travellers.trubox.ca/) Study abroad site at Thompson Rivers University
-
+* [Trickster Stories](http://lauragibbs.net/trickster/) Laura Gibbs
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
@@ -110,10 +115,6 @@ You can download a ZIP file of this theme via the green **Code*" button above (u
 The zip can be uploaded directly to your site via **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. If you run into size upload limits or just prefer going old school like me, unzip the package and ftp the entire folder into your `wp-content/themes` directory.
 
 To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in the Wordpress dashboard under **Appearance** --> **Themes**.  
-
-### Updating the TRU Writer Theme (manually)
-
-As of WordPress version 5.5, themes uploaded as .ZIP files can now be updated the same way you installed it. Just download the newest version, and update it by going to **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
 
 ### Installing TRU Writer in One Click with WP Pusher (get automatic updates!)
 
@@ -144,6 +145,15 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 ![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
 
 *Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
+
+## Updating TRU Writer
+Latest version:[![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
+
+Compare to version reported in your list of themes. Note that WordPress's reporting of themes being up to date does not reflect custom themes such as this one. 
+
+As of WordPress version 5.5, themes uploaded as .ZIP files can now be updated the same way you installed it. Just download the newest version, and update it by going to **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
+
+
 
 ## Inserting Demo Content
 
