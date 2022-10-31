@@ -12,7 +12,7 @@
 			$total_pages = ceil( $published_post_count / $posts_per_page );
 
 			$paging_header = '';
-			$writer_header = ( get_query_var('writer')) ? $published_post_count . ' Items Written By: ' . urldecode(get_query_var('writer')) :  '';
+			$writer_header = ( get_query_var('writer')) ? 'Written By: ' . urldecode(get_query_var('writer')) :  '';
 			
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			
