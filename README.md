@@ -28,6 +28,7 @@ The original TRU Writer was developed under a [Thompson Rivers University Open L
 [![Thompson Rivers University](https://cogdog.github.io/images/tru.jpg)](https://tru.ca) [![Reclaim Hosting](https://cogdog.github.io/images/reclaim.jpg)](https://reclaimhosting.com) [![OpenETC](https://cogdog.github.io/images/openetc.jpg)](https://opened.ca) [![Disruptive Media Learning Lab](https://cogdog.github.io/images/dmll.jpg)](https://dmll.org.uk/)   [![Supporters on Patreon](https://cogdog.github.io/images/patreon.jpg)](https://patreon.com/cogdog) 
 
 *If this kind of stuff has any value to you, please consider supporting me so I can do more!*
+
 [![Support me on Patreon](http://cogdog.github.io/images/badge-patreon.png)](https://patreon.com/cogdog) [![Support me on via PayPal](http://cogdog.github.io/images/badge-paypal.png)](https://paypal.me/cogdog)
 
 ## Examples in Action 
