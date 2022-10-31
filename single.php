@@ -104,8 +104,11 @@
 						<div class="post-author-inner">
 
 
-
-							<p class="author-description"><strong>Author:</strong> <?php echo $wAuthor; ?></p>
+							<?php if ($wAuthor) :?>
+								<p class="author-description"><strong>Author:</strong> 
+									<?php echo '<a href="' . get_site_url() . '/?writer=' . urlencode($wAuthor) . '">' . $wAuthor . '</a>' ; ?>
+								</p>
+							<?php endif?>
 
 							<p class="author-description"><strong>Published:</strong> <?php the_time(get_option('date_format')); ?></p>
 							<p class="author-description"><strong>Word Count:</strong> <?php  echo truwriter_word_count( get_the_content() );?> </p>

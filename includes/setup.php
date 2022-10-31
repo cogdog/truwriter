@@ -10,7 +10,6 @@ add_action( 'after_switch_theme', 'truwriter_setup' );
 function truwriter_setup() {
 
     // make sure our categories are present, accounted for, named
-	wp_insert_term( 'In Progress', 'category' );
 	wp_insert_term( 'Published', 'category' );
 
 	// Look for existence of pages with the appropriate template, if not found
@@ -97,7 +96,7 @@ function truwriter_change_post_label() {
 add_action('admin_menu', 'truwriter_drafts_menu');
 
 function truwriter_drafts_menu() {
-	add_submenu_page('edit.php', 'Writings in Progress (not submitted)', 'In Progress', 'edit_pages', 'edit.php?post_status=draft&post_type=post&cat=' . get_cat_ID( 'In Progress' ) );
+	add_submenu_page('edit.php', 'Writings in Progress (drafts)', 'In Draft', 'edit_pages', 'edit.php?post_status=draft&post_type=post');
 
 	add_submenu_page('edit.php', 'Writings Submitted for Approval', 'Pending Approval', 'edit_pages', 'edit.php?post_status=pending&post_type=post' );
 }
@@ -125,6 +124,7 @@ function truwriter_queryvars( $qvars ) {
 	$qvars[] = 'random'; // random flag
 	$qvars[] = 'elink'; // edit link flag
 	$qvars[] =  'ispre'; // another preview flag
+	$qvars[] =  'writer'; // for the writer name
 
 	return $qvars;
 }
@@ -388,8 +388,6 @@ function truwriter_tinymce_settings( $settings ) {
 	return $settings;
 }
 
-
-
 function truwriter_register_buttons( $plugin_array ) {
 	$plugin_array['imgbutton'] = get_stylesheet_directory_uri() . '/js/image-button.js';
 	return $plugin_array;
@@ -486,6 +484,93 @@ function truwriter_firstview( $content ) {
     }
 
     return $content;
+}
+
+
+# -----------------------------------------------------------------
+# Modify Posts Menu
+# -----------------------------------------------------------------
+
+// first remove the WP Author column, not needed
+add_filter( 'manage_posts_columns', 'truwriter_custom_posts_columns' );
+ 
+
+// redo the posts columns
+function truwriter_custom_posts_columns( $columns ) {
+	
+	// remmove wordpress author column
+	unset(
+		$columns['author']
+	);
+  
+  // now add new column for the SPLOT author
+  $columns['writer'] = 'Writer';
+  
+  // move the writer column
+  // h/t https://www.isitwp.com/change-wordpress-admin-post-columns-order/
+  $n_columns = array();
+  $move = 'writer'; // what to move
+  $before = 'categories'; // move before this
+  foreach($columns as $key => $value) {
+    if ($key==$before){
+      $n_columns[$move] = $move;
+    }
+      $n_columns[$key] = $value;
+  }
+  return $n_columns;
+}
+
+
+// populate the writers column
+add_action('manage_posts_custom_column', 'truwriter_columns_content', 10, 2);
+
+// Show splot author name 
+function truwriter_columns_content($column_name, $post_id) {
+    if ($column_name == 'writer') {
+    	echo '<a href="' . admin_url( 'edit.php?writer=' . urlencode(get_post_meta( $post_id, 'wAuthor', true  ))) . '">' . get_post_meta( $post_id, 'wAuthor', true  ) .  '</a>' ;
+    }
+}
+
+// enable writer as a sortable column
+add_filter( 'manage_edit-post_sortable_columns', 'truwriter_manage_sortable_columns' );
+
+function truwriter_manage_sortable_columns( $sortable_columns ) {
+
+   $sortable_columns[ 'writer' ] = 'writer';
+   return $sortable_columns;
+
+}
+
+// Query adjustments for writer columns
+add_action( 'pre_get_posts', 'truwriter_query_sort');
+
+function truwriter_query_sort( $query ) {
+	
+	// admin stuff!
+    if ( is_admin() ) {
+    
+    	// column sort by writer
+        if ($query->get( 'orderby') == 'writer' ) {
+        	$query->set('meta_key','wAuthor');
+        	$query->set('orderby','meta_value');
+    	}
+
+		// check to display posts just by the SPLOT Writer name
+		if ( get_query_var('writer') ) {
+			$query->set( 'meta_key', 'wAuthor' );
+			$query->set( 'meta_value', $query->query_vars['writer'] );
+		}
+		
+	} else {
+		// public check for writer value
+    	if ( get_query_var('writer') ) {
+    		$query->set( 'meta_key', 'wAuthor' );
+        	$query->set( 'meta_value', urldecode( get_query_var('writer') ) );
+
+    	} else { 	
+       	 	return;
+       	}
+    }
 }
 
 
@@ -742,6 +827,7 @@ add_filter( 'login_headertext', 'splot_login_logo_url_title' );
 function splot_login_logo_url_title() {
 	return 'The grand mystery of all things SPLOT';
 }
+
 
 
 # -----------------------------------------------------------------

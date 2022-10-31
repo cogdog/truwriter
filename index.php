@@ -7,22 +7,29 @@
 		<div class="posts">
 	
 			<?php
+			$paging_header = '';
+			$writer_header = ( get_query_var('writer')) ? 'Written By: ' . urldecode(get_query_var('writer')) :  '';
 			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			$total_post_count = wp_count_posts();
 			$published_post_count = $total_post_count->publish;
 			$total_pages = ceil( $published_post_count / $posts_per_page );
 			
-			if ( "1" < $paged ) : ?>
-			
-				<div class="page-title section small-padding">
-				
-					<h4 class="section-inner"><?php printf( __('Page %s of %s', 'radcliffe'), $paged, $wp_query->max_num_pages ); ?></h4>
-					
+			if ( $paged > "1" ) {
+				$paging_header = '(Page '. $paged .  ' of ' . $wp_query->max_num_pages .  ')';
+			}
+			?>
+
+			<?php if ( $writer_header OR $paging_header ) : ?>
+				<div class="page-title section light-padding show-writer">
+
+					<div class="section-inner archive-header">
+						<h1 class="archive-title">
+							<?php echo $writer_header . ' ' . $paging_header;?>
+						</h1>
+					</div>
 				</div>
-				
-				<div class="clear"></div>
-			
-			<?php endif; ?>
+
+			<?php endif?>
 				
 		    	<?php while (have_posts()) : the_post(); ?>
 		    	
