@@ -122,12 +122,12 @@ class truwriter_Theme_Options {
 		<h2 class="nav-tab-wrapper">
 		<a class="nav-tab" href="?page=truwriter-options">Settings</a>
 		<a class="nav-tab nav-tab-active" href="?page=truwriter-docs">Documentation</a><a class="nav-tab" href="?page=splot-settings">Import/Export</a></h2>
-		<p>The most current TRU Writer documentation is displayed below (<a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/&amp;toc=true" target="_blank">view in a new window</a>). Generated with <a href="https://docsify-this.net/" target="_blank">Docsify This</a>.</p>';
+		<p>The most current TRU Writer documentation is displayed below (<a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master&homepage=docs.md&toc=true&edit-link=https://github.com/cogdog/truwriter/blob/master/docs.md#/" target="_blank">view in a new window</a>). Generated with <a href="https://docsify-this.net/" target="_blank">Docsify This</a>.</p>';
 
 		echo '<div class="iframe-container">
 		
 		
-		<iframe src="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/" title="TRU Collector Documentation" allowfullscreen><a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master/&toc=true" target="_blank">View Documentation</a></iframe>
+		<iframe src="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master&homepage=docs.md&sidebar=true&edit-link=https://github.com/cogdog/truwriter/blob/master/docs.md#/" title="TRU Writer Documentation" allowfullscreen><a href="https://docsify-this.net/?basePath=https://raw.githubusercontent.com/cogdog/truwriter/master&homepage=docs.md&toc=true&edit-link=https://github.com/cogdog/truwriter/blob/master/docs.md#/" target="_blank">View Documentation</a></iframe>
 		</div>
 	</div>';
 
