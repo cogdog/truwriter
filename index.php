@@ -7,12 +7,14 @@
 		<div class="posts">
 	
 			<?php
-			$paging_header = '';
-			$writer_header = ( get_query_var('writer')) ? 'Written By: ' . urldecode(get_query_var('writer')) :  '';
-			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			$total_post_count = wp_count_posts();
 			$published_post_count = $total_post_count->publish;
 			$total_pages = ceil( $published_post_count / $posts_per_page );
+
+			$paging_header = '';
+			$writer_header = ( get_query_var('writer')) ? $published_post_count . ' Items Written By: ' . urldecode(get_query_var('writer')) :  '';
+			
+			$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 			
 			if ( $paged > "1" ) {
 				$paging_header = '(Page '. $paged .  ' of ' . $wp_query->max_num_pages .  ')';
