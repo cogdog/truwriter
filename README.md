@@ -141,7 +141,9 @@ In your cpanel, under **Applications** go to **All Applications**. This theme is
 ## Updating TRU Writer
 Current version [![Wordpress version badge](https://img.shields.io/badge/version-3.27-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 
-Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does not reflect custom themes such as this one, if what you see is less than the version above, here is how to update your copy of the theme. 
+Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does not reflect custom themes such as this one. 
+
+If what you see is less than the version above, here is how to update your copy of the theme. 
 
 *This applies if you are running WordPress on your own web hosting platform where you have the ability to install themes and plugins. If you are on a shared/multisite WordPress server, please contact your friendly technical admins and request that they update TRU Writer.*
 
