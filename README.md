@@ -147,7 +147,7 @@ If what you see is less than the version above, here is how to update your copy 
 
 *This applies if you are running WordPress on your own web hosting platform where you have the ability to install themes and plugins. If you are on a shared/multisite WordPress server, please contact your friendly technical admins and request that they update TRU Writer.*
 
-Custom (a.k.a unique!) theme like TRU Writer are installed by uploading a `.zip` file and they can now be updated the same way you installed it. It's that easy! 
+Custom (a.k.a unique!) WordPress themes like TRU Writer are installed by uploading a `.zip` file. They can now be updated the same way you installed it. It's that easy! 
 
 Just [download the newest version of TRU Writer as a .zip ](https://github.com/cogdog/truwriter/archive/refs/heads/master.zip). Now in your WordPress Dashboard, go to **Themes**, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
 
