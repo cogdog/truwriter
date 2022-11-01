@@ -4,7 +4,7 @@ by Alan Levine https://cog.dog or https://cogdogblog.com/
 [![Wordpress version badge](https://img.shields.io/badge/version-3.3-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-:house: TRU Collector |
+:house: TRU Writer |
 [:mag: Examples](examples.md) | 
 [:rocket: Installing](install.md) | 
 [:book: Documentation](docs.md) | 
