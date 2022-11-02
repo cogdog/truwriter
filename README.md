@@ -8,7 +8,7 @@ by Alan Levine https://cog.dog or https://cogdogblog.com/
 [:mag: Examples](examples.md) | 
 [:rocket: Installing](install.md) | 
 [:book: Documentation](docs.md) | 
-[:speech_balloon: Discussions](https://github.com/cogdog/tru-collector/discussions)
+[:speech_balloon: Discussions](https://github.com/cogdog/truwriter/discussions)
 
 
 This Wordpress Theme powers that look like [TRU Writer Demo](https://splot.ca/writer/); a site that allows people to publish writing to your site, including rich media content, without needing to login or understand the backend of Wordpress (or mess around with Block Editors).  It is one of a collection of the Things Known as SPLOTs, explore these mysterious entities at  https://splot.ca
