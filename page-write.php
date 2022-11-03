@@ -60,10 +60,10 @@ if ( isset( $_POST['truwriter_form_make_submitted'] ) && wp_verify_nonce( $_POST
  		$wTitle = 					sanitize_text_field( stripslashes( $_POST['wTitle'] ) );
  		$wAuthor = 					( isset ($_POST['wAuthor'] ) ) ? sanitize_text_field( stripslashes($_POST['wAuthor']) ) : 'Anonymous';
  		$wEmail = 					( isset ($_POST['wEmail'] ) ) ?  sanitize_text_field( $_POST['wEmail'] ) : '';
- 		$wTags = 					sanitize_text_field( $_POST['wTags'] );
- 		$wText = 					wp_kses_post( $_POST['wText'] );
- 		$wNotes = 					sanitize_text_field( stripslashes( $_POST['wNotes'] ) );
- 		$wFooter = 					sanitize_text_field( stripslashes( $_POST['wFooter'] ) ) ;
+ 		$wTags = 					( isset ($_POST['wTags'] ) ) ? sanitize_text_field( $_POST['wTags'] ):'';
+ 		$wText = 					( isset ($_POST['wText'] ) ) ? wp_kses_post( $_POST['wText'] ):'';
+ 		$wNotes = 					( isset ($_POST['wNotes'] ) ) ? sanitize_text_field( stripslashes( $_POST['wNotes'] ) ):'';
+ 		$wFooter = 					( isset ($_POST['wFooter'] ) ) ? sanitize_text_field( stripslashes( $_POST['wFooter'] ) ):'' ;
 
 		$wHeaderImage_id =			( isset ( $_POST['wHeaderImage'] ) ) ? $_POST['wHeaderImage'] : 0;
  		$linkEmailed = 				$_POST['linkEmailed'];

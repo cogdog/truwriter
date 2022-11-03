@@ -7,7 +7,7 @@ Using this theme requires a self-hosted--or institutionally hosted (lucky you)--
 ## Installing TRU Writer
 
 
-The TRU Writer is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`.
+The TRU Writer is a child theme based on [the free and elegant Radcliffe theme by Anders Noren](https://wordpress.org/themes/radcliffe). Install this theme first from within the Wordpress Dashboard under **Appearance** -- **Themes** searching on `Radcliffe`. It only needs to present in your site.
 
 ### Installing TRU Writer From Scratch
 
@@ -15,7 +15,9 @@ You can [download a .zip file of this theme](https://github.com/cogdog/truwriter
 
 The zip can be uploaded directly to your site via **Themes** in the Wordpress dashboard, then **Add Theme** and finally **Upload Theme**. If you run into size upload limits or just prefer going old school like me, unzip the package and ftp the entire folder into your `wp-content/themes` directory.
 
-To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in the Wordpress dashboard under **Appearance** --> **Themes**.  
+To get the TRU Writer working all you need to do is activate the "TRU Writer" theme when it appears in the Wordpress dashboard under **Appearance** --> **Themes**.  Now you can move on to learn about setting it up in the [TRU Writer Documentation](https://github.com/cogdog/truwriter/docs.md).
+
+You can update the theme at any time by uploading a newer version through the same steps above (check the [theme page](https://github.com/cogdog/truwriter) for the current version).
 
 ### Installing TRU Writer in One Click with WP Pusher (get automatic updates!)
 
@@ -36,16 +38,6 @@ Look under **WP Pusher** for **Install Theme**. In the form that appears, under 
 Woah Neo?
 
 Not only does this install the theme without any messy download/uploads, each time I update the theme on GitHub, your site will be automatically updated to the newest version. 
-
-### Installing in One Click From Reclaim Hosting (get semi automatic updates!)
-
-If you are wise enough to host your web sites at [Reclaim Hosting](http://reclaimhosting.com/) you have the option of installing a fully functioning site with this theme ([a copy of the demo site](http://lab.cogdogblog.com/writer/)) including recommended plugins, configured settings and sample content, all done  in one click. *But wait there is more!* With this method of installing your site, future updates to the theme are automatically added to your site (though not as frequently as the WP Pusher method).
-
-In your cpanel, under **Applications** go to **All Applications**. This theme is available listed under Fratured Applications; just install from there.
-
-![](images/reclaim-featured.jpg "Reclaim Hosting Featured Applications")
-
-*Note that unlike other WordPress installs, this one will not preserve your username/password, so be sure to save that information.* When it's done, log into your new site and start making it your own. 
 
 ## Inserting Demo Content
 
