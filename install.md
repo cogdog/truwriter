@@ -1,6 +1,6 @@
 # Installing The TRU Writer Theme
 
-Here are your instructions for installing the[TRU Writer SPLOT WordPress theme](https://github.com/cogdog/truwriter).
+Here are your instructions for installing the [TRU Writer SPLOT WordPress theme](https://github.com/cogdog/truwriter).
 
 Using this theme requires a self-hosted--or institutionally hosted (lucky you)-- Wordpress site (the kind that you download from [wordpress.org](http://www.wordpress.org). You cannot use this theme on the free "wordpress.com" site unless you have a business plan. Maybe check out [Reclaim Hosting](https://reclaimhosting.com/) if you need to set up your own hosting space. They are awesome.
 

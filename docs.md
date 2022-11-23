@@ -262,9 +262,12 @@ You can copy and paste from that .txt file into the import field of the settings
 
 Current version [![Wordpress version badge](https://img.shields.io/badge/version-3.3-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 
-Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does **not** reflect custom themes such as this one. 
+Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does **not** reflect custom themes such as this one.  If what you see is less than the version above, here is how to update your copy of TRU Writer. 
 
-If what you see is less than the version above, here is how to update your copy of TRU Writer. 
+If you [installed TRU Collector using the WP-Pusher plugin[(https://github.com/cogdog/truwriter/blob/master/install.md#installing-tru-writer-in-one-click-with-wp-pusher-get-automatic-updates), updates can be made automatic or done in one click!
+
+Otherwise, if you installed manually, updates are not too hard to do.
+
 
 *This applies if you are running WordPress on your own web hosting platform where you have the ability to install themes and plugins. If you are on a shared/multisite WordPress server, please contact your friendly technical admins and request that they update TRU Writer.*
 
@@ -273,4 +276,12 @@ Custom (a.k.a unique!) WordPress themes like TRU Writer are installed by uploadi
 Just [download the newest version of TRU Writer as a .zip ](https://github.com/cogdog/truwriter/archive/refs/heads/master.zip). Now in your WordPress Dashboard, go to **Themes**, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
 
 When done, your site should report this current version as active.
+
+
+
+## Got Questions
+
+This is quite a lot to take in, but these options and settings have been designed to allow you to change the way your site works that other wise would require custom programming. They also reflect the feedback of other users of TRU Writer.
+
+Please make use of the [Discussion space on GitHub](https://github.com/cogdog/truwriter/discussions/)! I am egaer to hear from you.
 
