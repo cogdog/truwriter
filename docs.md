@@ -264,7 +264,7 @@ Current version [![Wordpress version badge](https://img.shields.io/badge/version
 
 Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does **not** reflect custom themes such as this one.  If what you see is less than the version above, here is how to update your copy of TRU Writer. 
 
-If you [installed TRU Collector using the WP-Pusher plugin[(https://github.com/cogdog/truwriter/blob/master/install.md#installing-tru-writer-in-one-click-with-wp-pusher-get-automatic-updates), updates can be made automatic or done in one click!
+If you [installed TRU Writer using the WP-Pusher plugin[(https://github.com/cogdog/truwriter/blob/master/install.md#installing-tru-writer-in-one-click-with-wp-pusher-get-automatic-updates), updates can be made automatic or done in one click!
 
 Otherwise, if you installed manually, updates are not too hard to do.
 
