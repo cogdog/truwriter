@@ -76,9 +76,7 @@ The original TRU Writer was developed under a [Thompson Rivers University Open L
 
 * **Better Front End Editor**  Reduced reliance on special pages. The links to the random entry and the one use to get the edit link are no longer needed, and are handle now in the code. These pages should be deleted from your site. On an update to version 1.7 or later, you might have to go to **Settings** - **Permalinks** and just click save to update the url rules. Also the method for using the special link to edit an entry is now done in a single click. Much better!
 
-* **Better Layout and Media Support** Customizer options for choosing a this or wider content layout.
-
-Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long `functions.php` is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.
+* **Better Layout and Media Support** Customizer options for choosing a this or wider content layout. Media can also be uploaded by dragging and dropping files onto the editing area. Inside the code the long `functions.php` is now broken up into more manageable size includes. Small display improvements on single item views. The licensing options updated to be driven by functions, and expanded to include public domain and yikes, even copyright.
 
 * **Options for Email Address** the form field for users entering email addresses can be hidden if not used (this as well will remove and past "request edit link" from published sites. In addition, a new admin option is added to restruct the email addresses allowed to a list of domains.
 
@@ -98,8 +96,6 @@ Media can also be uploaded by dragging and dropping files onto the editing area.
 
 * **Options Refreshed, Auto Page Creation, Better Reading Time Display** Recoded the theme options so documentation in its own tab. When he theme is activated now, the necessary pages will be created automagically. And if the Estimated reading time plugin is not activated, nothing will be displayed where it normally displays.
 
-* **Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (it is not required), they will receive via email a special coded URL they can use at anytime to modify their work.
-
-When published, any writing with an email is published with a `Get Edit Link` button at the bottom which will resend the link to the email associated with it.
+* **Provide an Email, Edit your Work Later** A major limitation of the first versions was that authors had no ability to edit their work after publishing (that's what happens when you don't have logins). As of November 2015, authors have a new field where they can enter an email address- if this is provided (it is not required), they will receive via email a special coded URL they can use at anytime to modify their work. When published, any writing with an email is published with a `Get Edit Link` button at the bottom which will resend the link to the email associated with it.
 
 * **Admins Can Get Edit Link for Anybody** Even if the author does not provide an email address, in the Wordpress Dashboard interface, editors and admins can click and copy an edit like they can provide directly to a writer (this is added as a side metabox).
