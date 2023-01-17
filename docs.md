@@ -27,7 +27,7 @@ The default menus are not what you want Wordpress will generate one based on all
 
 ![](images/default-menus.jpg)
 
-In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link (your site URL followed by `/random`), and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/Writer
+In Wordpress Dashboard go to Appearance -&gt; Menus. Create a new menu, and check the location box for "Primary". A typical TRu Writer menu might have an "About Page", the Write page (the form for writing), maybe a Random link (your site URL followed by `/random`), and a set of dropdowns to see pages by category. Here is one example for the site http://splot.ca/writer
 
 ![](images/writer-menus.jpg)
 
@@ -264,7 +264,7 @@ Current version [![Wordpress version badge](https://img.shields.io/badge/version
 
 Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does **not** reflect custom themes such as this one.  If what you see is less than the version above, here is how to update your copy of TRU Writer. 
 
-If you [installed TRU Writer using the WP-Pusher plugin[(https://github.com/cogdog/truwriter/blob/master/install.md#installing-tru-writer-in-one-click-with-wp-pusher-get-automatic-updates), updates can be made automatic or done in one click!
+If you [installed TRU Writer using the WP-Pusher plugin](https://github.com/cogdog/truwriter/blob/master/install.md#installing-tru-writer-in-one-click-with-wp-pusher-get-automatic-updates), updates can be made automatic or done in one click!
 
 Otherwise, if you installed manually, updates are not too hard to do.
 
@@ -273,7 +273,7 @@ Otherwise, if you installed manually, updates are not too hard to do.
 
 Custom (a.k.a unique!) WordPress themes like TRU Writer are installed by uploading a `.zip` file. They can now be updated the same way you installed it. It's that easy! 
 
-Just [download the newest version of TRU Writer as a .zip ](https://github.com/cogdog/truwriter/archive/refs/heads/master.zip). Now in your WordPress Dashboard, go to **Themes**, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
+Just [download the newest version of TRU Writer as a .zip](https://github.com/cogdog/truwriter/archive/refs/heads/master.zip). Now in your WordPress Dashboard, go to **Themes**, then **Add Theme** and finally **Upload Theme**. You will be asked to confirm updating the theme with the newer version.  
 
 When done, your site should report this current version as active.
 
