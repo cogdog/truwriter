@@ -260,7 +260,7 @@ You can copy and paste from that .txt file into the import field of the settings
 
 ## Updating The TRU Writer theme
 
-Current version [![Wordpress version badge](https://img.shields.io/badge/version-3.3-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
+Current version [![Wordpress version badge](https://img.shields.io/badge/version-3.32-green.svg)](https://github.com/cogdog/truwriter/blob/master/style.css)
 
 Compare this to the version of TRU Writer reported in your list of themes. Note that WordPress's reporting of themes being up to date does **not** reflect custom themes such as this one.  If what you see is less than the version above, here is how to update your copy of TRU Writer. 
 

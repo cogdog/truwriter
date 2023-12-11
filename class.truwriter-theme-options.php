@@ -9,14 +9,14 @@ class truwriter_Theme_Options {
 	private $sections;
 	private $checkboxes;
 	private $settings;
+	private $section_callbacks;
 
 	/* Initialize */
 	function __construct() {
 
 		// This will keep track of the checkbox options for the validate_settings function.
 		$this->checkboxes = array();
-
-		// set up the settings!
+		$this->section_callbacks = array();
 		$this->settings = array();
 		$this->get_settings();
 

@@ -131,6 +131,11 @@ function truwriter_queryvars( $qvars ) {
 
 
 /* set up rewrite rules */
+
+
+/* set up rewrite rules */
+add_action('init','truwriter_rewrite_rules');
+
 function truwriter_rewrite_rules() {
 	// for sending to random item
    add_rewrite_rule('random/?$', 'index.php?random=1','top');
@@ -527,7 +532,7 @@ add_action('manage_posts_custom_column', 'truwriter_columns_content', 10, 2);
 // Show splot author name 
 function truwriter_columns_content($column_name, $post_id) {
     if ($column_name == 'writer') {
-    	echo '<a href="' . admin_url( 'edit.php?writer=' . urlencode(get_post_meta( $post_id, 'wAuthor', true  ))) . '">' . get_post_meta( $post_id, 'wAuthor', true  ) .  '</a>' ;
+    	echo '<a href="' . admin_url( 'edit.php?writer=' . urlencode(get_post_meta( $post_id, 'shared_by', true  ))) . '">' . get_post_meta( $post_id, 'shared_by', true  ) .  '</a>' ;
     }
 }
 
@@ -551,20 +556,20 @@ function truwriter_query_sort( $query ) {
     
     	// column sort by writer
         if ($query->get( 'orderby') == 'writer' ) {
-        	$query->set('meta_key','wAuthor');
+        	$query->set('meta_key','shared_by');
         	$query->set('orderby','meta_value');
     	}
 
 		// check to display posts just by the SPLOT Writer name
 		if ( get_query_var('writer') ) {
-			$query->set( 'meta_key', 'wAuthor' );
+			$query->set( 'meta_key', 'shared_by' );
 			$query->set( 'meta_value', $query->query_vars['writer'] );
 		}
 		
 	} else {
 		// public check for writer value
     	if ( get_query_var('writer') ) {
-    		$query->set( 'meta_key', 'wAuthor' );
+    		$query->set( 'meta_key', 'shared_by' );
         	$query->set( 'meta_value', urldecode( get_query_var('writer') ) );
 
     	} else { 	
