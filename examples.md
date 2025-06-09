@@ -15,6 +15,7 @@ If you are wondering what a TRU Writer powered site can do, explore this long li
 * [COVID-19 And LCC: Our Story in Words](https://livetogether.openlcc.net/covid19stories/) Lansing Community College
 * [Community Performace Toolbox](http://communityperformancetoolbox.org/)
 * [Ed Tech F20](https://fall20edtech.trubox.ca/) Thompson Rivers University
+* [Ecotoxicology](https://gardell.ds.lib.uw.edu/ecotox/) student projects at University of Washington.
 * [EDUHACK Wall](https://wall-it.eduhack.eu/)
 * [ENGL 1110 Writer, TRU](http://engl1110writer.trubox.ca/) Thompson Rivers University English course
 * [ENGL 4790 Writer, TRU](http://engl4790writer.trubox.ca/) Thompson Rivers University English course
@@ -53,6 +54,7 @@ If you are wondering what a TRU Writer powered site can do, explore this long li
 * [TRU Undergraduate Research Journal](http://undergradjournal.trubox.ca/) 
 * [TRU Writer SPLOT demo site](http://splot.ca/writer/)
 * [UDG Agora Comparte](http://udg.theagoraonline.net/comparte) (this version has a few more custom fields and is translated into Spanish)
+* [Visual Like](https://rikithompson.ds.lib.uw.edu/visuallife/) Student magazine on digitaul cultuer,  University of Washington Tacoma
 * [What Works: Remote Teaching and Learning at Kenyon College](https://whatworks.kenyoncip.org/)
 * [When I Needed Help](http://web.archive.org/web/20170925000738/http://whenineededhelp.com/) (WayBack Machine archive)
 * [Writing on the Web Together](http://truwriter.uwbopenweb.com/)
